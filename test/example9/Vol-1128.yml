@@ -1,0 +1,17 @@
+#include prefixes that are not part of the default prefixes
+
+mappings:
+ VolumeMapping:
+  source:
+   access:
+    template: "http://ceur-ws.org/Vol-{number}/"
+    mapping: [number, true]
+   iterator: body
+   type: "ql:CSS3"
+  subject: "http://ceur-ws.org/{span.CEURVOLNR}/"
+  po:
+   - ["bibo:volume",span.CEURVOLNR]
+   - ["dcterms:identifier", span.CEURFULLTITLE]
+   - ["bibo:shortTitle",span.CEURVOLACRONYM]
+   - [["rdfs:label","spc:volTitle"],span.CEURVOLTITLE]
+   - [["rdfs:label","spc:fullTitle"],span.CEURFULLTITLE]
