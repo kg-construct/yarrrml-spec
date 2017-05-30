@@ -1,0 +1,23 @@
+prefixes:
+  ql: "http://semweb.mmlab.be/ns/ql#"
+  simmodel: "http://www.lbl.gov/namespaces/Sim/Model/"
+  simres: "http://www.lbl.gov/namespaces/Sim/ResourcesGeneral/"
+  xsd: "http://www.w3.org/2001/XMLSchema#"
+
+mappings:
+  SimModelMapping:
+   source:
+     access: src/test/resources/example8/simergy.xml
+     type: "ql:XPath"
+     iterator: "/SimModel/simmodel:SimAppLibraryDefault_AppLibraryDefault_GlobalLibrary"
+   subject: "http://www.lbl.gov/namespaces/Sim/Model/{@RefId}"
+   classes: simmodel:SimAppLibraryDefault_AppLibraryDefault_GlobalLibrary 
+   po:
+    - ["simmodel:refId", @RefId]
+    - ["simres:simModelType", "simres:SimModelType"]
+    - ["simres:SimModelSubtype", "simres:SimModelSubtype"]
+    - ["simres:SimModelName","simres:SimModelName"]
+    - ["simres:SourceModelSchema","simres:SourceModelSchema"]
+    - ["simres:DefaultPreferenceIndex","simres:DefaultPreferenceIndex", "xsd:int"]
+    - ["simres:LibraryLocation","simres:LibraryLocation"]
+    - ["simres:LibraryName","simres:LibraryName"]

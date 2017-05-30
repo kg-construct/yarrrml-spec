@@ -2,9 +2,23 @@ prefixes:
   xsd: "http://www.w3.org/2001/XMLSchema#"
   crm: "http://www.cidoc-crm.org/cidoc-crm/"
 
+sources:
+  museum_source:
+    access: src/test/resources/example5/museum.json
+    type: "ql:JSONPath"
+    iterator: "$.[*]
+  museum_sitter_source:
+    access: src/test/resources/example5/museum.json
+    type: "ql:JSONPath"
+    iterator: "$.[*].Sitter[*]
+  museum_sitter_source2:
+    access: src/test/resources/example5/museum.json
+    type: "ql:JSONPath"
+    iterator: "$.[*].Sitter
+
 mappings:
   ArtistMapping:
-    source:
+    source: museum_source
     subject: "http://ex.com/{Artist}"
     classes: "crm:E21_Person"
     po: 
@@ -13,19 +27,19 @@ mappings:
        mapping: MoonWalkersMapping
        condition: [Artist, Name]
   MoonWalkerMapping:
-    source:
+    source: museum_sitter_source
     subject: "http://ex.com/{Name}"
     classes: "crm:E21_Person"
     po:
      - ["rdfs:label", $Name]
   SitterMapping:
-    source:
+    source: museum_sitter_source2
     subject: http://ex.com/{Name}
     classes: "crm:E21_Person"
     po:
      - ["rdfs:label", Name]
   ProductionMapping:
-    source:
+    source: museum_source
     subject: "http://ex.com/Production/{Ref}"
     classes: "crm:E21_Production"
     po:
@@ -35,7 +49,7 @@ mappings:
      - predicate: "crm:P108_has_produced"
        mapping: ArtworkMapping
   ArtworkMapping:
-    source:
+    source: museum_source
     subject: "http://ex.com/{Ref}"
     classes: "crm:E22_Made-Made_Object"
     po:
@@ -44,7 +58,7 @@ mappings:
      - predicate: "crm:P62_depicts"
        mapping: SitterMapping
   WikipediaExportMapping:
-    source:
+    source: src/test/resources/example5/moon-walkers.csv
     subject: "http://ex.com/{Name}"
     classes: "crm:E21_Person"
     po:

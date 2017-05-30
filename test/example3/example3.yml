@@ -7,10 +7,10 @@ prefixes:
   ql: http://semweb.mmlab.be/ns/ql#
 
 sources: 
-- id: sourceVenue
-  access: src/test/resources/example3/Venue.json
-  type: "ql:JSONPath"
-  iterator: $
+  sourceVenue:
+    access: src/test/resources/example3/Venue.json
+    type: "ql:JSONPath"
+    iterator: $
 
 mappings:
   AirportMapping:

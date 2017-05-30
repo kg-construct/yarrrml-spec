@@ -4,10 +4,10 @@ prefixes:
  ex: "http://www.example.com/"
  
 sources:
-  id: source1
-  access: src/test/resources/example1/example1.xml
-  type: "ql:Path"
-  iterator: /notes/note
+  source1:
+    access: src/test/resources/example1/example1.xml
+    type: "ql:Path"
+    iterator: /notes/note
   
 mappings:
   FromToMaps:
