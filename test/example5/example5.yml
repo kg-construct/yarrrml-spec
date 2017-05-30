@@ -1,0 +1,55 @@
+prefixes:
+  xsd: "http://www.w3.org/2001/XMLSchema#"
+  crm: "http://www.cidoc-crm.org/cidoc-crm/"
+
+mappings:
+  ArtistMapping:
+    source:
+    subject: "http://ex.com/{Artist}"
+    classes: "crm:E21_Person"
+    po: 
+     - ["rdfs:label",Artist]
+     - predicate: "crm:P143_carried_out_by"
+       mapping: MoonWalkersMapping
+       condition: [Artist, Name]
+  MoonWalkerMapping:
+    source:
+    subject: "http://ex.com/{Name}"
+    classes: "crm:E21_Person"
+    po:
+     - ["rdfs:label", $Name]
+  SitterMapping:
+    source:
+    subject: http://ex.com/{Name}
+    classes: "crm:E21_Person"
+    po:
+     - ["rdfs:label", Name]
+  ProductionMapping:
+    source:
+    subject: "http://ex.com/Production/{Ref}"
+    classes: "crm:E21_Production"
+    po:
+     - ["crm:P82_at_some_time_within",DateOfWork]
+     - predicate: "crm:P14_carried_out_by"
+       mapping: ArtistMapping
+     - predicate: "crm:P108_has_produced"
+       mapping: ArtworkMapping
+  ArtworkMapping:
+    source:
+    subject: "http://ex.com/{Ref}"
+    classes: "crm:E22_Made-Made_Object"
+    po:
+     - ["crm:P102_has_title",Title]
+     - ["crm:P48_has_preferred_identifier",Ref]
+     - predicate: "crm:P62_depicts"
+       mapping: SitterMapping
+  WikipediaExportMapping:
+    source:
+    subject: "http://ex.com/{Name}"
+    classes: "crm:E21_Person"
+    po:
+     - ["ex:birthday",Birth Date,"xsd:date"]
+     - ["ex:deathday",Death Date,"xsd:date"]
+     - ["ex:evaday",EVA Date,"xsd:date"]
+     - ["ex:service",Service]
+

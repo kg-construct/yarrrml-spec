@@ -1,0 +1,36 @@
+prefixes:
+ mail: "http://example.com/mail#"
+ xsd: "http://www.w3.org/2001/XMLSchema#"
+ ex: "http://www.example.com/"
+ 
+sources:
+  id: source1
+  access: src/test/resources/example1/example1.xml
+  type: "ql:Path"
+  iterator: /notes/note
+  
+mappings:
+  FromToMaps:
+    source: source1
+    subject: "http://www.example.com/note/{@id}"
+    classes: "mail:note"
+    po:
+     - predicate: "mail:when"
+       template: "{@year}-{@month}-{@day}"
+	     type: "xsd:date"
+     - ["mail:from",from]
+     - ["mail:to",to]
+     - ["mail:heading",heading]
+     - ["mail:body",body]
+  DateTime:
+    source: source1
+    subject: "http://www.example.com/DateTime/{@year}{@month}{@day}"
+    classes: "ex:DateTime"
+    po:
+      - predicate: "ex:day"
+        template: "---{@day}"
+	      type: "xsd:gDay"
+      - predicate: "ex:month"
+	      template: "---{@month}"
+        type: xsd:gMonth
+      - ["ex:year", "@year", "xsd:gYear"]
