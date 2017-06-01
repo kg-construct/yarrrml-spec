@@ -1,0 +1,15 @@
+sources:
+ person_source: "src/test/resources/exampleFn/input.csv"
+
+mappings:
+ Person_TemplateMapping:
+  source: person_source
+ IntermediateCoordinatesGeoMapping:
+  source: person_source
+  po:
+   - predicate: "geo:lon"
+     object:
+      function: "dbf:lon"
+      parameters:
+       "dbf:lonParameter":
+        constant: resting_place_coordinates
