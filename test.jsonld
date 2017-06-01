@@ -1,0 +1,79 @@
+{
+  "@context": {
+    "rr": "http://www.w3.org/ns/r2rml#",
+    "rml": "http://semweb.mmlab.be/ns/rml#",
+    "fno": "http://w3id.org/function/ontology#",
+    "fnml": "http://semweb.mmlab.be/ns/fnml#",
+    "dbf": "http://dbpedia.org/function/",
+    "logicalSource": {"@id": "rml:logicalSource", "@type": "@id"},
+    "subjectMap": {"@id": "rr:subjectMap"},
+    "predicateObjectMap": {"@id": "rr:predicateObjectMap"},
+    "termType": {"@id": "rr:termType", "@type": "@id"},
+    "source": {"@id": "rml:source"},
+    "iterator": {"@id": "rml:iterator"},
+    "constant": {"@id": "rr:constant"},
+    "reference": {"@id": "rml:reference", "@type": "@id"},
+    "objectMap": {"@id": "rr:objectMap"},
+    "predicate": {"@id": "rr:predicate", "@type": "@id"},
+    "ql": "http://semweb.mmlab.be/ns/ql#",
+    "referenceFormulation": {"@id": "rml:referenceFormulation", "@type": "@id"},
+    "_rules": {"@id": "http://rules", "rules": ["{?doc rr:subjectMap ?sm} => {?sm a rr:SubjectMap}.", "{?sm a rr:SubjectMap . _:x e:findall (1 {?sm rr:termType ?c} ()).} => {?sm rr:termType rr:IRI}.", "{?doc rr:predicateObjectMap ?pom} => {?pom a rr:PredicateObjectMap}.", "{?pom rr:objectMap ?om. _:x e:findall (1 {?om a ?type} ()).} => {?om a rr:ObjectMap}."]}
+  },
+  "dbf:doc": {
+    "@id":  "http://en.dbpedia.org/resource/Mapping_en:Infobox_country",
+    "@type": "rr:TriplesMap",
+    "logicalSource": "dbf:source",
+    "subjectMap": {
+      "@type": "rr:SubjectMap",
+      "termType": "rr:IRI",
+      "constant": "http://en.dbpedia.org/resource/{{wikititle}}"
+    },
+    "predicateObjectMap": [
+      {
+        "@type": "rr:PredicateObjectMap",
+        "predicate": "http://dbpedia.org/ontology/anthem",
+        "objectMap": {
+          "@type": "fnml:FunctionTermMap",
+          "fnml:functionValue": {
+            "logicalSource": "http://en.dbpedia.org/resource/Mapping_en:Infobox_country/Infobox_country/LogicalSource",
+            "subjectMap": {
+              "@type": "fno:Execution"
+            },
+            "predicateObjectMap": [
+              {
+                "predicate": "fno:executes",
+                "objectMap": {
+                  "@type": "rr:ObjectMap",
+                  "constant": {
+                    "@id": "dbf:simplePropertyFunction"
+                  }
+                }
+              },
+              {
+                "predicate": "dbf:dataTypeParameter",
+                "objectMap": {
+                  "@type": "rr:ObjectMap",
+                  "constant": "owl:Thing"
+                }
+              },
+              {
+                "predicate": "dbf:propertyParameter",
+                "objectMap": {
+                  "@type": "rr:ObjectMap",
+                  "reference": "national_anthem"
+                }
+              }
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "dbf:source": {
+    "@id": "http://en.dbpedia.org/resource/Mapping_en:Infobox_country/Infobox_country/LogicalSource",
+    "@type": "http://semweb.mmlab.be/ns/rml#LogicalSource",
+    "source": "http://en.wikipedia.org/wiki/Mapping_en:Infobox_country?oldid=35237",
+    "referenceFormulation": "ql:wikitext",
+    "iterator": "Infobox"
+  }
+}
