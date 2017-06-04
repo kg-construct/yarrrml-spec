@@ -1,36 +1,28 @@
 prefixes:
- mail: "http://example.com/mail#"
- xsd: "http://www.w3.org/2001/XMLSchema#"
- ex: "http://www.example.com/"
+ mail+ "http://example.com/mail#"
+ ex+ "http://www.example.com/"
  
 sources:
   source1:
-    access: src/test/resources/example1/example1.xml
-    type: "ql:Path"
+    access: src/test/resources/example1/example1.xml~xpath #~xpath or xquery
     iterator: /notes/note
   
 mappings:
   FromToMaps:
-    source: source1
-    subject: "http://www.example.com/note/{@id}"
-    classes: "mail:note"
-    po:
-     - predicate: "mail:when"
-       template: "{@year}-{@month}-{@day}"
-	     type: "xsd:date"
-     - ["mail:from",from]
-     - ["mail:to",to]
-     - ["mail:heading",heading]
-     - ["mail:body",body]
+    sources: source1
+    subjects: "http://www.example.com/note/$(@id)" #~iri (default)
+    classes: mail+note
+    predicateobjects:
+     - [mail+when,$(@year)-$(@month)-$(@day), xsd+date] #~iri or literal (default for object)
+     - [mail+from,$(from)]
+     - [mail+to, $(to)]
+     - [mail+heading,$(heading)]
+     - [mail+body,$(body)]
   DateTime:
     source: source1
-    subject: "http://www.example.com/DateTime/{@year}{@month}{@day}"
-    classes: "ex:DateTime"
-    po:
-      - predicate: "ex:day"
-        template: "---{@day}"
-	      type: "xsd:gDay"
-      - predicate: "ex:month"
-	      template: "---{@month}"
-        type: xsd:gMonth
-      - ["ex:year", "@year", "xsd:gYear"]
+    subject: "http://www.example.com/DateTime/$(@year)$(@month)$(@day)"
+    classes: ex+DateTime
+    predicateobjects:
+      - [ex+day,--$(@day),xsd+gDay]
+      - [ex+month,---$(@month),xsd+gMonth]
+      - [ex+year, $(@year), "xsd+gYear"]

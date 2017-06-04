@@ -9,7 +9,7 @@ mappings:
    iterator: body
    type: "ql:CSS3"
   subject: "http://ceur-ws.org/{span.CEURVOLNR}/"
-  po:
+  pos:
    - ["bibo:volume",span.CEURVOLNR]
    - ["dcterms:identifier", span.CEURFULLTITLE]
    - ["bibo:shortTitle",span.CEURVOLACRONYM]
