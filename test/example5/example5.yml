@@ -14,48 +14,48 @@ sources:
 
 mappings:
   ArtistMapping:
-    source: museum_source
-    subject: "http://ex.com/{Artist}"
-    classes: "crm:E21_Person"
-    pos:
-     - ["rdfs:label",Artist]
-     - po: ["crm:P143_carried_out_by",MoonWalkersMapping@mapping]
-       condition: [Artist, Name]
+    sources: museum_source
+    subjects: "http://ex.com/$(Artist)"
+    classes: crm+E21_Person
+    predicateobjects:
+     - [rdfs+label,$(Artist)]
+     - predicateobject: [crm+P143_carried_out_by,MoonWalkersMapping~mapping]
+       condition: [$(Artist), $(Name)]
   MoonWalkerMapping:
-    source: museum_sitter_source
-    subject: "http://ex.com/{Name}"
-    classes: "crm:E21_Person"
-    po:
-     - ["rdfs:label", $Name]
+    sources: museum_sitter_source
+    subjects: "http://ex.com/$(Name)"
+    classes: crm+E21_Person
+    predicateobjects:
+     - [rdfs+label, $($Name)]
   SitterMapping:
-    source: museum_sitter_source2
-    subject: "http://ex.com/{Name}"
-    classes: "crm:E21_Person"
-    po:
-     - ["rdfs:label", Name]
+    sources: museum_sitter_source2
+    subjects: "http://ex.com/$(Name)"
+    classes: crm+E21_Person
+    predicateobjects:
+     - [rdfs+label, $(Name)]
   ProductionMapping:
     source: museum_source
-    subject: "http://ex.com/Production/{Ref}"
-    classes: "crm:E21_Production"
-    po:
-     - ["crm:P82_at_some_time_within",DateOfWork]
-     - ["crm:P14_carried_out_by", ArtistMapping@mapping]
-     - ["crm:P108_has_produced", ArtworkMapping@mapping]
+    subject: "http://ex.com/Production/$(Ref)"
+    classes: crm+E21_Production
+    predicateobjects:
+     - [crm+P82_at_some_time_within,$(DateOfWork)]
+     - [crm+P14_carried_out_by, ArtistMapping~mapping]
+     - [crm+P108_has_produced, ArtworkMapping~mapping]
   ArtworkMapping:
     source: museum_source
     subject: "http://ex.com/{Ref}"
-    classes: "crm:E22_Made-Made_Object"
-    pos:
-     - ["crm:P102_has_title",Title]
-     - ["crm:P48_has_preferred_identifier",Ref]
-     - ["crm:P62_depicts", SitterMapping@mapping]
+    classes: crm+E22_Made-Made_Object
+    predicateobjects:
+     - [crm+P102_has_title,$(Title)]
+     - [crm+P48_has_preferred_identifier,$(Ref)]
+     - [crm+P62_depicts, SitterMapping~mapping]
   WikipediaExportMapping:
     source: src/test/resources/example5/moon-walkers.csv
-    subject: "http://ex.com/{Name}"
-    classes: "crm:E21_Person"
-    po:
-     - ["ex:birthday",Birth Date,"xsd:date"]
-     - ["ex:deathday",Death Date,"xsd:date"]
-     - ["ex:evaday",EVA Date,"xsd:date"]
-     - ["ex:service",Service]
+    subject: "http://ex.com/$(Name)"
+    classes: crm+E21_Person
+    predicateobjects:
+     - [ex+birthday,$(Birth Date),xsd+date]
+     - [ex+deathday,$(Death Date),xsd+date]
+     - [ex+evaday,$(EVA Date),xsd+date]
+     - [ex+service,$(Service)]
 

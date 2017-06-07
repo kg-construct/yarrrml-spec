@@ -2,16 +2,16 @@
 
 mappings:
  VolumeMapping:
-  source:
+  sources:
    access:
-    template: "http://ceur-ws.org/Vol-{number}/"
-    mapping: [number, true]
+    template: "http://ceur-ws.org/Vol-$(number)/"
+    required: number #number is a required parameter in the template
    iterator: body
-   type: "ql:CSS3"
-  subject: "http://ceur-ws.org/{span.CEURVOLNR}/"
-  pos:
-   - ["bibo:volume",span.CEURVOLNR]
-   - ["dcterms:identifier", span.CEURFULLTITLE]
-   - ["bibo:shortTitle",span.CEURVOLACRONYM]
-   - [["rdfs:label","spc:volTitle"],span.CEURVOLTITLE]
-   - [["rdfs:label","spc:fullTitle"],span.CEURFULLTITLE]
+   type: ql+CSS3
+  subjects: "http://ceur-ws.org/$(span.CEURVOLNR)/"
+  predicateobjects:
+   - [bibo+volume,$(span.CEURVOLNR)]
+   - [dcterms+identifier, $(span.CEURFULLTITLE)]
+   - [bibo+shortTitle,$(span.CEURVOLACRONYM)]
+   - [[rdfs+label,spc+volTitle],$(span.CEURVOLTITLE)]
+   - [[rdfs+label,spc+fullTitle],$(span.CEURFULLTITLE)]

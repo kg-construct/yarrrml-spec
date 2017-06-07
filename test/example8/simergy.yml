@@ -4,17 +4,17 @@ prefixes:
 
 mappings:
   SimModelMapping:
-   source:
+   sources:
      access: src/test/resources/example8/simergy.xml
      iterator: "/SimModel/simmodel:SimAppLibraryDefault_AppLibraryDefault_GlobalLibrary"
-   subject: "http://www.lbl.gov/namespaces/Sim/Model/{@RefId}"
-   classes: "simmodel:SimAppLibraryDefault_AppLibraryDefault_GlobalLibrary"
-   pos:
-    - ["simmodel:refId", @RefId]
-    - ["simres:simModelType", "simres:SimModelType"]
-    - ["simres:SimModelSubtype", "simres:SimModelSubtype"]
-    - ["simres:SimModelName","simres:SimModelName"]
-    - ["simres:SourceModelSchema","simres:SourceModelSchema"]
-    - ["simres:DefaultPreferenceIndex","simres:DefaultPreferenceIndex", "xsd:int"]
-    - ["simres:LibraryLocation","simres:LibraryLocation"]
-    - ["simres:LibraryName","simres:LibraryName"]
+   subjects: "http://www.lbl.gov/namespaces/Sim/Model/$(@RefId)"
+   classes: simmodel+SimAppLibraryDefault_AppLibraryDefault_GlobalLibrary
+   predicateobjects:
+    - [simmodel+refId, "$(@RefId)"]
+    - [simres+simModelType, "simres:SimModelType"]
+    - [simres+SimModelSubtype, "simres:SimModelSubtype"]
+    - [simres+SimModelName,"simres:SimModelName"]
+    - [simres+SourceModelSchema,"simres:SourceModelSchema"]
+    - [simres+DefaultPreferenceIndex,"simres:DefaultPreferenceIndex", xsd+int]
+    - [simres+LibraryLocation,"simres:LibraryLocation"]
+    - [simres+LibraryName,"simres:LibraryName"]
