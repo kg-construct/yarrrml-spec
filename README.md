@@ -1,6 +1,6 @@
 # YARRRML
 
-Human-readable **R**ML and **R**2 **R**ML using YAML.
+Human-readable RML and R2RML using YAML.
 
 
 ## Prefixes
