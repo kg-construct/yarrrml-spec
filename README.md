@@ -17,3 +17,8 @@ We consider these [ones](https://www.w3.org/2011/rdfa-context/rdfa-1.1) as prede
 - RML mapping in `turtle` to JSON-LD (baseline)
 - YAML version of JSON-LD
 - YARRRML is YAML with syntax sugar
+
+## Processing
+- YAML is a superset of JSON.
+- YARRRML is valid JSON.
+- So when mapping YARRRML to [R2]RML we rely on the JSON representation and use JSONPath to select the different elements.
