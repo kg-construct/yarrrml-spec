@@ -9,5 +9,4 @@ mappings:
   predicateobjects:
    - [geo+lon,dbf+lon~fn] #maybe don't need to add '~fn' if there are parameters
       parameters:
-       "dbf:lonParameter":
-        constant: $(resting_place_coordinates)
+       - [dbf+lonParameter,$(resting_place_coordinates)]
