@@ -1,0 +1,12 @@
+mappings:
+ TriplesMap_0:
+  sources:
+   access: src/test/resources/exampleFNO/Venue.json~jsonpath
+   iterator: $
+  subjects: "http://loc.example.com/city/$(city})"
+  classes: schema+City
+  predicateobjects:
+   - predicateobject: [ex+containsS, grel+contains]
+     parameters:
+      - [grel+subStringParameter, s]
+      - [grel+valueParameter, $(city)]

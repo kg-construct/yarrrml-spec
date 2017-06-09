@@ -3,13 +3,11 @@ sources:
 
 mappings:
  Person_TemplateMapping:
-  source: person_source
+  sources: person_source
  IntermediateCoordinatesGeoMapping:
-  source: person_source
-  po:
-   - predicate: "geo:lon"
-     object:
-      function: "dbf:lon"
+  sources: person_source
+  predicateobjects:
+   - [geo+lon,dbf+lon~fn] #maybe don't need to add '~fn' if there are parameters
       parameters:
        "dbf:lonParameter":
-        constant: resting_place_coordinates
+        constant: $(resting_place_coordinates)
