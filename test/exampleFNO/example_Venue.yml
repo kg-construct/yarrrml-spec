@@ -6,7 +6,8 @@ mappings:
   subjects: "http://loc.example.com/city/$(city})"
   classes: schema+City
   predicateobjects:
-   - predicateobject: [ex+containsS, grel+contains]
+   - predicates: ex+containsS
+     fn: grel+contains
      parameters:
-      - [grel+subStringParameter, s]
-      - [grel+valueParameter, $(city)]
+      - {p: grel+subStringParameter, o: s}
+      - {p: grel+valueParameter, o: $(city)}
