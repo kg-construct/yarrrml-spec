@@ -3,5 +3,5 @@ mappings:
   source: "http://rml.io/data/dataRetrieval/dcat/Airport.csv"
   subject: "http://airport.example.com/{id}"
   po:
-   - ["transit:service",bus]
-   - ["wgs84_pos:location",city]
+   - [transit:service,bus]
+   - [wgs84_pos:location,city]

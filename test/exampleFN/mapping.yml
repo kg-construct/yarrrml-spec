@@ -7,7 +7,7 @@ mappings:
  IntermediateCoordinatesGeoMapping:
   sources: person_source
   predicateobjects:
-   -  predicate: geo+lon
-      object: dbf+lon
+   -  predicate: geo:lon
+      object: dbf:lon
       parameters:
-       - {p: dbf+lonParameter, o: $(resting_place_coordinates)}
+       - {p: dbf:lonParameter, o: $(resting_place_coordinates)}

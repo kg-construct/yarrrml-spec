@@ -13,40 +13,40 @@ mappings:
   AirportMapping:
     sources: src/test/resources/example3/Airport.csv
     subjects: "http://airport.example.com/$(id)"
-    classes: transit+Stop
+    classes: transit:Stop
     predicateobjects:
-      - predicateobject: [transit+service, BusMapping~mapping]
+      - predicateobject: [transit:service, BusMapping~mapping]
         condition: [$(bus), "$(@id)"]
-      - predicateobject: [wgs84_pos+location, VenueMapping~mapping]
+      - predicateobject: [wgs84_pos:location, VenueMapping~mapping]
         condition: [$(city), $($.location.city)]
   BusMapping:
     sources:
       - access: src/test/resources/example3/Transport.xml~xpath
         iterator: /transport/bus
     subjects: "http://trans.example.com/busses/$(@id)"
-    classes: transit+Service
+    classes: transit:Service
     predicateobjects:
-      - [transit+stop, BusStopMapping~mapping]
+      - [transit:stop, BusStopMapping~mapping]
   BusStopMapping:
     sources: 
       access: src/test/resources/example3/Transport.xml~xpath
       iterator: /transport/bus/route/stop
     subject: "http://trans.example.com/stops/$(@id)"
-    classes: transit+Stop
+    classes: transit:Stop
     predicateobjects:
-      - [rdfs+label, $(.)]
+      - [rdfs:label, $(.)]
   VenueMapping:
     source: sourceVenue
     subject: "http://loc.example.com/city/$($.location.city)"
     classes: schema+City
     predicateobjects:
-      - predicateobject: [wgs84_pos+location, LocationMapping~mapping]
+      - predicateobject: [wgs84_pos:location, LocationMapping~mapping]
         condition: [$($.location.city), $($.location.city)]
-      - [geosp+onContinent,$($.location.continent)]
-      - [gn+countryCode,$($.location.country)]
+      - [geosp:onContinent,$($.location.continent)]
+      - [gn:countryCode,$($.location.country)]
   LocationMapping:
     source: sourceVenue
     subject: "http://loc.example.com/latlong/$($.venue.latitude),$($.venue.longitude)"
     predicateobjects:
-      - [wgs84_pos+lat,$($.venue.latitude)]
-      - [wgs84_pos+long,$($.venue.longitude)]
+      - [wgs84_pos:lat,$($.venue.latitude)]
+      - [wgs84_pos:long,$($.venue.longitude)]

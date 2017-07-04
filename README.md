@@ -19,6 +19,7 @@ We consider these [ones](https://www.w3.org/2011/rdfa-context/rdfa-1.1) as prede
 - YARRRML is YAML with syntax sugar
 
 ## Processing
+- [YAML Converter](https://codebeautify.org/yaml-to-json-xml-csv)
 - YAML is a superset of JSON.
 - YARRRML is valid JSON.
 - So when mapping YARRRML to [R2]RML we rely on the JSON representation and use JSONPath to select the different elements.
