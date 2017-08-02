@@ -365,10 +365,11 @@
           person:
             predicateobjects:
              - predicates: foaf:firstName
-               function: ex:toLowerCase
-               parameters:
-                - parameter: ex:input
-                  value: $(firstname)
+               objects:
+                - function: ex:toLowerCase
+                  parameters:
+                   - parameter: ex:input
+                     value: $(firstname)
       </pre>
 
       A shortcut version of this example looks as follows.
@@ -378,9 +379,10 @@
           person:
             predicateobjects:
              - predicates: foaf:firstName
-               function: ex:toLowerCase
-               parameters:
-                - [ex:input, $(firstname)]
+               objects:
+                - function: ex:toLowerCase
+                  parameters:
+                   - [ex:input, $(firstname)]
       </pre>
     </section>
 
