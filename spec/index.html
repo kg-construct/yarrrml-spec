@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <title>YARRRML</title>
+    <script 
+     src='https://www.w3.org/Tools/respec/respec-w3c-common' 
+     class='remove'></script>
+    <script class='remove'>
+      var respecConfig = {
+        specStatus: "unofficial",
+        editors: [{
+          name: "Ben De Meester",
+          url: "https://be.de-meester.org",
+        },{
+          name: "Pieter Heyvaert",
+          url: "https://pieterheyvaert.com",
+        }],
+        processVersion: 2017,
+        edDraftURI: "http://some.github.repo",
+        shortName: "dahut"
+      };
+    </script>
+  </head>
+  <body>
+    <section id='abstract'>
+      <p>
+        This is required.
+      </p>
+    </section>
+    <section id='sotd'>
+    </section>
+    <section>
+      <h2>Introduction</h2>
+
+      <section>
+        <h2>Goals</h2>
+
+      </section>
+
+      <section>
+        <h2>Relation to existing mapping languages</h2>
+
+      </section>
+
+      <section>
+        <h2>Relation to YAML</h2>
+
+      </section>
+    </section>
+
+    <section>
+      <h2>Terminology</h2>
+
+      <dl>
+        <di><dfn>subject</dfn></di>
+        <dd>the subject of an RDF triple</dd>
+
+        <di><dfn>predicate</dfn></di>
+        <dd>the predicate of an RDF triple</dd>
+
+        <di><dfn>object</dfn></di>
+        <dd>the object of an RDF triple</dd>
+
+        <di><dfn>class</dfn></di>
+        <dd>the type of an entity</dd>
+
+        <di><dfn>datatype</dfn></di>
+        <dd>the type of a literal value</dd>
+
+        <di><dfn>reference</dfn></di>
+        <dd></dd>
+
+        <di><dfn>function</dfn></di>
+        <dd>a programmatic function that takes 0 or more input parameters and returns a single result</dd>
+      </dl>
+    </section>
+
+    <section>
+      <h2>Prefixes and namespaces</h2>
+
+      <p>
+        A set of prefixes and namespaces are predefined by default in every YARRRML document.
+        There are the same as the predefined prefixes for <a href="https://www.w3.org/2011/rdfa-context/rdfa-1.1">RDFa</a>.
+      </p>
+
+      <p>
+        Custom prefixes can be added by adding the collection <code>prefixes</code> to the root of the document.
+        Each combination of a prefix and namespace is added to this collection as a key-value pair.
+
+        In the following example two prefxes are defined: <code>ex</code> and <code>test</code>.
+
+        <pre id="example-custom-prefixes" class="example" title="custom prefixes">
+          prefixes:
+            ex: http://www.example.com
+            test: http://www.test.com
+        </pre>
+      </p>
+    </section>
+
+    <section>
+      <h2>Template</h2>
+
+      <p>
+        A template contains 0 or more constant strings and 0 or more references to data in a data.
+        References are prefixed with <code>$(</code> and suffixed with <code>)</code>.
+        For example, <code>foo</code> is a template with one constant string.
+        <code>$(id)</code> is a template with one reference to 'id'.
+        <code>foo-$(id)</code> is a template with one constant string 'foo-' and one reference to 'id'.
+      </p>
+    </section>
+
+    <section>
+      <h2>Data sources</h2>
+    </section>
+
+    <section>
+      <h2>Mappings</h2>
+
+        <p>
+          The <code>mappings</code> collection contains all the mappings of the document.
+          Each mapping is added to this collection via key-value pair.
+          The key is unique for each mapping.
+          The value is collection containing rules to generate the subjects, predicates, and objects.
+
+          In the following example two mappings are defined: <code>person</code> and <code>project</code>.
+
+          <pre id="example-mappings" class="example" title="two mappings">
+            mappings:
+              person: ...
+              project: ...
+          </pre>
+      </p>
+
+      <section>
+        <h2>Data sources</h2>
+
+        <pre id="example-ds" class="example" title="mapping with one data source">
+          mapping:
+            person:
+              sources:
+                access: data/person.json~jsonpath
+                iterator: $
+        </pre>
+
+        A shortcut version of this example looks as follows.
+
+        <pre id="example-ds-sc" class="example" title="mapping with one data source using shortcuts">
+          mapping:
+            person:
+              sources: [data/person.json~jsonpath, $]
+        </pre>
+
+        <pre id="example-ds2-sc" class="example" title="mapping with two data sources">
+          mapping:
+            person:
+              sources:
+                - access: data/person.json~jsonpath
+                  iterator: $
+                - access: data/person2.json~jsonpath
+                  iterator: $.persons[*]
+        </pre>
+
+        A shortcut version of this example looks as follows.
+
+        <pre id="example-ds2" class="example" title="mapping with two data sources using shortcuts">
+          mapping:
+            person:
+              sources:
+                - [data/person.json~jsonpath, $]
+                - [data/person2.json~jsonpath, $.persons[*]]
+        </pre>
+      </section>
+
+      <section>
+        <h2>Subjects</h2>
+
+        <p>
+          **ADD MORE**
+          In the following example the mapping <code>person</code> generate subjects based on the template <code>http://wwww.example.com/person/$(id)</code>.
+
+          <pre id="example-subject" class="example" title="mapping with one subject">
+            mappings:
+              person:
+                subjects: http://wwww.example.com/person/$(id)
+          </pre>
+
+          It is also possible to specify multiple subjects.
+          In this case an array of templates is used.
+          In the following example the mapping <code>person</code> generate subjects based on the templates <code>http://wwww.example.com/person/$(id)</code>
+          and <code>http://www.test.com/$(firstname)</code>.
+
+          <pre id="example-subject2" class="example" title="mapping with two subjects">
+              mappings:
+                person:
+                  subjects: [http://wwww.example.com/person/$(id), http://www.test.com/$(firstname)]
+          </pre>
+        </p>
+      </section>
+
+      <section>
+        <h2>Predicates and objects</h2>
+
+        **ADD MORE**
+
+        In the following example the mapping <code>person</code> generates combinations of predicates and objects,
+        where the predicate is <code>foaf:firstName</code> and the object is the <code>firstname</code> of each person.
+
+        <pre id="example-po" class="example" title="mapping with one predicate and object">
+          mappings:
+            person:
+              predicateobjects:
+                - predicates: foaf:firstName
+                  objects: $(firstname)
+        </pre>
+
+        A shortcut version of this example looks as follows.
+
+        <pre id="example-po-sc" class="example" title="mapping with one predicate and object using shortcuts">
+          mappings:
+            person:
+              predicateobjects:
+                - [foaf:firstName, $(firstname)]
+        </pre>
+
+        It is possible to speficiy multiple predicates and objects.
+        In this case an array of templates is used.
+
+        <pre id="example-po2" class="example" title="mapping with two predicates and objects">
+          mappings:
+            person:
+              predicateobjects:
+                - predicates: [foaf:name, rdfs:label]
+                  objects: [$(firstname), $(lastname)]
+        </pre>
+
+        A shortcut version of this example looks as follows.
+
+        <pre id="example-po2-sc" class="example" title="mapping with two predicates and objects using shortcuts">
+          mappings:
+            person:
+              predicateobjects:
+                - [[foaf:name, rdfs:label], [$(firstname), $(lastname)]]
+        </pre>
+
+        <pre id="example-po3" class="example" title="mapping with object that generates an IRI">
+          mappings:
+            person:
+              predicateobjects:
+                - predicates: [foaf:name, rdfs:label]
+                  objects: $(colleague)
+                  type: iri
+        </pre>
+
+        A shortcut version of this example looks as follows.
+
+        <pre id="example-po3-sc" class="example" title="mapping with object that generates an IRI using shortcuts">
+          mappings:
+            person:
+              predicateobjects:
+                - [[foaf:name, rdfs:label], $(colleague)~iri]
+        </pre>
+      </section>
+
+      <section>
+        <h2>Datatypes</h2>
+
+        <pre id="example-datatype" class="example" title="mapping with one datatype">
+          mappings:
+            person:
+              predicateobjects:
+                - predicates: foaf:firstName
+                  objects: $(firstname)
+                  datatype: xsd:string
+        </pre>
+
+        A shortcut version of this example looks as follows.
+
+        <pre id="example-datatype-sc" class="example" title="mapping with one datatype using shortcuts">
+          mappings:
+            person:
+              predicateobjects:
+                - [foaf:firstName, $(firstname), xsd:string]
+        </pre>
+
+        <pre id="example-datatype2" class="example" title="mapping with two datatypes">
+          mappings:
+            person:
+              predicateobjects:
+                - predicates: [foaf:name, rdfs:label]
+                  objects:
+                    $(firstname):
+                      datatype: ex:string
+                    $(lastname):
+                      datatype: ex:anotherString
+        </pre>
+
+        A shortcut version of this example looks as follows.
+
+        <pre id="example-datatype2-sc" class="example" title="mapping with two datatypes using shortcuts">
+          mappings:
+            person:
+              predicateobjects:
+                - predicates: [foaf:name, rdfs:label]
+                  objects: [[$(firstname), ex:string], [$(lastname), ex:anotherString]]
+        </pre>
+      </section>
+
+      <section>
+        <h2>Languages</h2>
+
+        <pre id="example-lang" class="example" title="mapping with one language">
+          mappings:
+            person:
+              predicateobjects:
+                - predicates: foaf:firstName
+                  objects: $(firstname)
+                  language: en
+        </pre>
+
+        A shortcut version of this example looks as follows.
+
+        <pre id="example-lang-sc" class="example" title="mapping with one language using shortcuts">
+          mappings:
+            person:
+              predicateobjects:
+                - [foaf:firstName, $(firstname), en~lang]
+        </pre>
+
+        <pre id="example-lang2" class="example" title="mapping with two languages">
+          mappings:
+            person:
+              predicateobjects:
+                - predicates: [foaf:name, rdfs:label]
+                  objects:
+                    $(firstname):
+                      language: en
+                    $(lastname):
+                      language: nl
+        </pre>
+
+        A shortcut version of this example looks as follows.
+
+        <pre id="example-lang2-sc" class="example" title="mapping with two languages using shortcuts">
+          mappings:
+            person:
+              predicateobjects:
+                - predicates: [foaf:name, rdfs:label]
+                  objects: [[$(firstname), en~lang], $(lastname), nl~lang]]
+        </pre>
+      </section>
+
+      <section>
+        <h2>Refering to other mappings</h2>
+      </section>
+    </section>
+
+    <section>
+      <h2>Functions</h2>
+
+      Functions are be added to subjects, predicates, and objects.
+
+      <pre id="example-fn" class="example" title="mapping with function on firstname">
+        mappings:
+          person:
+            predicateobjects:
+             - predicates: foaf:firstName
+               function: ex:toLowerCase
+               parameters:
+                - parameter: ex:input
+                  value: $(firstname)
+      </pre>
+
+      A shortcut version of this example looks as follows.
+
+      <pre id="example-fn-sc" class="example" title="mapping with function on firstname using shortcuts">
+        mappings:
+          person:
+            predicateobjects:
+             - predicates: foaf:firstName
+               function: ex:toLowerCase
+               parameters:
+                - [ex:input, $(firstname)]
+      </pre>
+    </section>
+
+    <section>
+      <h2>Conditions</h2>
+    </section>
+
+    <section>
+      <h2>Shortcuts</h2>
+
+      <section>
+        <h2>Keys</h2>
+
+        <p>
+          <ul>
+            <li>subjects: subject, s</li>
+            <li>predicates: predicate, p</li>
+            <li>objects: object, o</li>
+            <li>function: fn, f</li>
+            <li>parameters: pms</li>
+            <li>parameter: pm</li>
+            <li>value: v</li>
+          </ul>
+        </p>
+      </section>
+    </section>
+
+    <section>
+      <h2>Examples</h2>
+
+      <section>
+        <h2>From R2RML to YARRRML</h2>
+      </section>
+
+      <section>
+        <h2>From RML to YARRRML</h2>
+      </section>
+    </section>
+  </body>
+</html>

@@ -13,8 +13,8 @@ mappings:
   AirportMapping:
     sources: src/test/resources/example3/Airport.csv
     subjects: "http://airport.example.com/$(id)"
-    classes: transit:Stop
     predicateobjects:
+      - [a, transit:Stop]
       - predicateobject: [transit:service, BusMapping~mapping]
         condition: [$(bus), "$(@id)"]
       - predicateobject: [wgs84_pos:location, VenueMapping~mapping]
