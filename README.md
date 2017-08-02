@@ -23,3 +23,7 @@ We consider these [ones](https://www.w3.org/2011/rdfa-context/rdfa-1.1) as prede
 - YAML is a superset of JSON.
 - YARRRML is valid JSON.
 - So when mapping YARRRML to [R2]RML we rely on the JSON representation and use JSONPath to select the different elements.
+
+## Papers
+
+Make clear this is an alternative (user manual), the RDF version remains the core
