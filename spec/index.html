@@ -46,6 +46,9 @@
       <section>
         <h2>Relation to YAML</h2>
 
+        <p>
+          YARRRML is a subset of the YAML.
+        </p>
       </section>
     </section>
 
@@ -88,7 +91,7 @@
         Custom prefixes can be added by adding the collection <code>prefixes</code> to the root of the document.
         Each combination of a prefix and namespace is added to this collection as a key-value pair.
 
-        In the following example two prefxes are defined: <code>ex</code> and <code>test</code>.
+        In the following example two prefixes are defined: <code>ex</code> and <code>test</code>.
 
         <pre id="example-custom-prefixes" class="example" title="custom prefixes">
           prefixes:
@@ -113,20 +116,34 @@
     <section>
       <h2>Data sources</h2>
 
-      <pre id="example-ds1" class="example" title="one data source">
-        sources:
-          person-source:
-            access: data/person.json
-            referenceFormulation: jsonpath
-            iterator: $
-      </pre>
+      <p>
+        The data sources are can be defined in the <code>sources</code> collection in the root of the document.
+        Each source is added to this collection via a key-value pair.
+        The key has to be unique for every source.
+        The value is a collection with three keys
+        <code>access</code> (required), <code>referenceFormulation</code> (required), and <code>iterator</code> (conditionally required).
 
-      A shortcut version of this example looks as follows.
+        In the following example a single data source is defined <code>person-source</code>.
 
-      <pre id="example-ds1-sc" class="example" title="one data source using shortcuts">
-        sources:
-          person-source: [data/person.json~jsonpath, $]
-      </pre>
+        <pre id="example-ds1" class="example" title="one data source">
+          sources:
+            person-source:
+              access: data/person.json
+              referenceFormulation: jsonpath
+              iterator: $
+        </pre>
+
+        A shortcut version of this example looks as follows.
+
+        <pre id="example-ds1-sc" class="example" title="one data source using shortcuts">
+          sources:
+            person-source: [data/person.json~jsonpath, $]
+        </pre>
+
+        The collection is replaced with an array where
+        the first element contains the value for <code>access</code> appended with the <code>~</code> and the value for <code>referenceFormulation</code>, and
+        the second element contains the iterator.
+      </p>
     </section>
 
     <section>
