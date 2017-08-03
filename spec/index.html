@@ -122,28 +122,79 @@
         The key has to be unique for every source.
         The value is a collection with three keys
         <code>access</code> (required), <code>referenceFormulation</code> (required), and <code>iterator</code> (conditionally required).
-
-        In the following example a single data source is defined <code>person-source</code>.
-
-        <pre id="example-ds1" class="example" title="one data source">
-          sources:
-            person-source:
-              access: data/person.json
-              referenceFormulation: jsonpath
-              iterator: $
-        </pre>
-
-        A shortcut version of this example looks as follows.
-
-        <pre id="example-ds1-sc" class="example" title="one data source using shortcuts">
-          sources:
-            person-source: [data/person.json~jsonpath, $]
-        </pre>
-
-        The collection is replaced with an array where
-        the first element contains the value for <code>access</code> appended with the <code>~</code> and the value for <code>referenceFormulation</code>, and
-        the second element contains the iterator.
       </p>
+
+        <section>
+          <h2>Keys</h2>
+          <dl>
+            <di><dfn>access</dfn></di>
+            <dd>the local or remote location of the data source</dd>
+
+            <di><dfn>referenceFormulation</dfn></di>
+            <dd>the reference formulation used on to access data source</dd>
+
+            <di><dfn>iterator</dfn></di>
+            <dd>the path to the different records over which to iterate</dd>
+          </dl>
+        </section>
+
+        <section>
+          <h2>Reference formulations</h2>
+          The following reference formulation are supported:
+
+          <dl>
+            <di><dfn>csv</dfn></di>
+            <dd>
+              No iterator is required.
+              Every row of a CSV data source is considered as a record.
+            </dd>
+
+            <di><dfn>jsonpath</dfn></di>
+            <dd>
+              This reference formulation is used for data sources that can be access via JSONPath expressions.
+              An iterator is required.
+            </dd>
+
+            <di><dfn>xpath</dfn></di>
+            <dd>
+              This reference formulation is used for data sources that can be access via XPath expressions.
+              An iterator is required.
+            </dd>
+
+            <di><dfn>xquery</dfn></di>
+            <dd>
+              This reference formulation is used for data sources that can be access via XPath expressions.
+              No iterator is required.
+              Every row of the result of the query is considered as a record.
+            </dd>
+          </dl>
+        </section>
+
+        <section>
+          <h2>Examples</h2>
+          <p>
+            In the following example a single data source is defined <code>person-source</code>.
+
+            <pre id="example-ds1" class="example" title="one data source">
+              sources:
+                person-source:
+                  access: data/person.json
+                  referenceFormulation: jsonpath
+                  iterator: $
+            </pre>
+
+            A shortcut version of this example looks as follows.
+
+            <pre id="example-ds1-sc" class="example" title="one data source using shortcuts">
+              sources:
+                person-source: [data/person.json~jsonpath, $]
+            </pre>
+
+            The collection is replaced with an array where
+            the first element contains the value for <code>access</code> appended with the <code>~</code> and the value for <code>referenceFormulation</code>, and
+            the second element contains the iterator.
+          </p>
+        </section>
     </section>
 
     <section>
@@ -333,8 +384,9 @@
             person:
               predicateobjects:
                 - predicates: [foaf:name, rdfs:label]
-                  objects: $(colleague)
-                  type: iri
+                  objects:
+                    value: $(colleague)
+                    type: iri
         </pre>
 
         A shortcut version of this example looks as follows.
@@ -355,8 +407,9 @@
             person:
               predicateobjects:
                 - predicates: foaf:firstName
-                  objects: $(firstname)
-                  datatype: xsd:string
+                  objects:
+                    value: $(firstname)
+                    datatype: xsd:string
         </pre>
 
         A shortcut version of this example looks as follows.
@@ -374,9 +427,9 @@
               predicateobjects:
                 - predicates: [foaf:name, rdfs:label]
                   objects:
-                    $(firstname):
+                    - value: $(firstname)
                       datatype: ex:string
-                    $(lastname):
+                    - value: $(lastname)
                       datatype: ex:anotherString
         </pre>
 
@@ -399,8 +452,9 @@
             person:
               predicateobjects:
                 - predicates: foaf:firstName
-                  objects: $(firstname)
-                  language: en
+                  objects:
+                    $(firstname)
+                    language: en
         </pre>
 
         A shortcut version of this example looks as follows.
@@ -418,9 +472,9 @@
               predicateobjects:
                 - predicates: [foaf:name, rdfs:label]
                   objects:
-                    $(firstname):
+                    - value: $(firstname)
                       language: en
-                    $(lastname):
+                    - value: $(lastname)
                       language: nl
         </pre>
 
@@ -502,6 +556,27 @@
             <li>http://www.w3.org/1999/02/22-rdf-syntax-ns#type: a</li>
           </ul>
         </p>
+      </section>
+
+      <section>
+        <h2>Arrays</h2>
+
+        <p>
+          An array of a single element can be replaced by that single element.
+          Consider the following example.
+
+          <pre id="example-array" class="example" title="array with single element">
+              parameters:
+               - [ex:input, $(firstname)]
+          </pre>
+
+           The shortcut version of this example is
+
+          <pre id="example-array-sc" class="example" title="single element">
+              parameters: [ex:input, $(firstname)]
+          </pre>
+        </p>
+
       </section>
     </section>
 
