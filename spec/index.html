@@ -112,6 +112,21 @@
 
     <section>
       <h2>Data sources</h2>
+
+      <pre id="example-ds1" class="example" title="one data source">
+        sources:
+          person-source:
+            access: data/person.json
+            referenceFormulation: jsonpath
+            iterator: $
+      </pre>
+
+      A shortcut version of this example looks as follows.
+
+      <pre id="example-ds1-sc" class="example" title="one data source using shortcuts">
+        sources:
+          person-source: [data/person.json~jsonpath, $]
+      </pre>
     </section>
 
     <section>
@@ -139,7 +154,8 @@
           mapping:
             person:
               sources:
-                access: data/person.json~jsonpath
+                access: data/person.json
+                referenceFormulation: jsonpath
                 iterator: $
         </pre>
 
@@ -151,24 +167,76 @@
               sources: [data/person.json~jsonpath, $]
         </pre>
 
-        <pre id="example-ds2-sc" class="example" title="mapping with two data sources">
+        <pre id="example-ds2" class="example" title="mapping with two data sources">
           mapping:
             person:
               sources:
-                - access: data/person.json~jsonpath
+                - access: data/person.json
+                  referenceFormulation: jsonpath
                   iterator: $
-                - access: data/person2.json~jsonpath
-                  iterator: $.persons[*]
+                - access: data/person2.json
+                  referenceFormulation: jsonpath
+                  iterator: "$.persons[*]"
         </pre>
 
         A shortcut version of this example looks as follows.
 
-        <pre id="example-ds2" class="example" title="mapping with two data sources using shortcuts">
+        <pre id="example-ds2-sc" class="example" title="mapping with two data sources using shortcuts">
           mapping:
             person:
               sources:
                 - [data/person.json~jsonpath, $]
-                - [data/person2.json~jsonpath, $.persons[*]]
+                - [data/person2.json~jsonpath, "$.persons[*]"]
+        </pre>
+
+        If you describe a data source outside of the mappings, you can include via their unique key.
+
+        <pre id="example-ds3" class="example" title="mapping with one data sources">
+          sources:
+            person-source:
+              access: data/person.json
+              referenceFormulation: jsonpath
+              iterator: $
+
+          mapping:
+            person:
+              sources: person-source
+        </pre>
+
+        Multiple sources can be used by using an array of source keys as value for the key <code>sources</code>.
+
+        <pre id="example-ds4" class="example" title="mapping with two data sources">
+          sources:
+            person-source:
+              access: data/person.json
+              referenceFormulation: jsonpath
+              iterator: $
+            person-source2:
+              access: data/person2.json
+              referenceFormulation: jsonpath
+              iterator: "$.person[*]"
+
+          mapping:
+            person:
+              sources: [person-source, person-source2]
+        </pre>
+
+        A combination of both sources defined outside and inside a mapping is possible.
+
+        <pre id="example-ds5" class="example" title="mapping with two data sources">
+          sources:
+            person-source:
+              access: data/person.json
+              referenceFormulation: jsonpath
+              iterator: $
+
+          mapping:
+            person:
+              sources:
+               - person-source
+               - access: data/person2.json
+                 referenceFormulation: jsonpath
+                 iterator: "$.persons[*]"
         </pre>
       </section>
 
