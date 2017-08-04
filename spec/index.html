@@ -415,6 +415,19 @@
               predicateobjects:
                 - [[foaf:name, rdfs:label], $(colleague)~iri]
         </pre>
+
+        The inverse predicate can also be added.
+        This is only valid when the object is an IRI or a blank node.
+
+        <pre id="example-po-inverse" class="example" title="mapping with one inverse predicate">
+          mappings:
+            work:
+              predicateobjects:
+                - predicates: ex:createdBy
+                  inversepredicates: ex:created
+                  objects: $(foafprofile)
+                  type: iri
+        </pre>
       </section>
 
       <section>
@@ -503,7 +516,7 @@
             person:
               predicateobjects:
                 - predicates: [foaf:name, rdfs:label]
-                  objects: [[$(firstname), en~lang], $(lastname), nl~lang]]
+                  objects: [[$(firstname), en~lang], [$(lastname), nl~lang]]
         </pre>
       </section>
 
@@ -557,6 +570,7 @@
           <ul>
             <li>subjects: subject, s</li>
             <li>predicates: predicate, p</li>
+            <li>inversepredicates: inversepredicate, i</li>
             <li>objects: object, o</li>
             <li>function: fn, f</li>
             <li>parameters: pms</li>
