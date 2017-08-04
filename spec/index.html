@@ -218,104 +218,120 @@
       <section>
         <h2>Data sources</h2>
 
-        <pre id="example-ds" class="example" title="mapping with one data source">
-          mapping:
-            person:
-              sources:
+        <p>
+          Besides defining data sources at the root of the document,
+          data sources can also be defined inside a mapping via the collection <code>sources</code>.
+          However, no unique key is specified for a source, and, thus, it cannot be referred to from other mappings.
+          The key-value to add to a source are the same when defining sources at the root of the document.
+
+          In the following example the mapping <code>person</code> has one source.
+
+          <pre id="example-ds" class="example" title="mapping with one data source">
+            mapping:
+              person:
+                sources:
+                  access: data/person.json
+                  referenceFormulation: jsonpath
+                  iterator: $
+          </pre>
+
+          A shortcut version of this example looks as follows.
+
+          <pre id="example-ds-sc" class="example" title="mapping with one data source using shortcuts">
+            mapping:
+              person:
+                sources: [data/person.json~jsonpath, $]
+          </pre>
+
+          In case a mapping needs to be applied to multiple data sources, multiple sources can be added to the <code>scources</code> collection.
+          In the following example the <code>person</code> mapping has two data sources.
+
+          <pre id="example-ds2" class="nohighlight example" title="mapping with two data sources">
+            mapping:
+              person:
+                sources:
+                  - access: data/person.json
+                    referenceFormulation: jsonpath
+                    iterator: $
+                  - access: data/person2.json
+                    referenceFormulation: jsonpath
+                    iterator: "$.persons[*]"
+          </pre>
+
+          A shortcut version of this example looks as follows.
+
+          <pre id="example-ds2-sc" class="nohighlight example" title="mapping with two data sources using shortcuts">
+            mapping:
+              person:
+                sources:
+                  - [data/person.json~jsonpath, $]
+                  - [data/person2.json~jsonpath, "$.persons[*]"]
+          </pre>
+
+          If you describe a data source outside of the mappings, you can include via their unique key.
+
+          <pre id="example-ds3" class="nohighlight example" title="mapping with one data sources">
+            sources:
+              person-source:
                 access: data/person.json
                 referenceFormulation: jsonpath
                 iterator: $
-        </pre>
 
-        A shortcut version of this example looks as follows.
+            mapping:
+              person:
+                sources: person-source
+          </pre>
 
-        <pre id="example-ds-sc" class="example" title="mapping with one data source using shortcuts">
-          mapping:
-            person:
-              sources: [data/person.json~jsonpath, $]
-        </pre>
+          Multiple sources can be used by using an array of source keys as value for the key <code>sources</code>.
 
-        <pre id="example-ds2" class="example" title="mapping with two data sources">
-          mapping:
-            person:
-              sources:
-                - access: data/person.json
-                  referenceFormulation: jsonpath
-                  iterator: $
-                - access: data/person2.json
-                  referenceFormulation: jsonpath
-                  iterator: "$.persons[*]"
-        </pre>
+          <pre id="example-ds4" class="example" title="mapping with two data sources">
+            sources:
+              person-source:
+                access: data/person.json
+                referenceFormulation: jsonpath
+                iterator: $
+              person-source2:
+                access: data/person2.json
+                referenceFormulation: jsonpath
+                iterator: "$.person[*]"
 
-        A shortcut version of this example looks as follows.
+            mapping:
+              person:
+                sources: [person-source, person-source2]
+          </pre>
 
-        <pre id="example-ds2-sc" class="example" title="mapping with two data sources using shortcuts">
-          mapping:
-            person:
-              sources:
-                - [data/person.json~jsonpath, $]
-                - [data/person2.json~jsonpath, "$.persons[*]"]
-        </pre>
+          A combination of both sources defined outside and inside a mapping is possible.
 
-        If you describe a data source outside of the mappings, you can include via their unique key.
+          <pre id="example-ds5" class="example" title="mapping with two data sources">
+            sources:
+              person-source:
+                access: data/person.json
+                referenceFormulation: jsonpath
+                iterator: $
 
-        <pre id="example-ds3" class="example" title="mapping with one data sources">
-          sources:
-            person-source:
-              access: data/person.json
-              referenceFormulation: jsonpath
-              iterator: $
-
-          mapping:
-            person:
-              sources: person-source
-        </pre>
-
-        Multiple sources can be used by using an array of source keys as value for the key <code>sources</code>.
-
-        <pre id="example-ds4" class="example" title="mapping with two data sources">
-          sources:
-            person-source:
-              access: data/person.json
-              referenceFormulation: jsonpath
-              iterator: $
-            person-source2:
-              access: data/person2.json
-              referenceFormulation: jsonpath
-              iterator: "$.person[*]"
-
-          mapping:
-            person:
-              sources: [person-source, person-source2]
-        </pre>
-
-        A combination of both sources defined outside and inside a mapping is possible.
-
-        <pre id="example-ds5" class="example" title="mapping with two data sources">
-          sources:
-            person-source:
-              access: data/person.json
-              referenceFormulation: jsonpath
-              iterator: $
-
-          mapping:
-            person:
-              sources:
-               - person-source
-               - access: data/person2.json
-                 referenceFormulation: jsonpath
-                 iterator: "$.persons[*]"
-        </pre>
+            mapping:
+              person:
+                sources:
+                 - person-source
+                 - access: data/person2.json
+                   referenceFormulation: jsonpath
+                   iterator: "$.persons[*]"
+          </pre>
+        </p>
       </section>
 
       <section>
         <h2>Subjects</h2>
 
         <p>
-          **ADD MORE**
-          In the following example the mapping <code>person</code> generate subjects based on the template <code>http://wwww.example.com/person/$(id)</code>.
+          For every triple is required to define whether a IRI or blank node needs to used.
+          This information is added to a mapping via the collection <code>subjects</code>.
+          In the case of an IRI , this collection contains 0 or more templates that specify the IRI.
+          In the case of a blank node, this collection is set to <code>null</code> or is not specified at all.
 
-          <pre id="example-subject" class="example" title="mapping with one subject">
+          In the following example the mapping <code>person</code> generate IRI for the subjects based on the template <code>http://wwww.example.com/person/$(id)</code>.
+
+          <pre id="example-subject" class="nohighlight example" title="mapping with one subject">
             mappings:
               person:
                 subjects: http://wwww.example.com/person/$(id)
@@ -331,6 +347,8 @@
                 person:
                   subjects: [http://wwww.example.com/person/$(id), http://www.test.com/$(firstname)]
           </pre>
+
+          It is possible to apply functions on subjects.
         </p>
       </section>
 
