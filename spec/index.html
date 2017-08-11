@@ -522,7 +522,38 @@
       </section>
 
       <section>
-        <h2>Refering to other mappings</h2>
+        <h2>Referring to other mappings</h2>
+
+        <p>
+          In certain use cases triples need to be generated between the records of two mappings.
+          For example, in the following example we have two mappings: persons and projects.
+          In the existing data there is for every person a field <code>projectID</code> referring to the project
+          on which the person is working.
+          Therefore, we want to generate triples between every person and his/her project.
+          The <code>objects</code> collection has an object with the key <code>mapping</code>.
+          The value of this key refers to the mapping that provides the IRIs that will serve as object for the predicate-object combination.
+          Furthermore, a condition is added, so that only persons and projects are linked when they are actually related, based on the <code>projectID</code>
+          of the person and the <code>ID</code> of the project.
+          Note that a condition is not required.
+          In this example it would result in relationships between every person and every project.
+
+          <pre id="example-ref-map" class="example" title="interlinking two mappings">
+            mappings:
+              person:
+                subjects: http://example.com/person/$(ID)
+                predicateobjects:
+                  - predicates: foaf:worksFor
+                  - objects:
+                    - mapping: person
+                      condition:
+                        function: equal
+                        parameters:
+                          - [ex:input1, $(projectID)]
+                          - [ex:input2, $(ID)]
+              project:
+                subjects: http://example.com/project/$(ID)
+          </pre>
+        </p>
       </section>
     </section>
 
