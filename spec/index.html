@@ -559,6 +559,38 @@
 
     <section>
       <h2>Conditions</h2>
+
+      <p>
+        A subject or predicate-object combination is in certain cases only generated when a condition is fulfilled.
+        In the following example, the predicate-object is only generated when the <code>firstname</code> is valid.
+
+        <pre id="example-cond" class="example" title="mapping with condition on predicate object">
+          mappings:
+            person:
+              predicateobjects:
+               - predicates: foaf:firstName
+                 objects: $(firstname)
+                 condition:
+                  function: ex:isValid
+                  parameters:
+                   - [ex:input, $(firstname)]
+        </pre>
+
+        In the following example, the mapping is only executed for every record that has set its <code>ID</code>.
+
+        <pre id="example-cond2" class="example" title="mapping with condition">
+          mappings:
+            person:
+              subjects: http://example.com/{ID}
+              condition:
+                  function: ex:isSet
+                  parameters:
+                   - [ex:input, $(ID)]
+              predicateobjects:
+               - predicates: foaf:firstName
+                 objects: $(firstname)
+        </pre>
+      </p>
     </section>
 
     <section>
