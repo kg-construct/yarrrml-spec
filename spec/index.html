@@ -297,7 +297,8 @@
 
             mapping:
               person:
-                sources: [person-source, person-source2]
+                sources:
+                  - [person-source, person-source2]
           </pre>
 
           A combination of both sources defined outside and inside a mapping is possible.
@@ -588,27 +589,6 @@
             <li>http://www.w3.org/1999/02/22-rdf-syntax-ns#type: a</li>
           </ul>
         </p>
-      </section>
-
-      <section>
-        <h2>Arrays</h2>
-
-        <p>
-          An array of a single element can be replaced by that single element.
-          Consider the following example.
-
-          <pre id="example-array" class="example" title="array with single element">
-              parameters:
-               - [ex:input, $(firstname)]
-          </pre>
-
-           The shortcut version of this example is
-
-          <pre id="example-array-sc" class="example" title="single element">
-              parameters: [ex:input, $(firstname)]
-          </pre>
-        </p>
-
       </section>
     </section>
 
