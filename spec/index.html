@@ -80,6 +80,29 @@
     </section>
 
     <section>
+      <h2>Profiles</h2>
+
+      <p>
+        This specification includes the following main profiles for tools that process YARRRML documents:
+
+        <ul>
+          <li>R2RML: applies the semantics specified by R2RML; and</li>
+          <li>RML: applies the semantics specified by RML.</li>
+        </ul>
+
+        These profiles can be extended with additional profiles, which cannot be used on their own:
+
+        <ul>
+          <li>FnO: applies the semantics specified by FnO;</li>
+          <li>DCAT: applies the semantics specified by DCAT;</li>
+          <li>D2RQ: applies the semantics specified by D2RQ;</li>
+          <li>SD: applies the semantics specified by SD; and</li>
+          <li>CSVW: applies the semantics specified by CSVW.</li>
+        </ul>
+      </p>
+    </section>
+
+    <section>
       <h2>Base IRI</h2>
 
       <p>
@@ -147,45 +170,102 @@
             <di><dfn>access</dfn></di>
             <dd>the local or remote location of the data source</dd>
 
-            <di><dfn>referenceFormulation</dfn></di>
+            <di><dfn>driver (required profiles: RML, D2RQ)</dfn></di>
+            <dd>the local or remote location of the data source</dd>
+
+            <di><dfn>referenceFormulation (required profiles: RML)</dfn></di>
             <dd>the reference formulation used on to access data source</dd>
 
-            <di><dfn>iterator</dfn></di>
+            <di><dfn>iterator (required profiles: RML)</dfn></di>
             <dd>the path to the different records over which to iterate</dd>
+
+            <di><dfn>delimiter (required profiles: RML, CSVW)</dfn></di>
+            <dd>the delimiter to separate fields in a record</dd>
+
+            <di><dfn>encoding (required profiles: RML, CSVW)</dfn></di>
+            <dd>the encoding used for the data</dd>
+
+            <di><dfn>query</dfn></di>
+            <dd>the query to execute on the data source to select only a part of the data</dd>
+
+            <di><dfn>queryFormulation</dfn></di>
+            <dd>the query formulation used on to query the data source</dd>
+
+            <di><dfn>credentials (required profiles: RML, D2RQ)</dfn></di>
+            <dd>the credentials required to access the data source</dd>
+
+            <di><dfn>username (required profiles: RML, D2RQ)</dfn></di>
+            <dd>the username required to access the data source</dd>
+
+            <di><dfn>password (required profiles: RML, D2RQ)</dfn></di>
+            <dd>the password required to access the data source</dd>
           </dl>
         </section>
 
         <section>
           <h2>Reference formulations</h2>
-          The following reference formulation are supported:
+          The following reference formulations are supported for these data formats.
 
           <dl>
-            <di><dfn>csv</dfn></di>
+            <di><dfn>CSV (required profiles: RML)</dfn></di>
             <dd>
+              The reference formulation <code>csv</code> is used for data sources in the CSV format.
               No iterator is required.
               Every row of a CSV data source is considered as a record.
             </dd>
 
-            <di><dfn>jsonpath</dfn></di>
+            <di><dfn>JSON (required profiles: RML)</dfn></di>
             <dd>
-              This reference formulation is used for data sources that can be access via JSONPath expressions.
+              The reference formulation <code>jsonpath</code> is used for data sources that can be access via JSONPath expressions.
               An iterator is required.
             </dd>
 
-            <di><dfn>xpath</dfn></di>
+            <di><dfn>XML (required profiles: RML)</dfn></di>
             <dd>
-              This reference formulation is used for data sources that can be access via XPath expressions.
+              The reference formulation <code>xpath</code> is used for data sources that can be access via XPath expressions.
               An iterator is required.
-            </dd>
-
-            <di><dfn>xquery</dfn></di>
-            <dd>
-              This reference formulation is used for data sources that can be access via XQuery queries.
+              The reference formulation <code>xquery</code> is used for data sources that can be access via XQuery queries.
               No iterator is required.
               Every row of the result of the query is considered as a record.
             </dd>
           </dl>
         </section>
+
+      <section>
+        <h2>Query formulations</h2>
+        The following query formulation are supported for these query languages.
+
+        <dl>
+          <di><dfn>SQL</dfn></di>
+          <dd>
+            The following query formulations can be used for data sources that can be queried via a SQL query:
+
+            <ul>
+              <li>sql2008</li>
+              <li>oracle</li>
+              <li>mysql</li>
+              <li>mssql</li>
+              <li>hsql</li>
+              <li>postgresql</li>
+              <li>db2</li>
+              <li>informix</li>
+              <li>ingres</li>
+              <li>progress</li>
+              <li>sybasease</li>
+              <li>sybasesqlanywhere</li>
+              <li>virtuoso</li>
+              <li>firebird</li>
+            </ul>
+
+            This list is based on version IRIs identified by <a href="https://www.w3.org/2001/sw/wiki/RDB2RDF/SQL_Version_IRIs">RDB2RDF</a>.
+          </dd>
+
+          <di><dfn>SPARQL (required profiles: RML, SD)</dfn></di>
+          <dd>
+            The query formulation <code>sparql11</code> is used for data sources that can be queried via a SPARQL 1.1 query.
+          </dd>
+        </dl>
+      </section>
 
         <section>
           <h2>Examples</h2>
@@ -228,7 +308,7 @@
           <pre id="example-mappings" class="example" title="two mappings">
             mappings:
               person: ...
-              project: ...
+                project: ...
           </pre>
       </p>
 
@@ -334,6 +414,25 @@
                  - access: data/person2.json
                    referenceFormulation: jsonpath
                    iterator: "$.persons[*]"
+          </pre>
+
+          The following mapping access a SQL database and select the required data via a query.
+
+          <pre id="example-db" class="example" title="mapping with database as source">
+            mapping:
+              person:
+                sources:
+                  access: jdbc:mysql://localhost/example
+                  driver: com.mysql.jdbc.Driver
+                  credentials:
+                    username: root
+                    password: root
+                  queryFormulation: sql2008
+                  query: |
+                    SELECT DEPTNO, DNAME, LOC,
+                    (SELECT COUNT(*) FROM EMP WHERE EMP.DEPTNO=DEPT.DEPTNO) AS STAFF
+                    FROM DEPT;
+                  referenceFormulation: csv
           </pre>
         </p>
       </section>
