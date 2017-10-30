@@ -170,19 +170,19 @@
             <dt><dfn>access</dfn></dt>
             <dd>the local or remote location of the data source</dd>
 
-            <dt><dfn>driver (required profiles: RML, D2RQ)</dfn></dt>
+            <dt><dfn>driver</dfn> (required profiles: RML, D2RQ)</dt>
             <dd>the local or remote location of the data source</dd>
 
-            <dt><dfn>referenceFormulation (required profiles: RML)</dfn></dt>
+            <dt><dfn>referenceFormulation</dfn> (required profiles: RML)</dt>
             <dd>the reference formulation used on to access data source</dd>
 
-            <dt><dfn>iterator (required profiles: RML)</dfn></dt>
+            <dt><dfn>iterator</dfn> (required profiles: RML)</dt>
             <dd>the path to the different records over which to iterate</dd>
 
-            <dt><dfn>delimiter (required profiles: RML, CSVW)</dfn></dt>
+            <dt><dfn>delimiter</dfn> (required profiles: RML, CSVW)</dt>
             <dd>the delimiter to separate fields in a record</dd>
 
-            <dt><dfn>encoding (required profiles: RML, CSVW)</dfn></dt>
+            <dt><dfn>encoding</dfn> (required profiles: RML, CSVW)</dt>
             <dd>the encoding used for the data</dd>
 
             <dt><dfn>query</dfn></dt>
@@ -191,13 +191,13 @@
             <dt><dfn>queryFormulation</dfn></dt>
             <dd>the query formulation used on to query the data source</dd>
 
-            <dt><dfn>credentials (required profiles: RML, D2RQ)</dfn></dt>
+            <dt><dfn>credentials</dfn> (required profiles: RML, D2RQ)</dt>
             <dd>the credentials required to access the data source</dd>
 
-            <dt><dfn>username (required profiles: RML, D2RQ)</dfn></dt>
+            <dt><dfn>username</dfn> (required profiles: RML, D2RQ)</dt>
             <dd>the username required to access the data source</dd>
 
-            <dt><dfn>password (required profiles: RML, D2RQ)</dfn></dt>
+            <dt><dfn>password</dfn> (required profiles: RML, D2RQ)</dt>
             <dd>the password required to access the data source</dd>
           </dl>
         </section>
@@ -207,20 +207,20 @@
           The following reference formulations are supported for these data formats.
 
           <dl>
-            <dt><dfn>CSV (required profiles: RML)</dfn></dt>
+            <dt><dfn>CSV</dfn> (required profiles: RML)</dt>
             <dd>
               The reference formulation <code>csv</code> is used for data sources in the CSV format.
               No iterator is required.
               Every row of a CSV data source is considered as a record.
             </dd>
 
-            <dt><dfn>JSON (required profiles: RML)</dfn></dt>
+            <dt><dfn>JSON</dfn> (required profiles: RML)</dt>
             <dd>
               The reference formulation <code>jsonpath</code> is used for data sources that can be access via JSONPath expressions.
               An iterator is required.
             </dd>
 
-            <dt><dfn>XML (required profiles: RML)</dfn></dt>
+            <dt><dfn>XML</dfn> (required profiles: RML)</dt>
             <dd>
               The reference formulation <code>xpath</code> is used for data sources that can be access via XPath expressions.
               An iterator is required.
@@ -260,7 +260,7 @@
             This list is based on version IRIs identified by <a href="https://www.w3.org/2001/sw/wiki/RDB2RDF/SQL_Version_IRIs">RDB2RDF</a>.
           </dd>
 
-          <dt><dfn>SPARQL (required profiles: RML, SD)</dfn></dt>
+          <dt><dfn>SPARQL</dfn> (required profiles: RML, SD)</dt>
           <dd>
             The query formulation <code>sparql11</code> is used for data sources that can be queried via a SPARQL 1.1 query.
           </dd>
