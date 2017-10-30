@@ -185,10 +185,10 @@
             <dt><dfn>encoding</dfn> (required profiles: RML, CSVW)</dt>
             <dd>the encoding used for the data</dd>
 
-            <dt><dfn>query</dfn></dt>
+            <dt><dfn>query</dfn> (required profiles: R2RML)</dt>
             <dd>the query to execute on the data source to select only a part of the data</dd>
 
-            <dt><dfn>queryFormulation</dfn></dt>
+            <dt><dfn>queryFormulation</dfn> (required profiles: R2RML)</dt>
             <dd>the query formulation used on to query the data source</dd>
 
             <dt><dfn>credentials</dfn> (required profiles: RML, D2RQ)</dt>
@@ -200,6 +200,10 @@
             <dt><dfn>password</dfn> (required profiles: RML, D2RQ)</dt>
             <dd>the password required to access the data source</dd>
           </dl>
+		  
+		  <div class="note">
+			<p>To be precise, the <a>iterator</a> contains a "query" as a string, as per specification of the <a>referenceFormulation</a>. E.g., when using <a>referenceFormulation</a> <code>xpath</code>, the <a>iterator</a> will be interpreted as an xPath statement. When using <a>referenceFormulation</a> <code>sparql</code>, the <a>iterator</a> will be interpreted as a SPARQL query. This is similar for <a>queryFormulation</a> and <a>query</a>.</p>
+		  </div>
         </section>
 
         <section>
@@ -432,7 +436,6 @@
                     SELECT DEPTNO, DNAME, LOC,
                     (SELECT COUNT(*) FROM EMP WHERE EMP.DEPTNO=DEPT.DEPTNO) AS STAFF
                     FROM DEPT;
-                  referenceFormulation: csv
           </pre>
         </p>
       </section>
