@@ -185,10 +185,10 @@
             <dt><dfn>encoding</dfn> (required profiles: RML, CSVW)</dt>
             <dd>the encoding used for the data</dd>
 
-            <dt><dfn>query</dfn> (required profiles: R2RML)</dt>
+            <dt><dfn>query</dfn> (required profiles: RML, R2RML)</dt>
             <dd>the query to execute on the data source to select only a part of the data</dd>
 
-            <dt><dfn>queryFormulation</dfn> (required profiles: R2RML)</dt>
+            <dt><dfn>queryFormulation</dfn> (required profiles: RML, R2RML)</dt>
             <dd>the query formulation used on to query the data source</dd>
 
             <dt><dfn>credentials</dfn> (required profiles: RML, D2RQ)</dt>
@@ -202,7 +202,18 @@
           </dl>
 		  
 		  <div class="note">
-			<p>To be precise, the <a>iterator</a> contains a "query" as a string, as per specification of the <a>referenceFormulation</a>. E.g., when using <a>referenceFormulation</a> <code>xpath</code>, the <a>iterator</a> will be interpreted as an xPath statement. When using <a>referenceFormulation</a> <code>sparql</code>, the <a>iterator</a> will be interpreted as a SPARQL query. This is similar for <a>queryFormulation</a> and <a>query</a>.</p>
+			<p>
+				To be precise, the <a>iterator</a> contains a "query" as a string,
+				as per specification of the <a>referenceFormulation</a>.
+				E.g., when using <a>referenceFormulation</a> <code>xpath</code>,
+				the <a>iterator</a> will be interpreted as an xPath statement.
+				When using <a>referenceFormulation</a> <code>sparql</code>,
+				the <a>iterator</a> will be interpreted as a SPARQL query.
+				This is similar for <a>queryFormulation</a> and <a>query</a>.
+				The latter however is executed when retrieving the data,
+				a so-called "view" of the data.
+				The former is executed on top of this view.
+			</p>
 		  </div>
         </section>
 
