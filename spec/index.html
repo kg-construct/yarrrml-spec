@@ -290,6 +290,28 @@
             The collection is replaced with an array where
             the first element contains the value for <code>access</code> appended with the <code>~</code> and the value for <code>referenceFormulation</code>, and
             the second element contains the iterator.
+
+          </p>
+
+          <p>
+          The following mapping access a SQL database and select the required data via a query.
+
+          <pre id="example-db" class="example" title="mapping with database as source">
+            mapping:
+              person:
+                sources:
+                  access: jdbc:mysql://localhost/example
+                  driver: com.mysql.jdbc.Driver
+                  credentials:
+                    username: root
+                    password: root
+                  queryFormulation: sql2008
+                  query: |
+                    SELECT DEPTNO, DNAME, LOC,
+                    (SELECT COUNT(*) FROM EMP WHERE EMP.DEPTNO=DEPT.DEPTNO) AS STAFF
+                    FROM DEPT;
+                  referenceFormulation: csv
+          </pre>
           </p>
         </section>
     </section>
@@ -414,25 +436,6 @@
                  - access: data/person2.json
                    referenceFormulation: jsonpath
                    iterator: "$.persons[*]"
-          </pre>
-
-          The following mapping access a SQL database and select the required data via a query.
-
-          <pre id="example-db" class="example" title="mapping with database as source">
-            mapping:
-              person:
-                sources:
-                  access: jdbc:mysql://localhost/example
-                  driver: com.mysql.jdbc.Driver
-                  credentials:
-                    username: root
-                    password: root
-                  queryFormulation: sql2008
-                  query: |
-                    SELECT DEPTNO, DNAME, LOC,
-                    (SELECT COUNT(*) FROM EMP WHERE EMP.DEPTNO=DEPT.DEPTNO) AS STAFF
-                    FROM DEPT;
-                  referenceFormulation: csv
           </pre>
         </p>
       </section>
