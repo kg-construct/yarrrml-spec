@@ -11,46 +11,52 @@
         specStatus: "unofficial",
         editors: [{
           name: "Ben De Meester",
-          url: "https://be.de-meester.org",
+          url: "https://ben.de-meester.org",
+          mailto: "ben.demeester@ugent.be",
+          company: 'imec — Ghent University — IDLab',
         },{
           name: "Pieter Heyvaert",
           url: "https://pieterheyvaert.com",
+          mailto: "pheyvaer.heyvaert@ugent.be",
+          company: 'imec — Ghent University — IDLab',
         }],
         processVersion: 2017,
-        edDraftURI: "http://some.github.repo",
-        shortName: "dahut"
+        // edDraftURI: "http://some.github.repo",
+        shortName: "yarrrml"
       };
     </script>
   </head>
   <body>
     <section id='abstract'>
       <p>
-        This is required.
+        YARRRML is a human readable text-based representation for declarative generation rules.
+        It is a subset of [[YAML]],
+        a widely used data serialization language designed to be human-friendly.
       </p>
     </section>
     <section id='sotd'>
     </section>
-    <section>
-      <h2>Introduction</h2>
+<!--<section>-->
+    <!--<h2>Introduction</h2>-->
 
-      <section>
-        <h2>Goals</h2>
+    <!--<section>-->
+        <!--<h2>Goals</h2>-->
 
-      </section>
+    <!--</section>-->
 
-      <section>
-        <h2>Relation to existing mapping languages</h2>
+    <!--<section>-->
+        <!--<h2>Relation to existing mapping languages</h2>-->
 
-      </section>
+    <!--</section>-->
 
-      <section>
-        <h2>Relation to YAML</h2>
+    <!--<section>-->
+        <!--<h2>Relation to YAML</h2>-->
 
-        <p>
-          YARRRML is a subset of the YAML.
-        </p>
-      </section>
-    </section>
+        <!--<p>-->
+            <!--YARRRML is a subset of the YAML.-->
+        <!--</p>-->
+    <!--</section>-->
+<!--</section>-->
 
     <section>
       <h2>Terminology</h2>
@@ -84,22 +90,24 @@
 
       <p>
         This specification includes the following main profiles for tools that process YARRRML documents:
-
-        <ul>
-          <li>R2RML: applies the semantics specified by R2RML; and</li>
-          <li>RML: applies the semantics specified by RML.</li>
-        </ul>
-
-        These profiles can be extended with additional profiles, which cannot be used on their own:
-
-        <ul>
-          <li>FnO: applies the semantics specified by FnO;</li>
-          <li>DCAT: applies the semantics specified by DCAT;</li>
-          <li>D2RQ: applies the semantics specified by D2RQ;</li>
-          <li>SD: applies the semantics specified by SD; and</li>
-          <li>CSVW: applies the semantics specified by CSVW.</li>
-        </ul>
       </p>
+
+      <ul>
+        <li>R2RML: applies the semantics specified by [[R2RML]]; and</li>
+        <li>RML: applies the semantics specified by RML.</li>
+      </ul>
+
+      <p>
+        These profiles can be extended with additional profiles, which cannot be used on their own:
+      </p>
+
+      <ul>
+        <li>FnO: applies the semantics specified by FnO;</li>
+        <li>DCAT: applies the semantics specified by DCAT;</li>
+        <li>D2RQ: applies the semantics specified by D2RQ;</li>
+        <li>SD: applies the semantics specified by SD; and</li>
+        <li>CSVW: applies the semantics specified by CSVW ([[csv2rdf]]).</li>
+      </ul>
     </section>
 
     <section>
@@ -112,11 +120,11 @@
       <p>
         A base IRI can be added by adding key <code>base</code> with as value the IRI itself to the root of the document.
         In the following example the base IRI is set to <code>http://mybaseiri.com#</code>.
-
-        <pre id="example-base-iri" class="nohighlight example" title="base IRI">
-          base: http://mybaseiri.com#
-        </pre>
       </p>
+
+      <pre id="example-base-iri" class="nohighlight example" title="base IRI">
+        base: http://mybaseiri.com#
+      </pre>
     </section>
 
     <section>
@@ -132,13 +140,13 @@
         Each combination of a prefix and namespace is added to this collection as a key-value pair.
 
         In the following example two prefixes are defined: <code>ex</code> and <code>test</code>.
-
-        <pre id="example-custom-prefixes" class="nohighlight example" title="custom prefixes">
-          prefixes:
-            ex: http://www.example.com
-            test: http://www.test.com
-        </pre>
       </p>
+
+      <pre id="example-custom-prefixes" class="nohighlight example" title="custom prefixes">
+        prefixes:
+          ex: http://www.example.com
+          test: http://www.test.com
+      </pre>
     </section>
 
     <section>
@@ -286,6 +294,7 @@
           <h2>Examples</h2>
           <p>
             In the following example a single data source is defined <code>person-source</code>.
+          </p>
 
             <pre id="example-ds1" class="example" title="one data source">
               sources:
@@ -295,13 +304,16 @@
                   iterator: $
             </pre>
 
+          <p>
             A shortcut version of this example looks as follows.
+          </p>
 
             <pre id="example-ds1-sc" class="example" title="one data source using shortcuts">
               sources:
                 person-source: [data/person.json~jsonpath, $]
             </pre>
 
+          <p>
             The collection is replaced with an array where
             the first element contains the value for <code>access</code> appended with the <code>~</code> and the value for <code>referenceFormulation</code>, and
             the second element contains the iterator.
@@ -310,6 +322,7 @@
 
           <p>
           The following mapping access a SQL database and select the required data via a query.
+          </p>
 
           <pre id="example-db" class="example" title="mapping with database as source">
             mapping:
@@ -327,7 +340,6 @@
                     FROM DEPT;
                   referenceFormulation: csv
           </pre>
-          </p>
         </section>
     </section>
 
@@ -341,13 +353,13 @@
           The value is collection containing rules to generate the subjects, predicates, and objects.
 
           In the following example two mappings are defined: <code>person</code> and <code>project</code>.
+        </p>
 
           <pre id="example-mappings" class="example" title="two mappings">
             mappings:
               person: ...
                 project: ...
           </pre>
-      </p>
 
       <section>
         <h2>Data sources</h2>
@@ -359,6 +371,7 @@
           The key-value to add to a source are the same when defining sources at the root of the document.
 
           In the following example the mapping <code>person</code> has one source.
+        </p>
 
           <pre id="example-ds" class="example" title="mapping with one data source">
             mapping:
@@ -452,7 +465,6 @@
                    referenceFormulation: jsonpath
                    iterator: "$.persons[*]"
           </pre>
-        </p>
       </section>
 
       <section>
@@ -465,6 +477,7 @@
           In the case of a blank node, this collection is set to <code>null</code> or is not specified at all.
 
           In the following example the mapping <code>person</code> generate IRI for the subjects based on the template <code>http://wwww.example.com/person/$(id)</code>.
+        </p>
 
           <pre id="example-subject" class="nohighlight example" title="mapping with one subject">
             mappings:
@@ -484,7 +497,6 @@
           </pre>
 
           It is possible to apply functions on subjects.
-        </p>
       </section>
 
       <section>
@@ -668,6 +680,7 @@
           of the person and the <code>ID</code> of the project.
           Note that a condition is not required.
           In this example it would result in relationships between every person and every project.
+        </p>
 
           <pre id="example-ref-map" class="example" title="interlinking two mappings">
             mappings:
@@ -685,7 +698,6 @@
               project:
                 subjects: http://example.com/project/$(ID)
           </pre>
-        </p>
       </section>
     </section>
 
@@ -726,6 +738,7 @@
       <p>
         A subject or predicate-object combination is in certain cases only generated when a condition is fulfilled.
         In the following example, the predicate-object is only generated when the <code>firstname</code> is valid.
+      </p>
 
         <pre id="example-cond" class="example" title="mapping with condition on predicate object">
           mappings:
@@ -753,7 +766,6 @@
                - predicates: foaf:firstName
                  objects: $(firstname)
         </pre>
-      </p>
     </section>
 
     <section>
@@ -762,7 +774,6 @@
       <section>
         <h2>Keys</h2>
 
-        <p>
           <ul>
             <li>subjects: subject, s</li>
             <li>predicates: predicate, p</li>
@@ -773,17 +784,14 @@
             <li>parameter: pm</li>
             <li>value: v</li>
           </ul>
-        </p>
       </section>
 
       <section>
         <h2>Predicates</h2>
 
-        <p>
           <ul>
             <li>http://www.w3.org/1999/02/22-rdf-syntax-ns#type: a</li>
           </ul>
-        </p>
       </section>
     </section>
 
