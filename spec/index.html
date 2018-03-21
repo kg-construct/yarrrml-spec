@@ -294,6 +294,7 @@
           <h2>Examples</h2>
           <p>
             In the following example a single data source is defined <code>person-source</code>.
+          </p>
 
             <pre id="example-ds1" class="example" title="one data source">
               sources:
@@ -303,13 +304,16 @@
                   iterator: $
             </pre>
 
+          <p>
             A shortcut version of this example looks as follows.
+          </p>
 
             <pre id="example-ds1-sc" class="example" title="one data source using shortcuts">
               sources:
                 person-source: [data/person.json~jsonpath, $]
             </pre>
 
+          <p>
             The collection is replaced with an array where
             the first element contains the value for <code>access</code> appended with the <code>~</code> and the value for <code>referenceFormulation</code>, and
             the second element contains the iterator.
@@ -318,6 +322,7 @@
 
           <p>
           The following mapping access a SQL database and select the required data via a query.
+          </p>
 
           <pre id="example-db" class="example" title="mapping with database as source">
             mapping:
@@ -335,7 +340,6 @@
                     FROM DEPT;
                   referenceFormulation: csv
           </pre>
-          </p>
         </section>
     </section>
 
