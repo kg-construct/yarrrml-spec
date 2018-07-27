@@ -334,7 +334,25 @@
             </div>
             <div id="tab1-3">
               <pre id="example-ds1-sg" class="example" title="one data source">
-              TODO
+                #########
+                # Query #
+                #########
+
+                SOURCE &lt;http://example.org/document#0> AS ?source
+
+                ######################
+                # Configuration file #
+                ######################
+
+                {
+                  "documentset": [
+                    {
+                      "uri": "http://example.org/document#0",
+                      "mediatype": "text/plain",
+                      "path": "data/person.json"
+                    }
+                  ]
+                }
               </pre>
             </div>
           </div>
@@ -365,7 +383,25 @@
               </div>
               <div id="tab2-3">
                 <pre id="example-ds1-sc-sg" class="example" title="one data source using shortcuts">
-                TODO
+                  #########
+                  # Query #
+                  #########
+
+                  SOURCE &lt;http://example.org/document#0> AS ?source
+
+                  ######################
+                  # Configuration file #
+                  ######################
+
+                  {
+                    "documentset": [
+                      {
+                        "uri": "http://example.org/document#0",
+                        "mediatype": "text/plain",
+                        "path": "data/person.json"
+                      }
+                    ]
+                  }
                 </pre>
               </div>
             </div>
@@ -472,7 +508,8 @@
           </div>
           <div id="tab4-3">
             <pre id="example-mappings-sg" class="example" title="two mappings">
-            TODO
+            GENERATE {}
+            WHERE {}
             </pre>
           </div>
         </div>
@@ -519,7 +556,27 @@
           </div>
           <div id="tab5-3">
             <pre id="example-ds-sg" class="example" title="mapping with one data source">
-            TODO
+              #########
+              # Query #
+              #########
+
+              GENERATE {}
+              SOURCE &lt;http://example.org/document#0> AS ?source
+              WHERE {}
+
+              ######################
+              # Configuration file #
+              ######################
+
+              {
+                "documentset": [
+                  {
+                    "uri": "http://example.org/document#0",
+                    "mediatype": "text/plain",
+                    "path": "data/person.json"
+                  }
+                ]
+              }
             </pre>
           </div>
         </div>
@@ -553,7 +610,27 @@
           </div>
           <div id="tab6-3">
             <pre id="example-ds-sc-sg" class="example" title="mapping with one data source using shortcuts">
-            TODO
+              #########
+              # Query #
+              #########
+
+              GENERATE {}
+              SOURCE &lt;http://example.org/document#0> AS ?source
+              WHERE {}
+
+              ######################
+              # Configuration file #
+              ######################
+
+              {
+                "documentset": [
+                  {
+                    "uri": "http://example.org/document#0",
+                    "mediatype": "text/plain",
+                    "path": "data/person.json"
+                  }
+                ]
+              }
             </pre>
           </div>
         </div>
@@ -603,7 +680,40 @@
           </div>
           <div id="tab7-3">
             <pre id="example-ds2-sg" class="example" title="mapping with two data sources">
-            TODO
+              ###########
+              # Query 1 #
+              ###########
+
+              GENERATE {}
+              SOURCE &lt;http://example.org/document#0> AS ?source
+              WHERE {}
+
+              ###########
+              # Query 2 #
+              ###########
+
+              GENERATE {}
+              SOURCE &lt;http://example.org/document#1> AS ?source
+              WHERE {}
+
+              ######################
+              # Configuration file #
+              ######################
+
+              {
+                "documentset": [
+                  {
+                    "uri": "http://example.org/document#0",
+                    "mediatype": "text/plain",
+                    "path": "data/person.json"
+                  },
+                  {
+                    "uri": "http://example.org/document#1",
+                    "mediatype": "text/plain",
+                    "path": "data/person2.json"
+                  }
+                ]
+              }
             </pre>
           </div>
         </div>
@@ -648,7 +758,40 @@
           </div>
           <div id="tab8-3">
             <pre id="example-ds2-sc-sg" class="example" title="mapping with two data sources using shortcuts">
-            TODO
+              ###########
+              # Query 1 #
+              ###########
+
+              GENERATE {}
+              SOURCE &lt;http://example.org/document#0> AS ?source
+              WHERE {}
+
+              ###########
+              # Query 2 #
+              ###########
+
+              GENERATE {}
+              SOURCE &lt;http://example.org/document#1> AS ?source
+              WHERE {}
+
+              ######################
+              # Configuration file #
+              ######################
+
+              {
+                "documentset": [
+                  {
+                    "uri": "http://example.org/document#0",
+                    "mediatype": "text/plain",
+                    "path": "data/person.json"
+                  },
+                  {
+                    "uri": "http://example.org/document#1",
+                    "mediatype": "text/plain",
+                    "path": "data/person2.json"
+                  }
+                ]
+              }
             </pre>
           </div>
         </div>
@@ -688,7 +831,27 @@
           </div>
           <div id="tab9-3">
             <pre id="example-ds3-sg" class="example" title="mapping with one data sources">
-            TODO
+              #########
+              # Query #
+              #########
+
+              GENERATE {}
+              SOURCE &lt;http://example.org/document#0> AS ?source
+              WHERE {}
+
+              ######################
+              # Configuration file #
+              ######################
+
+              {
+                "documentset": [
+                  {
+                    "uri": "http://example.org/document#0",
+                    "mediatype": "text/plain",
+                    "path": "data/person.json"
+                  }
+                ]
+              }
             </pre>
           </div>
         </div>
@@ -742,7 +905,40 @@
           </div>
           <div id="tab10-3">
             <pre id="example-ds4-sg" class="example" title="mapping with two data sources">
-            TODO
+              ###########
+              # Query 1 #
+              ###########
+
+              GENERATE {}
+              SOURCE &lt;http://example.org/document#0> AS ?source
+              WHERE {}
+
+              ###########
+              # Query 2 #
+              ###########
+
+              GENERATE {}
+              SOURCE &lt;http://example.org/document#1> AS ?source
+              WHERE {}
+
+              ######################
+              # Configuration file #
+              ######################
+
+              {
+                "documentset": [
+                  {
+                    "uri": "http://example.org/document#0",
+                    "mediatype": "text/plain",
+                    "path": "data/person.json"
+                  },
+                  {
+                    "uri": "http://example.org/document#1",
+                    "mediatype": "text/plain",
+                    "path": "data/person2.json"
+                  }
+                ]
+              }
             </pre>
           </div>
         </div>
@@ -795,7 +991,40 @@
           </div>
           <div id="tab11-3">
             <pre id="example-ds5-sg" class="example" title="mapping with two data sources">
-            TODO
+              ###########
+              # Query 1 #
+              ###########
+
+              GENERATE {}
+              SOURCE &lt;http://example.org/document#0> AS ?source
+              WHERE {}
+
+              ###########
+              # Query 2 #
+              ###########
+
+              GENERATE {}
+              SOURCE &lt;http://example.org/document#1> AS ?source
+              WHERE {}
+
+              ######################
+              # Configuration file #
+              ######################
+
+              {
+                "documentset": [
+                  {
+                    "uri": "http://example.org/document#0",
+                    "mediatype": "text/plain",
+                    "path": "data/person.json"
+                  },
+                  {
+                    "uri": "http://example.org/document#1",
+                    "mediatype": "text/plain",
+                    "path": "data/person2.json"
+                  }
+                ]
+              }
             </pre>
           </div>
         </div>
@@ -839,7 +1068,12 @@
           </div>
           <div id="tab12-3">
             <pre id="example-subject-sg" class="example" title="mapping with one subject">
-            TODO
+              GENERATE {
+                &lt;http://wwww.example.com/person/{?id}>
+              }
+              WHERE {
+                BIND(fun:JSONPath(?source,"$.id") AS ?id)
+              }
             </pre>
           </div>
         </div>
@@ -881,7 +1115,14 @@
           </div>
           <div id="tab13-3">
             <pre id="example-subject2-sg" class="example" title="mapping with two subject">
-            TODO
+              GENERATE {
+                &lt;http://wwww.example.com/person/{?id}>.
+                &lt;http://www.test.com/{firstname}>.
+              }
+              WHERE {
+                BIND(fun:JSONPath(?source,"$.id") AS ?id)
+                BIND(fun:JSONPath(?source,"$.firstname") AS ?firstname)
+              }
             </pre>
           </div>
         </div>
@@ -926,7 +1167,12 @@
           </div>
           <div id="tab14-3">
             <pre id="example-po-sg" class="example" title="mapping with one predicate and object">
-            TODO
+              GENERATE {
+                foaf:firstName ?firstname;
+              }
+              WHERE {
+                BIND(fun:JSONPath(?source,"$.firstname") AS ?firstname)
+              }
             </pre>
           </div>
         </div>
@@ -963,7 +1209,12 @@
           </div>
           <div id="tab15-3">
             <pre id="example-po-sc-sg" class="example" title="mapping with one predicate and object using shortcuts">
-            TODO
+              GENERATE {
+                foaf:firstName ?firstname;
+              }
+              WHERE {
+                BIND(fun:JSONPath(?source,"$.firstname") AS ?firstname)
+              }
             </pre>
           </div>
         </div>
@@ -1007,7 +1258,16 @@
           </div>
           <div id="tab16-3">
             <pre id="example-po2-sg" class="example" title="mapping with two predicates and objects">
-            TODO
+              GENERATE {
+                foaf:name ?firstname;
+                foaf:name ?lastname;
+                rdfs:label ?firstname;
+                rdfs:label ?lastname;
+              }
+              WHERE {
+                BIND(fun:JSONPath(?source,"$.firstname") AS ?firstname)
+                BIND(fun:JSONPath(?source,"$.lastname") AS ?lastname)
+              }
             </pre>
           </div>
         </div>
@@ -1049,7 +1309,16 @@
           </div>
           <div id="tab17-3">
             <pre id="example-po2-sc-sg" class="example" title="mapping with two predicates and objects using shortcuts">
-            TODO
+              GENERATE {
+                foaf:name ?firstname;
+                foaf:name ?lastname;
+                rdfs:label ?firstname;
+                rdfs:label ?lastname;
+              }
+              WHERE {
+                BIND(fun:JSONPath(?source,"$.firstname") AS ?firstname)
+                BIND(fun:JSONPath(?source,"$.lastname") AS ?lastname)
+              }
             </pre>
           </div>
         </div>
@@ -1088,7 +1357,12 @@
           </div>
           <div id="tab18-3">
             <pre id="example-po3-sg" class="example" title="mapping with object that generates an IRI">
-            TODO
+              GENERATE {
+                foaf:knows &lt;?colleague>;
+              }
+              WHERE {
+                BIND(fun:JSONPath(?source,"$.colleague") AS ?colleague)
+              }
             </pre>
           </div>
         </div>
@@ -1126,7 +1400,12 @@
           </div>
           <div id="tab19-3">
             <pre id="example-po3-sc-sg" class="example" title="mapping with object that generates an IRI using shortcuts">
-            TODO
+              GENERATE {
+                foaf:knows &lt;?colleague>;
+              }
+              WHERE {
+                BIND(fun:JSONPath(?source,"$.colleague") AS ?colleague)
+              }
             </pre>
           </div>
         </div>
@@ -1182,7 +1461,12 @@
           </div>
           <div id="tab20-3">
             <pre id="example-datatype-sg" class="example" title="mapping with one datatype">
-            TODO
+              GENERATE {
+                foaf:firstName "{firstname}"^^xsd:string;
+              }
+              WHERE {
+                BIND(fun:JSONPath(?source,"$.firstname") AS ?firstname)
+              }
             </pre>
           </div>
         </div>
@@ -1220,7 +1504,12 @@
           </div>
           <div id="tab21-3">
             <pre id="example-datatype-sc-sg" class="example" title="mapping with one datatype using shortcuts">
-            TODO
+              GENERATE {
+                foaf:firstName "{firstname}"^^xsd:string;
+              }
+              WHERE {
+                BIND(fun:JSONPath(?source,"$.firstname") AS ?firstname)
+              }
             </pre>
           </div>
         </div>
@@ -1266,7 +1555,14 @@
           </div>
           <div id="tab22-3">
             <pre id="example-datatype2-sg" class="example" title="mapping with two datatypes">
-            TODO
+              GENERATE {
+                foaf:name "{firstname}"^^ex:string;
+                foaf:name "{lastname}"^^ex:anotherString
+              }
+              WHERE {
+                BIND(fun:JSONPath(?source,"$.firstname") AS ?firstname)
+                BIND(fun:JSONPath(?source,"$.lastname") AS ?lastname)
+              }
             </pre>
           </div>
         </div>
@@ -1310,7 +1606,14 @@
           </div>
           <div id="tab23-3">
             <pre id="example-datatype2-sc-sg" class="example" title="mapping with two datatypes using shortcuts">
-            TODO
+              GENERATE {
+                foaf:name "{firstname}"^^ex:string;
+                foaf:name "{lastname}"^^ex:anotherString
+              }
+              WHERE {
+                BIND(fun:JSONPath(?source,"$.firstname") AS ?firstname)
+                BIND(fun:JSONPath(?source,"$.lastname") AS ?lastname)
+              }
             </pre>
           </div>
         </div>
@@ -1353,7 +1656,12 @@
           </div>
           <div id="tab24-3">
             <pre id="example-lang-sg" class="example" title="mapping with one language">
-            TODO
+              GENERATE {
+                foaf:firstName "{firstname}"@en;
+              }
+              WHERE {
+                BIND(fun:JSONPath(?source,"$.firstname") AS ?firstname)
+              }
             </pre>
           </div>
         </div>
@@ -1391,7 +1699,12 @@
           </div>
           <div id="tab25-3">
             <pre id="example-lang-sc-sg" class="example" title="mapping with one language using shortcuts">
-            TODO
+              GENERATE {
+                foaf:firstName "{firstname}"@en;
+              }
+              WHERE {
+                BIND(fun:JSONPath(?source,"$.firstname") AS ?firstname)
+              }
             </pre>
           </div>
         </div>
@@ -1437,7 +1750,14 @@
           </div>
           <div id="tab26-3">
             <pre id="example-lang2-sg" class="example" title="mapping with two languages">
-            TODO
+              GENERATE {
+                foaf:name "{firstname}"@en;
+                foaf:name "{lastname}"@nl;
+              }
+              WHERE {
+                BIND(fun:JSONPath(?source,"$.firstname") AS ?firstname)
+                BIND(fun:JSONPath(?source,"$.lastname") AS ?lastname)
+              }
             </pre>
           </div>
         </div>
@@ -1481,7 +1801,14 @@
           </div>
           <div id="tab27-3">
             <pre id="example-lang2-sc-sg" class="example" title="mapping with two languages using shortcuts">
-            TODO
+              GENERATE {
+                foaf:name "{firstname}"@en;
+                foaf:name "{lastname}"@nl;
+              }
+              WHERE {
+                BIND(fun:JSONPath(?source,"$.firstname") AS ?firstname)
+                BIND(fun:JSONPath(?source,"$.lastname") AS ?lastname)
+              }
             </pre>
           </div>
         </div>
