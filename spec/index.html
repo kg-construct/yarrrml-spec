@@ -1892,6 +1892,96 @@
           </div>
         </div>
       </section>
+
+      <section>
+        <h2>Graphs</h2>
+
+        <p>
+
+        </p>
+
+        <section>
+          <h3>All triples</h3>
+
+          <div id="tabs-32" class="nanotabs">
+            <ul>
+              <li><a href="#tab32-1" class="selected">YARRRML</a></li>
+              <li><a href="#tab32-2">RML</a></li>
+              <li><a href="#tab32-3">SPARQL-Generate</a></li>
+            </ul>
+            <div id="tab32-1">
+              <pre id="example-graphs-s" class="example" title="mapping with graph for all triples">
+                mappings:
+                  person:
+                    graphs: ex:myGraph
+              </pre>
+            </div>
+            <div id="tab32-2">
+              <pre id="example-graphs-s-rml" class="example" title="mapping with graph for all triples">
+                <#TriplesMap> a rr:TriplesMap; #person
+
+                  rr:subjectMap [
+                    a rr:SubjectMap;
+                    rr:graphMap [
+                      a rr:GraphMap;
+                      rr:template "http://example.org/myGraph"
+                    ]
+                  ].
+              </pre>
+            </div>
+            <div id="tab32-3">
+              <pre id="example-graphs-s-sg" class="example" title="mapping with graph for all triples">
+              TODO
+              </pre>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h3>All triples with a specific predicate and object</h3>
+
+          <div id="tabs-33" class="nanotabs">
+            <ul>
+              <li><a href="#tab33-1" class="selected">YARRRML</a></li>
+              <li><a href="#tab33-2">RML</a></li>
+              <li><a href="#tab33-3">SPARQL-Generate</a></li>
+            </ul>
+            <div id="tab33-1">
+              <pre id="example-graphs-po" class="example" title="mapping with graph for all triples with a specific predicate and object">
+                mappings:
+                  person:
+                    predicateobjects:
+                     - predicates: foaf:firstName
+                       objects: $(firstname)
+                       graphs: ex:myGraph
+              </pre>
+            </div>
+            <div id="tab33-2">
+              <pre id="example-graphs-po-rml" class="example" title="mapping with graph for all triples with a specific predicate and object">
+                <#TriplesMap> a rr:TriplesMap; #person
+
+                  rr:predicateObjectMap [
+                    a rr:PredicateObjectMap;
+                    rr:predicate foaf:firstName;
+                    rr:objectMap [
+                      a rr:ObjectMap;
+                      rr:template "{firstname}"
+                    ];
+                    rr:graphMap [
+                      a rr:GraphMap;
+                      rr:template "http://example.org/myGraph"
+                    ]
+                  ].
+              </pre>
+            </div>
+            <div id="tab33-3">
+              <pre id="example-graphs-po-sg" class="example" title="mapping with graph for all triples with a specific predicate and object">
+              TODO
+              </pre>
+            </div>
+          </div>
+        </section>
+      </section>
     </section>
 
     <section>
