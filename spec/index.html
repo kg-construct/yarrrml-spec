@@ -3,7 +3,7 @@
   <head>
     <meta charset='utf-8'>
     <title>YARRRML</title>
-    <script 
+    <script
      src='./respec-w3c-common.js'
      class='remove'></script>
     <script class='remove'>
@@ -221,7 +221,7 @@
             <dt><dfn>password</dfn> (required profiles: RML, D2RQ)</dt>
             <dd>the password required to access the data source</dd>
           </dl>
-		  
+
 		  <div class="note">
 			<p>
 				To be precise, the <a>iterator</a> contains a "query" as a string,
@@ -1520,7 +1520,7 @@
 
                     rr:predicateObjectMap [
                       rr:predicate ex:input ;
-                      rr:objectMap [ rr:reference "firstname" ]
+                      rr:objectMap [ rml:reference "firstname" ]
                     ]
                   ] .
             </pre>
@@ -1566,7 +1566,77 @@
 
                     rr:predicateObjectMap [
                       rr:predicate ex:input ;
-                      rr:objectMap [ rr:reference "firstname" ]
+                      rr:objectMap [ rml:reference "firstname" ]
+                    ]
+                  ] .
+            </pre>
+        </div>
+      </div>
+
+      It possible to combine multiple functions, i.e., the value of a parameter of a function is the result of another function.
+
+      <div id="tabs-31" class="nanotabs">
+        <ul>
+          <li><a href="#tab31-1" class="selected">YARRRML</a></li>
+          <li><a href="#tab31-2">RML</a></li>
+        </ul>
+        <div id="tab31-1">
+          <pre id="example-fn-recursive" class="example" title="mapping with multiple functions">
+            mappings:
+              person:
+                predicateobjects:
+                 - predicates: schema:name
+                   objects:
+                    - function: ex:escape
+                      parameters:
+                       - parameter: ex:valueParameter
+                         value:
+                           function: ex:toUpperCase
+                           parameters:
+                             - [ex:valueParameter, $(name)]
+                       - [ex:modeParameter, html]
+          </pre>
+        </div>
+        <div id="tab31-2">
+            <pre id="example-fn-recursive-rml" class="example" title="mapping with multiple functions">
+              <#TriplesMap> a rr:TriplesMap; #person
+
+                rr:predicateObjectMap [
+                  a rr:PredicateObjectMap;
+                  rr:predicate schema:name;
+                  rr:objectMap <#FunctionMap>
+                ].
+
+                <#FunctionMap>
+                  fnml:functionValue [
+                    rml:logicalSource <#LogicalSource> ;
+                    rr:predicateObjectMap [
+                      rr:predicate fno:executes ;
+                      rr:objectMap [ rr:constant ex:escape ]
+                    ] ;
+
+                    rr:predicateObjectMap [
+                      rr:predicate ex:valueParameter ;
+                      rr:objectMap <#FunctionMap2>
+                    ];
+
+                    rr:predicateObjectMap [
+                      rr:predicate ex:modeParameter ;
+                      rr:objectMap [ rr:constant "html" ]
+                    ]
+                  ] .
+
+                <#FunctionMap2>
+                  fnml:functionValue [
+                    rml:logicalSource <#LogicalSource> ;
+                    rr:predicateObjectMap [
+                      rr:predicate fno:executes ;
+                      rr:objectMap [ rr:constant ex:toUpperCase ]
+                    ] ;
+
+                    rr:predicateObjectMap [
+                      rr:predicate ex:valueParameter ;
+                      rr:objectMap [ rml:reference "name" ]
                     ]
                   ] .
             </pre>
