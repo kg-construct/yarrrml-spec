@@ -167,6 +167,52 @@
     </section>
 
     <section>
+      <h2>Authors</h2>
+
+      <p>
+        A set of prefixes and namespaces are predefined by default in every YARRRML document.
+        There are the same as the predefined prefixes for <a href="https://www.w3.org/2011/rdfa-context/rdfa-1.1">RDFa</a>.
+      </p>
+
+      <p>
+        Custom prefixes can be added by adding the collection <code>prefixes</code> to the root of the document.
+        Each combination of a prefix and namespace is added to this collection as a key-value pair.
+
+        In the following example two prefixes are defined: <code>ex</code> and <code>test</code>.
+      </p>
+
+      <div id="tabs-author" class="nanotabs">
+        <ul>
+          <li><a href="#tab-author-1" class="selected">YARRRML</a></li>
+          <li><a href="#tab-author-2">RML</a></li>
+        </ul>
+        <div id="tab-author-1">
+            <pre id="example-author-yarrrml" class="nohighlight example" title="mapping with multiple authors">
+              authors:
+                - John Doe &lt;john@doe.com> (https://johndoe.com)
+                - name: Jane Doe
+                  website: https://janedoe.com
+                - https://jamesdoe.com/me #webid
+            </pre>
+        </div>
+        <div id="tab-author-2">
+            <pre id="example-author-rml" class="example" title="mapping with multiple authors">
+              <#TM> schema:author [
+                a schema:Author;
+                schema:name "John Doe";
+                schema:email "john@doe.com";
+                schema:homepage "https://johndoe.com"
+              ], [
+                a schema:Author;
+                schema:name "Jane Doe";
+                schema:homepage "https://janedoe.com"
+              ], &lt;https://jamesdoe.com/me>.
+            </pre>
+        </div>
+      </div>
+    </section>
+
+    <section>
       <h2>Template</h2>
 
       <p>
