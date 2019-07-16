@@ -170,15 +170,24 @@
       <h2>Authors</h2>
 
       <p>
-        A set of prefixes and namespaces are predefined by default in every YARRRML document.
-        There are the same as the predefined prefixes for <a href="https://www.w3.org/2011/rdfa-context/rdfa-1.1">RDFa</a>.
+        The authors of the YARRRML rules can be added via the key <code>authors</code>.
+        The value is an array with an object for each author.
+        Each other can have the following keys:
       </p>
 
-      <p>
-        Custom prefixes can be added by adding the collection <code>prefixes</code> to the root of the document.
-        Each combination of a prefix and namespace is added to this collection as a key-value pair.
+      <dl>
+        <dt><dfn>name</dfn></dt>
+        <dd>the name of the author</dd>
 
-        In the following example two prefixes are defined: <code>ex</code> and <code>test</code>.
+        <dt><dfn>email</dfn></dt>
+        <dd>the email of the author</dd>
+
+        <dt><dfn>website</dfn></dt>
+        <dd>the website of the author</dd>
+      </dl>
+
+      <p>
+        In the following example two authors are defined.
       </p>
 
       <div id="tabs-author" class="nanotabs">
@@ -189,10 +198,10 @@
         <div id="tab-author-1">
             <pre id="example-author-yarrrml" class="nohighlight example" title="mapping with multiple authors">
               authors:
-                - John Doe &lt;john@doe.com> (https://johndoe.com)
+                - name: John Doe
+                  email: john@doe.com
                 - name: Jane Doe
                   website: https://janedoe.com
-                - https://jamesdoe.com/me #webid
             </pre>
         </div>
         <div id="tab-author-2">
@@ -201,12 +210,94 @@
                 a schema:Author;
                 schema:name "John Doe";
                 schema:email "john@doe.com";
-                schema:homepage "https://johndoe.com"
               ], [
                 a schema:Author;
                 schema:name "Jane Doe";
                 schema:homepage "https://janedoe.com"
-              ], &lt;https://jamesdoe.com/me>.
+              ].
+            </pre>
+        </div>
+      </div>
+
+      <p>
+        A string template exists that provides a shortcut version: <code>name &lt;email&gt; (website)</code>.
+        In the following example the same two authors are defined.
+      </p>
+
+      <div id="tabs-author-sc" class="nanotabs">
+        <ul>
+          <li><a href="#tab-author-sc-1" class="selected">YARRRML</a></li>
+          <li><a href="#tab-author-sc-2">RML</a></li>
+        </ul>
+        <div id="tab-author-sc-1">
+            <pre id="example-author-yarrrml-sc" class="nohighlight example" title="mapping with multiple authors">
+              authors:
+                - John Doe &lt;john@doe.com&gt;
+                - Jane Doe (https://janedoe.com)
+            </pre>
+        </div>
+        <div id="tab-author-sc-2">
+            <pre id="example-author-rml-sc" class="example" title="mapping with multiple authors">
+              <#TM> schema:author [
+                a schema:Author;
+                schema:name "John Doe";
+                schema:email "john@doe.com";
+              ], [
+                a schema:Author;
+                schema:name "Jane Doe";
+                schema:homepage "https://janedoe.com"
+              ].
+            </pre>
+        </div>
+      </div>
+
+      <p>
+        In the case that authors have a WebID, it can be used instead of providing the name, email and so on.
+        In the following example the same two authors are added via their WebIDs.
+      </p>
+
+      <div id="tabs-author-webid" class="nanotabs">
+        <ul>
+          <li><a href="#tab-author-webid-1" class="selected">YARRRML</a></li>
+          <li><a href="#tab-author-webid-2">RML</a></li>
+        </ul>
+        <div id="tab-author-webid-1">
+            <pre id="example-author-yarrrml-webid" class="nohighlight example" title="mapping with multiple authors">
+              authors:
+                - http://johndoe.com/#me
+                - http://janedoe.com/#me
+            </pre>
+        </div>
+        <div id="tab-author-webid-2">
+            <pre id="example-author-rml-webid" class="example" title="mapping with multiple authors">
+              <#TM> schema:author &lt;http://johndoe.com/#me&gt;,
+                &lt;http://janedoe.com/#me&gt;.
+            </pre>
+        </div>
+      </div>
+
+      <p>
+        In all the above cases when there is only author, an array is not needed.
+        In the following example one author is defined.
+      </p>
+
+      <div id="tabs-author-sc-single" class="nanotabs">
+        <ul>
+          <li><a href="#tab-author-sc-single-1" class="selected">YARRRML</a></li>
+          <li><a href="#tab-author-sc-single-2">RML</a></li>
+        </ul>
+        <div id="tab-author-sc-single-1">
+            <pre id="example-author-yarrrml-sc-single" class="nohighlight example" title="mapping with multiple authors">
+              authors: John Doe &lt;john@doe.com&gt;
+            </pre>
+        </div>
+        <div id="tab-author-sc-single-2">
+            <pre id="example-author-rml-sc-single" class="example" title="mapping with multiple authors">
+              <#TM> schema:author [
+                a schema:Author;
+                schema:name "John Doe";
+                schema:email "john@doe.com";
+              ].
             </pre>
         </div>
       </div>
@@ -1745,6 +1836,7 @@
             <li>parameters: pms</li>
             <li>parameter: pm</li>
             <li>value: v</li>
+            <li>authors: author, a</li>
           </ul>
       </section>
 
