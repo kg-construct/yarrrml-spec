@@ -19,13 +19,23 @@
           url: "https://pieterheyvaert.com",
           mailto: "pheyvaer.heyvaert@ugent.be",
           company: 'imec — Ghent University — IDLab',
+        },{
+          name: "Anastasia Dimou",
+          mailto: "anastasia.dimou@ugent.be",
+          company: 'imec — Ghent University — IDLab',
         }],
         // edDraftURI: "http://some.github.repo",
         shortName: "yarrrml",
-        previousURI: "http://w3id.org/yarrrml/spec/index-20180321.html",
-        previousPublishDate: "2018-03-21",
+        previousURI: "https://w3id.org/yarrrml/spec/index-20181108.html",
+        previousPublishDate: "2018-11-08",
         previousMaturity: "unofficial",
-        canonicalURI: "http://w3id.org/yarrrml/spec/",
+        canonicalURI: "https://w3id.org/yarrrml/spec/",
+        logos: [{
+          src: "http://rml.io/yarrrml/assets/img/logo.png",
+          href: "https://w3id.org/yarrrml",
+          alt: "YARRRML",
+          width: 164
+        }]
       };
     </script>
 
@@ -313,7 +323,6 @@
             <ul>
               <li><a href="#tab1-1" class="selected">YARRRML</a></li>
               <li><a href="#tab1-2">RML</a></li>
-              <li><a href="#tab1-3">SPARQL-Generate</a></li>
             </ul>
             <div id="tab1-1">
               <pre id="example-ds1-yarrrml" class="example" title="one data source">
@@ -332,29 +341,6 @@
                   rml:iterator "$".
               </pre>
             </div>
-            <div id="tab1-3">
-              <pre id="example-ds1-sg" class="example" title="one data source">
-                #########
-                # Query #
-                #########
-
-                SOURCE &lt;http://example.org/document#0> AS ?source
-
-                ######################
-                # Configuration file #
-                ######################
-
-                {
-                  "documentset": [
-                    {
-                      "uri": "http://example.org/document#0",
-                      "mediatype": "text/plain",
-                      "path": "data/person.json"
-                    }
-                  ]
-                }
-              </pre>
-            </div>
           </div>
 
           <p>
@@ -365,7 +351,6 @@
               <ul>
                 <li><a href="#tab2-1" class="selected">YARRRML</a></li>
                 <li><a href="#tab2-2">RML</a></li>
-                <li><a href="#tab2-3">SPARQL-Generate</a></li>
               </ul>
               <div id="tab2-1">
                 <pre id="example-ds1-sc" class="example" title="one data source using shortcuts">
@@ -379,29 +364,6 @@
                     rml:source "data/person.json";
                     rml:referenceFormulation ql:JSONPath;
                     rml:iterator "$".
-                </pre>
-              </div>
-              <div id="tab2-3">
-                <pre id="example-ds1-sc-sg" class="example" title="one data source using shortcuts">
-                  #########
-                  # Query #
-                  #########
-
-                  SOURCE &lt;http://example.org/document#0> AS ?source
-
-                  ######################
-                  # Configuration file #
-                  ######################
-
-                  {
-                    "documentset": [
-                      {
-                        "uri": "http://example.org/document#0",
-                        "mediatype": "text/plain",
-                        "path": "data/person.json"
-                      }
-                    ]
-                  }
                 </pre>
               </div>
             </div>
@@ -421,7 +383,6 @@
             <ul>
               <li><a href="#tab3-1" class="selected">YARRRML</a></li>
               <li><a href="#tab3-2">RML</a></li>
-              <li><a href="#tab3-3">SPARQL-Generate</a></li>
             </ul>
             <div id="tab3-1">
                 <pre id="example-db-yarrrrml" class="example" title="mapping with database as source">
@@ -462,11 +423,6 @@
                     d2rq:password "root" .
                 </pre>
             </div>
-            <div id="tab3-3">
-                <pre id="example-db-sg" class="example" title="mapping with database as source">
-                TODO
-                </pre>
-            </div>
           </div>
         </section>
     </section>
@@ -491,7 +447,6 @@
           <ul>
             <li><a href="#tab4-1" class="selected">YARRRML</a></li>
             <li><a href="#tab4-2">RML</a></li>
-            <li><a href="#tab4-3">SPARQL-Generate</a></li>
           </ul>
           <div id="tab4-1">
             <pre id="example-mappings-yarrrrml" class="example" title="two mappings">
@@ -504,12 +459,6 @@
             <pre id="example-mappings-rml" class="example" title="two mappings">
               <#TriplesMap> a rr:TriplesMap. #person
               <#TriplesMap2> a rr:TriplesMap. #project
-            </pre>
-          </div>
-          <div id="tab4-3">
-            <pre id="example-mappings-sg" class="example" title="two mappings">
-            GENERATE {}
-            WHERE {}
             </pre>
           </div>
         </div>
@@ -530,7 +479,6 @@
           <ul>
             <li><a href="#tab5-1" class="selected">YARRRML</a></li>
             <li><a href="#tab5-2">RML</a></li>
-            <li><a href="#tab5-3">SPARQL-Generate</a></li>
           </ul>
           <div id="tab5-1">
             <pre id="example-ds-yarrrml" class="example" title="mapping with one data source">
@@ -554,31 +502,6 @@
                 ].
             </pre>
           </div>
-          <div id="tab5-3">
-            <pre id="example-ds-sg" class="example" title="mapping with one data source">
-              #########
-              # Query #
-              #########
-
-              GENERATE {}
-              SOURCE &lt;http://example.org/document#0> AS ?source
-              WHERE {}
-
-              ######################
-              # Configuration file #
-              ######################
-
-              {
-                "documentset": [
-                  {
-                    "uri": "http://example.org/document#0",
-                    "mediatype": "text/plain",
-                    "path": "data/person.json"
-                  }
-                ]
-              }
-            </pre>
-          </div>
         </div>
 
           A shortcut version of this example looks as follows.
@@ -587,7 +510,6 @@
           <ul>
             <li><a href="#tab6-1" class="selected">YARRRML</a></li>
             <li><a href="#tab6-2">RML</a></li>
-            <li><a href="#tab6-3">SPARQL-Generate</a></li>
           </ul>
           <div id="tab6-1">
             <pre id="example-ds-sc-yarrrml" class="example" title="mapping with one data source using shortcuts">
@@ -608,31 +530,6 @@
                 ].
             </pre>
           </div>
-          <div id="tab6-3">
-            <pre id="example-ds-sc-sg" class="example" title="mapping with one data source using shortcuts">
-              #########
-              # Query #
-              #########
-
-              GENERATE {}
-              SOURCE &lt;http://example.org/document#0> AS ?source
-              WHERE {}
-
-              ######################
-              # Configuration file #
-              ######################
-
-              {
-                "documentset": [
-                  {
-                    "uri": "http://example.org/document#0",
-                    "mediatype": "text/plain",
-                    "path": "data/person.json"
-                  }
-                ]
-              }
-            </pre>
-          </div>
         </div>
 
           In case a mapping needs to be applied to multiple data sources, multiple sources can be added to the <code>scources</code> collection.
@@ -642,7 +539,6 @@
           <ul>
             <li><a href="#tab7-1" class="selected">YARRRML</a></li>
             <li><a href="#tab7-2">RML</a></li>
-            <li><a href="#tab7-3">SPARQL-Generate</a></li>
           </ul>
           <div id="tab7-1">
             <pre id="example-ds2-yarrrml" class="nohighlight example" title="mapping with two data sources">
@@ -678,44 +574,6 @@
                 ].
             </pre>
           </div>
-          <div id="tab7-3">
-            <pre id="example-ds2-sg" class="example" title="mapping with two data sources">
-              ###########
-              # Query 1 #
-              ###########
-
-              GENERATE {}
-              SOURCE &lt;http://example.org/document#0> AS ?source
-              WHERE {}
-
-              ###########
-              # Query 2 #
-              ###########
-
-              GENERATE {}
-              SOURCE &lt;http://example.org/document#1> AS ?source
-              WHERE {}
-
-              ######################
-              # Configuration file #
-              ######################
-
-              {
-                "documentset": [
-                  {
-                    "uri": "http://example.org/document#0",
-                    "mediatype": "text/plain",
-                    "path": "data/person.json"
-                  },
-                  {
-                    "uri": "http://example.org/document#1",
-                    "mediatype": "text/plain",
-                    "path": "data/person2.json"
-                  }
-                ]
-              }
-            </pre>
-          </div>
         </div>
 
           A shortcut version of this example looks as follows.
@@ -724,7 +582,6 @@
           <ul>
             <li><a href="#tab8-1" class="selected">YARRRML</a></li>
             <li><a href="#tab8-2">RML</a></li>
-            <li><a href="#tab8-3">SPARQL-Generate</a></li>
           </ul>
           <div id="tab8-1">
             <pre id="example-ds2-sc-yarrrml" class="nohighlight example" title="mapping with two data sources using shortcuts">
@@ -756,44 +613,6 @@
                 ].
             </pre>
           </div>
-          <div id="tab8-3">
-            <pre id="example-ds2-sc-sg" class="example" title="mapping with two data sources using shortcuts">
-              ###########
-              # Query 1 #
-              ###########
-
-              GENERATE {}
-              SOURCE &lt;http://example.org/document#0> AS ?source
-              WHERE {}
-
-              ###########
-              # Query 2 #
-              ###########
-
-              GENERATE {}
-              SOURCE &lt;http://example.org/document#1> AS ?source
-              WHERE {}
-
-              ######################
-              # Configuration file #
-              ######################
-
-              {
-                "documentset": [
-                  {
-                    "uri": "http://example.org/document#0",
-                    "mediatype": "text/plain",
-                    "path": "data/person.json"
-                  },
-                  {
-                    "uri": "http://example.org/document#1",
-                    "mediatype": "text/plain",
-                    "path": "data/person2.json"
-                  }
-                ]
-              }
-            </pre>
-          </div>
         </div>
 
           If you describe a data source outside of the mappings, you can include via their unique key.
@@ -802,7 +621,6 @@
           <ul>
             <li><a href="#tab9-1" class="selected">YARRRML</a></li>
             <li><a href="#tab9-2">RML</a></li>
-            <li><a href="#tab9-3">SPARQL-Generate</a></li>
           </ul>
           <div id="tab9-1">
             <pre id="example-ds3-yarrrml" class="nohighlight example" title="mapping with one data sources">
@@ -829,31 +647,6 @@
                 ].
             </pre>
           </div>
-          <div id="tab9-3">
-            <pre id="example-ds3-sg" class="example" title="mapping with one data sources">
-              #########
-              # Query #
-              #########
-
-              GENERATE {}
-              SOURCE &lt;http://example.org/document#0> AS ?source
-              WHERE {}
-
-              ######################
-              # Configuration file #
-              ######################
-
-              {
-                "documentset": [
-                  {
-                    "uri": "http://example.org/document#0",
-                    "mediatype": "text/plain",
-                    "path": "data/person.json"
-                  }
-                ]
-              }
-            </pre>
-          </div>
         </div>
 
           Multiple sources can be used by using an array of source keys as value for the key <code>sources</code>.
@@ -862,7 +655,6 @@
           <ul>
             <li><a href="#tab10-1" class="selected">YARRRML</a></li>
             <li><a href="#tab10-2">RML</a></li>
-            <li><a href="#tab10-3">SPARQL-Generate</a></li>
           </ul>
           <div id="tab10-1">
             <pre id="example-ds4" class="example" title="mapping with two data sources">
@@ -903,44 +695,6 @@
                 ].
             </pre>
           </div>
-          <div id="tab10-3">
-            <pre id="example-ds4-sg" class="example" title="mapping with two data sources">
-              ###########
-              # Query 1 #
-              ###########
-
-              GENERATE {}
-              SOURCE &lt;http://example.org/document#0> AS ?source
-              WHERE {}
-
-              ###########
-              # Query 2 #
-              ###########
-
-              GENERATE {}
-              SOURCE &lt;http://example.org/document#1> AS ?source
-              WHERE {}
-
-              ######################
-              # Configuration file #
-              ######################
-
-              {
-                "documentset": [
-                  {
-                    "uri": "http://example.org/document#0",
-                    "mediatype": "text/plain",
-                    "path": "data/person.json"
-                  },
-                  {
-                    "uri": "http://example.org/document#1",
-                    "mediatype": "text/plain",
-                    "path": "data/person2.json"
-                  }
-                ]
-              }
-            </pre>
-          </div>
         </div>
 
           A combination of both sources defined outside and inside a mapping is possible.
@@ -949,7 +703,6 @@
           <ul>
             <li><a href="#tab11-1" class="selected">YARRRML</a></li>
             <li><a href="#tab11-2">RML</a></li>
-            <li><a href="#tab11-3">SPARQL-Generate</a></li>
           </ul>
           <div id="tab11-1">
             <pre id="example-ds5" class="example" title="mapping with two data sources">
@@ -989,44 +742,6 @@
                 ].
             </pre>
           </div>
-          <div id="tab11-3">
-            <pre id="example-ds5-sg" class="example" title="mapping with two data sources">
-              ###########
-              # Query 1 #
-              ###########
-
-              GENERATE {}
-              SOURCE &lt;http://example.org/document#0> AS ?source
-              WHERE {}
-
-              ###########
-              # Query 2 #
-              ###########
-
-              GENERATE {}
-              SOURCE &lt;http://example.org/document#1> AS ?source
-              WHERE {}
-
-              ######################
-              # Configuration file #
-              ######################
-
-              {
-                "documentset": [
-                  {
-                    "uri": "http://example.org/document#0",
-                    "mediatype": "text/plain",
-                    "path": "data/person.json"
-                  },
-                  {
-                    "uri": "http://example.org/document#1",
-                    "mediatype": "text/plain",
-                    "path": "data/person2.json"
-                  }
-                ]
-              }
-            </pre>
-          </div>
         </div>
 
       </section>
@@ -1047,7 +762,6 @@
           <ul>
             <li><a href="#tab12-1" class="selected">YARRRML</a></li>
             <li><a href="#tab12-2">RML</a></li>
-            <li><a href="#tab12-3">SPARQL-Generate</a></li>
           </ul>
           <div id="tab12-1">
             <pre id="example-subject" class="nohighlight example" title="mapping with one subject">
@@ -1066,16 +780,6 @@
                 ].
             </pre>
           </div>
-          <div id="tab12-3">
-            <pre id="example-subject-sg" class="example" title="mapping with one subject">
-              GENERATE {
-                &lt;http://wwww.example.com/person/{?id}>
-              }
-              WHERE {
-                BIND(fun:JSONPath(?source,"$.id") AS ?id)
-              }
-            </pre>
-          </div>
         </div>
 
           It is also possible to specify multiple subjects.
@@ -1087,7 +791,6 @@
           <ul>
             <li><a href="#tab13-1" class="selected">YARRRML</a></li>
             <li><a href="#tab13-2">RML</a></li>
-            <li><a href="#tab13-3">SPARQL-Generate</a></li>
           </ul>
           <div id="tab13-1">
             <pre id="example-subject2" class="example" title="mapping with two subjects">
@@ -1113,18 +816,6 @@
                 ].
             </pre>
           </div>
-          <div id="tab13-3">
-            <pre id="example-subject2-sg" class="example" title="mapping with two subject">
-              GENERATE {
-                &lt;http://wwww.example.com/person/{?id}>.
-                &lt;http://www.test.com/{firstname}>.
-              }
-              WHERE {
-                BIND(fun:JSONPath(?source,"$.id") AS ?id)
-                BIND(fun:JSONPath(?source,"$.firstname") AS ?firstname)
-              }
-            </pre>
-          </div>
         </div>
 
           It is possible to apply functions on subjects.
@@ -1140,7 +831,6 @@
           <ul>
             <li><a href="#tab14-1" class="selected">YARRRML</a></li>
             <li><a href="#tab14-2">RML</a></li>
-            <li><a href="#tab14-3">SPARQL-Generate</a></li>
           </ul>
           <div id="tab14-1">
             <pre id="example-po" class="example" title="mapping with one predicate and object">
@@ -1165,16 +855,6 @@
                 ].
             </pre>
           </div>
-          <div id="tab14-3">
-            <pre id="example-po-sg" class="example" title="mapping with one predicate and object">
-              GENERATE {
-                foaf:firstName ?firstname;
-              }
-              WHERE {
-                BIND(fun:JSONPath(?source,"$.firstname") AS ?firstname)
-              }
-            </pre>
-          </div>
         </div>
 
         A shortcut version of this example looks as follows.
@@ -1183,7 +863,6 @@
           <ul>
             <li><a href="#tab15-1" class="selected">YARRRML</a></li>
             <li><a href="#tab15-2">RML</a></li>
-            <li><a href="#tab15-3">SPARQL-Generate</a></li>
           </ul>
           <div id="tab15-1">
             <pre id="example-po-sc" class="example" title="mapping with one predicate and object using shortcuts">
@@ -1207,16 +886,6 @@
                 ].
             </pre>
           </div>
-          <div id="tab15-3">
-            <pre id="example-po-sc-sg" class="example" title="mapping with one predicate and object using shortcuts">
-              GENERATE {
-                foaf:firstName ?firstname;
-              }
-              WHERE {
-                BIND(fun:JSONPath(?source,"$.firstname") AS ?firstname)
-              }
-            </pre>
-          </div>
         </div>
 
         It is possible to specify multiple predicates and objects.
@@ -1226,7 +895,6 @@
           <ul>
             <li><a href="#tab16-1" class="selected">YARRRML</a></li>
             <li><a href="#tab16-2">RML</a></li>
-            <li><a href="#tab16-3">SPARQL-Generate</a></li>
           </ul>
           <div id="tab16-1">
             <pre id="example-po2" class="example" title="mapping with two predicates and objects">
@@ -1256,20 +924,6 @@
                 ].
             </pre>
           </div>
-          <div id="tab16-3">
-            <pre id="example-po2-sg" class="example" title="mapping with two predicates and objects">
-              GENERATE {
-                foaf:name ?firstname;
-                foaf:name ?lastname;
-                rdfs:label ?firstname;
-                rdfs:label ?lastname;
-              }
-              WHERE {
-                BIND(fun:JSONPath(?source,"$.firstname") AS ?firstname)
-                BIND(fun:JSONPath(?source,"$.lastname") AS ?lastname)
-              }
-            </pre>
-          </div>
         </div>
 
         A shortcut version of this example looks as follows.
@@ -1278,7 +932,6 @@
           <ul>
             <li><a href="#tab17-1" class="selected">YARRRML</a></li>
             <li><a href="#tab17-2">RML</a></li>
-            <li><a href="#tab17-3">SPARQL-Generate</a></li>
           </ul>
           <div id="tab17-1">
             <pre id="example-po2-sc" class="example" title="mapping with two predicates and objects using shortcuts">
@@ -1307,27 +960,12 @@
                 ].
             </pre>
           </div>
-          <div id="tab17-3">
-            <pre id="example-po2-sc-sg" class="example" title="mapping with two predicates and objects using shortcuts">
-              GENERATE {
-                foaf:name ?firstname;
-                foaf:name ?lastname;
-                rdfs:label ?firstname;
-                rdfs:label ?lastname;
-              }
-              WHERE {
-                BIND(fun:JSONPath(?source,"$.firstname") AS ?firstname)
-                BIND(fun:JSONPath(?source,"$.lastname") AS ?lastname)
-              }
-            </pre>
-          </div>
         </div>
 
         <div id="tabs-18" class="nanotabs">
           <ul>
             <li><a href="#tab18-1" class="selected">YARRRML</a></li>
             <li><a href="#tab18-2">RML</a></li>
-            <li><a href="#tab18-3">SPARQL-Generate</a></li>
           </ul>
           <div id="tab18-1">
             <pre id="example-po3" class="example" title="mapping with object that generates an IRI">
@@ -1355,16 +993,6 @@
                 ].
             </pre>
           </div>
-          <div id="tab18-3">
-            <pre id="example-po3-sg" class="example" title="mapping with object that generates an IRI">
-              GENERATE {
-                foaf:knows &lt;?colleague>;
-              }
-              WHERE {
-                BIND(fun:JSONPath(?source,"$.colleague") AS ?colleague)
-              }
-            </pre>
-          </div>
         </div>
 
         A shortcut version of this example looks as follows.
@@ -1373,7 +1001,6 @@
           <ul>
             <li><a href="#tab19-1" class="selected">YARRRML</a></li>
             <li><a href="#tab19-2">RML</a></li>
-            <li><a href="#tab19-3">SPARQL-Generate</a></li>
           </ul>
           <div id="tab19-1">
             <pre id="example-po3-sc" class="example" title="mapping with object that generates an IRI using shortcuts">
@@ -1396,16 +1023,6 @@
                     rr:TermType rr:IRI
                   ]
                 ].
-            </pre>
-          </div>
-          <div id="tab19-3">
-            <pre id="example-po3-sc-sg" class="example" title="mapping with object that generates an IRI using shortcuts">
-              GENERATE {
-                foaf:knows &lt;?colleague>;
-              }
-              WHERE {
-                BIND(fun:JSONPath(?source,"$.colleague") AS ?colleague)
-              }
             </pre>
           </div>
         </div>
@@ -1431,7 +1048,6 @@
           <ul>
             <li><a href="#tab20-1" class="selected">YARRRML</a></li>
             <li><a href="#tab20-2">RML</a></li>
-            <li><a href="#tab20-3">SPARQL-Generate</a></li>
           </ul>
           <div id="tab20-1">
             <pre id="example-datatype" class="example" title="mapping with one datatype">
@@ -1459,16 +1075,6 @@
                 ].
             </pre>
           </div>
-          <div id="tab20-3">
-            <pre id="example-datatype-sg" class="example" title="mapping with one datatype">
-              GENERATE {
-                foaf:firstName "{firstname}"^^xsd:string;
-              }
-              WHERE {
-                BIND(fun:JSONPath(?source,"$.firstname") AS ?firstname)
-              }
-            </pre>
-          </div>
         </div>
 
         A shortcut version of this example looks as follows.
@@ -1477,7 +1083,6 @@
           <ul>
             <li><a href="#tab21-1" class="selected">YARRRML</a></li>
             <li><a href="#tab21-2">RML</a></li>
-            <li><a href="#tab21-3">SPARQL-Generate</a></li>
           </ul>
           <div id="tab21-1">
             <pre id="example-datatype-sc" class="example" title="mapping with one datatype using shortcuts">
@@ -1502,23 +1107,12 @@
                 ].
             </pre>
           </div>
-          <div id="tab21-3">
-            <pre id="example-datatype-sc-sg" class="example" title="mapping with one datatype using shortcuts">
-              GENERATE {
-                foaf:firstName "{firstname}"^^xsd:string;
-              }
-              WHERE {
-                BIND(fun:JSONPath(?source,"$.firstname") AS ?firstname)
-              }
-            </pre>
-          </div>
         </div>
 
         <div id="tabs-22" class="nanotabs">
           <ul>
             <li><a href="#tab22-1" class="selected">YARRRML</a></li>
             <li><a href="#tab22-2">RML</a></li>
-            <li><a href="#tab22-3">SPARQL-Generate</a></li>
           </ul>
           <div id="tab22-1">
             <pre id="example-datatype2" class="example" title="mapping with two datatypes">
@@ -1553,18 +1147,6 @@
                 ].
             </pre>
           </div>
-          <div id="tab22-3">
-            <pre id="example-datatype2-sg" class="example" title="mapping with two datatypes">
-              GENERATE {
-                foaf:name "{firstname}"^^ex:string;
-                foaf:name "{lastname}"^^ex:anotherString
-              }
-              WHERE {
-                BIND(fun:JSONPath(?source,"$.firstname") AS ?firstname)
-                BIND(fun:JSONPath(?source,"$.lastname") AS ?lastname)
-              }
-            </pre>
-          </div>
         </div>
 
         A shortcut version of this example looks as follows.
@@ -1573,7 +1155,6 @@
           <ul>
             <li><a href="#tab23-1" class="selected">YARRRML</a></li>
             <li><a href="#tab23-2">RML</a></li>
-            <li><a href="#tab23-3">SPARQL-Generate</a></li>
           </ul>
           <div id="tab23-1">
              <pre id="example-datatype2-sc" class="example" title="mapping with two datatypes using shortcuts">
@@ -1604,18 +1185,6 @@
                 ].
             </pre>
           </div>
-          <div id="tab23-3">
-            <pre id="example-datatype2-sc-sg" class="example" title="mapping with two datatypes using shortcuts">
-              GENERATE {
-                foaf:name "{firstname}"^^ex:string;
-                foaf:name "{lastname}"^^ex:anotherString
-              }
-              WHERE {
-                BIND(fun:JSONPath(?source,"$.firstname") AS ?firstname)
-                BIND(fun:JSONPath(?source,"$.lastname") AS ?lastname)
-              }
-            </pre>
-          </div>
         </div>
       </section>
 
@@ -1626,7 +1195,6 @@
           <ul>
             <li><a href="#tab24-1" class="selected">YARRRML</a></li>
             <li><a href="#tab24-2">RML</a></li>
-            <li><a href="#tab24-3">SPARQL-Generate</a></li>
           </ul>
           <div id="tab24-1">
              <pre id="example-lang" class="example" title="mapping with one language">
@@ -1654,16 +1222,6 @@
                 ].
             </pre>
           </div>
-          <div id="tab24-3">
-            <pre id="example-lang-sg" class="example" title="mapping with one language">
-              GENERATE {
-                foaf:firstName "{firstname}"@en;
-              }
-              WHERE {
-                BIND(fun:JSONPath(?source,"$.firstname") AS ?firstname)
-              }
-            </pre>
-          </div>
         </div>
 
         A shortcut version of this example looks as follows.
@@ -1672,7 +1230,6 @@
           <ul>
             <li><a href="#tab25-1" class="selected">YARRRML</a></li>
             <li><a href="#tab25-2">RML</a></li>
-            <li><a href="#tab25-3">SPARQL-Generate</a></li>
           </ul>
           <div id="tab25-1">
             <pre id="example-lang-sc" class="example" title="mapping with one language using shortcuts">
@@ -1697,23 +1254,12 @@
                 ].
             </pre>
           </div>
-          <div id="tab25-3">
-            <pre id="example-lang-sc-sg" class="example" title="mapping with one language using shortcuts">
-              GENERATE {
-                foaf:firstName "{firstname}"@en;
-              }
-              WHERE {
-                BIND(fun:JSONPath(?source,"$.firstname") AS ?firstname)
-              }
-            </pre>
-          </div>
         </div>
 
         <div id="tabs-26" class="nanotabs">
           <ul>
             <li><a href="#tab26-1" class="selected">YARRRML</a></li>
             <li><a href="#tab26-2">RML</a></li>
-            <li><a href="#tab26-3">SPARQL-Generate</a></li>
           </ul>
           <div id="tab26-1">
             <pre id="example-lang2" class="example" title="mapping with two languages">
@@ -1748,18 +1294,6 @@
                 ].
             </pre>
           </div>
-          <div id="tab26-3">
-            <pre id="example-lang2-sg" class="example" title="mapping with two languages">
-              GENERATE {
-                foaf:name "{firstname}"@en;
-                foaf:name "{lastname}"@nl;
-              }
-              WHERE {
-                BIND(fun:JSONPath(?source,"$.firstname") AS ?firstname)
-                BIND(fun:JSONPath(?source,"$.lastname") AS ?lastname)
-              }
-            </pre>
-          </div>
         </div>
 
         A shortcut version of this example looks as follows.
@@ -1768,7 +1302,6 @@
           <ul>
             <li><a href="#tab27-1" class="selected">YARRRML</a></li>
             <li><a href="#tab27-2">RML</a></li>
-            <li><a href="#tab27-3">SPARQL-Generate</a></li>
           </ul>
           <div id="tab27-1">
             <pre id="example-lang2-sc" class="example" title="mapping with two languages using shortcuts">
@@ -1799,18 +1332,6 @@
                 ].
             </pre>
           </div>
-          <div id="tab27-3">
-            <pre id="example-lang2-sc-sg" class="example" title="mapping with two languages using shortcuts">
-              GENERATE {
-                foaf:name "{firstname}"@en;
-                foaf:name "{lastname}"@nl;
-              }
-              WHERE {
-                BIND(fun:JSONPath(?source,"$.firstname") AS ?firstname)
-                BIND(fun:JSONPath(?source,"$.lastname") AS ?lastname)
-              }
-            </pre>
-          </div>
         </div>
       </section>
 
@@ -1835,7 +1356,6 @@
           <ul>
             <li><a href="#tab28-1" class="selected">YARRRML</a></li>
             <li><a href="#tab28-2">RML</a></li>
-            <li><a href="#tab28-3">SPARQL-Generate</a></li>
           </ul>
           <div id="tab28-1">
             <pre id="example-ref-map" class="example" title="interlinking two mappings">
@@ -1885,11 +1405,6 @@
                 ]
             </pre>
           </div>
-          <div id="tab28-3">
-            <pre id="example-ref-map-sg" class="example" title="interlinking two mappings">
-            TODO
-            </pre>
-          </div>
         </div>
       </section>
 
@@ -1907,7 +1422,6 @@
             <ul>
               <li><a href="#tab32-1" class="selected">YARRRML</a></li>
               <li><a href="#tab32-2">RML</a></li>
-              <li><a href="#tab32-3">SPARQL-Generate</a></li>
             </ul>
             <div id="tab32-1">
               <pre id="example-graphs-s" class="example" title="mapping with graph for all triples">
@@ -1929,11 +1443,6 @@
                   ].
               </pre>
             </div>
-            <div id="tab32-3">
-              <pre id="example-graphs-s-sg" class="example" title="mapping with graph for all triples">
-              TODO
-              </pre>
-            </div>
           </div>
         </section>
 
@@ -1944,7 +1453,6 @@
             <ul>
               <li><a href="#tab33-1" class="selected">YARRRML</a></li>
               <li><a href="#tab33-2">RML</a></li>
-              <li><a href="#tab33-3">SPARQL-Generate</a></li>
             </ul>
             <div id="tab33-1">
               <pre id="example-graphs-po" class="example" title="mapping with graph for all triples with a specific predicate and object">
@@ -1974,11 +1482,6 @@
                   ].
               </pre>
             </div>
-            <div id="tab33-3">
-              <pre id="example-graphs-po-sg" class="example" title="mapping with graph for all triples with a specific predicate and object">
-              TODO
-              </pre>
-            </div>
           </div>
         </section>
       </section>
@@ -1987,13 +1490,12 @@
     <section>
       <h2>Functions</h2>
 
-      Functions are be added to subjects, predicates, and objects.
+      Functions can be added to subjects, predicates, and objects.
 
       <div id="tabs-29" class="nanotabs">
         <ul>
           <li><a href="#tab29-1" class="selected">YARRRML</a></li>
           <li><a href="#tab29-2">RML</a></li>
-          <li><a href="#tab29-3">SPARQL-Generate</a></li>
         </ul>
         <div id="tab29-1">
           <pre id="example-fn" class="example" title="mapping with function on firstname">
@@ -2014,7 +1516,7 @@
 
                 rr:predicateObjectMap [
                   a rr:PredicateObjectMap;
-                  rr:predicate foaf:worksFor;
+                  rr:predicate foaf:firstName;
                   rr:objectMap <#FunctionMap>
                 ].
 
@@ -2028,14 +1530,9 @@
 
                     rr:predicateObjectMap [
                       rr:predicate ex:input ;
-                      rr:objectMap [ rr:reference "firstname" ]
+                      rr:objectMap [ rml:reference "firstname" ]
                     ]
                   ] .
-            </pre>
-        </div>
-        <div id="tab29-3">
-            <pre id="example-fn-sg" class="example" title="mapping with function on firstname">
-            TODO
             </pre>
         </div>
       </div>
@@ -2046,7 +1543,6 @@
         <ul>
           <li><a href="#tab30-1" class="selected">YARRRML</a></li>
           <li><a href="#tab30-2">RML</a></li>
-          <li><a href="#tab30-3">SPARQL-Generate</a></li>
         </ul>
         <div id="tab30-1">
           <pre id="example-fn-sc" class="example" title="mapping with function on firstname using shortcuts">
@@ -2080,14 +1576,79 @@
 
                     rr:predicateObjectMap [
                       rr:predicate ex:input ;
-                      rr:objectMap [ rr:reference "firstname" ]
+                      rr:objectMap [ rml:reference "firstname" ]
                     ]
                   ] .
             </pre>
         </div>
-        <div id="tab30-3">
-            <pre id="example-fn-sc-sg" class="example" title="mapping with function on firstname using shortcuts">
-            TODO
+      </div>
+
+      It possible to combine multiple functions, i.e., the value of a parameter of a function is the result of another function.
+
+      <div id="tabs-31" class="nanotabs">
+        <ul>
+          <li><a href="#tab31-1" class="selected">YARRRML</a></li>
+          <li><a href="#tab31-2">RML</a></li>
+        </ul>
+        <div id="tab31-1">
+          <pre id="example-fn-recursive" class="example" title="mapping with multiple functions">
+            mappings:
+              person:
+                predicateobjects:
+                 - predicates: schema:name
+                   objects:
+                    - function: ex:escape
+                      parameters:
+                       - parameter: ex:valueParameter
+                         value:
+                           function: ex:toUpperCase
+                           parameters:
+                             - [ex:valueParameter, $(name)]
+                       - [ex:modeParameter, html]
+          </pre>
+        </div>
+        <div id="tab31-2">
+            <pre id="example-fn-recursive-rml" class="example" title="mapping with multiple functions">
+              <#TriplesMap> a rr:TriplesMap; #person
+
+                rr:predicateObjectMap [
+                  a rr:PredicateObjectMap;
+                  rr:predicate schema:name;
+                  rr:objectMap <#FunctionMap>
+                ].
+
+                <#FunctionMap>
+                  fnml:functionValue [
+                    rml:logicalSource <#LogicalSource> ;
+                    rr:predicateObjectMap [
+                      rr:predicate fno:executes ;
+                      rr:objectMap [ rr:constant ex:escape ]
+                    ] ;
+
+                    rr:predicateObjectMap [
+                      rr:predicate ex:valueParameter ;
+                      rr:objectMap <#FunctionMap2>
+                    ];
+
+                    rr:predicateObjectMap [
+                      rr:predicate ex:modeParameter ;
+                      rr:objectMap [ rr:constant "html" ]
+                    ]
+                  ] .
+
+                <#FunctionMap2>
+                  fnml:functionValue [
+                    rml:logicalSource <#LogicalSource> ;
+                    rr:predicateObjectMap [
+                      rr:predicate fno:executes ;
+                      rr:objectMap [ rr:constant ex:toUpperCase ]
+                    ] ;
+
+                    rr:predicateObjectMap [
+                      rr:predicate ex:valueParameter ;
+                      rr:objectMap [ rml:reference "name" ]
+                    ]
+                  ] .
             </pre>
         </div>
       </div>
