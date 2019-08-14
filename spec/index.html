@@ -206,15 +206,17 @@
         </div>
         <div id="tab-author-2">
             <pre id="example-author-rml" class="example" title="mapping with multiple authors">
-              <#TM> schema:author [
-                a schema:Author;
-                schema:name "John Doe";
-                schema:email "john@doe.com";
-              ], [
-                a schema:Author;
-                schema:name "Jane Doe";
-                schema:homepage "https://janedoe.com"
-              ].
+              :Rules a void:Dataset;
+                void:exampleResource <#TM>; # linking all Triples Maps
+                dcterms:contributor [
+                  a foaf:Person;
+                  rdfs:label "John Doe";
+                  foaf:mbox &lt;mailto:john@doe.com&gt;
+                ], [
+                  a foaf:Person;
+                  rdfs:label "Jane Doe";
+                  foaf:homepage &lt;https://janedoe.com>&gt;
+                ].
             </pre>
         </div>
       </div>
@@ -238,15 +240,17 @@
         </div>
         <div id="tab-author-sc-2">
             <pre id="example-author-rml-sc" class="example" title="mapping with multiple authors">
-              <#TM> schema:author [
-                a schema:Author;
-                schema:name "John Doe";
-                schema:email "john@doe.com";
-              ], [
-                a schema:Author;
-                schema:name "Jane Doe";
-                schema:homepage "https://janedoe.com"
-              ].
+              :Rules a void:Dataset;
+                void:exampleResource <#TM>; # linking all Triples Maps
+                dcterms:contributor [
+                  a foaf:Person;
+                  rdfs:label "John Doe";
+                  foaf:mbox &lt;mailto:john@doe.com&gt;
+                ], [
+                  a foaf:Person;
+                  rdfs:label "Jane Doe";
+                  foaf:homepage &lt;https://janedoe.com>&gt;
+                ].
             </pre>
         </div>
       </div>
@@ -270,8 +274,10 @@
         </div>
         <div id="tab-author-webid-2">
             <pre id="example-author-rml-webid" class="example" title="mapping with multiple authors">
-              <#TM> schema:author &lt;http://johndoe.com/#me&gt;,
-                &lt;http://janedoe.com/#me&gt;.
+                :Rules a void:Dataset;
+                  void:exampleResource <#TM>; # linking all Triples Maps
+                  dcterms:contributor &lt;http://johndoe.com/#me&gt;,
+                    &lt;http://janedoe.com/#me&gt;.
             </pre>
         </div>
       </div>
@@ -293,11 +299,13 @@
         </div>
         <div id="tab-author-sc-single-2">
             <pre id="example-author-rml-sc-single" class="example" title="mapping with multiple authors">
-              <#TM> schema:author [
-                a schema:Author;
-                schema:name "John Doe";
-                schema:email "john@doe.com";
-              ].
+              :Rules a void:Dataset;
+                void:exampleResource <#TM>; # linking all Triples Maps
+                dcterms:contributor [
+                  a foaf:Person;
+                  rdfs:label "John Doe";
+                  foaf:mbox &lt;mailto:john@doe.com&gt;
+                ].
             </pre>
         </div>
       </div>
