@@ -1583,6 +1583,54 @@
         </div>
       </div>
 
+      Datatypes can also be assigned to the results of functions.
+
+      <div id="tabs-34" class="nanotabs">
+        <ul>
+          <li><a href="#tab34-1" class="selected">YARRRML</a></li>
+          <li><a href="#tab34-2">RML</a></li>
+        </ul>
+        <div id="tab34-1">
+          <pre id="example-fn-datatype" class="example" title="mapping with function on age and setting datatype to integer">
+            mappings:
+              person:
+                predicateobjects:
+                 - predicates: ex:age
+                   objects:
+                    - function: ex:double
+                      parameters:
+                       - [ex:input, $(age)]
+                      datatype: xsd:integer
+          </pre>
+        </div>
+        <div id="tab34-2">
+            <pre id="example-fn-datatype-rml" class="example" title="mapping with function on age and setting datatype to integer">
+              <#TriplesMap> a rr:TriplesMap; #person
+
+                rr:predicateObjectMap [
+                  a rr:PredicateObjectMap;
+                  rr:predicate foaf:worksFor;
+                  rr:objectMap <#FunctionMap>
+                ].
+
+                <#FunctionMap>
+                  rr:datatype xsd:integer;
+                  fnml:functionValue [
+                    rml:logicalSource <#LogicalSource> ;
+                    rr:predicateObjectMap [
+                      rr:predicate fno:executes ;
+                      rr:objectMap [ rr:constant ex:toLowerCase ]
+                    ] ;
+
+                    rr:predicateObjectMap [
+                      rr:predicate ex:input ;
+                      rr:objectMap [ rml:reference "firstname" ]
+                    ]
+                  ] .
+            </pre>
+        </div>
+      </div>
+
       It possible to combine multiple functions, i.e., the value of a parameter of a function is the result of another function.
 
       <div id="tabs-31" class="nanotabs">
