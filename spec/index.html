@@ -333,7 +333,7 @@
       <h2>Data sources</h2>
 
       <p>
-        The data sources are can be defined in the <code>sources</code> collection in the root of the document.
+        The data sources are defined in the <code>sources</code> collection in the root of the document.
         Each source is added to this collection via a key-value pair.
         The key has to be unique for every source.
         The value is a collection with three keys
@@ -897,7 +897,7 @@
         <p>
           For every triple is required to define whether a IRI or blank node needs to used.
           This information is added to a mapping via the collection <code>subjects</code>.
-          In the case of an IRI , this collection contains 0 or more templates that specify the IRI.
+          In the case of an IRI, this collection contains 0 or more templates that specify the IRI.
           In the case of a blank node, this collection is set to <code>null</code> or is not specified at all.
 
           In the following example the mapping <code>person</code> generate IRI for the subjects based on the template <code>http://wwww.example.com/person/$(id)</code>.
