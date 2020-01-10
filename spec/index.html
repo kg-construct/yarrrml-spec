@@ -1656,7 +1656,7 @@
       Additionally, it is possible to combine the function and its parameters in one line.
       The function is followed by brackets (<code>(...)</code>),
       every parameter-value pair is separated by a comma (<code>,</code>), and
-      parameters are separated from their value with 2 colons (<code>::</code>).
+      parameters are separated from their value by an equal sign (<code>=</code>).
 
       <div id="tabs-34" class="nanotabs">
         <ul>
@@ -1670,7 +1670,7 @@
                 predicateobjects:
                  - predicates: foaf:firstName
                    objects:
-                    - function: ex:toLowerCase(input:: $(firstname))
+                    - function: ex:toLowerCase(ex:input = $(firstname))
           </pre>
         </div>
         <div id="tab34-2">
@@ -1700,8 +1700,50 @@
         </div>
       </div>
 
-      Note that this is only possible when the function includes a prefix and the prefix is the same for the parameters.
-      In the example the prefix is <code>ex</code> and the parameter will become <code>ex:input</code>.
+      Note that it is possible to exclude the prefix of the parameters
+      if it is the same as the prefix of the function:
+
+      <div id="tabs-35" class="nanotabs">
+        <ul>
+          <li><a href="#tab35-1" class="selected">YARRRML</a></li>
+          <li><a href="#tab35-2">RML</a></li>
+        </ul>
+        <div id="tab35-1">
+          <pre id="example-fn-oneline-no-prefix" class="example" title="mapping with function on firstname using one line without prefix">
+            mappings:
+              person:
+                predicateobjects:
+                 - predicates: foaf:firstName
+                   objects:
+                    - function: ex:toLowerCase(input = $(firstname))
+          </pre>
+        </div>
+        <div id="tab35-2">
+            <pre id="example-fn-oneline-rml-no-prefix" class="example" title="mapping with function on firstname using one line without prefix">
+              <#TriplesMap> a rr:TriplesMap; #person
+
+                rr:predicateObjectMap [
+                  a rr:PredicateObjectMap;
+                  rr:predicate foaf:worksFor;
+                  rr:objectMap <#FunctionMap>
+                ].
+
+                <#FunctionMap>
+                  fnml:functionValue [
+                    rml:logicalSource <#LogicalSource> ;
+                    rr:predicateObjectMap [
+                      rr:predicate fno:executes ;
+                      rr:objectMap [ rr:constant ex:toLowerCase ]
+                    ] ;
+
+                    rr:predicateObjectMap [
+                      rr:predicate ex:input ;
+                      rr:objectMap [ rml:reference "firstname" ]
+                    ]
+                  ] .
+            </pre>
+        </div>
+      </div>
     </section>
 
     <section>
