@@ -333,7 +333,7 @@
       <h2>Data sources</h2>
 
       <p>
-        The data sources are can be defined in the <code>sources</code> collection in the root of the document.
+        The data sources are defined in the <code>sources</code> collection in the root of the document.
         Each source is added to this collection via a key-value pair.
         The key has to be unique for every source.
         The value is a collection with three keys
@@ -897,7 +897,7 @@
         <p>
           For every triple is required to define whether a IRI or blank node needs to used.
           This information is added to a mapping via the collection <code>subjects</code>.
-          In the case of an IRI , this collection contains 0 or more templates that specify the IRI.
+          In the case of an IRI, this collection contains 0 or more templates that specify the IRI.
           In the case of a blank node, this collection is set to <code>null</code> or is not specified at all.
 
           In the following example the mapping <code>person</code> generate IRI for the subjects based on the template <code>http://wwww.example.com/person/$(id)</code>.
@@ -1730,12 +1730,12 @@
 
       Datatypes can also be assigned to the results of functions.
 
-      <div id="tabs-34" class="nanotabs">
+      <div id="tabs-36" class="nanotabs">
         <ul>
-          <li><a href="#tab34-1" class="selected">YARRRML</a></li>
-          <li><a href="#tab34-2">RML</a></li>
+          <li><a href="#tab36-1" class="selected">YARRRML</a></li>
+          <li><a href="#tab36-2">RML</a></li>
         </ul>
-        <div id="tab34-1">
+        <div id="tab36-1">
           <pre id="example-fn-datatype" class="example" title="mapping with function on age and setting datatype to integer">
             mappings:
               person:
@@ -1748,7 +1748,7 @@
                       datatype: xsd:integer
           </pre>
         </div>
-        <div id="tab34-2">
+        <div id="tab36-2">
             <pre id="example-fn-datatype-rml" class="example" title="mapping with function on age and setting datatype to integer">
               <#TriplesMap> a rr:TriplesMap; #person
 
@@ -1840,6 +1840,98 @@
                     rr:predicateObjectMap [
                       rr:predicate ex:valueParameter ;
                       rr:objectMap [ rml:reference "name" ]
+                    ]
+                  ] .
+            </pre>
+        </div>
+      </div>
+
+      Additionally, it is possible to combine the function and its parameters in one line.
+      The function is followed by brackets (<code>(...)</code>),
+      every parameter-value pair is separated by a comma (<code>,</code>), and
+      parameters are separated from their value by an equal sign (<code>=</code>).
+
+      <div id="tabs-34" class="nanotabs">
+        <ul>
+          <li><a href="#tab34-1" class="selected">YARRRML</a></li>
+          <li><a href="#tab34-2">RML</a></li>
+        </ul>
+        <div id="tab34-1">
+          <pre id="example-fn-oneline" class="example" title="mapping with function on firstname using one line">
+            mappings:
+              person:
+                predicateobjects:
+                 - predicates: foaf:firstName
+                   objects:
+                    - function: ex:toLowerCase(ex:input = $(firstname))
+          </pre>
+        </div>
+        <div id="tab34-2">
+            <pre id="example-fn-oneline-rml" class="example" title="mapping with function on firstname using one line">
+              <#TriplesMap> a rr:TriplesMap; #person
+
+                rr:predicateObjectMap [
+                  a rr:PredicateObjectMap;
+                  rr:predicate foaf:worksFor;
+                  rr:objectMap <#FunctionMap>
+                ].
+
+                <#FunctionMap>
+                  fnml:functionValue [
+                    rml:logicalSource <#LogicalSource> ;
+                    rr:predicateObjectMap [
+                      rr:predicate fno:executes ;
+                      rr:objectMap [ rr:constant ex:toLowerCase ]
+                    ] ;
+
+                    rr:predicateObjectMap [
+                      rr:predicate ex:input ;
+                      rr:objectMap [ rml:reference "firstname" ]
+                    ]
+                  ] .
+            </pre>
+        </div>
+      </div>
+
+      Note that it is possible to exclude the prefix of the parameters
+      if it is the same as the prefix of the function:
+
+      <div id="tabs-35" class="nanotabs">
+        <ul>
+          <li><a href="#tab35-1" class="selected">YARRRML</a></li>
+          <li><a href="#tab35-2">RML</a></li>
+        </ul>
+        <div id="tab35-1">
+          <pre id="example-fn-oneline-no-prefix" class="example" title="mapping with function on firstname using one line without prefix">
+            mappings:
+              person:
+                predicateobjects:
+                 - predicates: foaf:firstName
+                   objects:
+                    - function: ex:toLowerCase(input = $(firstname))
+          </pre>
+        </div>
+        <div id="tab35-2">
+            <pre id="example-fn-oneline-rml-no-prefix" class="example" title="mapping with function on firstname using one line without prefix">
+              <#TriplesMap> a rr:TriplesMap; #person
+
+                rr:predicateObjectMap [
+                  a rr:PredicateObjectMap;
+                  rr:predicate foaf:worksFor;
+                  rr:objectMap <#FunctionMap>
+                ].
+
+                <#FunctionMap>
+                  fnml:functionValue [
+                    rml:logicalSource <#LogicalSource> ;
+                    rr:predicateObjectMap [
+                      rr:predicate fno:executes ;
+                      rr:objectMap [ rr:constant ex:toLowerCase ]
+                    ] ;
+
+                    rr:predicateObjectMap [
+                      rr:predicate ex:input ;
+                      rr:objectMap [ rml:reference "firstname" ]
                     ]
                   ] .
             </pre>
