@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## Unreleased
 
+### Added
+- Reference to parser as reference implementation (see [issue 25](https://gitlab.ilabt.imec.be/yarrrml/spec/issues/25))
+
 ### Removed
 - Duplicate logos (see [issue 21](https://gitlab.ilabt.imec.be/yarrrml/spec/issues/21))
 - Test files (see [issue 22](https://gitlab.ilabt.imec.be/yarrrml/spec/issues/22))
