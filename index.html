@@ -13,16 +13,16 @@
           name: "Ben De Meester",
           url: "https://ben.de-meester.org",
           mailto: "ben.demeester@ugent.be",
-          company: 'imec — Ghent University — IDLab',
+          company: 'Ghent University - IDLab, imec',
         },{
           name: "Pieter Heyvaert",
           url: "https://pieterheyvaert.com",
-          mailto: "pheyvaer.heyvaert@ugent.be",
-          company: 'imec — Ghent University — IDLab',
+          mailto: "pieter.heyvaert@ugent.be",
+          company: 'Ghent University - IDLab, imec',
         },{
           name: "Anastasia Dimou",
           mailto: "anastasia.dimou@ugent.be",
-          company: 'imec — Ghent University — IDLab',
+          company: 'Ghent University - IDLab, imec',
         }],
         // edDraftURI: "http://some.github.repo",
         shortName: "yarrrml",
@@ -59,27 +59,6 @@
     </section>
     <section id='sotd'>
     </section>
-<!--<section>-->
-    <!--<h2>Introduction</h2>-->
-
-    <!--<section>-->
-        <!--<h2>Goals</h2>-->
-
-    <!--</section>-->
-
-    <!--<section>-->
-        <!--<h2>Relation to existing mapping languages</h2>-->
-
-    <!--</section>-->
-
-    <!--<section>-->
-        <!--<h2>Relation to YAML</h2>-->
-
-        <!--<p>-->
-            <!--YARRRML is a subset of the YAML.-->
-        <!--</p>-->
-    <!--</section>-->
-<!--</section>-->
 
     <section>
       <h2>Terminology</h2>
@@ -101,7 +80,7 @@
         <dd>the type of a literal value</dd>
 
         <dt><dfn>reference</dfn></dt>
-        <dd></dd>
+        <dd>the reference to a data fraction in a data source</dd>
 
         <dt><dfn>function</dfn></dt>
         <dd>a programmatic function that takes 0 or more input parameters and returns a single result</dd>
@@ -2002,6 +1981,16 @@
             <li>http://www.w3.org/1999/02/22-rdf-syntax-ns#type: a</li>
           </ul>
       </section>
+    </section>
+
+    <section>
+      <h2>Reference implementation</h2>
+
+      <p>
+        The <a href="https://github.com/rmlio/yarrrml-parser">YARRRML Parser</a>
+        is a reference implementation that generates [R2]RML rules based on YARRRML.
+        The parser's code also includes tests to validate a parser's conformance to the YARRRML specification.
+      </p>
     </section>
   </body>
 
