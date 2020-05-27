@@ -1473,7 +1473,12 @@
           Furthermore, a condition is added, so that only persons and projects are linked when they are actually related, based on the <code>projectID</code>
           of the person and the <code>ID</code> of the project.
           Note that a condition is not required.
-          In this example it would result in relationships between every person and every project.
+          But when a condition is used an extra value can be given to a parameter of a function.
+          This is either <code>s</code> or <code>o</code>.
+          <code>s</code> means that the value of the parameter is coming from the subject of the relationship, while
+          <code>o</code> means that the value is coming from the object of the relationship.
+          The default value is <code>s</code>.
+          In this example it would result in relationships between every person and their projects.
         </p>
 
         <div id="tabs-28" class="nanotabs">
@@ -1493,8 +1498,8 @@
                         condition:
                           function: equal
                           parameters:
-                            - [str1, $(projectID)]
-                            - [str2, $(ID)]
+                            - [str1, $(projectID), s]
+                            - [str2, $(ID), o]
                 project:
                   subjects: http://example.com/project/$(ID)
             </pre>

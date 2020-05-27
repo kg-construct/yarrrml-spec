@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## Unreleased
 
+### Added
+- Explain "s" and "o" for conditions when linking (see [issue 27](https://gitlab.ilabt.imec.be/yarrrml/spec/-/issues/27))
+
 ## [1.1.0] - 2020-01-22
 
 ### Added
