@@ -1961,6 +1961,114 @@
     </section>
 
     <section>
+      <h2>External references</h2>
+
+      <p>
+        It is possible to define references that do not refer to data in a data source.
+        These references are called "external references".
+        They are provided via the <code>external</code> key that has
+        as value a list of references with their values.
+        In the following example two external references are defined:
+        <code>name</code> and <code>city</code> with as values <code>John</code> and <code>Ghent</code>.
+      </p>
+
+      <pre id="example-er-1" class="example" title="defining external references">
+          external:
+            name: John
+            city: Ghent
+
+          mappings:
+            person:
+              subjects: http://example.org/$(id)
+              po:
+                - [ex:name, $(_name)]
+                - [ex:firstName, $(_name)]
+                - [ex:city, $(_city)]
+      </pre>
+
+      <p>
+      Replacing the external references with their actual values results in the following.
+      </p>
+
+      <pre id="example-er-2" class="example" title="external references are filled in">
+          mappings:
+            person:
+              s: http://example.org/$(id)
+              po:
+                - [ex:name, John]
+                - [ex:firstName, John]
+                - [ex:city, Ghent]
+      </pre>
+
+      <p>
+      If the value for an external reference is not provided, then the reference is not replaced.
+      In the following example no value is provided for <code>name</code>.
+      </p>
+
+      <pre id="example-er-3" class="example" title="defining some external references">
+          external:
+            city: Ghent
+
+          mappings:
+            person:
+              subjects: http://example.org/$(id)
+              po:
+                - [ex:name, $(_name)]
+                - [ex:firstName, $(_name)]
+                - [ex:city, $(_city)]
+      </pre>
+
+      <p>
+      Replacing the remaining external reference with its actual value results in the following.
+      </p>
+
+      <pre id="example-er-4" class="example" title="some external references are filled in">
+          mappings:
+            person:
+              subjects: http://example.org/$(id)
+              po:
+                - [ex:name, $(_name)]
+                - [ex:firstName, $(_name)]
+                - [ex:city, Ghent]
+      </pre>
+
+      <p>
+      <code>$(_name)</code> is not replaced.
+      </p>
+
+      <p>
+      If you want use a reference as both a regular and an external reference,
+      you add a <code>\</code> before the regular reference.
+      In the following example <code>$(_name)</code> is an external reference and
+      <code>$(\_name)</code> is a regular reference.
+      </p>
+
+      <pre id="example-er-5" class="example" title="defining both regular and external references">
+          external:
+            name: John
+
+          mappings:
+            person:
+              subjects: http://example.org/$(id)
+              po:
+                - [ex:name, $(_name)]
+                - [ex:firstName, $(\_name)]
+      </pre>
+
+      Replacing the external reference with its actual value results in the following.
+
+      <pre id="example-er-6" class="example" title="external reference is filled in, ignoring reular reference">
+          mappings:
+            person:
+              subjects: http://example.org/$(id)
+              po:
+                - [ex:name, John]
+                - [ex:firstName, $(_name)]
+      </pre>
+
+    </section>
+
+    <section>
       <h2>Shortcuts</h2>
 
       <section>
