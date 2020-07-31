@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added
 - Explain "s" and "o" for conditions when linking (see [issue 27](https://gitlab.ilabt.imec.be/yarrrml/spec/-/issues/27))
+- Section about external references (see [issue 29](https://gitlab.ilabt.imec.be/yarrrml/spec/-/issues/29))
 
 ### Fixed
 - Example 30 is wrong (see [issue 28](https://gitlab.ilabt.imec.be/yarrrml/spec/-/issues/28))
