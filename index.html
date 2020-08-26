@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset='utf-8'>
     <title>YARRRML</title>
@@ -200,7 +200,7 @@
                 ], [
                   a foaf:Person;
                   rdfs:label "Jane Doe";
-                  foaf:homepage &lt;https://janedoe.com>&gt;
+                  foaf:homepage &lt;https://janedoe.com&gt;
                 ].
             </pre>
         </div>
@@ -315,150 +315,313 @@
         The data sources are defined in the <code>sources</code> collection in the root of the document.
         Each source is added to this collection via a key-value pair.
         The key has to be unique for every source.
-        The value is a collection with three keys
-        <code>access</code> (required), <code>referenceFormulation</code> (required), and <code>iterator</code> (conditionally required).
+        The value is a collection with the keys described below.
       </p>
 
-        <section>
-          <h2>Keys</h2>
-          <dl>
-            <dt><dfn>access</dfn></dt>
-            <dd>the local or remote location of the data source</dd>
-
-            <dt><dfn>driver</dfn> (required profiles: RML, D2RQ)</dt>
-            <dd>the local or remote location of the data source</dd>
-
-            <dt><dfn>referenceFormulation</dfn> (required profiles: RML)</dt>
-            <dd>the reference formulation used on to access data source</dd>
-
-            <dt><dfn>iterator</dfn> (required profiles: RML)</dt>
-            <dd>the path to the different records over which to iterate</dd>
-
-            <dt><dfn>delimiter</dfn> (required profiles: RML, CSVW)</dt>
-            <dd>the delimiter to separate fields in a record</dd>
-
-            <dt><dfn>encoding</dfn> (required profiles: RML, CSVW)</dt>
-            <dd>the encoding used for the data</dd>
-
-            <dt><dfn>query</dfn> (required profiles: RML, R2RML)</dt>
-            <dd>the query to execute on the data source to select only a part of the data</dd>
-
-            <dt><dfn>queryFormulation</dfn> (required profiles: RML, R2RML)</dt>
-            <dd>the query formulation used on to query the data source</dd>
-
-            <dt><dfn>credentials</dfn> (required profiles: RML, D2RQ)</dt>
-            <dd>the credentials required to access the data source</dd>
-
-            <dt><dfn>username</dfn> (required profiles: RML, D2RQ)</dt>
-            <dd>the username required to access the data source</dd>
-
-            <dt><dfn>password</dfn> (required profiles: RML, D2RQ)</dt>
-            <dd>the password required to access the data source</dd>
-          </dl>
-
-		  <div class="note">
-			<p>
-				To be precise, the <a>iterator</a> contains a "query" as a string,
-				as per specification of the <a>referenceFormulation</a>.
-				E.g., when using <a>referenceFormulation</a> <code>xpath</code>,
-				the <a>iterator</a> will be interpreted as an xPath statement.
-				When using <a>referenceFormulation</a> <code>sparql</code>,
-				the <a>iterator</a> will be interpreted as a SPARQL query.
-				This is similar for <a>queryFormulation</a> and <a>query</a>.
-				The latter however is executed when retrieving the data,
-				a so-called "view" of the data.
-				The former is executed on top of this view.
-			</p>
-		  </div>
-        </section>
-
-        <section>
-          <h2>Reference formulations</h2>
-          The following reference formulations are supported for these data formats.
-
-          <dl>
-            <dt><dfn>CSV</dfn> (required profiles: RML)</dt>
-            <dd>
-              The reference formulation <code>csv</code> is used for data sources in the CSV format.
-              No iterator is required.
-              Every row of a CSV data source is considered as a record.
-            </dd>
-
-            <dt><dfn>JSON</dfn> (required profiles: RML)</dt>
-            <dd>
-              The reference formulation <code>jsonpath</code> is used for data sources that can be access via JSONPath expressions.
-              An iterator is required.
-            </dd>
-
-            <dt><dfn>XML</dfn> (required profiles: RML)</dt>
-            <dd>
-              The reference formulation <code>xpath</code> is used for data sources that can be access via XPath expressions.
-              An iterator is required.
-              The reference formulation <code>xquery</code> is used for data sources that can be access via XQuery queries.
-              No iterator is required.
-              Every row of the result of the query is considered as a record.
-            </dd>
-          </dl>
-        </section>
-
       <section>
-        <h2>Query formulations</h2>
-        The following query formulation are supported for these query languages.
-
+        <h2>Keys</h2>
         <dl>
-          <dt><dfn>SQL</dfn></dt>
-          <dd>
-            The following query formulations can be used for data sources that can be queried via a SQL query:
-
-            <ul>
-              <li>sql2008</li>
-              <li>oracle</li>
-              <li>mysql</li>
-              <li>mssql</li>
-              <li>hsql</li>
-              <li>postgresql</li>
-              <li>db2</li>
-              <li>informix</li>
-              <li>ingres</li>
-              <li>progress</li>
-              <li>sybasease</li>
-              <li>sybasesqlanywhere</li>
-              <li>virtuoso</li>
-              <li>firebird</li>
-            </ul>
-
-            This list is based on version IRIs identified by <a href="https://www.w3.org/2001/sw/wiki/RDB2RDF/SQL_Version_IRIs">RDB2RDF</a>.
+          <dt><dfn>type</dfn></dt>
+          <dd>Type of the data source.<br />
+            Required profiles: RML. <br />
+            Datatype: string.
           </dd>
 
-          <dt><dfn>SPARQL</dfn> (required profiles: RML, SD)</dt>
-          <dd>
-            The query formulation <code>sparql11</code> is used for data sources that can be queried via a SPARQL 1.1 query.
+          <dt><dfn>access</dfn></dt>
+          <dd>Local or remote location of the data source. <br />
+            Required profiles: RML. <br />
+            Datatype: string.
+          </dd>
+
+          <dt><dfn>credentials</dfn></dt>
+          <dd>Credentials required to access the data source.<br />
+            Required profiles: RML. <br />
+            Datatype: collection.
+          </dd>
+
+          <dt><dfn>queryFormulation</dfn></dt>
+          <dd>Query formulation used to query the data source. <br />
+            Required profiles: RML or R2RML. <br />
+            Datatype: string.
+          </dd>
+
+          <dt><dfn>query</dfn></dt>
+          <dd>Query to execute on the data source to retrieve the desired data. <br />
+            Required profiles: RML or R2RML. <br />
+            Datatype: string.
+          </dd>
+
+          <dt><dfn>encoding</dfn></dt>
+          <dd>Encoding used by the data. <br />
+            Required profiles: RML and CSVW. <br />
+            Datatype: string.
+          </dd>
+
+          <dt><dfn>delimiter</dfn></dt>
+          <dd>Delimiter to separate fields in a record. <br />
+            Required profiles: RML and CSVW. <br />
+            Datatype: string.
+          </dd>
+
+          <dt><dfn>referenceFormulation</dfn></dt>
+          <dd>Reference formulation used to access the data retrieved from the data source. <br />
+            Required profiles: RML. <br />
+            Datatype: string.
+          </dd>
+
+          <dt><dfn>iterator</dfn></dt>
+          <dd>Path to the records over which to iterate. <br />
+            Required profiles: RML. <br />
+            Datatype: string.
           </dd>
         </dl>
       </section>
 
-        <section>
-          <h2>Examples</h2>
-          <p>
-            In the following example a single data source is defined <code>person-source</code>.
-          </p>
+      <section>
+        <h2>Type</h2>
 
-          <div id="tabs-1" class="nanotabs">
+        <p>
+          This key's value describes what type of data source is used,
+          so that the correct way of connecting to the data source can be determined.
+          By default a local file is assumed when the <code>access</code> value is a path such as <code>file.json</code>.
+          The value of type is then implicitly <code>localfile</code>.
+          By default a remote file is assumed and retrieved via an HTTP GET when a URL is given such as <code>http://example.org/file.json</code>.
+          The value of type is then implicitly <code>remotefile</code>.
+          The following values are supported:
+        </p>
+
+        <table>
+          <tr><th>Data source type</th><th>Value</th><th>Required profiles</th></tr>
+          <tr><td><a href="https://www.oracle.com/database/technologies/">Oracle Database</a></td><td>oracle</td><td>RML and D2RQ</td></tr>
+          <tr><td><a href="https://www.mysql.com/">MySQL</a></td><td>mysql</td><td>RML and D2RQ</td></tr>
+          <tr><td><a href="http://hsqldb.org/">HSQLDB</a></td><td>hsql</td><td>RML and D2RQ</td></tr>
+          <tr><td><a href="https://www.postgresql.org/">PostgreSQL</a></td><td>postgresql</td><td>RML and D2RQ</td></tr>
+          <tr><td><a href="https://www.ibm.com/products/db2-database">IBM DB2</a></td><td>db2</td><td>RML and D2RQ</td></tr>
+          <tr><td><a href="https://www.ibm.com/products/informix">IBM Informix</a></td><td>informix</td><td>RML and D2RQ</td></tr>
+          <tr><td><a href="https://www.actian.com/data-management/actian-x-hybrid-rdbms/">Ingres</a></td><td>ingres</td><td>RML and D2RQ</td></tr>
+          <tr><td><a href="https://www.sap.com/products/sybase-ase.html">SAP Adaptive Server Enterprise</a></td><td>sapase</td><td>RML and D2RQ</td></tr>
+          <tr><td><a href="https://www.sap.com/products/sql-anywhere.html">SAP SQL Anywhere</a></td><td>sapsqlanywhere</td><td>RML and D2RQ</td></tr>
+          <tr><td><a href="https://firebirdsql.org/">Firebird</a></td><td>firebird</td><td>RML and D2RQ</td></tr>
+          <tr><td>SPARQL endpoint</td><td>sparql</td><td>RML and SD</td></tr>
+          <tr><td>Local file</td><td>localfile</td><td>RML</td></tr>
+          <tr><td>Remote file</td><td>remotefile</td><td>RML</td></tr>
+        </table>
+
+        <div class="note">
+          <p>
+            R2RML rules do not include this information:
+            it is supplied directly to the used R2RML processor.
+            Also, it does not support SPARQL endpoints, local files, and remote files.
+          </p>
+        </div>
+      </section>
+
+      <section>
+        <h2>Access</h2>
+
+        <p>
+          This key's value describes where the data source can be accessed.
+          Examples are <code>file.json</code> and <code>http://example.org/my/db</code>.
+        </p>
+      </section>
+
+      <section>
+        <h2>Query formulation</h2>
+        <p>
+          Query formulations define what type of query is used query to a data source.
+          This key's supported values are the same as the values for the type.
+          Therefore, if only a type is provided the query formulation is implicitly the same.
+          But if you want for example to use a MySQL query with an Oracle Database,
+          then you need to specify both the type and the query formulation.
+        </p>
+
+        <p>
+          In the case of SPARQL endpoints, defined by the value <code>sparql</code> for type,
+          the query formulation is by default <code>sparql11</code>: the data sources
+          are queried via a <a href="https://www.w3.org/TR/sparql11-query/">SPARQL 1.1 query</a>.
+        </p>
+      </section>
+
+      <section>
+        <h2>Query</h2>
+
+        <p>
+          This key's value is a query that conforms the selected query formulation.
+          For example, if the query formulation is <code>mysql</code>, then
+          the value of <code>query</code> needs to be a valid MySQL query.
+        </p>
+      </section>
+
+      <section>
+        <h2>Reference formulation</h2>
+        <p>
+          Reference formulations define how to access the data retrieved from the data source.
+          For example, this retrieved data can be query results coming from a database or
+          a JSON file on the local file system.
+          The value of this key is a string.
+          This key's supported values are.
+        </p>
+
+        <table>
+          <tr><th>Reference formulation</th><th>Value</th><th>Required profiles</th></tr>
+          <tr><td>CSV (tables with columns and rows)</td><td>csv</td><td>RML</td></tr>
+          <tr><td><a href="https://goessner.net/articles/JsonPath/">JSONPath</a></td><td>jsonpath</td><td>RML</td></tr>
+          <tr><td><a href="https://www.w3.org/TR/xpath/">XPath</a></td><td>xpath</td><td>RML</td></tr>
+          <tr><td><a href="https://www.w3.org/TR/xquery/">XQuery</a></td><td>xquery</td><td>RML</td></tr>
+        </table>
+      </section>
+
+      <section>
+        <h2>Iterator</h2>
+
+        <p>
+          This key's value defines what records are processed.
+          It has to conform to the selected reference formulation.
+        </p>
+
+        <p>
+          Consider the following JSON example with an array of two people.
+          One person is one record.
+        </p>
+
+        <pre>
+{
+  "people": [
+    {...},
+    {...}
+  ]
+}
+        </pre>
+
+        <p>
+          To iterate over all the people,
+          the iterator is <code>$.people[*]</code> when using <code>jsonpath</code> as a reference formulation.
+          If no iterator is provided,
+          it is unclear what the records are.
+        </p>
+      </section>
+
+      <section>
+        <h2>Delimiter</h2>
+
+        <p>
+          This key's value defines the delimiter when working with CSV files.
+          The default is <code>,</code>.
+        </p>
+      </section>
+
+      <section>
+        <h2>Encoding</h2>
+
+        <p>
+          This key's value defines the encoding of the retrieved data.
+          The default is <code>utf-8</code>.
+        </p>
+      </section>
+
+      <section>
+        <h2>Credentials</h2>
+
+        <p>
+          Credentials are provided when accessing a data source requires authentication.
+          This key's value is a collection with the keys described below.
+        </p>
+
+        <dl>
+          <dt><dfn>username</dfn></dt>
+          <dd>User name required to access the data source. <br />
+            Required profiles: RML and D2RQ.
+          </dd>
+
+          <dt><dfn>password</dfn></dt>
+          <dd>Password required to access the data source.<br />
+            Required profiles: RML and D2RQ.
+          </dd>
+        </dl>
+      </section>
+
+      <section>
+        <h2>Query formulation vs reference formulation</h2>
+
+        <img src="query-vs-reference-formulations.jpeg" alt="Sequence diagram showing difference between query and reference formulation">
+
+        <p>
+          In the figure above, you find a sequence diagram showing at what point the query and query formulation are used and
+          a what point the iterator and reference formulation are used.
+          The component "Processor" represents the software application that executes the converted YARRRML rules,
+          e.g., RML rules.
+          For clarity, this conversion is not included in the figure.
+          The processor gets the <code>type</code> and <code>access</code> from the YARRRML rules.
+          It uses this information to create a connection with the data source.
+          Next, the processor gets the <code>query formulation</code> and <code>query</code>.
+          It uses this information to query the desired data from the data source,
+          making use of the earlier created connection.
+          Once the data is retrieved the connection is closed.
+          The processor gets the <code>reference formulation</code> and <code>iterator</code>.
+          It uses this information to iterate over the retrieved data.
+        </p>
+
+        <img src="query-vs-reference-formulations-example.jpeg" alt="Sequence diagram showing difference between query and reference formulation for a SPARQL endpoint">
+
+        <p>
+          In the figure above, you find a sequence diagram showing an example of
+          the use of query, query formulation, iterator, and reference formulation.
+          The data source is a SPARQL endpoint, available at <code>http://example.org/sparql</code>,
+          which is queried using a SPARQL 1.1 query.
+          The query formulation is <code>sparql11</code> and
+          the query is <code>SELECT * WHERE{?s ?p ?o}</code>
+          The result is an XML document which is iterated upon using the iterator <code>/sparql/results/result</code>
+          that conforms to the XPath specification.
+        </p>
+      </section>
+
+      <section>
+        <h2>Examples</h2>
+        <p>
+          In the following example a single data source is defined <code>person-source</code>.
+        </p>
+
+        <div id="tabs-1" class="nanotabs">
+          <ul>
+            <li><a href="#tab1-1" class="selected">YARRRML</a></li>
+            <li><a href="#tab1-2">RML</a></li>
+          </ul>
+          <div id="tab1-1">
+            <pre id="example-ds1-yarrrml" class="example" title="one data source">
+            sources:
+              person-source:
+                access: data/person.json
+                referenceFormulation: jsonpath
+                iterator: $
+            </pre>
+          </div>
+          <div id="tab1-2">
+            <pre id="example-ds1-rml" class="example" title="one data source">
+              <#LogicalSource> a rml:LogicalSource;
+                rml:source "data/person.json";
+                rml:referenceFormulation ql:JSONPath;
+                rml:iterator "$".
+            </pre>
+          </div>
+        </div>
+
+        <p>
+          A shortcut version of this example looks as follows.
+        </p>
+
+          <div id="tabs-2" class="nanotabs">
             <ul>
-              <li><a href="#tab1-1" class="selected">YARRRML</a></li>
-              <li><a href="#tab1-2">RML</a></li>
+              <li><a href="#tab2-1" class="selected">YARRRML</a></li>
+              <li><a href="#tab2-2">RML</a></li>
             </ul>
-            <div id="tab1-1">
-              <pre id="example-ds1-yarrrml" class="example" title="one data source">
-              sources:
-                person-source:
-                  access: data/person.json
-                  referenceFormulation: jsonpath
-                  iterator: $
+            <div id="tab2-1">
+              <pre id="example-ds1-sc" class="example" title="one data source using shortcuts">
+                sources:
+                  person-source: [data/person.json~jsonpath, $]
               </pre>
             </div>
-            <div id="tab1-2">
-              <pre id="example-ds1-rml" class="example" title="one data source">
+            <div id="tab2-2">
+              <pre id="example-ds1-sc-rml" class="example" title="one data source using shortcuts">
                 <#LogicalSource> a rml:LogicalSource;
                   rml:source "data/person.json";
                   rml:referenceFormulation ql:JSONPath;
@@ -467,88 +630,63 @@
             </div>
           </div>
 
-          <p>
-            A shortcut version of this example looks as follows.
-          </p>
+        <p>
+          The collection is replaced with an array where
+          the first element contains the value for <code>access</code> appended with the <code>~</code> and the value for <code>referenceFormulation</code>, and
+          the second element contains the iterator.
 
-            <div id="tabs-2" class="nanotabs">
-              <ul>
-                <li><a href="#tab2-1" class="selected">YARRRML</a></li>
-                <li><a href="#tab2-2">RML</a></li>
-              </ul>
-              <div id="tab2-1">
-                <pre id="example-ds1-sc" class="example" title="one data source using shortcuts">
-                  sources:
-                    person-source: [data/person.json~jsonpath, $]
-                </pre>
-              </div>
-              <div id="tab2-2">
-                <pre id="example-ds1-sc-rml" class="example" title="one data source using shortcuts">
-                  <#LogicalSource> a rml:LogicalSource;
-                    rml:source "data/person.json";
-                    rml:referenceFormulation ql:JSONPath;
-                    rml:iterator "$".
-                </pre>
-              </div>
-            </div>
+        </p>
 
-          <p>
-            The collection is replaced with an array where
-            the first element contains the value for <code>access</code> appended with the <code>~</code> and the value for <code>referenceFormulation</code>, and
-            the second element contains the iterator.
+        <p>
+        The following mapping access a SQL database and select the required data via a query.
+        </p>
 
-          </p>
-
-          <p>
-          The following mapping access a SQL database and select the required data via a query.
-          </p>
-
-          <div id="tabs-3" class="nanotabs">
-            <ul>
-              <li><a href="#tab3-1" class="selected">YARRRML</a></li>
-              <li><a href="#tab3-2">RML</a></li>
-            </ul>
-            <div id="tab3-1">
-                <pre id="example-db-yarrrrml" class="example" title="mapping with database as source">
-                  mapping:
-                    person:
-                      sources:
-                        access: http://localhost/example
-                        type: mysql
-                        credentials:
-                          username: root
-                          password: root
-                        queryFormulation: sql2008
-                        query: |
-                          SELECT DEPTNO, DNAME, LOC,
-                          (SELECT COUNT(*) FROM EMP WHERE EMP.DEPTNO=DEPT.DEPTNO) AS STAFF
-                          FROM DEPT;
-                        referenceFormulation: csv
-                </pre>
-            </div>
-            <div id="tab3-2">
-                <pre id="example-db-rml" class="example" title="mapping with database as source">
-                  <#TriplesMap> a rr:TriplesMap;
-
-                    rml:logicalSource [
-                      a rml:LogicalSource;
-                      rml:source <#DataSource>;
-                      rr:sqlVersion rr:SQL2008;
-                      rml:query "SELECT DEPTNO, DNAME, LOC,
-                            (SELECT COUNT(*) FROM EMP WHERE EMP.DEPTNO=DEPT.DEPTNO) AS STAFF
-                            FROM DEPT;";
-                      rml:referenceFormulation ql:CSV
-                    ].
-
-                  <#DataSource> a d2rq:Database;
-                    d2rq:jdbcDSN "jdbc:mysql://localhost/example";
-                    d2rq:jdbcDriver "com.mysql.jdbc.Driver";
-                    d2rq:username "root";
-                    d2rq:password "root" .
-                </pre>
-            </div>
+        <div id="tabs-3" class="nanotabs">
+          <ul>
+            <li><a href="#tab3-1" class="selected">YARRRML</a></li>
+            <li><a href="#tab3-2">RML</a></li>
+          </ul>
+          <div id="tab3-1">
+              <pre id="example-db-yarrrrml" class="example" title="mapping with database as source">
+                mapping:
+                  person:
+                    sources:
+                      access: http://localhost/example
+                      type: mysql
+                      credentials:
+                        username: root
+                        password: root
+                      queryFormulation: sql2008
+                      query: |
+                        SELECT DEPTNO, DNAME, LOC,
+                        (SELECT COUNT(*) FROM EMP WHERE EMP.DEPTNO=DEPT.DEPTNO) AS STAFF
+                        FROM DEPT;
+                      referenceFormulation: csv
+              </pre>
           </div>
-        </section>
+          <div id="tab3-2">
+              <pre id="example-db-rml" class="example" title="mapping with database as source">
+                <#TriplesMap> a rr:TriplesMap;
+
+                  rml:logicalSource [
+                    a rml:LogicalSource;
+                    rml:source <#DataSource>;
+                    rr:sqlVersion rr:SQL2008;
+                    rml:query "SELECT DEPTNO, DNAME, LOC,
+                          (SELECT COUNT(*) FROM EMP WHERE EMP.DEPTNO=DEPT.DEPTNO) AS STAFF
+                          FROM DEPT;";
+                    rml:referenceFormulation ql:CSV
+                  ].
+
+                <#DataSource> a d2rq:Database;
+                  d2rq:jdbcDSN "jdbc:mysql://localhost/example";
+                  d2rq:jdbcDriver "com.mysql.jdbc.Driver";
+                  d2rq:username "root";
+                  d2rq:password "root" .
+              </pre>
+          </div>
+        </div>
+      </section>
     </section>
 
     <section>

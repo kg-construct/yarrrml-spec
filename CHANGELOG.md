@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## Unreleased
 
+### Fixed
+- Clarify access type and query formulation (see [issue 30](https://gitlab.ilabt.imec.be/yarrrml/spec/-/issues/30))
+
 ## [1.2.0] - 2020-07-31
 
 ### Added
