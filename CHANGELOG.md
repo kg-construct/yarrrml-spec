@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## Unreleased
 
+## [1.2.1] - 2020-08-27
+
 ### Fixed
 - Clarify access type and query formulation (see [issue 30](https://gitlab.ilabt.imec.be/yarrrml/spec/-/issues/30))
 
@@ -36,6 +38,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 - Release v1.0.0
 
+[1.2.1]: https://gitlab.ilabt.imec.be/yarrrml/spec/compare/v1.2.0...v1.2.1
 [1.2.0]: https://gitlab.ilabt.imec.be/yarrrml/spec/compare/v1.1.0...v1.2.0
 [1.1.0]: https://gitlab.ilabt.imec.be/yarrrml/spec/compare/v1.0.0...v1.1.0
 [1.0.0]: https://gitlab.ilabt.imec.be/yarrrml/spec/-/tags/v1.0.0
