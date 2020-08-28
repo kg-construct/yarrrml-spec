@@ -402,6 +402,8 @@
           <tr><td><a href="https://www.sap.com/products/sybase-ase.html">SAP Adaptive Server Enterprise</a></td><td>sapase</td><td>RML and D2RQ</td></tr>
           <tr><td><a href="https://www.sap.com/products/sql-anywhere.html">SAP SQL Anywhere</a></td><td>sapsqlanywhere</td><td>RML and D2RQ</td></tr>
           <tr><td><a href="https://firebirdsql.org/">Firebird</a></td><td>firebird</td><td>RML and D2RQ</td></tr>
+          <tr><td><a href="https://www.microsoft.com/en-gb/sql-server/sql-server-2019">Microsoft SQL Server</a></td><td>mssqlserver</td><td>RML and D2RQ</td></tr>
+          <tr><td><a href="https://virtuoso.openlinksw.com/">Virtuoso</a></td><td>virtuoso</td><td>RML and D2RQ</td></tr>
           <tr><td>SPARQL endpoint</td><td>sparql</td><td>RML and SD</td></tr>
           <tr><td>Local file</td><td>localfile</td><td>RML</td></tr>
           <tr><td>Remote file</td><td>remotefile</td><td>RML</td></tr>
@@ -429,17 +431,20 @@
         <h2>Query formulation</h2>
         <p>
           Query formulations define what type of query is used query to a data source.
-          This key's supported values are the same as the values for the type.
+          This key's supported values are the same as the values for the type,
+          together with the additional values below.
           Therefore, if only a type is provided the query formulation is implicitly the same.
           But if you want for example to use a MySQL query with an Oracle Database,
           then you need to specify both the type and the query formulation.
         </p>
 
-        <p>
-          In the case of SPARQL endpoints, defined by the value <code>sparql</code> for type,
-          the query formulation is by default <code>sparql11</code>: the data sources
-          are queried via a <a href="https://www.w3.org/TR/sparql11-query/">SPARQL 1.1 query</a>.
-        </p>
+        <table>
+          <tr><th>Query formulation</th><th>Value</th><th>Required profiles</th></tr>
+          <tr><td><a href="https://www.w3.org/TR/sparql11-query/">SPARQL 1.1 query</a> (default for SPARQL endpoint)</td><td>sparql11</td><td>RML and SD</td></tr>
+          <tr><td><a href="https://en.wikipedia.org/wiki/SQL:2008">SQL:2008</a></td><td>sql2008</td><td>RML and D2RQ, or R2RML</td></tr>
+          <tr><td><a href="https://en.wikipedia.org/wiki/SQL:2011">SQL:2011</a></td><td>sql2011</td><td>RML and D2RQ, or R2RML</td></tr>
+          <tr><td><a href="https://en.wikipedia.org/wiki/SQL:2016">SQL:2016</a></td><td>sql2016</td><td>RML and D2RQ, or R2RML</td></tr>
+        </table>
       </section>
 
       <section>
