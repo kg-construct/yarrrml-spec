@@ -7,8 +7,18 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## Unreleased
 
+### Added
+- Pronunciation
+- Web of Things support
+- Target support
+
 ### Fixed
 - Add virtuoso, myssqlserver to type and sql2008 to queryformulation (see [issue 32](https://gitlab.ilabt.imec.be/yarrrml/spec/-/issues/32))
+- Example 27 (mapping with one data source using shortcuts)
+- Example 74 (mapping with two datatypes)
+- Some typo's
+- Added shortcut for `predicateobjects` to list of shortcuts for keys.
+- Link to D2RQ.
 
 ## [1.2.1] - 2020-08-27
 

@@ -8,8 +8,87 @@
      class='remove'></script>
     <script class='remove'>
       var respecConfig = {
+        localBiblio: {
+          "DCAT": {
+            title: "Data Catalog Vocabulary (DCAT) - Version 2",
+            href: "https://www.w3.org/TR/vocab-dcat/",
+            status: "W3C Recommendation",
+            publisher: "W3C",
+            date: "22 February 2020",
+          },
+          "SD": {
+            title: "SPARQL 1.1 Service Description",
+            href: "https://www.w3.org/TR/sparql11-service-description/",
+            status: "W3C Recommendation",
+            publisher: "W3C",
+            date: "21 March 2013",
+          },
+          "D2RQ": {
+            title: "The D2RQ Mapping Language",
+            href: "https://d2rq.org/d2rq-language",
+            status: "Unofficial Draft",
+            authors: [
+              "Richard Cyganiak",
+              "Chris Bizer",
+              "Jörg Garbers",
+              "Oliver Maresch",
+              "Christian Becker"
+            ],
+            publisher: "Freie Universität Berlin - DERI",
+            date: "12 March 2012",
+          },
+          "FnO": {
+            title: "The Function Ontology",
+            href: "https://fno.io/spec/",
+            status: "Unofficial Draft",
+            authors: [
+              "Ben De Meester",
+              "Anastasia Dimou"
+            ],
+            publisher: "IDLab - imec - Ghent University",
+            date: "10 November 2021",
+          },
+          "RMLT": {
+            title: "Target in RML",
+            href: "https://rml.io/specs/rml-target",
+            status: "Unofficial Draft",
+            authors: [
+              "Dylan Van Assche",
+              "Anastasia Dimou"
+            ],
+            publisher: "IDLab - imec - Ghent University",
+            date: "18 May 2021",
+          },
+          "RML": {
+            title: "RDF Mapping Language (RML)",
+            href: "https://rml.io/specs/rml/",
+            status: "Unofficial Draft",
+            authors: [
+              "Anastasia Dimou",
+              "Miel Vander Sande"
+            ],
+            publisher: "IDLab - imec - Ghent University",
+            date: "October 2020",
+          },
+          "DataIO": {
+            title: "DataIO",
+            href: "https://rml.io/specs/dataio",
+            status: "Unofficial Draft",
+            authors: [
+              "Dylan Van Assche",
+              "Anastasia Dimou"
+            ],
+            publisher: "IDLab - imec - Ghent University",
+            date: "18 May 2021",
+          },
+        },
         specStatus: "unofficial",
         editors: [{
+          name: "Dylan Van Assche",
+          url: "https://dylanvanassche.be/",
+          mailto: "dylan.vanassche@ugent.be",
+          company: 'Ghent University - IDLab, imec',
+        },{
           name: "Ben De Meester",
           url: "https://ben.de-meester.org",
           mailto: "ben.demeester@ugent.be",
@@ -26,8 +105,8 @@
         }],
         // edDraftURI: "http://some.github.repo",
         shortName: "yarrrml",
-        previousURI: "https://w3id.org/yarrrml/spec/index-20190801.html",
-        previousPublishDate: "2019-08-01",
+        previousURI: "https://w3id.org/yarrrml/spec/index-20210930.html",
+        previousPublishDate: "2021-09-30",
         previousMaturity: "unofficial",
         canonicalURI: "https://w3id.org/yarrrml/spec/",
         logos: [{
@@ -52,7 +131,7 @@
   <body>
     <section id='abstract'>
       <p>
-        YARRRML is a human readable text-based representation for declarative generation rules.
+        YARRRML (pronounced /jɑɹməl/) is a human readable text-based representation for declarative generation rules.
         It is a subset of [[YAML]],
         a widely used data serialization language designed to be human-friendly.
       </p>
@@ -95,8 +174,9 @@
       </p>
 
       <ul>
-        <li>R2RML: applies the semantics specified by [[R2RML]]; and</li>
-        <li>RML: applies the semantics specified by RML.</li>
+        <li>R2RML: applies the semantics specified by [[R2RML]];</li>
+        <li>RML: applies the semantics specified by [[RML]]; and</li>
+        <li>RMLT: applies the semantics specified by [[RMLT]].</li>
       </ul>
 
       <p>
@@ -104,11 +184,15 @@
       </p>
 
       <ul>
-        <li>FnO: applies the semantics specified by FnO;</li>
-        <li>DCAT: applies the semantics specified by DCAT;</li>
-        <li>D2RQ: applies the semantics specified by D2RQ;</li>
-        <li>SD: applies the semantics specified by SD; and</li>
+        <li>FORMATS: applies the semantics specified by the <a href="http://w3.org/ns/formats">W3C Formats namespace</a>.</li>
+        <li>COMP: applies the semantics specified by the <a href="http://semweb.mmlab.be/ns/rml-compression#">Compression namespace</a>.</li>
+        <li>VOID: applies the semantics specified by [[VoID]];</li>
+        <li>FnO: applies the semantics specified by [[FnO]];</li>
+        <li>DCAT: applies the semantics specified by [[DCAT]];</li>
+        <li>D2RQ: applies the semantics specified by [[D2RQ]];</li>
+        <li>SD: applies the semantics specified by SD ([[sparql11-service-description]]); and</li>
         <li>CSVW: applies the semantics specified by CSVW ([[csv2rdf]]).</li>
+        <li>WOT: applies the semantics specified by WoT Thing Description and WoT Security ([[wot-thing-description]], [[wot-security]])</li>
       </ul>
     </section>
 
@@ -157,7 +241,7 @@
       <p>
         The authors of the YARRRML rules can be added via the key <code>authors</code>.
         The value is an array with an object for each author.
-        Each other can have the following keys:
+        Each author can have the following keys:
       </p>
 
       <dl>
@@ -363,6 +447,18 @@
             Datatype: string.
           </dd>
 
+          <dt><dfn>contentType</dfn></dt>
+          <dd>Content type to expect expressed as MIME types. <br />
+            Required profiles: RML and WOT. <br />
+            Datatype: string. 
+          </dd>
+
+          <dt><dfn>operationType</dfn></dt>
+          <dd>Indicates the operation type of the Web of Things description. <br />
+            Required profiles: RML and WOT. <br />
+            Datatype: string. 
+          </dd>
+
           <dt><dfn>referenceFormulation</dfn></dt>
           <dd>Reference formulation used to access the data retrieved from the data source. <br />
             Required profiles: RML. <br />
@@ -404,6 +500,7 @@
           <tr><td><a href="https://firebirdsql.org/">Firebird</a></td><td>firebird</td><td>RML and D2RQ</td></tr>
           <tr><td><a href="https://www.microsoft.com/en-gb/sql-server/sql-server-2019">Microsoft SQL Server</a></td><td>mssqlserver</td><td>RML and D2RQ</td></tr>
           <tr><td><a href="https://virtuoso.openlinksw.com/">Virtuoso</a></td><td>virtuoso</td><td>RML and D2RQ</td></tr>
+          <tr><td><a href="https://www.w3.org/WoT/">Web of Things</a></td><td>wot</td><td>RML and WOT</td></tr>
           <tr><td>SPARQL endpoint</td><td>sparql</td><td>RML and SD</td></tr>
           <tr><td>Local file</td><td>localfile</td><td>RML</td></tr>
           <tr><td>Remote file</td><td>remotefile</td><td>RML</td></tr>
@@ -436,6 +533,11 @@
           Therefore, if only a type is provided the query formulation is implicitly the same.
           But if you want for example to use a MySQL query with an Oracle Database,
           then you need to specify both the type and the query formulation.
+        </p>
+        <p>
+          In the case of SPARQL endpoints, defined by the value <code>sparql</code> for type, 
+          the query formulation is by default <code>sparql11</code>: the data sources are queried 
+          via a <a href="https://www.w3.org/TR/sparql11-query/">SPARQL 1.1 query</a>. 
         </p>
 
         <table>
@@ -489,7 +591,7 @@
           One person is one record.
         </p>
 
-        <pre>
+        <pre class="hljs javascript">
 {
   "people": [
     {...},
@@ -543,6 +645,56 @@
             Required profiles: RML and D2RQ.
           </dd>
         </dl>
+      </section>
+
+      <section>
+        <h2>Content type</h2>
+
+        <p>This key's value defines the content type of the retrieved data with a MIME type.</p>
+      </section>
+
+      <section>
+        <h2>Operation type</h2>
+
+        <p>This key's value defines the operation type for the Web of Things description.</p>
+
+        <table>
+          <tr><th>Operation</th><th>Value</th><th>Operation type</th></tr>
+          <tr><td>Retrieve data from Web API or stream</td><td><code>read</code></td><td><code>td:readproperty</code></td></tr>
+          <tr><td>Push data to Web API or stream</td><td><code>write</code></td><td><code>td:writeproperty</code></td></tr>
+        </table>
+      </section>
+
+      <section>
+        <h2>Security</h2>
+
+        <p>Web of Things Security description to describe how authentication
+        should be performed againast a Web API or stream when accessing its data.</p>
+
+        <table>
+          <tr><th>Security</th><th>Value</th><th>Web of Things Security scheme</th></tr>
+          <tr><td>Security through API key</td><td><code>apikey</code></td><td><code>wotsec:APISecurityScheme</code></td></tr>
+        </table>
+
+        <dl>
+          <dt><dfn>type</dfn></dt>
+          <dd>Security scheme to apply.<br />
+            Required profiles: RML and WOT. <br />
+          </dd>
+          <dt><dfn>in</dfn></dt>
+          <dd>Where to store the security information when performing authentication against a Web API or stream.<br />
+            Required profiles: RML and WOT. <br />
+          </dd>
+          <dt><dfn>name</dfn></dt>
+          <dd>Name of the property holding the private security information such as API key.<br />
+            Required profiles: RML and WOT. <br />
+          </dd>
+          <dt><dfn>value</dfn></dt>
+          <dd>Value of the property holding the private security information such as API key.<br />
+            Required profiles: RML and WOT. <br />
+          </dd>
+        </dl>
+
       </section>
 
       <section>
@@ -695,6 +847,211 @@
     </section>
 
     <section>
+      <h2>Targets</h2>
+
+      <section>
+        <h2>Keys</h2>
+
+        <dl>
+          <dt><dfn>type</dfn></dt>
+          <dd>Type of the target.<br />
+            Required profiles: RMLT. <br />
+            Datatype: string.
+          </dd>
+          <dt><dfn>access</dfn></dt>
+          <dd>Local or remote location of the target.<br />
+            Required profiles: RMLT. <br />
+            Datatype: string.
+          </dd>
+          <dt><dfn>serialization</dfn></dt>
+          <dd>Serialization format to use when exporting to the target.<br />
+            Required profiles: RMLT and FORMATS. <br />
+            Datatype: string.
+          </dd>
+          <dt><dfn>ompression</dfn></dt>
+          <dd>Compression algorithm to use when exporting to the target.<br />
+            Required profiles: RMLT and COMP. <br />
+            Datatype: string.
+          </dd>
+        </dl>
+      </section>
+
+      <section>
+        <h2>Type</h2>
+
+        <p>This key's value describes what type of target is used, so that the correct way
+        of accessing to the target can be determined. By default a local file is assumed
+        when the <code>access</code> value is a path such as file.nq. The value of type is
+        then implicitly <code>localfile</code>. The following values are supported:</p>
+
+        <table>
+          <tr><th>Target type</th><th>Value</th><th>Required profiles</th></tr>
+          <tr><td>SPARQL endpoint</td><td><code>sparql</code></td><td>RML, RMLT and SD</td></tr>
+          <tr><td>Local file</td><td><code>localfile</code></td><td>RML, RMLT and VOID/DCAT</td></tr>
+        </table>
+      </section>
+
+      <section>
+        <h2>Access</h2>
+        <p>This key's value describes where the target can be accessed. Example: <code>file.nq</code>. </p>
+      </section>
+
+      <section>
+        <h2>Serialization</h2>
+
+        <p>This key's value is the serialization format that should be used to serialize
+        the RDF when exporting to the target. By default, the serialization format is N-Quads
+        [[DataIO]]. The supported serialization formats are listed by the 
+        <a href="http://w3.org/ns/formats">W3C Formats namespace</a>. </p>
+
+        <table>
+          <tr><th>Serialization format</th><th>Value</th></tr>
+          <tr><td>JSON-LD</td><td>jsonld</td></tr>
+          <tr><td>N3</td><td>n3</td></tr>
+          <tr><td>N-Triples</td><td>ntriples</td></tr>
+          <tr><td>N-Quads</td><td>nquads</td></tr>
+          <tr><td>LD Patch</td><td>ldpatch</td></tr>
+          <tr><td>microdata</td><td>microdata</td></tr>
+          <tr><td>OWL XML Serialization</td><td>owlxml</td></tr>
+          <tr><td>OWL Functional Syntax</td><td>owlfunctional</td></tr>
+          <tr><td>OWL Manchester Syntax</td><td>owlmanchester</td></tr>
+          <tr><td>POWDER</td><td>powder</td></tr>
+          <tr><td>POWDER-S</td><td>powder-s</td></tr>
+          <tr><td>PROV-N</td><td>prov-n</td></tr>
+          <tr><td>PROV-XML</td><td>prov-xml</td></tr>
+          <tr><td>RDFa</td><td>rdfa</td></tr>
+          <tr><td>RDF/JSON</td><td>rdfjson</td></tr>
+          <tr><td>RDF/XML</td><td>rdfxml</td></tr>
+          <tr><td>RIF XML Syntax</td><td>rifxml</td></tr>
+          <tr><td>SPARQL Results in XML</td><td>sparqlxml</td></tr>
+          <tr><td>SPARQL Results in JSON</td><td>sparqljson</td></tr>
+          <tr><td>SPARQL Results in CSV</td><td>sparqlcsv</td></tr>
+          <tr><td>SPARQL Results in TSV</td><td>sparqltsv</td></tr>
+          <tr><td>Turtle</td><td>turtle</td></tr>
+          <tr><td>TriG</td><td>trig</td></tr>
+        </table>
+      </section>
+
+      <section>
+        <h2>Compression</h2>
+        <p>Compression defines which compression algorithm should be applied when exporting
+        to a target. By default, no compression algorithm is applied [[DataIO]]. The supported
+        compression algorithms are listed by the <a href="http://semweb.mmlab.be/ns/rml-compression#">
+        Compression namespace</a>. </p>
+
+        <table>
+          <tr><th>Compression algorithm</th><th>Value</th></tr>
+          <tr><td>GZip</td><td>gzip</td></tr>
+          <tr><td>Zip</td><td>zip</td></tr>
+          <tr><td>TarGZip</td><td>targzip</td></tr>
+          <tr><td>TarXz</td><td>tarxz</td></tr>
+        </table>
+      </section>
+
+      <section>
+        <h2>Examples</h2>
+
+        <p>In the following example a single target is defined <code>person-target</code>.</p>
+
+        <div id="tabs-37" class="nanotabs">
+          <ul>
+            <li><a href="#tab37-1" class="selected">YARRRML</a></li>
+            <li><a href="#tab37-2">RML</a></li>
+          </ul>
+          <div id="tab37-1">
+              <pre id="example-singletarget-yarrrrml" class="example" title="one target">
+                targets:
+                  person-target:
+                    access: data/dump.ttl.gz
+                    type: void
+                    serialization: turtle
+                    compression: gzip
+              </pre>
+          </div>
+          <div id="tab37-2">
+              <pre id="example-singletarget-rml" class="example" title="one target">
+                &lt;#LogicalTarget&gt; a rmlt:LogicalTarget;
+                  rmlt:target [ a void:Dataset;
+                    void:dataDump &lt;file://data/dump.ttl.gz&gt;
+                  ];
+                  rmlt:serialization formats:Turtle;
+                  rmlt:compression comp:gzip.
+              </pre>
+          </div>
+        </div>
+
+        <p>A shortcut version of this example looks as follows. </p>
+
+        <div id="tabs-38" class="nanotabs">
+          <ul>
+            <li><a href="#tab38-1" class="selected">YARRRML</a></li>
+            <li><a href="#tab38-2">RML</a></li>
+          </ul>
+          <div id="tab38-1">
+              <pre id="example-st-shortcut-yarrrrml" class="example" title="one target using shortcuts">
+                targets:
+                  person-target: [data/dump.ttl.gz~void, turtle, gzip]
+              </pre>
+          </div>
+          <div id="tab38-2">
+              <pre id="example-st-shortcut-rml" class="example" title="one target using shortcuts">
+                &lt;#LogicalTarget&gt; a rmlt:LogicalTarget;
+                  rmlt:target [ a void:Dataset;
+                    void:dataDump &lt;file://data/dump.ttl.gz&gt;
+                  ];
+                  rmlt:serialization formats:Turtle;
+                  rmlt:compression comp:gzip.
+              </pre>
+          </div>
+        </div>
+
+        <p>The collection is replaced with an array where the first element contains the value
+        for access appended with the <code>~</code> and the value for <code>type</code>, the
+        second element contains serialization format, and the third element contains the
+        compression algorithm. The serialization format and compression algorithm are not required.
+        By default N-Quads is used a serialization format and no compression is applied.</p>
+
+        <p>The following mapping access a SPARQL endpoint as target using SPARQL UPDATE queries:</p>
+
+        <div id="tabs-39" class="nanotabs">
+          <ul>
+            <li><a href="#tab39-1" class="selected">YARRRML</a></li>
+            <li><a href="#tab39-2">RML</a></li>
+          </ul>
+          <div id="tab39-1">
+              <pre id="example-sparql-target-yarrrrml" class="example" title="mapping with SPARQL endpoint as target">
+                mapping:
+                  person:
+                    subjects:
+                      - value: http://example.org/{id}
+                        targets:
+                          access: http://localhost/sparql
+                          type: sparql
+              </pre>
+          </div>
+          <div id="tab39-2">
+              <pre id="example-sparql-target-rml" class="example" title="mapping with SPARQL endpoint as target">
+                &lt;#TriplesMap&gt; a rr:TriplesMap;
+                 rr:subjectMap [ a rr:SubjectMap;
+                   rr:template "http://example.org/{id}";
+                   rml:logicalTarget [
+                     a rmlt:LogicalTarget;
+                     rmlt:target &lt;#Target&gt;
+                   ];
+                 ].
+
+                &lt;#Target&gt; a sd:Service;
+                  sd:endpoint &lt;http://localhost/sparql&gt;
+                  sd:supportedLanguage sd:SPARQL11Update.
+              </pre>
+          </div>
+        </div>
+
+      </section>
+
+    </section>
+
+    <section>
       <h2>Mappings</h2>
 
         <p>
@@ -705,10 +1062,6 @@
 
           In the following example two mappings are defined: <code>person</code> and <code>project</code>.
         </p>
-
-        <pre id="example-mappings" class="example" title="two mappings">
-
-        </pre>
 
         <div id="tabs-4" class="nanotabs">
           <ul>
@@ -724,8 +1077,8 @@
           </div>
           <div id="tab4-2">
             <pre id="example-mappings-rml" class="example" title="two mappings">
-              <#TriplesMap> a rr:TriplesMap. #person
-              <#TriplesMap2> a rr:TriplesMap. #project
+              &lt;#TriplesMap&gt; a rr:TriplesMap. #person
+              &lt;#TriplesMap2&gt; a rr:TriplesMap. #project
             </pre>
           </div>
         </div>
@@ -782,7 +1135,8 @@
             <pre id="example-ds-sc-yarrrml" class="example" title="mapping with one data source using shortcuts">
             mapping:
               person:
-                sources: [data/person.json~jsonpath, $]
+                sources: 
+                  - [data/person.json~jsonpath, $]
           </pre>
           </div>
           <div id="tab6-2">
@@ -1009,6 +1363,319 @@
                   rml:iterator "$.persons[*]".
                 ].
             </pre>
+          </div>
+        </div>
+
+      </section>
+
+      <section>
+        <h2>Targets</h2>
+
+        <p>Besides defining targets at the root of the document, targets can also be defined inside a
+        mapping via the collection <code>targets</code>. However, no unique key is specified for a target,
+        and, thus, it cannot be referred to from other mappings. The key-value to add to a target are the
+        same when defining targets at the root of the document. In the following example the mapping
+        <code>person</code> has one target.</p>
+
+        <div id="tabs-40" class="nanotabs">
+          <ul>
+            <li><a href="#tab40-1" class="selected">YARRRML</a></li>
+            <li><a href="#tab40-2">RML</a></li>
+          </ul>
+          <div id="tab40-1">
+              <pre id="example-t-yarrrrml" class="example" title="mapping with one target">
+                mapping:
+                  person:
+                    subjects:
+                      - value: "http://example.org/{id}"
+                        targets:
+                          access: data/dump.ttl.gz
+                          type: void
+                          serialization: turtle
+                          compression: gzip
+              </pre>
+          </div>
+          <div id="tab40-2">
+              <pre id="example-t-rml" class="example" title="mapping with one target">
+                &lt;#TriplesMap&gt; a rr:TriplesMap;
+                 rr:subjectMap [ a rr:SubjectMap;
+                   rr:template "http://example.org/{id}";
+                   rml:logicalTarget [
+                     a rmlt:LogicalTarget;
+                     rmlt:target [ a void:Dataset;
+                       void:dataDump <file://data/dump.ttl.gz>
+                     ];
+                     rmlt:serialization formats:Turtle;
+                     rmlt:compression comp:gzip.
+                   ];
+                 ].
+              </pre>
+          </div>
+        </div>
+
+        <p>A shortcut version of this example looks as follows.</p>
+
+        <div id="tabs-41" class="nanotabs">
+          <ul>
+            <li><a href="#tab41-1" class="selected">YARRRML</a></li>
+            <li><a href="#tab41-2">RML</a></li>
+          </ul>
+          <div id="tab41-1">
+              <pre id="example-ts-yarrrrml" class="example" title="mapping with one target using shortcuts">
+                mapping:
+                  person:
+                    subjects:
+                      - value: "http://example.org/{id}"
+                        targets:
+                          - ["data/dump.ttl.gz~void", "turtle", "gzip"]
+              </pre>
+          </div>
+          <div id="tab41-2">
+              <pre id="example-ts-rml" class="example" title="mapping with one target using shortcuts">
+                &lt;#TriplesMap&gt; a rr:TriplesMap;
+                 rr:subjectMap [ a rr:SubjectMap;
+                   rr:template "http://example.org/{id}";
+                   rml:logicalTarget [
+                     a rmlt:LogicalTarget;
+                     rmlt:target [ a void:Dataset;
+                       void:dataDump <file://data/dump.ttl.gz>
+                     ];
+                     rmlt:serialization formats:Turtle;
+                     rmlt:compression comp:gzip.
+                   ];
+                 ].
+              </pre>
+          </div>
+        </div>
+
+        <p>In case the output of a mapping needs to be exported to multiple targets, multiple targets
+        can be added to the targets collection. In the following example the <code>person</code> mapping
+        has two data sources. </p>
+
+        <div id="tabs-42" class="nanotabs">
+          <ul>
+            <li><a href="#tab42-1" class="selected">YARRRML</a></li>
+            <li><a href="#tab42-2">RML</a></li>
+          </ul>
+          <div id="tab42-1">
+              <pre id="example-tt-yarrrrml" class="example" title="mapping with two targets for subject">
+                mapping:
+                  person:
+                    subjects:
+                      - value: "http://example.org/{id}"
+                        targets:
+                          - access: data/dump1.nq
+                            type: void
+                          - access: data/dump2.nq
+                            type: void
+              </pre>
+          </div>
+          <div id="tab42-2">
+              <pre id="example-tt-rml" class="example" title="mapping with two targets for subject">
+                &lt;#TriplesMap&gt; a rr:TriplesMap;
+                 rr:subjectMap [ a rr:SubjectMap;
+                   rr:template "http://example.org/{id}";
+                   # Target 1
+                   rml:logicalTarget [ 
+                     a rmlt:LogicalTarget;
+                     rmlt:target [ a void:Dataset;
+                       void:dataDump &lt;file://data/dump1.nq&gt;;
+                     ];
+                   ];
+                   # Target 2
+                   rml:logicalTarget [ 
+                     a rmlt:LogicalTarget;
+                     rmlt:target [ a void:Dataset;
+                       void:dataDump &lt;file://data/dump2.nq&gt;;
+                     ];
+                   ].
+                 ].
+              </pre>
+          </div>
+        </div>
+
+        <p>A shortcut version of this example looks as follows.</p>
+
+        <div id="tabs-43" class="nanotabs">
+          <ul>
+            <li><a href="#tab43-1" class="selected">YARRRML</a></li>
+            <li><a href="#tab43-2">RML</a></li>
+          </ul>
+          <div id="tab43-1">
+              <pre id="example-tts-yarrrrml" class="example" title="mapping with two targets for subject using shortcuts">
+                mapping:
+                  person:
+                    subjects:
+                      - value: "http://example.org/{id}"
+                        targets:
+                          - ["data/dump1.nq~void"]
+                          - ["data/dump2.nq~void"]
+              </pre>
+          </div>
+          <div id="tab43-2">
+              <pre id="example-tts-rml" class="example" title="mapping with two targets for subject using shortcuts">
+                &lt;#TriplesMap&gt; a rr:TriplesMap;
+                 rr:subjectMap [ a rr:SubjectMap;
+                   rr:template "http://example.org/{id}";
+                   # Target 1
+                   rml:logicalTarget [ 
+                     a rmlt:LogicalTarget;
+                     rmlt:target [ a void:Dataset;
+                       void:dataDump &lt;file://data/dump1.nq&gt;;
+                     ];
+                   ];
+                   # Target 2
+                   rml:logicalTarget [ 
+                     a rmlt:LogicalTarget;
+                     rmlt:target [ a void:Dataset;
+                       void:dataDump &lt;file://data/dump2.nq&gt;;
+                     ];
+                   ].
+                 ].
+              </pre>
+          </div>
+        </div>
+
+        <p>If you describe a target outside of the mappings, you can include via their unique key.</p>
+
+        <div id="tabs-44" class="nanotabs">
+          <ul>
+            <li><a href="#tab44-1" class="selected">YARRRML</a></li>
+            <li><a href="#tab44-2">RML</a></li>
+          </ul>
+          <div id="tab44-1">
+              <pre id="example-oto-yarrrrml" class="example" title="mapping with one target for subject">
+                targets:
+                  person-target:
+                    access: data/dump.jsonld.gz
+                    type: dcat
+                    serialization: jsonld
+                    compression: gzip
+
+                mapping:
+                  person:
+                    subjects:
+                      - value: "http://example.org/{id}"
+                        targets: person-target
+              </pre>
+          </div>
+          <div id="tab44-2">
+              <pre id="example-oto-rml" class="example" title="mapping with one target for subject">
+                &lt;#TriplesMap&gt; a rr:TriplesMap;
+                 rr:subjectMap [ a rr:SubjectMap;
+                   rr:template "http://example.org/{id}";
+                   rml:logicalTarget [ 
+                     a rmlt:LogicalTarget;
+                     rmlt:target [ a void:Dataset;
+                       void:dataDump &lt;file://data/dump1.jsonld.gz&gt;;
+                     ];
+                     rmlt:serialization formats:JSON-LD;
+                     rmlt:compression comp:gzip;
+                   ].
+                 ].
+              </pre>
+          </div>
+        </div>
+
+        <p>Multiple targets can be used by using an array of target keys as value for the key <code>targets</code>. </p>
+
+        <div id="tabs-45" class="nanotabs">
+          <ul>
+            <li><a href="#tab45-1" class="selected">YARRRML</a></li>
+            <li><a href="#tab45-2">RML</a></li>
+          </ul>
+          <div id="tab45-1">
+              <pre id="example-otts-yarrrrml" class="example" title="mapping with two targets for subject">
+                targets:
+                  person-target1:
+                    access: data/dump.jsonld.gz
+                    type: dcat
+                    serialization: jsonld
+                    compression: gzip
+                  person-target2:
+                    access: data/dump2.rdf
+                    type: void
+                    serialization: rdfxml
+
+                mapping:
+                  person:
+                    subjects:
+                      - value: "http://example.org/{id}"
+                        targets:
+                          - person-target1
+                          - person-target2
+              </pre>
+          </div>
+          <div id="tab45-2">
+              <pre id="example-otts-rml" class="example" title="mapping with two targets for subject">
+                &lt;#TriplesMap&gt; a rr:TriplesMap;
+                 rr:subjectMap [ a rr:SubjectMap;
+                   rr:template "http://example.org/{id}";
+                   # Target 1
+                   rml:logicalTarget [ 
+                     a rmlt:LogicalTarget;
+                     rmlt:target [ a void:Dataset;
+                       void:dataDump &lt;file://data/dump1.jsonld.gz&gt;;
+                     ];
+                     rmlt:serialization formats:JSON-LD;
+                     rmlt:compression comp:gzip;
+                   ];
+                   # Target 2
+                   rml:logicalTarget [ 
+                     a rmlt:LogicalTarget;
+                     rmlt:target [ a void:Dataset;
+                       void:dataDump &lt;file://data/dump2.rdf&gt;;
+                     ];
+                     rmlt:serialization formats:RDF_XML;
+                   ];
+                 ].
+              </pre>
+          </div>
+        </div>
+
+        <p>A combination of both targets defined outside and inside a mapping is possible.</p>
+
+        <div id="tabs-46" class="nanotabs">
+          <ul>
+            <li><a href="#tab46-1" class="selected">YARRRML</a></li>
+            <li><a href="#tab46-2">RML</a></li>
+          </ul>
+          <div id="tab46-1">
+              <pre id="example-otc-yarrrrml" class="example" title=" mapping with two targets for subject">
+                targets:
+                  person-target:
+                    access: data/dump1.nq
+
+                mapping:
+                  person:
+                    subjects:
+                      - value: "http://example.org/{id}"
+                        targets: 
+                          - person-target
+                          - access: data/dump2.nq
+              </pre>
+          </div>
+          <div id="tab46-2">
+              <pre id="example-otc-rml" class="example" title=" mapping with two targets for subject">
+                &lt;#TriplesMap&gt; a rr:TriplesMap;
+                 rr:subjectMap [ a rr:SubjectMap;
+                   rr:template "http://example.org/{id}";
+                   # Target 1
+                   rml:logicalTarget [ 
+                     a rmlt:LogicalTarget;
+                     rmlt:target [ a void:Dataset;
+                       void:dataDump &lt;file://data/dump1.nq&gt;;
+                     ];
+                   ];
+                   # Target 2
+                   rml:logicalTarget [ 
+                     a rmlt:LogicalTarget;
+                     rmlt:target [ a void:Dataset;
+                       void:dataDump &lt;file://data/dump2.nq&gt;;
+                     ];
+                   ].
+                 ].
+              </pre>
           </div>
         </div>
 
@@ -1388,6 +2055,12 @@
                 person:
                   predicateobjects:
                     - predicates: foaf:name
+                      objects:
+                        - value: $(firstname)
+                          datatype: ex:string
+                        - value: $(lastname)
+                          datatype: ex:anotherString
+                    - predicates: rdfs:label
                       objects:
                         - value: $(firstname)
                           datatype: ex:string
@@ -2223,6 +2896,7 @@
             <li>predicates: predicate, p</li>
             <li>inversepredicates: inversepredicate, i</li>
             <li>objects: object, o</li>
+            <li>predicateobjects: po</li>
             <li>function: fn, f</li>
             <li>parameters: pms</li>
             <li>parameter: pm</li>
