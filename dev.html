@@ -1,0 +1,2952 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset='utf-8'>
+    <title>YARRRML</title>
+    <script
+     src='resources/js/respec-w3c-common.js'
+     class='remove'></script>
+    <script class='remove'>
+      var respecConfig = {
+        localBiblio: {
+          "DCAT": {
+            title: "Data Catalog Vocabulary (DCAT) - Version 2",
+            href: "https://www.w3.org/TR/vocab-dcat/",
+            status: "W3C Recommendation",
+            publisher: "W3C",
+            date: "22 February 2020",
+          },
+          "SD": {
+            title: "SPARQL 1.1 Service Description",
+            href: "https://www.w3.org/TR/sparql11-service-description/",
+            status: "W3C Recommendation",
+            publisher: "W3C",
+            date: "21 March 2013",
+          },
+          "D2RQ": {
+            title: "The D2RQ Mapping Language",
+            href: "https://d2rq.org/d2rq-language",
+            status: "Unofficial Draft",
+            authors: [
+              "Richard Cyganiak",
+              "Chris Bizer",
+              "Jörg Garbers",
+              "Oliver Maresch",
+              "Christian Becker"
+            ],
+            publisher: "Freie Universität Berlin - DERI",
+            date: "12 March 2012",
+          },
+          "FnO": {
+            title: "The Function Ontology",
+            href: "https://fno.io/spec/",
+            status: "Unofficial Draft",
+            authors: [
+              "Ben De Meester",
+              "Anastasia Dimou"
+            ],
+            publisher: "IDLab - imec - Ghent University",
+            date: "10 November 2021",
+          },
+          "RMLT": {
+            title: "Target in RML",
+            href: "https://rml.io/specs/rml-target",
+            status: "Unofficial Draft",
+            authors: [
+              "Dylan Van Assche",
+              "Anastasia Dimou"
+            ],
+            publisher: "IDLab - imec - Ghent University",
+            date: "18 May 2021",
+          },
+          "RML": {
+            title: "RDF Mapping Language (RML)",
+            href: "https://rml.io/specs/rml/",
+            status: "Unofficial Draft",
+            authors: [
+              "Anastasia Dimou",
+              "Miel Vander Sande"
+            ],
+            publisher: "IDLab - imec - Ghent University",
+            date: "October 2020",
+          },
+          "DataIO": {
+            title: "DataIO",
+            href: "https://rml.io/specs/dataio",
+            status: "Unofficial Draft",
+            authors: [
+              "Dylan Van Assche",
+              "Anastasia Dimou"
+            ],
+            publisher: "IDLab - imec - Ghent University",
+            date: "18 May 2021",
+          },
+        },
+        specStatus: "unofficial",
+        editors: [{
+          name: "Dylan Van Assche",
+          url: "https://dylanvanassche.be/",
+          mailto: "dylan.vanassche@ugent.be",
+          company: 'Ghent University - IDLab, imec',
+        },{
+          name: "Ben De Meester",
+          url: "https://ben.de-meester.org",
+          mailto: "ben.demeester@ugent.be",
+          company: 'Ghent University - IDLab, imec',
+        },{
+          name: "Pieter Heyvaert",
+          url: "https://pieterheyvaert.com",
+          mailto: "pieter.heyvaert@ugent.be",
+          company: 'Ghent University - IDLab, imec',
+        },{
+          name: "Anastasia Dimou",
+          mailto: "anastasia.dimou@ugent.be",
+          company: 'Ghent University - IDLab, imec',
+        }],
+        // edDraftURI: "http://some.github.repo",
+        shortName: "yarrrml",
+        previousURI: "https://w3id.org/yarrrml/spec/index-20210930.html",
+        previousPublishDate: "2021-09-30",
+        previousMaturity: "unofficial",
+        canonicalURI: "https://w3id.org/yarrrml/spec/",
+        logos: [{
+          src: "resources/images/logo.png",
+          href: "https://w3id.org/yarrrml",
+          alt: "YARRRML",
+          width: 164
+        }],
+        otherLinks: [
+          {
+            key: "This Version",
+            data: [{
+              value: "https://w3id.org/yarrrml/spec/%thisDate%/",
+              href: "https://w3id.org/yarrrml/spec/%thisDate%/"
+            }]
+          },
+          {
+            key: "Previous Version",
+            data: [{
+              value: "https://w3id.org/yarrrml/spec/%prevDate%/",
+              href: "https://w3id.org/yarrrml/spec/%prevDate%/"
+            }]
+          },
+          {
+            key: "Website",
+            data: [{
+              value: "https://w3id.org/yarrrml",
+              href: "https://w3id.org/yarrrml"
+            }]
+          }
+        ],
+      };
+    </script>
+
+    <style>
+      .nanotabs { text-align:left; width:500px; margin:20px auto 0; }
+      .nanotabs { margin:20px 0 60px; }
+      .nanotabs li { float:left; list-style:none; }
+      .nanotabs li a { display:block; padding:4px 6px; background:#DDD; color:#333; font:bold 11pt Verdana; text-decoration:none; }
+      .nanotabs li a:hover { background:#EEE; color:#000; }
+      .nanotabs li a.selected { background:#555; color:#FFF; }
+      /*.nanotabs div {clear:left; display:none; background:#EEE; border-top:1px solid #555; border-bottom:1px solid #888; padding:8px; *padding-top:4px; letter-spacing:1px; }*/
+    </style>
+  </head>
+  <body>
+    <section id='abstract'>
+      <p>
+        YARRRML (pronounced /jɑɹməl/) is a human readable text-based representation for declarative generation rules.
+        It is a subset of [[YAML]],
+        a widely used data serialization language designed to be human-friendly.
+      </p>
+    </section>
+    <section id='sotd'>
+    </section>
+
+    <section>
+      <h2>Terminology</h2>
+
+      <dl>
+        <dt><dfn>subject</dfn></dt>
+        <dd>the subject of an RDF triple</dd>
+
+        <dt><dfn>predicate</dfn></dt>
+        <dd>the predicate of an RDF triple</dd>
+
+        <dt><dfn>object</dfn></dt>
+        <dd>the object of an RDF triple</dd>
+
+        <dt><dfn>class</dfn></dt>
+        <dd>the type of an entity</dd>
+
+        <dt><dfn>datatype</dfn></dt>
+        <dd>the type of a literal value</dd>
+
+        <dt><dfn>reference</dfn></dt>
+        <dd>the reference to a data fraction in a data source</dd>
+
+        <dt><dfn>function</dfn></dt>
+        <dd>a programmatic function that takes 0 or more input parameters and returns a single result</dd>
+      </dl>
+    </section>
+
+    <section>
+      <h2>Profiles</h2>
+
+      <p>
+        This specification includes the following main profiles for tools that process YARRRML documents:
+      </p>
+
+      <ul>
+        <li>R2RML: applies the semantics specified by [[R2RML]];</li>
+        <li>RML: applies the semantics specified by [[RML]]; and</li>
+        <li>RMLT: applies the semantics specified by [[RMLT]].</li>
+      </ul>
+
+      <p>
+        These profiles can be extended with additional profiles, which cannot be used on their own:
+      </p>
+
+      <ul>
+        <li>FORMATS: applies the semantics specified by the <a href="http://w3.org/ns/formats">W3C Formats namespace</a>.</li>
+        <li>COMP: applies the semantics specified by the <a href="http://semweb.mmlab.be/ns/rml-compression#">Compression namespace</a>.</li>
+        <li>VOID: applies the semantics specified by [[VoID]];</li>
+        <li>FnO: applies the semantics specified by [[FnO]];</li>
+        <li>DCAT: applies the semantics specified by [[DCAT]];</li>
+        <li>D2RQ: applies the semantics specified by [[D2RQ]];</li>
+        <li>SD: applies the semantics specified by SD ([[sparql11-service-description]]); and</li>
+        <li>CSVW: applies the semantics specified by CSVW ([[csv2rdf]]).</li>
+        <li>WOT: applies the semantics specified by WoT Thing Description and WoT Security ([[wot-thing-description]], [[wot-security]])</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Base IRI</h2>
+
+      <p>
+        A base IRI can be defined.
+        This IRI will be used for the creation of the IRIs of the term maps and sources of the [R2]RML rules.
+      </p>
+      <p>
+        A base IRI can be added by adding key <code>base</code> with as value the IRI itself to the root of the document.
+        In the following example the base IRI is set to <code>http://mybaseiri.com#</code>.
+      </p>
+
+      <pre id="example-base-iri" class="nohighlight example" title="base IRI">
+        base: http://mybaseiri.com#
+      </pre>
+    </section>
+
+    <section>
+      <h2>Prefixes and namespaces</h2>
+
+      <p>
+        A set of prefixes and namespaces are predefined by default in every YARRRML document.
+        There are the same as the predefined prefixes for <a href="https://www.w3.org/2011/rdfa-context/rdfa-1.1">RDFa</a>.
+      </p>
+
+      <p>
+        Custom prefixes can be added by adding the collection <code>prefixes</code> to the root of the document.
+        Each combination of a prefix and namespace is added to this collection as a key-value pair.
+
+        In the following example two prefixes are defined: <code>ex</code> and <code>test</code>.
+      </p>
+
+      <pre id="example-custom-prefixes" class="nohighlight example" title="custom prefixes">
+        prefixes:
+          ex: http://www.example.com
+          test: http://www.test.com
+      </pre>
+    </section>
+
+    <section>
+      <h2>Authors</h2>
+
+      <p>
+        The authors of the YARRRML rules can be added via the key <code>authors</code>.
+        The value is an array with an object for each author.
+        Each author can have the following keys:
+      </p>
+
+      <dl>
+        <dt><dfn>name</dfn></dt>
+        <dd>the name of the author</dd>
+
+        <dt><dfn>email</dfn></dt>
+        <dd>the email of the author</dd>
+
+        <dt><dfn>website</dfn></dt>
+        <dd>the website of the author</dd>
+      </dl>
+
+      <p>
+        In the following example two authors are defined.
+      </p>
+
+      <div id="tabs-author" class="nanotabs">
+        <ul>
+          <li><a href="#tab-author-1" class="selected">YARRRML</a></li>
+          <li><a href="#tab-author-2">RML</a></li>
+        </ul>
+        <div id="tab-author-1">
+            <pre id="example-author-yarrrml" class="nohighlight example" title="mapping with multiple authors">
+              authors:
+                - name: John Doe
+                  email: john@doe.com
+                - name: Jane Doe
+                  website: https://janedoe.com
+            </pre>
+        </div>
+        <div id="tab-author-2">
+            <pre id="example-author-rml" class="example" title="mapping with multiple authors">
+              :Rules a void:Dataset;
+                void:exampleResource <#TM>; # linking all Triples Maps
+                dcterms:contributor [
+                  a foaf:Person;
+                  rdfs:label "John Doe";
+                  foaf:mbox &lt;mailto:john@doe.com&gt;
+                ], [
+                  a foaf:Person;
+                  rdfs:label "Jane Doe";
+                  foaf:homepage &lt;https://janedoe.com&gt;
+                ].
+            </pre>
+        </div>
+      </div>
+
+      <p>
+        A string template exists that provides a shortcut version: <code>name &lt;email&gt; (website)</code>.
+        In the following example the same two authors are defined.
+      </p>
+
+      <div id="tabs-author-sc" class="nanotabs">
+        <ul>
+          <li><a href="#tab-author-sc-1" class="selected">YARRRML</a></li>
+          <li><a href="#tab-author-sc-2">RML</a></li>
+        </ul>
+        <div id="tab-author-sc-1">
+            <pre id="example-author-yarrrml-sc" class="nohighlight example" title="mapping with multiple authors">
+              authors:
+                - John Doe &lt;john@doe.com&gt;
+                - Jane Doe (https://janedoe.com)
+            </pre>
+        </div>
+        <div id="tab-author-sc-2">
+            <pre id="example-author-rml-sc" class="example" title="mapping with multiple authors">
+              :Rules a void:Dataset;
+                void:exampleResource <#TM>; # linking all Triples Maps
+                dcterms:contributor [
+                  a foaf:Person;
+                  rdfs:label "John Doe";
+                  foaf:mbox &lt;mailto:john@doe.com&gt;
+                ], [
+                  a foaf:Person;
+                  rdfs:label "Jane Doe";
+                  foaf:homepage &lt;https://janedoe.com>&gt;
+                ].
+            </pre>
+        </div>
+      </div>
+
+      <p>
+        In the case that authors have a WebID, it can be used instead of providing the name, email and so on.
+        In the following example the same two authors are added via their WebIDs.
+      </p>
+
+      <div id="tabs-author-webid" class="nanotabs">
+        <ul>
+          <li><a href="#tab-author-webid-1" class="selected">YARRRML</a></li>
+          <li><a href="#tab-author-webid-2">RML</a></li>
+        </ul>
+        <div id="tab-author-webid-1">
+            <pre id="example-author-yarrrml-webid" class="nohighlight example" title="mapping with multiple authors">
+              authors:
+                - http://johndoe.com/#me
+                - http://janedoe.com/#me
+            </pre>
+        </div>
+        <div id="tab-author-webid-2">
+            <pre id="example-author-rml-webid" class="example" title="mapping with multiple authors">
+                :Rules a void:Dataset;
+                  void:exampleResource <#TM>; # linking all Triples Maps
+                  dcterms:contributor &lt;http://johndoe.com/#me&gt;,
+                    &lt;http://janedoe.com/#me&gt;.
+            </pre>
+        </div>
+      </div>
+
+      <p>
+        In all the above cases when there is only author, an array is not needed.
+        In the following example one author is defined.
+      </p>
+
+      <div id="tabs-author-sc-single" class="nanotabs">
+        <ul>
+          <li><a href="#tab-author-sc-single-1" class="selected">YARRRML</a></li>
+          <li><a href="#tab-author-sc-single-2">RML</a></li>
+        </ul>
+        <div id="tab-author-sc-single-1">
+            <pre id="example-author-yarrrml-sc-single" class="nohighlight example" title="mapping with multiple authors">
+              authors: John Doe &lt;john@doe.com&gt;
+            </pre>
+        </div>
+        <div id="tab-author-sc-single-2">
+            <pre id="example-author-rml-sc-single" class="example" title="mapping with multiple authors">
+              :Rules a void:Dataset;
+                void:exampleResource <#TM>; # linking all Triples Maps
+                dcterms:contributor [
+                  a foaf:Person;
+                  rdfs:label "John Doe";
+                  foaf:mbox &lt;mailto:john@doe.com&gt;
+                ].
+            </pre>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Template</h2>
+
+      <p>
+        A template contains 0 or more constant strings and 0 or more references to data in a data.
+        References are prefixed with <code>$(</code> and suffixed with <code>)</code>.
+        For example, <code>foo</code> is a template with one constant string.
+        <code>$(id)</code> is a template with one reference to <code>id</code>.
+        <code>foo-$(id)</code> is a template with one constant string <code>foo-</code> and one reference to <code>id</code>.
+      </p>
+    </section>
+
+    <section>
+      <h2>Data sources</h2>
+
+      <p>
+        The data sources are defined in the <code>sources</code> collection in the root of the document.
+        Each source is added to this collection via a key-value pair.
+        The key has to be unique for every source.
+        The value is a collection with the keys described below.
+      </p>
+
+      <section>
+        <h2>Keys</h2>
+        <dl>
+          <dt><dfn>type</dfn></dt>
+          <dd>Type of the data source.<br />
+            Required profiles: RML. <br />
+            Datatype: string.
+          </dd>
+
+          <dt><dfn>access</dfn></dt>
+          <dd>Local or remote location of the data source. <br />
+            Required profiles: RML. <br />
+            Datatype: string.
+          </dd>
+
+          <dt><dfn>credentials</dfn></dt>
+          <dd>Credentials required to access the data source.<br />
+            Required profiles: RML. <br />
+            Datatype: collection.
+          </dd>
+
+          <dt><dfn>queryFormulation</dfn></dt>
+          <dd>Query formulation used to query the data source. <br />
+            Required profiles: RML or R2RML. <br />
+            Datatype: string.
+          </dd>
+
+          <dt><dfn>query</dfn></dt>
+          <dd>Query to execute on the data source to retrieve the desired data. <br />
+            Required profiles: RML or R2RML. <br />
+            Datatype: string.
+          </dd>
+
+          <dt><dfn>encoding</dfn></dt>
+          <dd>Encoding used by the data. <br />
+            Required profiles: RML and CSVW. <br />
+            Datatype: string.
+          </dd>
+
+          <dt><dfn>delimiter</dfn></dt>
+          <dd>Delimiter to separate fields in a record. <br />
+            Required profiles: RML and CSVW. <br />
+            Datatype: string.
+          </dd>
+
+          <dt><dfn>contentType</dfn></dt>
+          <dd>Content type to expect expressed as MIME types. <br />
+            Required profiles: RML and WOT. <br />
+            Datatype: string. 
+          </dd>
+
+          <dt><dfn>operationType</dfn></dt>
+          <dd>Indicates the operation type of the Web of Things description. <br />
+            Required profiles: RML and WOT. <br />
+            Datatype: string. 
+          </dd>
+
+          <dt><dfn>referenceFormulation</dfn></dt>
+          <dd>Reference formulation used to access the data retrieved from the data source. <br />
+            Required profiles: RML. <br />
+            Datatype: string.
+          </dd>
+
+          <dt><dfn>iterator</dfn></dt>
+          <dd>Path to the records over which to iterate. <br />
+            Required profiles: RML. <br />
+            Datatype: string.
+          </dd>
+        </dl>
+      </section>
+
+      <section>
+        <h2>Type</h2>
+
+        <p>
+          This key's value describes what type of data source is used,
+          so that the correct way of connecting to the data source can be determined.
+          By default a local file is assumed when the <code>access</code> value is a path such as <code>file.json</code>.
+          The value of type is then implicitly <code>localfile</code>.
+          By default a remote file is assumed and retrieved via an HTTP GET when a URL is given such as <code>http://example.org/file.json</code>.
+          The value of type is then implicitly <code>remotefile</code>.
+          The following values are supported:
+        </p>
+
+        <table>
+          <tr><th>Data source type</th><th>Value</th><th>Required profiles</th></tr>
+          <tr><td><a href="https://www.oracle.com/database/technologies/">Oracle Database</a></td><td>oracle</td><td>RML and D2RQ</td></tr>
+          <tr><td><a href="https://www.mysql.com/">MySQL</a></td><td>mysql</td><td>RML and D2RQ</td></tr>
+          <tr><td><a href="http://hsqldb.org/">HSQLDB</a></td><td>hsql</td><td>RML and D2RQ</td></tr>
+          <tr><td><a href="https://www.postgresql.org/">PostgreSQL</a></td><td>postgresql</td><td>RML and D2RQ</td></tr>
+          <tr><td><a href="https://www.ibm.com/products/db2-database">IBM DB2</a></td><td>db2</td><td>RML and D2RQ</td></tr>
+          <tr><td><a href="https://www.ibm.com/products/informix">IBM Informix</a></td><td>informix</td><td>RML and D2RQ</td></tr>
+          <tr><td><a href="https://www.actian.com/data-management/actian-x-hybrid-rdbms/">Ingres</a></td><td>ingres</td><td>RML and D2RQ</td></tr>
+          <tr><td><a href="https://www.sap.com/products/sybase-ase.html">SAP Adaptive Server Enterprise</a></td><td>sapase</td><td>RML and D2RQ</td></tr>
+          <tr><td><a href="https://www.sap.com/products/sql-anywhere.html">SAP SQL Anywhere</a></td><td>sapsqlanywhere</td><td>RML and D2RQ</td></tr>
+          <tr><td><a href="https://firebirdsql.org/">Firebird</a></td><td>firebird</td><td>RML and D2RQ</td></tr>
+          <tr><td><a href="https://www.microsoft.com/en-gb/sql-server/sql-server-2019">Microsoft SQL Server</a></td><td>mssqlserver</td><td>RML and D2RQ</td></tr>
+          <tr><td><a href="https://virtuoso.openlinksw.com/">Virtuoso</a></td><td>virtuoso</td><td>RML and D2RQ</td></tr>
+          <tr><td><a href="https://www.w3.org/WoT/">Web of Things</a></td><td>wot</td><td>RML and WOT</td></tr>
+          <tr><td>SPARQL endpoint</td><td>sparql</td><td>RML and SD</td></tr>
+          <tr><td>Local file</td><td>localfile</td><td>RML</td></tr>
+          <tr><td>Remote file</td><td>remotefile</td><td>RML</td></tr>
+        </table>
+
+        <div class="note">
+          <p>
+            R2RML rules do not include this information:
+            it is supplied directly to the used R2RML processor.
+            Also, it does not support SPARQL endpoints, local files, and remote files.
+          </p>
+        </div>
+      </section>
+
+      <section>
+        <h2>Access</h2>
+
+        <p>
+          This key's value describes where the data source can be accessed.
+          Examples are <code>file.json</code> and <code>http://example.org/my/db</code>.
+        </p>
+      </section>
+
+      <section>
+        <h2>Query formulation</h2>
+        <p>
+          Query formulations define what type of query is used query to a data source.
+          This key's supported values are the same as the values for the type,
+          together with the additional values below.
+          Therefore, if only a type is provided the query formulation is implicitly the same.
+          But if you want for example to use a MySQL query with an Oracle Database,
+          then you need to specify both the type and the query formulation.
+        </p>
+        <p>
+          In the case of SPARQL endpoints, defined by the value <code>sparql</code> for type, 
+          the query formulation is by default <code>sparql11</code>: the data sources are queried 
+          via a <a href="https://www.w3.org/TR/sparql11-query/">SPARQL 1.1 query</a>. 
+        </p>
+
+        <table>
+          <tr><th>Query formulation</th><th>Value</th><th>Required profiles</th></tr>
+          <tr><td><a href="https://www.w3.org/TR/sparql11-query/">SPARQL 1.1 query</a> (default for SPARQL endpoint)</td><td>sparql11</td><td>RML and SD</td></tr>
+          <tr><td><a href="https://en.wikipedia.org/wiki/SQL:2008">SQL:2008</a></td><td>sql2008</td><td>RML and D2RQ, or R2RML</td></tr>
+          <tr><td><a href="https://en.wikipedia.org/wiki/SQL:2011">SQL:2011</a></td><td>sql2011</td><td>RML and D2RQ, or R2RML</td></tr>
+          <tr><td><a href="https://en.wikipedia.org/wiki/SQL:2016">SQL:2016</a></td><td>sql2016</td><td>RML and D2RQ, or R2RML</td></tr>
+        </table>
+      </section>
+
+      <section>
+        <h2>Query</h2>
+
+        <p>
+          This key's value is a query that conforms the selected query formulation.
+          For example, if the query formulation is <code>mysql</code>, then
+          the value of <code>query</code> needs to be a valid MySQL query.
+        </p>
+      </section>
+
+      <section>
+        <h2>Reference formulation</h2>
+        <p>
+          Reference formulations define how to access the data retrieved from the data source.
+          For example, this retrieved data can be query results coming from a database or
+          a JSON file on the local file system.
+          The value of this key is a string.
+          This key's supported values are.
+        </p>
+
+        <table>
+          <tr><th>Reference formulation</th><th>Value</th><th>Required profiles</th></tr>
+          <tr><td>CSV (tables with columns and rows)</td><td>csv</td><td>RML</td></tr>
+          <tr><td><a href="https://goessner.net/articles/JsonPath/">JSONPath</a></td><td>jsonpath</td><td>RML</td></tr>
+          <tr><td><a href="https://www.w3.org/TR/xpath/">XPath</a></td><td>xpath</td><td>RML</td></tr>
+          <tr><td><a href="https://www.w3.org/TR/xquery/">XQuery</a></td><td>xquery</td><td>RML</td></tr>
+        </table>
+      </section>
+
+      <section>
+        <h2>Iterator</h2>
+
+        <p>
+          This key's value defines what records are processed.
+          It has to conform to the selected reference formulation.
+        </p>
+
+        <p>
+          Consider the following JSON example with an array of two people.
+          One person is one record.
+        </p>
+
+        <pre class="hljs javascript">
+{
+  "people": [
+    {...},
+    {...}
+  ]
+}
+        </pre>
+
+        <p>
+          To iterate over all the people,
+          the iterator is <code>$.people[*]</code> when using <code>jsonpath</code> as a reference formulation.
+          If no iterator is provided,
+          it is unclear what the records are.
+        </p>
+      </section>
+
+      <section>
+        <h2>Delimiter</h2>
+
+        <p>
+          This key's value defines the delimiter when working with CSV files.
+          The default is <code>,</code>.
+        </p>
+      </section>
+
+      <section>
+        <h2>Encoding</h2>
+
+        <p>
+          This key's value defines the encoding of the retrieved data.
+          The default is <code>utf-8</code>.
+        </p>
+      </section>
+
+      <section>
+        <h2>Credentials</h2>
+
+        <p>
+          Credentials are provided when accessing a data source requires authentication.
+          This key's value is a collection with the keys described below.
+        </p>
+
+        <dl>
+          <dt><dfn>username</dfn></dt>
+          <dd>User name required to access the data source. <br />
+            Required profiles: RML and D2RQ.
+          </dd>
+
+          <dt><dfn>password</dfn></dt>
+          <dd>Password required to access the data source.<br />
+            Required profiles: RML and D2RQ.
+          </dd>
+        </dl>
+      </section>
+
+      <section>
+        <h2>Content type</h2>
+
+        <p>This key's value defines the content type of the retrieved data with a MIME type.</p>
+      </section>
+
+      <section>
+        <h2>Operation type</h2>
+
+        <p>This key's value defines the operation type for the Web of Things description.</p>
+
+        <table>
+          <tr><th>Operation</th><th>Value</th><th>Operation type</th></tr>
+          <tr><td>Retrieve data from Web API or stream</td><td><code>read</code></td><td><code>td:readproperty</code></td></tr>
+          <tr><td>Push data to Web API or stream</td><td><code>write</code></td><td><code>td:writeproperty</code></td></tr>
+        </table>
+      </section>
+
+      <section>
+        <h2>Security</h2>
+
+        <p>Web of Things Security description to describe how authentication
+        should be performed againast a Web API or stream when accessing its data.</p>
+
+        <table>
+          <tr><th>Security</th><th>Value</th><th>Web of Things Security scheme</th></tr>
+          <tr><td>Security through API key</td><td><code>apikey</code></td><td><code>wotsec:APISecurityScheme</code></td></tr>
+        </table>
+
+        <dl>
+          <dt><dfn>type</dfn></dt>
+          <dd>Security scheme to apply.<br />
+            Required profiles: RML and WOT. <br />
+          </dd>
+          <dt><dfn>in</dfn></dt>
+          <dd>Where to store the security information when performing authentication against a Web API or stream.<br />
+            Required profiles: RML and WOT. <br />
+          </dd>
+          <dt><dfn>name</dfn></dt>
+          <dd>Name of the property holding the private security information such as API key.<br />
+            Required profiles: RML and WOT. <br />
+          </dd>
+          <dt><dfn>value</dfn></dt>
+          <dd>Value of the property holding the private security information such as API key.<br />
+            Required profiles: RML and WOT. <br />
+          </dd>
+        </dl>
+
+      </section>
+
+      <section>
+        <h2>Query formulation vs reference formulation</h2>
+
+        <img src="resources/images/query-vs-reference-formulations.jpeg" alt="Sequence diagram showing difference between query and reference formulation">
+
+        <p>
+          In the figure above, you find a sequence diagram showing at what point the query and query formulation are used and
+          a what point the iterator and reference formulation are used.
+          The component "Processor" represents the software application that executes the converted YARRRML rules,
+          e.g., RML rules.
+          For clarity, this conversion is not included in the figure.
+          The processor gets the <code>type</code> and <code>access</code> from the YARRRML rules.
+          It uses this information to create a connection with the data source.
+          Next, the processor gets the <code>query formulation</code> and <code>query</code>.
+          It uses this information to query the desired data from the data source,
+          making use of the earlier created connection.
+          Once the data is retrieved the connection is closed.
+          The processor gets the <code>reference formulation</code> and <code>iterator</code>.
+          It uses this information to iterate over the retrieved data.
+        </p>
+
+        <img src="resources/images/query-vs-reference-formulations-example.jpeg" alt="Sequence diagram showing difference between query and reference formulation for a SPARQL endpoint">
+
+        <p>
+          In the figure above, you find a sequence diagram showing an example of
+          the use of query, query formulation, iterator, and reference formulation.
+          The data source is a SPARQL endpoint, available at <code>http://example.org/sparql</code>,
+          which is queried using a SPARQL 1.1 query.
+          The query formulation is <code>sparql11</code> and
+          the query is <code>SELECT * WHERE{?s ?p ?o}</code>
+          The result is an XML document which is iterated upon using the iterator <code>/sparql/results/result</code>
+          that conforms to the XPath specification.
+        </p>
+      </section>
+
+      <section>
+        <h2>Examples</h2>
+        <p>
+          In the following example a single data source is defined <code>person-source</code>.
+        </p>
+
+        <div id="tabs-1" class="nanotabs">
+          <ul>
+            <li><a href="#tab1-1" class="selected">YARRRML</a></li>
+            <li><a href="#tab1-2">RML</a></li>
+          </ul>
+          <div id="tab1-1">
+            <pre id="example-ds1-yarrrml" class="example" title="one data source">
+            sources:
+              person-source:
+                access: data/person.json
+                referenceFormulation: jsonpath
+                iterator: $
+            </pre>
+          </div>
+          <div id="tab1-2">
+            <pre id="example-ds1-rml" class="example" title="one data source">
+              <#LogicalSource> a rml:LogicalSource;
+                rml:source "data/person.json";
+                rml:referenceFormulation ql:JSONPath;
+                rml:iterator "$".
+            </pre>
+          </div>
+        </div>
+
+        <p>
+          A shortcut version of this example looks as follows.
+        </p>
+
+          <div id="tabs-2" class="nanotabs">
+            <ul>
+              <li><a href="#tab2-1" class="selected">YARRRML</a></li>
+              <li><a href="#tab2-2">RML</a></li>
+            </ul>
+            <div id="tab2-1">
+              <pre id="example-ds1-sc" class="example" title="one data source using shortcuts">
+                sources:
+                  person-source: [data/person.json~jsonpath, $]
+              </pre>
+            </div>
+            <div id="tab2-2">
+              <pre id="example-ds1-sc-rml" class="example" title="one data source using shortcuts">
+                <#LogicalSource> a rml:LogicalSource;
+                  rml:source "data/person.json";
+                  rml:referenceFormulation ql:JSONPath;
+                  rml:iterator "$".
+              </pre>
+            </div>
+          </div>
+
+        <p>
+          The collection is replaced with an array where
+          the first element contains the value for <code>access</code> appended with the <code>~</code> and the value for <code>referenceFormulation</code>, and
+          the second element contains the iterator.
+
+        </p>
+
+        <p>
+        The following mapping access a SQL database and select the required data via a query.
+        </p>
+
+        <div id="tabs-3" class="nanotabs">
+          <ul>
+            <li><a href="#tab3-1" class="selected">YARRRML</a></li>
+            <li><a href="#tab3-2">RML</a></li>
+          </ul>
+          <div id="tab3-1">
+              <pre id="example-db-yarrrrml" class="example" title="mapping with database as source">
+                mapping:
+                  person:
+                    sources:
+                      access: http://localhost/example
+                      type: mysql
+                      credentials:
+                        username: root
+                        password: root
+                      queryFormulation: sql2008
+                      query: |
+                        SELECT DEPTNO, DNAME, LOC,
+                        (SELECT COUNT(*) FROM EMP WHERE EMP.DEPTNO=DEPT.DEPTNO) AS STAFF
+                        FROM DEPT;
+                      referenceFormulation: csv
+              </pre>
+          </div>
+          <div id="tab3-2">
+              <pre id="example-db-rml" class="example" title="mapping with database as source">
+                <#TriplesMap> a rr:TriplesMap;
+
+                  rml:logicalSource [
+                    a rml:LogicalSource;
+                    rml:source <#DataSource>;
+                    rr:sqlVersion rr:SQL2008;
+                    rml:query "SELECT DEPTNO, DNAME, LOC,
+                          (SELECT COUNT(*) FROM EMP WHERE EMP.DEPTNO=DEPT.DEPTNO) AS STAFF
+                          FROM DEPT;";
+                    rml:referenceFormulation ql:CSV
+                  ].
+
+                <#DataSource> a d2rq:Database;
+                  d2rq:jdbcDSN "jdbc:mysql://localhost/example";
+                  d2rq:jdbcDriver "com.mysql.jdbc.Driver";
+                  d2rq:username "root";
+                  d2rq:password "root" .
+              </pre>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <section>
+      <h2>Targets</h2>
+
+      <section>
+        <h2>Keys</h2>
+
+        <dl>
+          <dt><dfn>type</dfn></dt>
+          <dd>Type of the target.<br />
+            Required profiles: RMLT. <br />
+            Datatype: string.
+          </dd>
+          <dt><dfn>access</dfn></dt>
+          <dd>Local or remote location of the target.<br />
+            Required profiles: RMLT. <br />
+            Datatype: string.
+          </dd>
+          <dt><dfn>serialization</dfn></dt>
+          <dd>Serialization format to use when exporting to the target.<br />
+            Required profiles: RMLT and FORMATS. <br />
+            Datatype: string.
+          </dd>
+          <dt><dfn>ompression</dfn></dt>
+          <dd>Compression algorithm to use when exporting to the target.<br />
+            Required profiles: RMLT and COMP. <br />
+            Datatype: string.
+          </dd>
+        </dl>
+      </section>
+
+      <section>
+        <h2>Type</h2>
+
+        <p>This key's value describes what type of target is used, so that the correct way
+        of accessing to the target can be determined. By default a local file is assumed
+        when the <code>access</code> value is a path such as file.nq. The value of type is
+        then implicitly <code>localfile</code>. The following values are supported:</p>
+
+        <table>
+          <tr><th>Target type</th><th>Value</th><th>Required profiles</th></tr>
+          <tr><td>SPARQL endpoint</td><td><code>sparql</code></td><td>RML, RMLT and SD</td></tr>
+          <tr><td>Local file</td><td><code>localfile</code></td><td>RML, RMLT and VOID/DCAT</td></tr>
+        </table>
+      </section>
+
+      <section>
+        <h2>Access</h2>
+        <p>This key's value describes where the target can be accessed. Example: <code>file.nq</code>. </p>
+      </section>
+
+      <section>
+        <h2>Serialization</h2>
+
+        <p>This key's value is the serialization format that should be used to serialize
+        the RDF when exporting to the target. By default, the serialization format is N-Quads
+        [[DataIO]]. The supported serialization formats are listed by the 
+        <a href="http://w3.org/ns/formats">W3C Formats namespace</a>. </p>
+
+        <table>
+          <tr><th>Serialization format</th><th>Value</th></tr>
+          <tr><td>JSON-LD</td><td>jsonld</td></tr>
+          <tr><td>N3</td><td>n3</td></tr>
+          <tr><td>N-Triples</td><td>ntriples</td></tr>
+          <tr><td>N-Quads</td><td>nquads</td></tr>
+          <tr><td>LD Patch</td><td>ldpatch</td></tr>
+          <tr><td>microdata</td><td>microdata</td></tr>
+          <tr><td>OWL XML Serialization</td><td>owlxml</td></tr>
+          <tr><td>OWL Functional Syntax</td><td>owlfunctional</td></tr>
+          <tr><td>OWL Manchester Syntax</td><td>owlmanchester</td></tr>
+          <tr><td>POWDER</td><td>powder</td></tr>
+          <tr><td>POWDER-S</td><td>powder-s</td></tr>
+          <tr><td>PROV-N</td><td>prov-n</td></tr>
+          <tr><td>PROV-XML</td><td>prov-xml</td></tr>
+          <tr><td>RDFa</td><td>rdfa</td></tr>
+          <tr><td>RDF/JSON</td><td>rdfjson</td></tr>
+          <tr><td>RDF/XML</td><td>rdfxml</td></tr>
+          <tr><td>RIF XML Syntax</td><td>rifxml</td></tr>
+          <tr><td>SPARQL Results in XML</td><td>sparqlxml</td></tr>
+          <tr><td>SPARQL Results in JSON</td><td>sparqljson</td></tr>
+          <tr><td>SPARQL Results in CSV</td><td>sparqlcsv</td></tr>
+          <tr><td>SPARQL Results in TSV</td><td>sparqltsv</td></tr>
+          <tr><td>Turtle</td><td>turtle</td></tr>
+          <tr><td>TriG</td><td>trig</td></tr>
+        </table>
+      </section>
+
+      <section>
+        <h2>Compression</h2>
+        <p>Compression defines which compression algorithm should be applied when exporting
+        to a target. By default, no compression algorithm is applied [[DataIO]]. The supported
+        compression algorithms are listed by the <a href="http://semweb.mmlab.be/ns/rml-compression#">
+        Compression namespace</a>. </p>
+
+        <table>
+          <tr><th>Compression algorithm</th><th>Value</th></tr>
+          <tr><td>GZip</td><td>gzip</td></tr>
+          <tr><td>Zip</td><td>zip</td></tr>
+          <tr><td>TarGZip</td><td>targzip</td></tr>
+          <tr><td>TarXz</td><td>tarxz</td></tr>
+        </table>
+      </section>
+
+      <section>
+        <h2>Examples</h2>
+
+        <p>In the following example a single target is defined <code>person-target</code>.</p>
+
+        <div id="tabs-37" class="nanotabs">
+          <ul>
+            <li><a href="#tab37-1" class="selected">YARRRML</a></li>
+            <li><a href="#tab37-2">RML</a></li>
+          </ul>
+          <div id="tab37-1">
+              <pre id="example-singletarget-yarrrrml" class="example" title="one target">
+                targets:
+                  person-target:
+                    access: data/dump.ttl.gz
+                    type: void
+                    serialization: turtle
+                    compression: gzip
+              </pre>
+          </div>
+          <div id="tab37-2">
+              <pre id="example-singletarget-rml" class="example" title="one target">
+                &lt;#LogicalTarget&gt; a rmlt:LogicalTarget;
+                  rmlt:target [ a void:Dataset;
+                    void:dataDump &lt;file://data/dump.ttl.gz&gt;
+                  ];
+                  rmlt:serialization formats:Turtle;
+                  rmlt:compression comp:gzip.
+              </pre>
+          </div>
+        </div>
+
+        <p>A shortcut version of this example looks as follows. </p>
+
+        <div id="tabs-38" class="nanotabs">
+          <ul>
+            <li><a href="#tab38-1" class="selected">YARRRML</a></li>
+            <li><a href="#tab38-2">RML</a></li>
+          </ul>
+          <div id="tab38-1">
+              <pre id="example-st-shortcut-yarrrrml" class="example" title="one target using shortcuts">
+                targets:
+                  person-target: [data/dump.ttl.gz~void, turtle, gzip]
+              </pre>
+          </div>
+          <div id="tab38-2">
+              <pre id="example-st-shortcut-rml" class="example" title="one target using shortcuts">
+                &lt;#LogicalTarget&gt; a rmlt:LogicalTarget;
+                  rmlt:target [ a void:Dataset;
+                    void:dataDump &lt;file://data/dump.ttl.gz&gt;
+                  ];
+                  rmlt:serialization formats:Turtle;
+                  rmlt:compression comp:gzip.
+              </pre>
+          </div>
+        </div>
+
+        <p>The collection is replaced with an array where the first element contains the value
+        for access appended with the <code>~</code> and the value for <code>type</code>, the
+        second element contains serialization format, and the third element contains the
+        compression algorithm. The serialization format and compression algorithm are not required.
+        By default N-Quads is used a serialization format and no compression is applied.</p>
+
+        <p>The following mapping access a SPARQL endpoint as target using SPARQL UPDATE queries:</p>
+
+        <div id="tabs-39" class="nanotabs">
+          <ul>
+            <li><a href="#tab39-1" class="selected">YARRRML</a></li>
+            <li><a href="#tab39-2">RML</a></li>
+          </ul>
+          <div id="tab39-1">
+              <pre id="example-sparql-target-yarrrrml" class="example" title="mapping with SPARQL endpoint as target">
+                mapping:
+                  person:
+                    subjects:
+                      - value: http://example.org/{id}
+                        targets:
+                          access: http://localhost/sparql
+                          type: sparql
+              </pre>
+          </div>
+          <div id="tab39-2">
+              <pre id="example-sparql-target-rml" class="example" title="mapping with SPARQL endpoint as target">
+                &lt;#TriplesMap&gt; a rr:TriplesMap;
+                 rr:subjectMap [ a rr:SubjectMap;
+                   rr:template "http://example.org/{id}";
+                   rml:logicalTarget [
+                     a rmlt:LogicalTarget;
+                     rmlt:target &lt;#Target&gt;
+                   ];
+                 ].
+
+                &lt;#Target&gt; a sd:Service;
+                  sd:endpoint &lt;http://localhost/sparql&gt;
+                  sd:supportedLanguage sd:SPARQL11Update.
+              </pre>
+          </div>
+        </div>
+
+      </section>
+
+    </section>
+
+    <section>
+      <h2>Mappings</h2>
+
+        <p>
+          The <code>mappings</code> collection contains all the mappings of the document.
+          Each mapping is added to this collection via key-value pair.
+          The key is unique for each mapping.
+          The value is collection containing rules to generate the subjects, predicates, and objects.
+
+          In the following example two mappings are defined: <code>person</code> and <code>project</code>.
+        </p>
+
+        <div id="tabs-4" class="nanotabs">
+          <ul>
+            <li><a href="#tab4-1" class="selected">YARRRML</a></li>
+            <li><a href="#tab4-2">RML</a></li>
+          </ul>
+          <div id="tab4-1">
+            <pre id="example-mappings-yarrrrml" class="example" title="two mappings">
+              mappings:
+                person: ...
+                project: ...
+            </pre>
+          </div>
+          <div id="tab4-2">
+            <pre id="example-mappings-rml" class="example" title="two mappings">
+              &lt;#TriplesMap&gt; a rr:TriplesMap. #person
+              &lt;#TriplesMap2&gt; a rr:TriplesMap. #project
+            </pre>
+          </div>
+        </div>
+
+      <section>
+        <h2>Data sources</h2>
+
+        <p>
+          Besides defining data sources at the root of the document,
+          data sources can also be defined inside a mapping via the collection <code>sources</code>.
+          However, no unique key is specified for a source, and, thus, it cannot be referred to from other mappings.
+          The key-value to add to a source are the same when defining sources at the root of the document.
+
+          In the following example the mapping <code>person</code> has one source.
+        </p>
+
+        <div id="tabs-5" class="nanotabs">
+          <ul>
+            <li><a href="#tab5-1" class="selected">YARRRML</a></li>
+            <li><a href="#tab5-2">RML</a></li>
+          </ul>
+          <div id="tab5-1">
+            <pre id="example-ds-yarrrml" class="example" title="mapping with one data source">
+            mapping:
+              person:
+                sources:
+                  access: data/person.json
+                  referenceFormulation: jsonpath
+                  iterator: $
+            </pre>
+          </div>
+          <div id="tab5-2">
+            <pre id="example-ds-rml" class="example" title="mapping with one data source">
+              <#TriplesMap> a rr:TriplesMap; #person
+
+                rml:logicalSource [
+                  a rml:LogicalSource;
+                  rml:source "data/person.json";
+                  rml:referenceFormulation ql:JSONPath;
+                  rml:iterator "$".
+                ].
+            </pre>
+          </div>
+        </div>
+
+          A shortcut version of this example looks as follows.
+
+        <div id="tabs-6" class="nanotabs">
+          <ul>
+            <li><a href="#tab6-1" class="selected">YARRRML</a></li>
+            <li><a href="#tab6-2">RML</a></li>
+          </ul>
+          <div id="tab6-1">
+            <pre id="example-ds-sc-yarrrml" class="example" title="mapping with one data source using shortcuts">
+            mapping:
+              person:
+                sources: 
+                  - [data/person.json~jsonpath, $]
+          </pre>
+          </div>
+          <div id="tab6-2">
+            <pre id="example-ds-sc-rml" class="example" title="mapping with one data source using shortcuts">
+              <#TriplesMap> a rr:TriplesMap; #person
+
+                rml:logicalSource [
+                  a rml:LogicalSource;
+                  rml:source "data/person.json";
+                  rml:referenceFormulation ql:JSONPath;
+                  rml:iterator "$".
+                ].
+            </pre>
+          </div>
+        </div>
+
+          In case a mapping needs to be applied to multiple data sources, multiple sources can be added to the <code>scources</code> collection.
+          In the following example the <code>person</code> mapping has two data sources.
+
+        <div id="tabs-7" class="nanotabs">
+          <ul>
+            <li><a href="#tab7-1" class="selected">YARRRML</a></li>
+            <li><a href="#tab7-2">RML</a></li>
+          </ul>
+          <div id="tab7-1">
+            <pre id="example-ds2-yarrrml" class="nohighlight example" title="mapping with two data sources">
+              mapping:
+                person:
+                  sources:
+                    - access: data/person.json
+                      referenceFormulation: jsonpath
+                      iterator: $
+                    - access: data/person2.json
+                      referenceFormulation: jsonpath
+                      iterator: "$.persons[*]"
+            </pre>
+          </div>
+          <div id="tab7-2">
+            <pre id="example-ds2-rml" class="example" title="mapping with two data sources">
+              <#TriplesMap> a rr:TriplesMap; #person, first source
+
+                rml:logicalSource [
+                  a rml:LogicalSource;
+                  rml:source "data/person.json";
+                  rml:referenceFormulation ql:JSONPath;
+                  rml:iterator "$".
+                ].
+
+              <#TriplesMap2> a rr:TriplesMap; #person, second source
+
+                rml:logicalSource [
+                  a rml:LogicalSource;
+                  rml:source "data/person2.json";
+                  rml:referenceFormulation ql:JSONPath;
+                  rml:iterator "$.persons[*]".
+                ].
+            </pre>
+          </div>
+        </div>
+
+          A shortcut version of this example looks as follows.
+
+        <div id="tabs-8" class="nanotabs">
+          <ul>
+            <li><a href="#tab8-1" class="selected">YARRRML</a></li>
+            <li><a href="#tab8-2">RML</a></li>
+          </ul>
+          <div id="tab8-1">
+            <pre id="example-ds2-sc-yarrrml" class="nohighlight example" title="mapping with two data sources using shortcuts">
+              mapping:
+                person:
+                  sources:
+                    - [data/person.json~jsonpath, $]
+                    - [data/person2.json~jsonpath, "$.persons[*]"]
+            </pre>
+          </div>
+          <div id="tab8-2">
+            <pre id="example-ds2-sc-rml" class="example" title="mapping with two data sources using shortcuts">
+              <#TriplesMap> a rr:TriplesMap; #person, first source
+
+                rml:logicalSource [
+                  a rml:LogicalSource;
+                  rml:source "data/person.json";
+                  rml:referenceFormulation ql:JSONPath;
+                  rml:iterator "$".
+                ].
+
+              <#TriplesMap2> a rr:TriplesMap; #person, second source
+
+                rml:logicalSource [
+                  a rml:LogicalSource;
+                  rml:source "data/person2.json";
+                  rml:referenceFormulation ql:JSONPath;
+                  rml:iterator "$.persons[*]".
+                ].
+            </pre>
+          </div>
+        </div>
+
+          If you describe a data source outside of the mappings, you can include via their unique key.
+
+        <div id="tabs-9" class="nanotabs">
+          <ul>
+            <li><a href="#tab9-1" class="selected">YARRRML</a></li>
+            <li><a href="#tab9-2">RML</a></li>
+          </ul>
+          <div id="tab9-1">
+            <pre id="example-ds3-yarrrml" class="nohighlight example" title="mapping with one data sources">
+              sources:
+                person-source:
+                  access: data/person.json
+                  referenceFormulation: jsonpath
+                  iterator: $
+
+              mapping:
+                person:
+                  sources: person-source
+            </pre>
+          </div>
+          <div id="tab9-2">
+            <pre id="example-ds3-rml" class="example" title="mapping with one data sources">
+              <#TriplesMap> a rr:TriplesMap; #person
+
+                rml:logicalSource [
+                  a rml:LogicalSource;
+                  rml:source "data/person.json";
+                  rml:referenceFormulation ql:JSONPath;
+                  rml:iterator "$".
+                ].
+            </pre>
+          </div>
+        </div>
+
+          Multiple sources can be used by using an array of source keys as value for the key <code>sources</code>.
+
+        <div id="tabs-10" class="nanotabs">
+          <ul>
+            <li><a href="#tab10-1" class="selected">YARRRML</a></li>
+            <li><a href="#tab10-2">RML</a></li>
+          </ul>
+          <div id="tab10-1">
+            <pre id="example-ds4" class="example" title="mapping with two data sources">
+              sources:
+                person-source:
+                  access: data/person.json
+                  referenceFormulation: jsonpath
+                  iterator: $
+                person-source2:
+                  access: data/person2.json
+                  referenceFormulation: jsonpath
+                  iterator: "$.person[*]"
+
+              mapping:
+                person:
+                  sources:
+                    - person-source
+                    - person-source2
+            </pre>
+          </div>
+          <div id="tab10-2">
+            <pre id="example-ds4-rml" class="example" title="mapping with two data sources">
+              <#TriplesMap> a rr:TriplesMap; #person, first source
+
+                rml:logicalSource [
+                  a rml:LogicalSource;
+                  rml:source "data/person.json";
+                  rml:referenceFormulation ql:JSONPath;
+                  rml:iterator "$".
+                ].
+
+              <#TriplesMap2> a rr:TriplesMap; #person, second source
+
+                rml:logicalSource [
+                  a rml:LogicalSource;
+                  rml:source "data/person2.json";
+                  rml:referenceFormulation ql:JSONPath;
+                  rml:iterator "$.persons[*]".
+                ].
+            </pre>
+          </div>
+        </div>
+
+          A combination of both sources defined outside and inside a mapping is possible.
+
+        <div id="tabs-11" class="nanotabs">
+          <ul>
+            <li><a href="#tab11-1" class="selected">YARRRML</a></li>
+            <li><a href="#tab11-2">RML</a></li>
+          </ul>
+          <div id="tab11-1">
+            <pre id="example-ds5" class="example" title="mapping with two data sources">
+              sources:
+                person-source:
+                  access: data/person.json
+                  referenceFormulation: jsonpath
+                  iterator: $
+
+              mapping:
+                person:
+                  sources:
+                   - person-source
+                   - access: data/person2.json
+                     referenceFormulation: jsonpath
+                     iterator: "$.persons[*]"
+            </pre>
+          </div>
+          <div id="tab11-2">
+            <pre id="example-ds5-rml" class="example" title="mapping with two data sources">
+              <#TriplesMap> a rr:TriplesMap; #person, first source
+
+                rml:logicalSource [
+                  a rml:LogicalSource;
+                  rml:source "data/person.json";
+                  rml:referenceFormulation ql:JSONPath;
+                  rml:iterator "$".
+                ].
+
+              <#TriplesMap2> a rr:TriplesMap; #person, second source
+
+                rml:logicalSource [
+                  a rml:LogicalSource;
+                  rml:source "data/person2.json";
+                  rml:referenceFormulation ql:JSONPath;
+                  rml:iterator "$.persons[*]".
+                ].
+            </pre>
+          </div>
+        </div>
+
+      </section>
+
+      <section>
+        <h2>Targets</h2>
+
+        <p>Besides defining targets at the root of the document, targets can also be defined inside a
+        mapping via the collection <code>targets</code>. However, no unique key is specified for a target,
+        and, thus, it cannot be referred to from other mappings. The key-value to add to a target are the
+        same when defining targets at the root of the document. In the following example the mapping
+        <code>person</code> has one target.</p>
+
+        <div id="tabs-40" class="nanotabs">
+          <ul>
+            <li><a href="#tab40-1" class="selected">YARRRML</a></li>
+            <li><a href="#tab40-2">RML</a></li>
+          </ul>
+          <div id="tab40-1">
+              <pre id="example-t-yarrrrml" class="example" title="mapping with one target">
+                mapping:
+                  person:
+                    subjects:
+                      - value: "http://example.org/{id}"
+                        targets:
+                          access: data/dump.ttl.gz
+                          type: void
+                          serialization: turtle
+                          compression: gzip
+              </pre>
+          </div>
+          <div id="tab40-2">
+              <pre id="example-t-rml" class="example" title="mapping with one target">
+                &lt;#TriplesMap&gt; a rr:TriplesMap;
+                 rr:subjectMap [ a rr:SubjectMap;
+                   rr:template "http://example.org/{id}";
+                   rml:logicalTarget [
+                     a rmlt:LogicalTarget;
+                     rmlt:target [ a void:Dataset;
+                       void:dataDump <file://data/dump.ttl.gz>
+                     ];
+                     rmlt:serialization formats:Turtle;
+                     rmlt:compression comp:gzip.
+                   ];
+                 ].
+              </pre>
+          </div>
+        </div>
+
+        <p>A shortcut version of this example looks as follows.</p>
+
+        <div id="tabs-41" class="nanotabs">
+          <ul>
+            <li><a href="#tab41-1" class="selected">YARRRML</a></li>
+            <li><a href="#tab41-2">RML</a></li>
+          </ul>
+          <div id="tab41-1">
+              <pre id="example-ts-yarrrrml" class="example" title="mapping with one target using shortcuts">
+                mapping:
+                  person:
+                    subjects:
+                      - value: "http://example.org/{id}"
+                        targets:
+                          - ["data/dump.ttl.gz~void", "turtle", "gzip"]
+              </pre>
+          </div>
+          <div id="tab41-2">
+              <pre id="example-ts-rml" class="example" title="mapping with one target using shortcuts">
+                &lt;#TriplesMap&gt; a rr:TriplesMap;
+                 rr:subjectMap [ a rr:SubjectMap;
+                   rr:template "http://example.org/{id}";
+                   rml:logicalTarget [
+                     a rmlt:LogicalTarget;
+                     rmlt:target [ a void:Dataset;
+                       void:dataDump <file://data/dump.ttl.gz>
+                     ];
+                     rmlt:serialization formats:Turtle;
+                     rmlt:compression comp:gzip.
+                   ];
+                 ].
+              </pre>
+          </div>
+        </div>
+
+        <p>In case the output of a mapping needs to be exported to multiple targets, multiple targets
+        can be added to the targets collection. In the following example the <code>person</code> mapping
+        has two data sources. </p>
+
+        <div id="tabs-42" class="nanotabs">
+          <ul>
+            <li><a href="#tab42-1" class="selected">YARRRML</a></li>
+            <li><a href="#tab42-2">RML</a></li>
+          </ul>
+          <div id="tab42-1">
+              <pre id="example-tt-yarrrrml" class="example" title="mapping with two targets for subject">
+                mapping:
+                  person:
+                    subjects:
+                      - value: "http://example.org/{id}"
+                        targets:
+                          - access: data/dump1.nq
+                            type: void
+                          - access: data/dump2.nq
+                            type: void
+              </pre>
+          </div>
+          <div id="tab42-2">
+              <pre id="example-tt-rml" class="example" title="mapping with two targets for subject">
+                &lt;#TriplesMap&gt; a rr:TriplesMap;
+                 rr:subjectMap [ a rr:SubjectMap;
+                   rr:template "http://example.org/{id}";
+                   # Target 1
+                   rml:logicalTarget [ 
+                     a rmlt:LogicalTarget;
+                     rmlt:target [ a void:Dataset;
+                       void:dataDump &lt;file://data/dump1.nq&gt;;
+                     ];
+                   ];
+                   # Target 2
+                   rml:logicalTarget [ 
+                     a rmlt:LogicalTarget;
+                     rmlt:target [ a void:Dataset;
+                       void:dataDump &lt;file://data/dump2.nq&gt;;
+                     ];
+                   ].
+                 ].
+              </pre>
+          </div>
+        </div>
+
+        <p>A shortcut version of this example looks as follows.</p>
+
+        <div id="tabs-43" class="nanotabs">
+          <ul>
+            <li><a href="#tab43-1" class="selected">YARRRML</a></li>
+            <li><a href="#tab43-2">RML</a></li>
+          </ul>
+          <div id="tab43-1">
+              <pre id="example-tts-yarrrrml" class="example" title="mapping with two targets for subject using shortcuts">
+                mapping:
+                  person:
+                    subjects:
+                      - value: "http://example.org/{id}"
+                        targets:
+                          - ["data/dump1.nq~void"]
+                          - ["data/dump2.nq~void"]
+              </pre>
+          </div>
+          <div id="tab43-2">
+              <pre id="example-tts-rml" class="example" title="mapping with two targets for subject using shortcuts">
+                &lt;#TriplesMap&gt; a rr:TriplesMap;
+                 rr:subjectMap [ a rr:SubjectMap;
+                   rr:template "http://example.org/{id}";
+                   # Target 1
+                   rml:logicalTarget [ 
+                     a rmlt:LogicalTarget;
+                     rmlt:target [ a void:Dataset;
+                       void:dataDump &lt;file://data/dump1.nq&gt;;
+                     ];
+                   ];
+                   # Target 2
+                   rml:logicalTarget [ 
+                     a rmlt:LogicalTarget;
+                     rmlt:target [ a void:Dataset;
+                       void:dataDump &lt;file://data/dump2.nq&gt;;
+                     ];
+                   ].
+                 ].
+              </pre>
+          </div>
+        </div>
+
+        <p>If you describe a target outside of the mappings, you can include via their unique key.</p>
+
+        <div id="tabs-44" class="nanotabs">
+          <ul>
+            <li><a href="#tab44-1" class="selected">YARRRML</a></li>
+            <li><a href="#tab44-2">RML</a></li>
+          </ul>
+          <div id="tab44-1">
+              <pre id="example-oto-yarrrrml" class="example" title="mapping with one target for subject">
+                targets:
+                  person-target:
+                    access: data/dump.jsonld.gz
+                    type: dcat
+                    serialization: jsonld
+                    compression: gzip
+
+                mapping:
+                  person:
+                    subjects:
+                      - value: "http://example.org/{id}"
+                        targets: person-target
+              </pre>
+          </div>
+          <div id="tab44-2">
+              <pre id="example-oto-rml" class="example" title="mapping with one target for subject">
+                &lt;#TriplesMap&gt; a rr:TriplesMap;
+                 rr:subjectMap [ a rr:SubjectMap;
+                   rr:template "http://example.org/{id}";
+                   rml:logicalTarget [ 
+                     a rmlt:LogicalTarget;
+                     rmlt:target [ a void:Dataset;
+                       void:dataDump &lt;file://data/dump1.jsonld.gz&gt;;
+                     ];
+                     rmlt:serialization formats:JSON-LD;
+                     rmlt:compression comp:gzip;
+                   ].
+                 ].
+              </pre>
+          </div>
+        </div>
+
+        <p>Multiple targets can be used by using an array of target keys as value for the key <code>targets</code>. </p>
+
+        <div id="tabs-45" class="nanotabs">
+          <ul>
+            <li><a href="#tab45-1" class="selected">YARRRML</a></li>
+            <li><a href="#tab45-2">RML</a></li>
+          </ul>
+          <div id="tab45-1">
+              <pre id="example-otts-yarrrrml" class="example" title="mapping with two targets for subject">
+                targets:
+                  person-target1:
+                    access: data/dump.jsonld.gz
+                    type: dcat
+                    serialization: jsonld
+                    compression: gzip
+                  person-target2:
+                    access: data/dump2.rdf
+                    type: void
+                    serialization: rdfxml
+
+                mapping:
+                  person:
+                    subjects:
+                      - value: "http://example.org/{id}"
+                        targets:
+                          - person-target1
+                          - person-target2
+              </pre>
+          </div>
+          <div id="tab45-2">
+              <pre id="example-otts-rml" class="example" title="mapping with two targets for subject">
+                &lt;#TriplesMap&gt; a rr:TriplesMap;
+                 rr:subjectMap [ a rr:SubjectMap;
+                   rr:template "http://example.org/{id}";
+                   # Target 1
+                   rml:logicalTarget [ 
+                     a rmlt:LogicalTarget;
+                     rmlt:target [ a void:Dataset;
+                       void:dataDump &lt;file://data/dump1.jsonld.gz&gt;;
+                     ];
+                     rmlt:serialization formats:JSON-LD;
+                     rmlt:compression comp:gzip;
+                   ];
+                   # Target 2
+                   rml:logicalTarget [ 
+                     a rmlt:LogicalTarget;
+                     rmlt:target [ a void:Dataset;
+                       void:dataDump &lt;file://data/dump2.rdf&gt;;
+                     ];
+                     rmlt:serialization formats:RDF_XML;
+                   ];
+                 ].
+              </pre>
+          </div>
+        </div>
+
+        <p>A combination of both targets defined outside and inside a mapping is possible.</p>
+
+        <div id="tabs-46" class="nanotabs">
+          <ul>
+            <li><a href="#tab46-1" class="selected">YARRRML</a></li>
+            <li><a href="#tab46-2">RML</a></li>
+          </ul>
+          <div id="tab46-1">
+              <pre id="example-otc-yarrrrml" class="example" title=" mapping with two targets for subject">
+                targets:
+                  person-target:
+                    access: data/dump1.nq
+
+                mapping:
+                  person:
+                    subjects:
+                      - value: "http://example.org/{id}"
+                        targets: 
+                          - person-target
+                          - access: data/dump2.nq
+              </pre>
+          </div>
+          <div id="tab46-2">
+              <pre id="example-otc-rml" class="example" title=" mapping with two targets for subject">
+                &lt;#TriplesMap&gt; a rr:TriplesMap;
+                 rr:subjectMap [ a rr:SubjectMap;
+                   rr:template "http://example.org/{id}";
+                   # Target 1
+                   rml:logicalTarget [ 
+                     a rmlt:LogicalTarget;
+                     rmlt:target [ a void:Dataset;
+                       void:dataDump &lt;file://data/dump1.nq&gt;;
+                     ];
+                   ];
+                   # Target 2
+                   rml:logicalTarget [ 
+                     a rmlt:LogicalTarget;
+                     rmlt:target [ a void:Dataset;
+                       void:dataDump &lt;file://data/dump2.nq&gt;;
+                     ];
+                   ].
+                 ].
+              </pre>
+          </div>
+        </div>
+
+      </section>
+
+      <section>
+        <h2>Subjects</h2>
+
+        <p>
+          For every triple is required to define whether a IRI or blank node needs to used.
+          This information is added to a mapping via the collection <code>subjects</code>.
+          In the case of an IRI, this collection contains 0 or more templates that specify the IRI.
+          In the case of a blank node, this collection is set to <code>null</code> or is not specified at all.
+
+          In the following example the mapping <code>person</code> generate IRI for the subjects based on the template <code>http://wwww.example.com/person/$(id)</code>.
+        </p>
+
+        <div id="tabs-12" class="nanotabs">
+          <ul>
+            <li><a href="#tab12-1" class="selected">YARRRML</a></li>
+            <li><a href="#tab12-2">RML</a></li>
+          </ul>
+          <div id="tab12-1">
+            <pre id="example-subject" class="nohighlight example" title="mapping with one subject">
+              mappings:
+                person:
+                  subjects: http://wwww.example.com/person/$(id)
+            </pre>
+          </div>
+          <div id="tab12-2">
+            <pre id="example-subject-rml" class="example" title="mapping with one subject">
+              <#TriplesMap> a rr:TriplesMap; #person
+
+                rr:subjectMap [
+                  a rr:SubjectMap;
+                  rr:template "http://wwww.example.com/person/{id}"
+                ].
+            </pre>
+          </div>
+        </div>
+
+          It is also possible to specify multiple subjects.
+          In this case an array of templates is used.
+          In the following example the mapping <code>person</code> generate subjects based on the templates <code>http://wwww.example.com/person/$(id)</code>
+          and <code>http://www.test.com/$(firstname)</code>.
+
+        <div id="tabs-13" class="nanotabs">
+          <ul>
+            <li><a href="#tab13-1" class="selected">YARRRML</a></li>
+            <li><a href="#tab13-2">RML</a></li>
+          </ul>
+          <div id="tab13-1">
+            <pre id="example-subject2" class="example" title="mapping with two subjects">
+              mappings:
+                person:
+                  subjects: [http://wwww.example.com/person/$(id), http://www.test.com/$(firstname)]
+            </pre>
+          </div>
+          <div id="tab13-2">
+            <pre id="example-subject2-rml" class="example" title="mapping with two subject">
+              <#TriplesMap> a rr:TriplesMap; #person, first subject
+
+                rr:subjectMap [
+                  a rr:SubjectMap;
+                  rr:template "http://wwww.example.com/person/{id}"
+                ].
+
+              <#TriplesMap2> a rr:TriplesMap; #person, second subject
+
+                rr:subjectMap [
+                  a rr:SubjectMap;
+                  rr:template "http://www.test.com/{firstname}"
+                ].
+            </pre>
+          </div>
+        </div>
+
+          It is possible to apply functions on subjects.
+      </section>
+
+      <section>
+        <h2>Predicates and objects</h2>
+
+        In the following example the mapping <code>person</code> generates combinations of predicates and objects,
+        where the predicate is <code>foaf:firstName</code> and the object is the <code>firstname</code> of each person.
+
+        <div id="tabs-14" class="nanotabs">
+          <ul>
+            <li><a href="#tab14-1" class="selected">YARRRML</a></li>
+            <li><a href="#tab14-2">RML</a></li>
+          </ul>
+          <div id="tab14-1">
+            <pre id="example-po" class="example" title="mapping with one predicate and object">
+              mappings:
+                person:
+                  predicateobjects:
+                    - predicates: foaf:firstName
+                      objects: $(firstname)
+            </pre>
+          </div>
+          <div id="tab14-2">
+            <pre id="example-po-rml" class="example" title="mapping with one predicate and object">
+              <#TriplesMap> a rr:TriplesMap; #person
+
+                rr:predicateObjectMap [
+                  a rr:PredicateObjectMap;
+                  rr:predicate foaf:firstName;
+                  rr:objectMap [
+                    a rr:ObjectMap;
+                    rml:reference "firstname"
+                  ]
+                ].
+            </pre>
+          </div>
+        </div>
+
+        A shortcut version of this example looks as follows.
+
+        <div id="tabs-15" class="nanotabs">
+          <ul>
+            <li><a href="#tab15-1" class="selected">YARRRML</a></li>
+            <li><a href="#tab15-2">RML</a></li>
+          </ul>
+          <div id="tab15-1">
+            <pre id="example-po-sc" class="example" title="mapping with one predicate and object using shortcuts">
+              mappings:
+                person:
+                  predicateobjects:
+                    - [foaf:firstName, $(firstname)]
+            </pre>
+          </div>
+          <div id="tab15-2">
+            <pre id="example-po-sc-rml" class="example" title="mapping with one predicate and object using shortcuts">
+              <#TriplesMap> a rr:TriplesMap; #person
+
+                rr:predicateObjectMap [
+                  a rr:PredicateObjectMap;
+                  rr:predicate foaf:firstName;
+                  rr:objectMap [
+                    a rr:ObjectMap;
+                    rml:reference "firstname"
+                  ]
+                ].
+            </pre>
+          </div>
+        </div>
+
+        It is possible to specify multiple predicates and objects.
+        In this case an array of templates is used.
+
+        <div id="tabs-16" class="nanotabs">
+          <ul>
+            <li><a href="#tab16-1" class="selected">YARRRML</a></li>
+            <li><a href="#tab16-2">RML</a></li>
+          </ul>
+          <div id="tab16-1">
+            <pre id="example-po2" class="example" title="mapping with two predicates and objects">
+              mappings:
+                person:
+                  predicateobjects:
+                    - predicates: [foaf:name, rdfs:label]
+                      objects: [$(firstname), $(lastname)]
+            </pre>
+          </div>
+          <div id="tab16-2">
+            <pre id="example-po2-rml" class="example" title="mapping with two predicates and objects">
+              <#TriplesMap> a rr:TriplesMap; #person
+
+                rr:predicateObjectMap [
+                  a rr:PredicateObjectMap;
+                  rr:predicate foaf:name;
+                  rr:predicate rdfs:label;
+                  rr:objectMap [
+                    a rr:ObjectMap;
+                    rml:reference "firstname"
+                  ];
+                  rr:objectMap [
+                    a rr:ObjectMap;
+                    rml:reference "lastname"
+                  ]
+                ].
+            </pre>
+          </div>
+        </div>
+
+        A shortcut version of this example looks as follows.
+
+        <div id="tabs-17" class="nanotabs">
+          <ul>
+            <li><a href="#tab17-1" class="selected">YARRRML</a></li>
+            <li><a href="#tab17-2">RML</a></li>
+          </ul>
+          <div id="tab17-1">
+            <pre id="example-po2-sc" class="example" title="mapping with two predicates and objects using shortcuts">
+              mappings:
+                person:
+                  predicateobjects:
+                    - [[foaf:name, rdfs:label], [$(firstname), $(lastname)]]
+            </pre>
+          </div>
+          <div id="tab17-2">
+            <pre id="example-po2-sc-rml" class="example" title="mapping with two predicates and objects using shortcuts">
+              <#TriplesMap> a rr:TriplesMap; #person
+
+                rr:predicateObjectMap [
+                  a rr:PredicateObjectMap;
+                  rr:predicate foaf:name;
+                  rr:predicate rdfs:label;
+                  rr:objectMap [
+                    a rr:ObjectMap;
+                    rml:reference "firstname"
+                  ];
+                  rr:objectMap [
+                    a rr:ObjectMap;
+                    rml:reference "lastname"
+                  ]
+                ].
+            </pre>
+          </div>
+        </div>
+
+        <div id="tabs-18" class="nanotabs">
+          <ul>
+            <li><a href="#tab18-1" class="selected">YARRRML</a></li>
+            <li><a href="#tab18-2">RML</a></li>
+          </ul>
+          <div id="tab18-1">
+            <pre id="example-po3" class="example" title="mapping with object that generates an IRI">
+              mappings:
+                person:
+                  predicateobjects:
+                    - predicates: foaf:knows
+                      objects:
+                        value: $(colleague)
+                        type: iri
+            </pre>
+          </div>
+          <div id="tab18-2">
+            <pre id="example-po3-rml" class="example" title="mapping with object that generates an IRI">
+              <#TriplesMap> a rr:TriplesMap; #person
+
+                rr:predicateObjectMap [
+                  a rr:PredicateObjectMap;
+                  rr:predicate foaf:knows;
+                  rr:objectMap [
+                    a rr:ObjectMap;
+                    rml:reference "colleague";
+                    rr:TermType rr:IRI
+                  ]
+                ].
+            </pre>
+          </div>
+        </div>
+
+        A shortcut version of this example looks as follows.
+
+        <div id="tabs-19" class="nanotabs">
+          <ul>
+            <li><a href="#tab19-1" class="selected">YARRRML</a></li>
+            <li><a href="#tab19-2">RML</a></li>
+          </ul>
+          <div id="tab19-1">
+            <pre id="example-po3-sc" class="example" title="mapping with object that generates an IRI using shortcuts">
+              mappings:
+                person:
+                  predicateobjects:
+                    - [[foaf:knows, rdfs:label], $(colleague)~iri]
+            </pre>
+          </div>
+          <div id="tab19-2">
+            <pre id="example-po3-sc-rml" class="example" title="mapping with object that generates an IRI using shortcuts">
+              <#TriplesMap> a rr:TriplesMap; #person
+
+                rr:predicateObjectMap [
+                  a rr:PredicateObjectMap;
+                  rr:predicate foaf:knows;
+                  rr:objectMap [
+                    a rr:ObjectMap;
+                    rml:reference "colleague";
+                    rr:TermType rr:IRI
+                  ]
+                ].
+            </pre>
+          </div>
+        </div>
+
+        The inverse predicate can also be added.
+        This is only valid when the object is an IRI or a blank node.
+
+        <pre id="example-po-inverse" class="example" title="mapping with one inverse predicate">
+          mappings:
+            work:
+              predicateobjects:
+                - predicates: ex:createdBy
+                  inversepredicates: ex:created
+                  objects: $(foafprofile)
+                  type: iri
+        </pre>
+      </section>
+
+      <section>
+        <h2>Datatypes</h2>
+
+        <div id="tabs-20" class="nanotabs">
+          <ul>
+            <li><a href="#tab20-1" class="selected">YARRRML</a></li>
+            <li><a href="#tab20-2">RML</a></li>
+          </ul>
+          <div id="tab20-1">
+            <pre id="example-datatype" class="example" title="mapping with one datatype">
+              mappings:
+                person:
+                  predicateobjects:
+                    - predicates: foaf:firstName
+                      objects:
+                        value: $(firstname)
+                        datatype: xsd:string
+            </pre>
+          </div>
+          <div id="tab20-2">
+            <pre id="example-datatype-rml" class="example" title="mapping with one datatype">
+              <#TriplesMap> a rr:TriplesMap; #person
+
+                rr:predicateObjectMap [
+                  a rr:PredicateObjectMap;
+                  rr:predicate foaf:firstName;
+                  rr:objectMap [
+                    a rr:ObjectMap;
+                    rml:reference "firstname";
+                    rr:datatype xsd:string
+                  ]
+                ].
+            </pre>
+          </div>
+        </div>
+
+        A shortcut version of this example looks as follows.
+
+        <div id="tabs-21" class="nanotabs">
+          <ul>
+            <li><a href="#tab21-1" class="selected">YARRRML</a></li>
+            <li><a href="#tab21-2">RML</a></li>
+          </ul>
+          <div id="tab21-1">
+            <pre id="example-datatype-sc" class="example" title="mapping with one datatype using shortcuts">
+              mappings:
+                person:
+                  predicateobjects:
+                    - [foaf:firstName, $(firstname), xsd:string]
+            </pre>
+          </div>
+          <div id="tab21-2">
+            <pre id="example-datatype-sc-rml" class="example" title="mapping with one datatype using shortcuts">
+              <#TriplesMap> a rr:TriplesMap; #person
+
+                rr:predicateObjectMap [
+                  a rr:PredicateObjectMap;
+                  rr:predicate foaf:firstName;
+                  rr:objectMap [
+                    a rr:ObjectMap;
+                    rml:reference "firstname";
+                    rr:datatype xsd:string
+                  ]
+                ].
+            </pre>
+          </div>
+        </div>
+
+        <div id="tabs-22" class="nanotabs">
+          <ul>
+            <li><a href="#tab22-1" class="selected">YARRRML</a></li>
+            <li><a href="#tab22-2">RML</a></li>
+          </ul>
+          <div id="tab22-1">
+            <pre id="example-datatype2" class="example" title="mapping with two datatypes">
+              mappings:
+                person:
+                  predicateobjects:
+                    - predicates: foaf:name
+                      objects:
+                        - value: $(firstname)
+                          datatype: ex:string
+                        - value: $(lastname)
+                          datatype: ex:anotherString
+                    - predicates: rdfs:label
+                      objects:
+                        - value: $(firstname)
+                          datatype: ex:string
+                        - value: $(lastname)
+                          datatype: ex:anotherString
+            </pre>
+          </div>
+          <div id="tab22-2">
+            <pre id="example-datatype2-rml" class="example" title="mapping with two datatypes">
+              <#TriplesMap> a rr:TriplesMap; #person
+
+                rr:predicateObjectMap [
+                  a rr:PredicateObjectMap;
+                  rr:predicate foaf:name;
+                  rr:objectMap [
+                    a rr:ObjectMap;
+                    rml:reference "firstname";
+                    rr:datatype ex:string
+                  ];
+                  rr:objectMap [
+                    a rr:ObjectMap;
+                    rml:reference "lastname";
+                    rr:datatype ex:anotherString
+                  ]
+                ].
+            </pre>
+          </div>
+        </div>
+
+        A shortcut version of this example looks as follows.
+
+        <div id="tabs-23" class="nanotabs">
+          <ul>
+            <li><a href="#tab23-1" class="selected">YARRRML</a></li>
+            <li><a href="#tab23-2">RML</a></li>
+          </ul>
+          <div id="tab23-1">
+             <pre id="example-datatype2-sc" class="example" title="mapping with two datatypes using shortcuts">
+              mappings:
+                person:
+                  predicateobjects:
+                    - predicates: [foaf:name, rdfs:label]
+                      objects: [[$(firstname), ex:string], [$(lastname), ex:anotherString]]
+            </pre>
+          </div>
+          <div id="tab23-2">
+            <pre id="example-datatype2-sc-rml" class="example" title="mapping with two datatypes using shortcuts">
+              <#TriplesMap> a rr:TriplesMap; #person
+
+                rr:predicateObjectMap [
+                  a rr:PredicateObjectMap;
+                  rr:predicate foaf:name;
+                  rr:objectMap [
+                    a rr:ObjectMap;
+                    rml:reference "firstname";
+                    rr:datatype ex:string
+                  ];
+                  rr:objectMap [
+                    a rr:ObjectMap;
+                    rml:reference "lastname";
+                    rr:datatype ex:anotherString
+                  ]
+                ].
+            </pre>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Languages</h2>
+
+        <div id="tabs-24" class="nanotabs">
+          <ul>
+            <li><a href="#tab24-1" class="selected">YARRRML</a></li>
+            <li><a href="#tab24-2">RML</a></li>
+          </ul>
+          <div id="tab24-1">
+             <pre id="example-lang" class="example" title="mapping with one language">
+                mappings:
+                  person:
+                    predicateobjects:
+                      - predicates: foaf:firstName
+                        objects:
+                          value: $(firstname)
+                          language: en
+              </pre>
+          </div>
+          <div id="tab24-2">
+            <pre id="example-lang-rml" class="example" title="mapping with one language">
+              <#TriplesMap> a rr:TriplesMap; #person
+
+                rr:predicateObjectMap [
+                  a rr:PredicateObjectMap;
+                  rr:predicate foaf:firstName;
+                  rr:objectMap [
+                    a rr:ObjectMap;
+                    rml:reference "firstname";
+                    rr:language "en"
+                  ]
+                ].
+            </pre>
+          </div>
+        </div>
+
+        A shortcut version of this example looks as follows.
+
+        <div id="tabs-25" class="nanotabs">
+          <ul>
+            <li><a href="#tab25-1" class="selected">YARRRML</a></li>
+            <li><a href="#tab25-2">RML</a></li>
+          </ul>
+          <div id="tab25-1">
+            <pre id="example-lang-sc" class="example" title="mapping with one language using shortcuts">
+              mappings:
+                person:
+                  predicateobjects:
+                    - [foaf:firstName, $(firstname), en~lang]
+            </pre>
+          </div>
+          <div id="tab25-2">
+            <pre id="example-lang-sc-rml" class="example" title="mapping with one language using shortcuts">
+              <#TriplesMap> a rr:TriplesMap; #person
+
+                rr:predicateObjectMap [
+                  a rr:PredicateObjectMap;
+                  rr:predicate foaf:firstName;
+                  rr:objectMap [
+                    a rr:ObjectMap;
+                    rml:reference "firstname";
+                    rr:language "en"
+                  ]
+                ].
+            </pre>
+          </div>
+        </div>
+
+        <div id="tabs-26" class="nanotabs">
+          <ul>
+            <li><a href="#tab26-1" class="selected">YARRRML</a></li>
+            <li><a href="#tab26-2">RML</a></li>
+          </ul>
+          <div id="tab26-1">
+            <pre id="example-lang2" class="example" title="mapping with two languages">
+              mappings:
+                person:
+                  predicateobjects:
+                    - predicates: foaf:name
+                      objects:
+                        - value: $(firstname)
+                          language: en
+                        - value: $(lastname)
+                          language: nl
+            </pre>
+          </div>
+          <div id="tab26-2">
+            <pre id="example-lang2-rml" class="example" title="mapping with two languages">
+              <#TriplesMap> a rr:TriplesMap; #person
+
+                rr:predicateObjectMap [
+                  a rr:PredicateObjectMap;
+                  rr:predicate foaf:name;
+                  rr:objectMap [
+                    a rr:ObjectMap;
+                    rml:reference "firstname";
+                    rr:language "en"
+                  ];
+                  rr:objectMap [
+                    a rr:ObjectMap;
+                    rml:reference "lastname";
+                    rr:language "nl"
+                  ]
+                ].
+            </pre>
+          </div>
+        </div>
+
+        A shortcut version of this example looks as follows.
+
+        <div id="tabs-27" class="nanotabs">
+          <ul>
+            <li><a href="#tab27-1" class="selected">YARRRML</a></li>
+            <li><a href="#tab27-2">RML</a></li>
+          </ul>
+          <div id="tab27-1">
+            <pre id="example-lang2-sc" class="example" title="mapping with two languages using shortcuts">
+              mappings:
+                person:
+                  predicateobjects:
+                    - predicates: [foaf:name, rdfs:label]
+                      objects: [[$(firstname), en~lang], [$(lastname), nl~lang]]
+            </pre>
+          </div>
+          <div id="tab27-2">
+            <pre id="example-lang2-sc-rml" class="example" title="mapping with two languages using shortcuts">
+              <#TriplesMap> a rr:TriplesMap; #person
+
+                rr:predicateObjectMap [
+                  a rr:PredicateObjectMap;
+                  rr:predicate foaf:name;
+                  rr:objectMap [
+                    a rr:ObjectMap;
+                    rml:reference "firstname";
+                    rr:language "en"
+                  ];
+                  rr:objectMap [
+                    a rr:ObjectMap;
+                    rml:reference "lastname";
+                    rr:language "nl"
+                  ]
+                ].
+            </pre>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Referring to other mappings</h2>
+
+        <p>
+          In certain use cases triples need to be generated between the records of two mappings.
+          For example, in the following example we have two mappings: persons and projects.
+          In the existing data there is for every person a field <code>projectID</code> referring to the project
+          on which the person is working.
+          Therefore, we want to generate triples between every person and his/her project.
+          The <code>objects</code> collection has an object with the key <code>mapping</code>.
+          The value of this key refers to the mapping that provides the IRIs that will serve as object for the predicate-object combination.
+          Furthermore, a condition is added, so that only persons and projects are linked when they are actually related, based on the <code>projectID</code>
+          of the person and the <code>ID</code> of the project.
+          Note that a condition is not required.
+          But when a condition is used an extra value can be given to a parameter of a function.
+          This is either <code>s</code> or <code>o</code>.
+          <code>s</code> means that the value of the parameter is coming from the subject of the relationship, while
+          <code>o</code> means that the value is coming from the object of the relationship.
+          The default value is <code>s</code>.
+          In this example it would result in relationships between every person and their projects.
+        </p>
+
+        <div id="tabs-28" class="nanotabs">
+          <ul>
+            <li><a href="#tab28-1" class="selected">YARRRML</a></li>
+            <li><a href="#tab28-2">RML</a></li>
+          </ul>
+          <div id="tab28-1">
+            <pre id="example-ref-map" class="example" title="interlinking two mappings">
+              mappings:
+                person:
+                  subjects: http://example.com/person/$(ID)
+                  predicateobjects:
+                    - predicates: foaf:worksFor
+                      objects:
+                      - mapping: project
+                        condition:
+                          function: equal
+                          parameters:
+                            - [str1, $(projectID), s]
+                            - [str2, $(ID), o]
+                project:
+                  subjects: http://example.com/project/$(ID)
+            </pre>
+          </div>
+          <div id="tab28-2">
+            <pre id="example-ref-map-rml" class="example" title="interlinking two mappings">
+              <#TriplesMap> a rr:TriplesMap; #person
+
+                rr:subjectMap [
+                  a rr:SubjectMap;
+                  rr:template "http://example.com/person/{ID}"
+                ]
+
+                rr:predicateObjectMap [
+                  a rr:PredicateObjectMap;
+                  rr:predicate foaf:worksFor;
+                  rr:objectMap [
+                    a rr:RefObjectMap;
+                    rr:parentTriplesMap <#TriplesMap2>;
+                    rr:joinCondition [
+                      rr:child "projectID";
+                      rr:parent "ID"
+                    ]
+                  ]
+                ].
+
+              <#TriplesMap2> a rr:TriplesMap; #person
+
+                rr:subjectMap [
+                  a rr:SubjectMap;
+                  rr:template "http://example.com/project/{ID}"
+                ]
+            </pre>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Graphs</h2>
+
+        <p>
+
+        </p>
+
+        <section>
+          <h3>All triples</h3>
+
+          <div id="tabs-32" class="nanotabs">
+            <ul>
+              <li><a href="#tab32-1" class="selected">YARRRML</a></li>
+              <li><a href="#tab32-2">RML</a></li>
+            </ul>
+            <div id="tab32-1">
+              <pre id="example-graphs-s" class="example" title="mapping with graph for all triples">
+                mappings:
+                  person:
+                    graphs: ex:myGraph
+              </pre>
+            </div>
+            <div id="tab32-2">
+              <pre id="example-graphs-s-rml" class="example" title="mapping with graph for all triples">
+                <#TriplesMap> a rr:TriplesMap; #person
+
+                  rr:subjectMap [
+                    a rr:SubjectMap;
+                    rr:graphMap [
+                      a rr:GraphMap;
+                      rr:template "http://example.org/myGraph"
+                    ]
+                  ].
+              </pre>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h3>All triples with a specific predicate and object</h3>
+
+          <div id="tabs-33" class="nanotabs">
+            <ul>
+              <li><a href="#tab33-1" class="selected">YARRRML</a></li>
+              <li><a href="#tab33-2">RML</a></li>
+            </ul>
+            <div id="tab33-1">
+              <pre id="example-graphs-po" class="example" title="mapping with graph for all triples with a specific predicate and object">
+                mappings:
+                  person:
+                    predicateobjects:
+                     - predicates: foaf:firstName
+                       objects: $(firstname)
+                       graphs: ex:myGraph
+              </pre>
+            </div>
+            <div id="tab33-2">
+              <pre id="example-graphs-po-rml" class="example" title="mapping with graph for all triples with a specific predicate and object">
+                <#TriplesMap> a rr:TriplesMap; #person
+
+                  rr:predicateObjectMap [
+                    a rr:PredicateObjectMap;
+                    rr:predicate foaf:firstName;
+                    rr:objectMap [
+                      a rr:ObjectMap;
+                      rr:template "{firstname}"
+                    ];
+                    rr:graphMap [
+                      a rr:GraphMap;
+                      rr:template "http://example.org/myGraph"
+                    ]
+                  ].
+              </pre>
+            </div>
+          </div>
+        </section>
+      </section>
+    </section>
+
+    <section>
+      <h2>Functions</h2>
+
+      Functions can be added to subjects, predicates, and objects.
+
+      <div id="tabs-29" class="nanotabs">
+        <ul>
+          <li><a href="#tab29-1" class="selected">YARRRML</a></li>
+          <li><a href="#tab29-2">RML</a></li>
+        </ul>
+        <div id="tab29-1">
+          <pre id="example-fn" class="example" title="mapping with function on firstname">
+            mappings:
+              person:
+                predicateobjects:
+                 - predicates: foaf:firstName
+                   objects:
+                    - function: ex:toLowerCase
+                      parameters:
+                       - parameter: ex:input
+                         value: $(firstname)
+          </pre>
+        </div>
+        <div id="tab29-2">
+            <pre id="example-fn-rml" class="example" title="mapping with function on firstname">
+              <#TriplesMap> a rr:TriplesMap; #person
+
+                rr:predicateObjectMap [
+                  a rr:PredicateObjectMap;
+                  rr:predicate foaf:firstName;
+                  rr:objectMap <#FunctionMap>
+                ].
+
+                <#FunctionMap>
+                  fnml:functionValue [
+                    rml:logicalSource <#LogicalSource> ;
+                    rr:predicateObjectMap [
+                      rr:predicate fno:executes ;
+                      rr:objectMap [ rr:constant ex:toLowerCase ]
+                    ] ;
+
+                    rr:predicateObjectMap [
+                      rr:predicate ex:input ;
+                      rr:objectMap [ rml:reference "firstname" ]
+                    ]
+                  ] .
+            </pre>
+        </div>
+      </div>
+
+      A shortcut version of this example looks as follows.
+
+      <div id="tabs-30" class="nanotabs">
+        <ul>
+          <li><a href="#tab30-1" class="selected">YARRRML</a></li>
+          <li><a href="#tab30-2">RML</a></li>
+        </ul>
+        <div id="tab30-1">
+          <pre id="example-fn-sc" class="example" title="mapping with function on firstname using shortcuts">
+            mappings:
+              person:
+                predicateobjects:
+                 - predicates: foaf:firstName
+                   objects:
+                    - function: ex:toLowerCase
+                      parameters:
+                       - [ex:input, $(firstname)]
+          </pre>
+        </div>
+        <div id="tab30-2">
+            <pre id="example-fn-sc-rml" class="example" title="mapping with function on firstname using shortcuts">
+              <#TriplesMap> a rr:TriplesMap; #person
+
+                rr:predicateObjectMap [
+                  a rr:PredicateObjectMap;
+                  rr:predicate foaf:worksFor;
+                  rr:objectMap <#FunctionMap>
+                ].
+
+                <#FunctionMap>
+                  fnml:functionValue [
+                    rml:logicalSource <#LogicalSource> ;
+                    rr:predicateObjectMap [
+                      rr:predicate fno:executes ;
+                      rr:objectMap [ rr:constant ex:toLowerCase ]
+                    ] ;
+
+                    rr:predicateObjectMap [
+                      rr:predicate ex:input ;
+                      rr:objectMap [ rml:reference "firstname" ]
+                    ]
+                  ] .
+            </pre>
+        </div>
+      </div>
+
+      Datatypes can also be assigned to the results of functions.
+
+      <div id="tabs-36" class="nanotabs">
+        <ul>
+          <li><a href="#tab36-1" class="selected">YARRRML</a></li>
+          <li><a href="#tab36-2">RML</a></li>
+        </ul>
+        <div id="tab36-1">
+          <pre id="example-fn-datatype" class="example" title="mapping with function on age and setting datatype to integer">
+            mappings:
+              person:
+                predicateobjects:
+                 - predicates: ex:age
+                   objects:
+                    - function: ex:double
+                      parameters:
+                       - [ex:input, $(age)]
+                      datatype: xsd:integer
+          </pre>
+        </div>
+        <div id="tab36-2">
+            <pre id="example-fn-datatype-rml" class="example" title="mapping with function on age and setting datatype to integer">
+              <#TriplesMap> a rr:TriplesMap; #person
+
+                rr:predicateObjectMap [
+                  a rr:PredicateObjectMap;
+                  rr:predicate foaf:worksFor;
+                  rr:objectMap <#FunctionMap>
+                ].
+
+                <#FunctionMap>
+                  rr:datatype xsd:integer;
+                  fnml:functionValue [
+                    rml:logicalSource <#LogicalSource> ;
+                    rr:predicateObjectMap [
+                      rr:predicate fno:executes ;
+                      rr:objectMap [ rr:constant ex:toLowerCase ]
+                    ] ;
+
+                    rr:predicateObjectMap [
+                      rr:predicate ex:input ;
+                      rr:objectMap [ rml:reference "firstname" ]
+                    ]
+                  ] .
+            </pre>
+        </div>
+      </div>
+
+      It possible to combine multiple functions, i.e., the value of a parameter of a function is the result of another function.
+
+      <div id="tabs-31" class="nanotabs">
+        <ul>
+          <li><a href="#tab31-1" class="selected">YARRRML</a></li>
+          <li><a href="#tab31-2">RML</a></li>
+        </ul>
+        <div id="tab31-1">
+          <pre id="example-fn-recursive" class="example" title="mapping with multiple functions">
+            mappings:
+              person:
+                predicateobjects:
+                 - predicates: schema:name
+                   objects:
+                    - function: ex:escape
+                      parameters:
+                       - parameter: ex:valueParameter
+                         value:
+                           function: ex:toUpperCase
+                           parameters:
+                             - [ex:valueParameter, $(name)]
+                       - [ex:modeParameter, html]
+          </pre>
+        </div>
+        <div id="tab31-2">
+            <pre id="example-fn-recursive-rml" class="example" title="mapping with multiple functions">
+              <#TriplesMap> a rr:TriplesMap; #person
+
+                rr:predicateObjectMap [
+                  a rr:PredicateObjectMap;
+                  rr:predicate schema:name;
+                  rr:objectMap <#FunctionMap>
+                ].
+
+                <#FunctionMap>
+                  fnml:functionValue [
+                    rml:logicalSource <#LogicalSource> ;
+                    rr:predicateObjectMap [
+                      rr:predicate fno:executes ;
+                      rr:objectMap [ rr:constant ex:escape ]
+                    ] ;
+
+                    rr:predicateObjectMap [
+                      rr:predicate ex:valueParameter ;
+                      rr:objectMap <#FunctionMap2>
+                    ];
+
+                    rr:predicateObjectMap [
+                      rr:predicate ex:modeParameter ;
+                      rr:objectMap [ rr:constant "html" ]
+                    ]
+                  ] .
+
+                <#FunctionMap2>
+                  fnml:functionValue [
+                    rml:logicalSource <#LogicalSource> ;
+                    rr:predicateObjectMap [
+                      rr:predicate fno:executes ;
+                      rr:objectMap [ rr:constant ex:toUpperCase ]
+                    ] ;
+
+                    rr:predicateObjectMap [
+                      rr:predicate ex:valueParameter ;
+                      rr:objectMap [ rml:reference "name" ]
+                    ]
+                  ] .
+            </pre>
+        </div>
+      </div>
+
+      Additionally, it is possible to combine the function and its parameters in one line.
+      The function is followed by brackets (<code>(...)</code>),
+      every parameter-value pair is separated by a comma (<code>,</code>), and
+      parameters are separated from their value by an equal sign (<code>=</code>).
+
+      <div id="tabs-34" class="nanotabs">
+        <ul>
+          <li><a href="#tab34-1" class="selected">YARRRML</a></li>
+          <li><a href="#tab34-2">RML</a></li>
+        </ul>
+        <div id="tab34-1">
+          <pre id="example-fn-oneline" class="example" title="mapping with function on firstname using one line">
+            mappings:
+              person:
+                predicateobjects:
+                 - predicates: foaf:firstName
+                   objects:
+                    - function: ex:toLowerCase(ex:input = $(firstname))
+          </pre>
+        </div>
+        <div id="tab34-2">
+            <pre id="example-fn-oneline-rml" class="example" title="mapping with function on firstname using one line">
+              <#TriplesMap> a rr:TriplesMap; #person
+
+                rr:predicateObjectMap [
+                  a rr:PredicateObjectMap;
+                  rr:predicate foaf:worksFor;
+                  rr:objectMap <#FunctionMap>
+                ].
+
+                <#FunctionMap>
+                  fnml:functionValue [
+                    rml:logicalSource <#LogicalSource> ;
+                    rr:predicateObjectMap [
+                      rr:predicate fno:executes ;
+                      rr:objectMap [ rr:constant ex:toLowerCase ]
+                    ] ;
+
+                    rr:predicateObjectMap [
+                      rr:predicate ex:input ;
+                      rr:objectMap [ rml:reference "firstname" ]
+                    ]
+                  ] .
+            </pre>
+        </div>
+      </div>
+
+      Note that it is possible to exclude the prefix of the parameters
+      if it is the same as the prefix of the function:
+
+      <div id="tabs-35" class="nanotabs">
+        <ul>
+          <li><a href="#tab35-1" class="selected">YARRRML</a></li>
+          <li><a href="#tab35-2">RML</a></li>
+        </ul>
+        <div id="tab35-1">
+          <pre id="example-fn-oneline-no-prefix" class="example" title="mapping with function on firstname using one line without prefix">
+            mappings:
+              person:
+                predicateobjects:
+                 - predicates: foaf:firstName
+                   objects:
+                    - function: ex:toLowerCase(input = $(firstname))
+          </pre>
+        </div>
+        <div id="tab35-2">
+            <pre id="example-fn-oneline-rml-no-prefix" class="example" title="mapping with function on firstname using one line without prefix">
+              <#TriplesMap> a rr:TriplesMap; #person
+
+                rr:predicateObjectMap [
+                  a rr:PredicateObjectMap;
+                  rr:predicate foaf:worksFor;
+                  rr:objectMap <#FunctionMap>
+                ].
+
+                <#FunctionMap>
+                  fnml:functionValue [
+                    rml:logicalSource <#LogicalSource> ;
+                    rr:predicateObjectMap [
+                      rr:predicate fno:executes ;
+                      rr:objectMap [ rr:constant ex:toLowerCase ]
+                    ] ;
+
+                    rr:predicateObjectMap [
+                      rr:predicate ex:input ;
+                      rr:objectMap [ rml:reference "firstname" ]
+                    ]
+                  ] .
+            </pre>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Conditions</h2>
+
+      <p>
+        A subject or predicate-object combination is in certain cases only generated when a condition is fulfilled.
+        In the following example, the predicate-object is only generated when the <code>firstname</code> is valid.
+      </p>
+
+        <pre id="example-cond" class="example" title="mapping with condition on predicate object">
+          mappings:
+            person:
+              predicateobjects:
+               - predicates: foaf:firstName
+                 objects: $(firstname)
+                 condition:
+                  function: ex:isValid
+                  parameters:
+                   - [ex:input, $(firstname)]
+        </pre>
+
+        In the following example, the mapping is only executed for every record that has set its <code>ID</code>.
+
+        <pre id="example-cond2" class="example" title="mapping with condition">
+          mappings:
+            person:
+              subjects: http://example.com/{ID}
+              condition:
+                  function: ex:isSet
+                  parameters:
+                   - [ex:input, $(ID)]
+              predicateobjects:
+               - predicates: foaf:firstName
+                 objects: $(firstname)
+        </pre>
+    </section>
+
+    <section>
+      <h2>External references</h2>
+
+      <p>
+        It is possible to define references that do not refer to data in a data source.
+        These references are called "external references".
+        They are provided via the <code>external</code> key that has
+        as value a list of references with their values.
+        In the following example two external references are defined:
+        <code>name</code> and <code>city</code> with as values <code>John</code> and <code>Ghent</code>.
+      </p>
+
+      <pre id="example-er-1" class="example" title="defining external references">
+          external:
+            name: John
+            city: Ghent
+
+          mappings:
+            person:
+              subjects: http://example.org/$(id)
+              po:
+                - [ex:name, $(_name)]
+                - [ex:firstName, $(_name)]
+                - [ex:city, $(_city)]
+      </pre>
+
+      <p>
+      Replacing the external references with their actual values results in the following.
+      </p>
+
+      <pre id="example-er-2" class="example" title="external references are filled in">
+          mappings:
+            person:
+              s: http://example.org/$(id)
+              po:
+                - [ex:name, John]
+                - [ex:firstName, John]
+                - [ex:city, Ghent]
+      </pre>
+
+      <p>
+      If the value for an external reference is not provided, then the reference is not replaced.
+      In the following example no value is provided for <code>name</code>.
+      </p>
+
+      <pre id="example-er-3" class="example" title="defining some external references">
+          external:
+            city: Ghent
+
+          mappings:
+            person:
+              subjects: http://example.org/$(id)
+              po:
+                - [ex:name, $(_name)]
+                - [ex:firstName, $(_name)]
+                - [ex:city, $(_city)]
+      </pre>
+
+      <p>
+      Replacing the remaining external reference with its actual value results in the following.
+      </p>
+
+      <pre id="example-er-4" class="example" title="some external references are filled in">
+          mappings:
+            person:
+              subjects: http://example.org/$(id)
+              po:
+                - [ex:name, $(_name)]
+                - [ex:firstName, $(_name)]
+                - [ex:city, Ghent]
+      </pre>
+
+      <p>
+      <code>$(_name)</code> is not replaced.
+      </p>
+
+      <p>
+      If you want use a reference as both a regular and an external reference,
+      you add a <code>\</code> before the regular reference.
+      In the following example <code>$(_name)</code> is an external reference and
+      <code>$(\_name)</code> is a regular reference.
+      </p>
+
+      <pre id="example-er-5" class="example" title="defining both regular and external references">
+          external:
+            name: John
+
+          mappings:
+            person:
+              subjects: http://example.org/$(id)
+              po:
+                - [ex:name, $(_name)]
+                - [ex:firstName, $(\_name)]
+      </pre>
+
+      Replacing the external reference with its actual value results in the following.
+
+      <pre id="example-er-6" class="example" title="external reference is filled in, ignoring reular reference">
+          mappings:
+            person:
+              subjects: http://example.org/$(id)
+              po:
+                - [ex:name, John]
+                - [ex:firstName, $(_name)]
+      </pre>
+
+    </section>
+
+    <section>
+      <h2>Shortcuts</h2>
+
+      <section>
+        <h2>Keys</h2>
+
+          <ul>
+            <li>mappings: mapping, m</li>
+            <li>subjects: subject, s</li>
+            <li>predicates: predicate, p</li>
+            <li>inversepredicates: inversepredicate, i</li>
+            <li>objects: object, o</li>
+            <li>predicateobjects: po</li>
+            <li>function: fn, f</li>
+            <li>parameters: pms</li>
+            <li>parameter: pm</li>
+            <li>value: v</li>
+            <li>authors: author, a</li>
+          </ul>
+      </section>
+
+      <section>
+        <h2>Predicates</h2>
+
+          <ul>
+            <li>http://www.w3.org/1999/02/22-rdf-syntax-ns#type: a</li>
+          </ul>
+      </section>
+    </section>
+
+    <section>
+      <h2>Reference implementation</h2>
+
+      <p>
+        The <a href="https://github.com/rmlio/yarrrml-parser">YARRRML Parser</a>
+        is a reference implementation that generates [R2]RML rules based on YARRRML.
+        The parser's code also includes tests to validate a parser's conformance to the YARRRML specification.
+      </p>
+    </section>
+  </body>
+
+  <script src="https://www.sunsean.com/nanotabs/nanotabs.js"></script>
+</html>
