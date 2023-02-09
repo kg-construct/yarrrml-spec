@@ -382,7 +382,7 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 .hljs-strong {
   font-weight: bold;
 }
-</style><link rel="stylesheet" href="https://www.w3.org/StyleSheets/TR/2016/W3C-UD"><link rel="canonical" href="https://w3id.org/yarrrml/spec/"><script id="initialUserConfig" type="application/json">{
+</style><link rel="stylesheet" href="https://www.w3.org/StyleSheets/TR/2016/W3C-UD"><link rel="canonical" href="https://w3id.org/kg-construct/yarrrml"><script id="initialUserConfig" type="application/json">{
   "localBiblio": {
     "DCAT": {
       "title": "Data Catalog Vocabulary (DCAT) - Version 2",
@@ -434,6 +434,20 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
       "publisher": "IDLab - imec - Ghent University",
       "date": "18 May 2021"
     },
+    "RMLStar": {
+      "title": "Star in RML",
+      "href": "https://w3id.org/kg-construct/rml-star",
+      "status": "Unofficial Draft",
+      "authors": [
+        "Ana Iglesias-Molina",
+        "Julián Arenas-Guerrero",
+        "Thomas Delva",
+        "David Chaves-Fraga",
+        "Anastasia Dimou"
+      ],
+      "publisher": "W3C CG in KGC",
+      "date": "05 May 2022"
+    },
     "RML": {
       "title": "RDF Mapping Language (RML)",
       "href": "https://rml.io/specs/rml/",
@@ -479,19 +493,30 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
     },
     {
       "name": "Anastasia Dimou",
-      "mailto": "anastasia.dimou@ugent.be",
-      "company": "Ghent University - IDLab, imec"
+      "mailto": "anastasia.dimou@kuleuven.be",
+      "company": "KULeuven - DTAI-EAVISE"
+    },
+    {
+      "name": "David Chaves-Fraga",
+      "url": "https://davidchavesfraga.com",
+      "mailto": "david.chaves@upm.es",
+      "company": "Universidad Politécnica de Madrid - OEG"
+    },
+    {
+      "name": "Ana Iglesias-Molina",
+      "mailto": "ana.iglesiasm@upm.es",
+      "company": "Universidad Politécnica de Madrid - OEG"
     }
   ],
   "shortName": "yarrrml",
-  "previousURI": "https://w3id.org/yarrrml/spec/index-20210930.html",
-  "previousPublishDate": "2021-09-30",
+  "previousURI": "https://w3id.org/kg-construct/yarrrml/20230126/index.html",
+  "previousPublishDate": "2023-01-26",
   "previousMaturity": "unofficial",
-  "canonicalURI": "https://w3id.org/yarrrml/spec/",
+  "canonicalURI": "https://w3id.org/kg-construct/yarrrml",
   "logos": [
     {
       "src": "resources/images/logo.png",
-      "href": "https://w3id.org/yarrrml",
+      "href": "https://w3id.org/kg-construct/yarrrml",
       "alt": "YARRRML",
       "width": 164
     }
@@ -501,8 +526,8 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
       "key": "This Version",
       "data": [
         {
-          "value": "https://w3id.org/yarrrml/spec/20230126/",
-          "href": "https://w3id.org/yarrrml/spec/20230126/"
+          "value": "https://w3id.org/kg-construct/yarrrml/20230209/",
+          "href": "https://w3id.org/kg-construct/yarrrml/20230209/"
         }
       ]
     },
@@ -510,8 +535,8 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
       "key": "Previous Version",
       "data": [
         {
-          "value": "https://w3id.org/yarrrml/spec/20210930/",
-          "href": "https://w3id.org/yarrrml/spec/20210930/"
+          "value": "https://w3id.org/yarrrml/spec/20230126/",
+          "href": "https://w3id.org/yarrrml/spec/20230126/"
         }
       ]
     },
@@ -519,14 +544,14 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
       "key": "Website",
       "data": [
         {
-          "value": "https://w3id.org/yarrrml",
-          "href": "https://w3id.org/yarrrml"
+          "value": "https://w3id.org/kg-construct/yarrrml",
+          "href": "https://w3id.org/kg-construct/yarrrml"
         }
       ]
     }
   ],
-  "publishISODate": "2023-01-26T00:00:00.000Z",
-  "generatedSubtitle": "Unofficial Draft 26 January 2023"
+  "publishISODate": "2023-02-09T00:00:00.000Z",
+  "generatedSubtitle": "Unofficial Draft 09 February 2023"
 }</script><meta name="description" content="YARRRML (pronounced /jɑɹməl/) is a human readable text-based representation for declarative generation rules.
         It is a subset of [YAML],
         a widely used data serialization language designed to be human-friendly."></head>
@@ -534,7 +559,7 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
   
   <h1 class="title p-name" id="title">YARRRML</h1>
   
-  <h2 id="unofficial-draft-26-january-2023">Unofficial Draft <time class="dt-published" datetime="2023-01-26">26 January 2023</time></h2>
+  <h2 id="unofficial-draft-09-february-2023">Unofficial Draft <time class="dt-published" datetime="2023-02-09">09 February 2023</time></h2>
   <dl>
     
     
@@ -545,14 +570,14 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
     
     
     <dt>Editors:</dt>
-    <dd class="p-author h-card vcard"><a class="u-url url p-name fn" href="https://dylanvanassche.be/">Dylan Van Assche</a>, Ghent University - IDLab, imec, <a class="ed_mailto u-email email" href="mailto:dylan.vanassche@ugent.be">dylan.vanassche@ugent.be</a></dd><dd class="p-author h-card vcard"><a class="u-url url p-name fn" href="https://ben.de-meester.org">Ben De Meester</a>, Ghent University - IDLab, imec, <a class="ed_mailto u-email email" href="mailto:ben.demeester@ugent.be">ben.demeester@ugent.be</a></dd><dd class="p-author h-card vcard"><a class="u-url url p-name fn" href="https://pieterheyvaert.com">Pieter Heyvaert</a>, Ghent University - IDLab, imec, <a class="ed_mailto u-email email" href="mailto:pieter.heyvaert@ugent.be">pieter.heyvaert@ugent.be</a></dd><dd class="p-author h-card vcard"><span class="p-name fn">Anastasia Dimou</span>, Ghent University - IDLab, imec, <a class="ed_mailto u-email email" href="mailto:anastasia.dimou@ugent.be">anastasia.dimou@ugent.be</a></dd>
+    <dd class="p-author h-card vcard"><a class="u-url url p-name fn" href="https://dylanvanassche.be/">Dylan Van Assche</a>, Ghent University - IDLab, imec, <a class="ed_mailto u-email email" href="mailto:dylan.vanassche@ugent.be">dylan.vanassche@ugent.be</a></dd><dd class="p-author h-card vcard"><a class="u-url url p-name fn" href="https://ben.de-meester.org">Ben De Meester</a>, Ghent University - IDLab, imec, <a class="ed_mailto u-email email" href="mailto:ben.demeester@ugent.be">ben.demeester@ugent.be</a></dd><dd class="p-author h-card vcard"><a class="u-url url p-name fn" href="https://pieterheyvaert.com">Pieter Heyvaert</a>, Ghent University - IDLab, imec, <a class="ed_mailto u-email email" href="mailto:pieter.heyvaert@ugent.be">pieter.heyvaert@ugent.be</a></dd><dd class="p-author h-card vcard"><span class="p-name fn">Anastasia Dimou</span>, KULeuven - DTAI-EAVISE, <a class="ed_mailto u-email email" href="mailto:anastasia.dimou@kuleuven.be">anastasia.dimou@kuleuven.be</a></dd><dd class="p-author h-card vcard"><a class="u-url url p-name fn" href="https://davidchavesfraga.com">David Chaves-Fraga</a>, Universidad Politécnica de Madrid - OEG, <a class="ed_mailto u-email email" href="mailto:david.chaves@upm.es">david.chaves@upm.es</a></dd><dd class="p-author h-card vcard"><span class="p-name fn">Ana Iglesias-Molina</span>, Universidad Politécnica de Madrid - OEG, <a class="ed_mailto u-email email" href="mailto:ana.iglesiasm@upm.es">ana.iglesiasm@upm.es</a></dd>
     
     <dt>This Version:</dt><dd>
-      <a href="https://w3id.org/yarrrml/spec/20230126/">https://w3id.org/yarrrml/spec/20230126/</a>
+      <a href="https://w3id.org/kg-construct/yarrrml/20230209/">https://w3id.org/kg-construct/yarrrml/20230209/</a>
     </dd><dt>Previous Version:</dt><dd>
-      <a href="https://w3id.org/yarrrml/spec/20210930/">https://w3id.org/yarrrml/spec/20210930/</a>
+      <a href="https://w3id.org/yarrrml/spec/20230126/">https://w3id.org/yarrrml/spec/20230126/</a>
     </dd><dt>Website:</dt><dd>
-      <a href="https://w3id.org/yarrrml">https://w3id.org/yarrrml</a>
+      <a href="https://w3id.org/kg-construct/yarrrml">https://w3id.org/kg-construct/yarrrml</a>
     </dd>
   </dl>
   
@@ -575,7 +600,7 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
     <section id="sotd" class="introductory"><h2 id="status-of-this-document">Status of This Document</h2><p>
     This document is draft of a potential specification. It has no official standing of
     any kind and does not represent the support or consensus of any standards organisation.
-  </p></section><nav id="toc"><h2 class="introductory" id="table-of-contents">Table of Contents</h2><ol class="toc"><li class="tocline"><a href="#terminology" class="tocxref"><span class="secno">1. </span>Terminology</a></li><li class="tocline"><a href="#profiles" class="tocxref"><span class="secno">2. </span>Profiles</a></li><li class="tocline"><a href="#base-iri" class="tocxref"><span class="secno">3. </span>Base IRI</a></li><li class="tocline"><a href="#prefixes-and-namespaces" class="tocxref"><span class="secno">4. </span>Prefixes and namespaces</a></li><li class="tocline"><a href="#authors" class="tocxref"><span class="secno">5. </span>Authors</a></li><li class="tocline"><a href="#template" class="tocxref"><span class="secno">6. </span>Template</a></li><li class="tocline"><a href="#data-sources" class="tocxref"><span class="secno">7. </span>Data sources</a><ol class="toc"><li class="tocline"><a href="#keys" class="tocxref"><span class="secno">7.1 </span>Keys</a></li><li class="tocline"><a href="#type-1" class="tocxref"><span class="secno">7.2 </span>Type</a></li><li class="tocline"><a href="#access-0" class="tocxref"><span class="secno">7.3 </span>Access</a></li><li class="tocline"><a href="#query-formulation" class="tocxref"><span class="secno">7.4 </span>Query formulation</a></li><li class="tocline"><a href="#query" class="tocxref"><span class="secno">7.5 </span>Query</a></li><li class="tocline"><a href="#reference-formulation" class="tocxref"><span class="secno">7.6 </span>Reference formulation</a></li><li class="tocline"><a href="#iterator" class="tocxref"><span class="secno">7.7 </span>Iterator</a></li><li class="tocline"><a href="#delimiter" class="tocxref"><span class="secno">7.8 </span>Delimiter</a></li><li class="tocline"><a href="#encoding" class="tocxref"><span class="secno">7.9 </span>Encoding</a></li><li class="tocline"><a href="#credentials" class="tocxref"><span class="secno">7.10 </span>Credentials</a></li><li class="tocline"><a href="#content-type" class="tocxref"><span class="secno">7.11 </span>Content type</a></li><li class="tocline"><a href="#operation-type" class="tocxref"><span class="secno">7.12 </span>Operation type</a></li><li class="tocline"><a href="#security" class="tocxref"><span class="secno">7.13 </span>Security</a></li><li class="tocline"><a href="#query-formulation-vs-reference-formulation" class="tocxref"><span class="secno">7.14 </span>Query formulation vs reference formulation</a></li><li class="tocline"><a href="#examples" class="tocxref"><span class="secno">7.15 </span>Examples</a></li></ol></li><li class="tocline"><a href="#targets" class="tocxref"><span class="secno">8. </span>Targets</a><ol class="toc"><li class="tocline"><a href="#keys-0" class="tocxref"><span class="secno">8.1 </span>Keys</a></li><li class="tocline"><a href="#type-2" class="tocxref"><span class="secno">8.2 </span>Type</a></li><li class="tocline"><a href="#access-1" class="tocxref"><span class="secno">8.3 </span>Access</a></li><li class="tocline"><a href="#serialization" class="tocxref"><span class="secno">8.4 </span>Serialization</a></li><li class="tocline"><a href="#compression" class="tocxref"><span class="secno">8.5 </span>Compression</a></li><li class="tocline"><a href="#examples-0" class="tocxref"><span class="secno">8.6 </span>Examples</a></li></ol></li><li class="tocline"><a href="#mappings" class="tocxref"><span class="secno">9. </span>Mappings</a><ol class="toc"><li class="tocline"><a href="#data-sources-0" class="tocxref"><span class="secno">9.1 </span>Data sources</a></li><li class="tocline"><a href="#targets-0" class="tocxref"><span class="secno">9.2 </span>Targets</a></li><li class="tocline"><a href="#subjects" class="tocxref"><span class="secno">9.3 </span>Subjects</a></li><li class="tocline"><a href="#predicates-and-objects" class="tocxref"><span class="secno">9.4 </span>Predicates and objects</a></li><li class="tocline"><a href="#datatypes" class="tocxref"><span class="secno">9.5 </span>Datatypes</a></li><li class="tocline"><a href="#languages" class="tocxref"><span class="secno">9.6 </span>Languages</a></li><li class="tocline"><a href="#referring-to-other-mappings" class="tocxref"><span class="secno">9.7 </span>Referring to other mappings</a></li><li class="tocline"><a href="#graphs" class="tocxref"><span class="secno">9.8 </span>Graphs</a><ol class="toc"><li class="tocline"><a href="#all-triples" class="tocxref"><span class="secno">9.8.1 </span>All triples</a></li><li class="tocline"><a href="#all-triples-with-a-specific-predicate-and-object" class="tocxref"><span class="secno">9.8.2 </span>All triples with a specific predicate and object</a></li></ol></li></ol></li><li class="tocline"><a href="#functions" class="tocxref"><span class="secno">10. </span>Functions</a></li><li class="tocline"><a href="#conditions" class="tocxref"><span class="secno">11. </span>Conditions</a></li><li class="tocline"><a href="#external-references" class="tocxref"><span class="secno">12. </span>External references</a></li><li class="tocline"><a href="#shortcuts" class="tocxref"><span class="secno">13. </span>Shortcuts</a><ol class="toc"><li class="tocline"><a href="#keys-1" class="tocxref"><span class="secno">13.1 </span>Keys</a></li><li class="tocline"><a href="#predicates" class="tocxref"><span class="secno">13.2 </span>Predicates</a></li></ol></li><li class="tocline"><a href="#reference-implementation" class="tocxref"><span class="secno">14. </span>Reference implementation</a></li><li class="tocline"><a href="#references" class="tocxref"><span class="secno">A. </span>References</a><ol class="toc"><li class="tocline"><a href="#informative-references" class="tocxref"><span class="secno">A.1 </span>Informative references</a></li></ol></li></ol></nav>
+  </p></section><nav id="toc"><h2 class="introductory" id="table-of-contents">Table of Contents</h2><ol class="toc"><li class="tocline"><a href="#terminology" class="tocxref"><span class="secno">1. </span>Terminology</a></li><li class="tocline"><a href="#profiles" class="tocxref"><span class="secno">2. </span>Profiles</a></li><li class="tocline"><a href="#base-iri" class="tocxref"><span class="secno">3. </span>Base IRI</a></li><li class="tocline"><a href="#prefixes-and-namespaces" class="tocxref"><span class="secno">4. </span>Prefixes and namespaces</a></li><li class="tocline"><a href="#authors" class="tocxref"><span class="secno">5. </span>Authors</a></li><li class="tocline"><a href="#template" class="tocxref"><span class="secno">6. </span>Template</a></li><li class="tocline"><a href="#data-sources" class="tocxref"><span class="secno">7. </span>Data sources</a><ol class="toc"><li class="tocline"><a href="#keys" class="tocxref"><span class="secno">7.1 </span>Keys</a></li><li class="tocline"><a href="#type-1" class="tocxref"><span class="secno">7.2 </span>Type</a></li><li class="tocline"><a href="#access-0" class="tocxref"><span class="secno">7.3 </span>Access</a></li><li class="tocline"><a href="#query-formulation" class="tocxref"><span class="secno">7.4 </span>Query formulation</a></li><li class="tocline"><a href="#query" class="tocxref"><span class="secno">7.5 </span>Query</a></li><li class="tocline"><a href="#reference-formulation" class="tocxref"><span class="secno">7.6 </span>Reference formulation</a></li><li class="tocline"><a href="#iterator" class="tocxref"><span class="secno">7.7 </span>Iterator</a></li><li class="tocline"><a href="#delimiter" class="tocxref"><span class="secno">7.8 </span>Delimiter</a></li><li class="tocline"><a href="#encoding" class="tocxref"><span class="secno">7.9 </span>Encoding</a></li><li class="tocline"><a href="#credentials" class="tocxref"><span class="secno">7.10 </span>Credentials</a></li><li class="tocline"><a href="#content-type" class="tocxref"><span class="secno">7.11 </span>Content type</a></li><li class="tocline"><a href="#operation-type" class="tocxref"><span class="secno">7.12 </span>Operation type</a></li><li class="tocline"><a href="#security" class="tocxref"><span class="secno">7.13 </span>Security</a></li><li class="tocline"><a href="#query-formulation-vs-reference-formulation" class="tocxref"><span class="secno">7.14 </span>Query formulation vs reference formulation</a></li><li class="tocline"><a href="#examples" class="tocxref"><span class="secno">7.15 </span>Examples</a></li></ol></li><li class="tocline"><a href="#targets" class="tocxref"><span class="secno">8. </span>Targets</a><ol class="toc"><li class="tocline"><a href="#keys-0" class="tocxref"><span class="secno">8.1 </span>Keys</a></li><li class="tocline"><a href="#type-2" class="tocxref"><span class="secno">8.2 </span>Type</a></li><li class="tocline"><a href="#access-1" class="tocxref"><span class="secno">8.3 </span>Access</a></li><li class="tocline"><a href="#serialization" class="tocxref"><span class="secno">8.4 </span>Serialization</a></li><li class="tocline"><a href="#compression" class="tocxref"><span class="secno">8.5 </span>Compression</a></li><li class="tocline"><a href="#examples-0" class="tocxref"><span class="secno">8.6 </span>Examples</a></li></ol></li><li class="tocline"><a href="#mappings" class="tocxref"><span class="secno">9. </span>Mappings</a><ol class="toc"><li class="tocline"><a href="#data-sources-0" class="tocxref"><span class="secno">9.1 </span>Data sources</a></li><li class="tocline"><a href="#targets-0" class="tocxref"><span class="secno">9.2 </span>Targets</a></li><li class="tocline"><a href="#subjects" class="tocxref"><span class="secno">9.3 </span>Subjects</a></li><li class="tocline"><a href="#predicates-and-objects" class="tocxref"><span class="secno">9.4 </span>Predicates and objects</a></li><li class="tocline"><a href="#datatypes" class="tocxref"><span class="secno">9.5 </span>Datatypes</a></li><li class="tocline"><a href="#languages" class="tocxref"><span class="secno">9.6 </span>Languages</a></li><li class="tocline"><a href="#referring-to-other-mappings" class="tocxref"><span class="secno">9.7 </span>Referring to other mappings</a></li></ol></li><li class="tocline"><a href="#graphs" class="tocxref"><span class="secno">10. </span>Graphs</a><ol class="toc"><li class="tocline"><a href="#all-triples" class="tocxref"><span class="secno">10.1 </span>All triples</a></li><li class="tocline"><a href="#all-triples-with-a-specific-predicate-and-object" class="tocxref"><span class="secno">10.2 </span>All triples with a specific predicate and object</a></li></ol></li><li class="tocline"><a href="#functions" class="tocxref"><span class="secno">11. </span>Functions</a></li><li class="tocline"><a href="#conditions" class="tocxref"><span class="secno">12. </span>Conditions</a></li><li class="tocline"><a href="#rdf-star" class="tocxref"><span class="secno">13. </span>RDF-Star</a><ol class="toc"><li class="tocline"><a href="#keys-1" class="tocxref"><span class="secno">13.1 </span>Keys</a></li><li class="tocline"><a href="#examples-1" class="tocxref"><span class="secno">13.2 </span>Examples</a></li></ol></li><li class="tocline"><a href="#external-references" class="tocxref"><span class="secno">14. </span>External references</a></li><li class="tocline"><a href="#shortcuts" class="tocxref"><span class="secno">15. </span>Shortcuts</a><ol class="toc"><li class="tocline"><a href="#keys-2" class="tocxref"><span class="secno">15.1 </span>Keys</a></li><li class="tocline"><a href="#predicates" class="tocxref"><span class="secno">15.2 </span>Predicates</a></li></ol></li><li class="tocline"><a href="#implementations" class="tocxref"><span class="secno">16. </span>Implementations</a></li><li class="tocline"><a href="#references" class="tocxref"><span class="secno">A. </span>References</a><ol class="toc"><li class="tocline"><a href="#informative-references" class="tocxref"><span class="secno">A.1 </span>Informative references</a></li></ol></li></ol></nav>
 
     <section id="terminology">
       <!--OddPage--><h2 id="x1-terminology"><span class="secno">1. </span>Terminology</h2>
@@ -615,6 +640,7 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
         <li>R2RML: applies the semantics specified by [<cite><a class="bibref" href="#bib-R2RML">R2RML</a></cite>];</li>
         <li>RML: applies the semantics specified by [<cite><a class="bibref" href="#bib-RML">RML</a></cite>]; and</li>
         <li>RMLT: applies the semantics specified by [<cite><a class="bibref" href="#bib-RMLT">RMLT</a></cite>].</li>
+        <li>RMLStar: applies the semantics specified by [<cite><a class="bibref" href="#bib-RMLStar">RMLStar</a></cite>].</li>
       </ul>
 
       <p>
@@ -2412,6 +2438,40 @@ mapping:
   ].</pre></div>
           </div>
         </div>
+
+        The datatype can be also a data reference
+
+        <div id="tabs-23a" class="nanotabs">
+          <ul>
+            <li><a href="#tab23-1a" class="selected">YARRRML</a></li>
+            <li><a href="#tab23-2a" class="">RML</a></li>
+          </ul>
+          <div id="tab23-1a" style="display: block;">
+             <div class="example"><div class="example-title marker"><span>Example 78</span><span style="text-transform: none">: mapping with one reference datatype</span></div><pre id="example-lang" class="hljs javascript" aria-busy="false">mappings:
+  person:
+    predicateobjects:
+      - predicates: foaf:firstName
+        <span class="hljs-attr">objects</span>:
+          value: $(firstname)
+          <span class="hljs-attr">datatype</span>: $(my_datatype)</pre></div>
+          </div>
+          <div id="tab23-2a" style="display: none;">
+            <div class="example"><div class="example-title marker"><span>Example 79</span><span style="text-transform: none">: mapping with one reference datatype</span></div><pre id="example-lang-rml" class="hljs css" aria-busy="false">&lt;<span class="hljs-selector-id">#TriplesMap</span>&gt; <span class="hljs-selector-tag">a</span> rr:TriplesMap; <span class="hljs-selector-id">#person</span>
+
+  rr:predicateObjectMap [
+    a rr:PredicateObjectMap;
+    rr:predicate foaf:firstName;
+    rr:objectMap [
+      a rr:ObjectMap;
+      rml:reference <span class="hljs-string">"firstname"</span>;
+      rml:datatypeMap [
+        rml:reference <span class="hljs-string">"my_language"</span>
+      ];
+    ]
+  ].</pre></div>
+          </div>
+        </div>
+
       </section>
 
       <section id="languages">
@@ -2423,7 +2483,7 @@ mapping:
             <li><a href="#tab24-2" class="">RML</a></li>
           </ul>
           <div id="tab24-1" style="display: block;">
-             <div class="example"><div class="example-title marker"><span>Example 78</span><span style="text-transform: none">: mapping with one language</span></div><pre id="example-lang" class="hljs javascript" aria-busy="false">mappings:
+             <div class="example"><div class="example-title marker"><span>Example 80</span><span style="text-transform: none">: mapping with one language</span></div><pre id="example-lang" class="hljs javascript" aria-busy="false">mappings:
   person:
     predicateobjects:
       - predicates: foaf:firstName
@@ -2432,7 +2492,7 @@ mapping:
           <span class="hljs-attr">language</span>: en</pre></div>
           </div>
           <div id="tab24-2" style="display: none;">
-            <div class="example"><div class="example-title marker"><span>Example 79</span><span style="text-transform: none">: mapping with one language</span></div><pre id="example-lang-rml" class="hljs css" aria-busy="false">&lt;<span class="hljs-selector-id">#TriplesMap</span>&gt; <span class="hljs-selector-tag">a</span> rr:TriplesMap; <span class="hljs-selector-id">#person</span>
+            <div class="example"><div class="example-title marker"><span>Example 81</span><span style="text-transform: none">: mapping with one language</span></div><pre id="example-lang-rml" class="hljs css" aria-busy="false">&lt;<span class="hljs-selector-id">#TriplesMap</span>&gt; <span class="hljs-selector-tag">a</span> rr:TriplesMap; <span class="hljs-selector-id">#person</span>
 
   rr:predicateObjectMap [
     a rr:PredicateObjectMap;
@@ -2454,13 +2514,13 @@ mapping:
             <li><a href="#tab25-2" class="">RML</a></li>
           </ul>
           <div id="tab25-1" style="display: block;">
-            <div class="example"><div class="example-title marker"><span>Example 80</span><span style="text-transform: none">: mapping with one language using shortcuts</span></div><pre id="example-lang-sc" class="hljs javascript" aria-busy="false">mappings:
+            <div class="example"><div class="example-title marker"><span>Example 82</span><span style="text-transform: none">: mapping with one language using shortcuts</span></div><pre id="example-lang-sc" class="hljs javascript" aria-busy="false">mappings:
   person:
     predicateobjects:
       - [foaf:firstName, $(firstname), en~lang]</pre></div>
           </div>
           <div id="tab25-2" style="display: none;">
-            <div class="example"><div class="example-title marker"><span>Example 81</span><span style="text-transform: none">: mapping with one language using shortcuts</span></div><pre id="example-lang-sc-rml" class="hljs css" aria-busy="false">&lt;<span class="hljs-selector-id">#TriplesMap</span>&gt; <span class="hljs-selector-tag">a</span> rr:TriplesMap; <span class="hljs-selector-id">#person</span>
+            <div class="example"><div class="example-title marker"><span>Example 83</span><span style="text-transform: none">: mapping with one language using shortcuts</span></div><pre id="example-lang-sc-rml" class="hljs css" aria-busy="false">&lt;<span class="hljs-selector-id">#TriplesMap</span>&gt; <span class="hljs-selector-tag">a</span> rr:TriplesMap; <span class="hljs-selector-id">#person</span>
 
   rr:predicateObjectMap [
     a rr:PredicateObjectMap;
@@ -2480,7 +2540,7 @@ mapping:
             <li><a href="#tab26-2" class="">RML</a></li>
           </ul>
           <div id="tab26-1" style="display: block;">
-            <div class="example"><div class="example-title marker"><span>Example 82</span><span style="text-transform: none">: mapping with two languages</span></div><pre id="example-lang2" class="hljs javascript" aria-busy="false">mappings:
+            <div class="example"><div class="example-title marker"><span>Example 84</span><span style="text-transform: none">: mapping with two languages</span></div><pre id="example-lang2" class="hljs javascript" aria-busy="false">mappings:
   person:
     predicateobjects:
       - predicates: foaf:name
@@ -2491,7 +2551,7 @@ mapping:
             <span class="hljs-attr">language</span>: nl</pre></div>
           </div>
           <div id="tab26-2" style="display: none;">
-            <div class="example"><div class="example-title marker"><span>Example 83</span><span style="text-transform: none">: mapping with two languages</span></div><pre id="example-lang2-rml" class="hljs css" aria-busy="false">&lt;<span class="hljs-selector-id">#TriplesMap</span>&gt; <span class="hljs-selector-tag">a</span> rr:TriplesMap; <span class="hljs-selector-id">#person</span>
+            <div class="example"><div class="example-title marker"><span>Example 85</span><span style="text-transform: none">: mapping with two languages</span></div><pre id="example-lang2-rml" class="hljs css" aria-busy="false">&lt;<span class="hljs-selector-id">#TriplesMap</span>&gt; <span class="hljs-selector-tag">a</span> rr:TriplesMap; <span class="hljs-selector-id">#person</span>
 
   rr:predicateObjectMap [
     a rr:PredicateObjectMap;
@@ -2518,14 +2578,14 @@ mapping:
             <li><a href="#tab27-2" class="">RML</a></li>
           </ul>
           <div id="tab27-1" style="display: block;">
-            <div class="example"><div class="example-title marker"><span>Example 84</span><span style="text-transform: none">: mapping with two languages using shortcuts</span></div><pre id="example-lang2-sc" class="hljs javascript" aria-busy="false">mappings:
+            <div class="example"><div class="example-title marker"><span>Example 86</span><span style="text-transform: none">: mapping with two languages using shortcuts</span></div><pre id="example-lang2-sc" class="hljs javascript" aria-busy="false">mappings:
   person:
     predicateobjects:
       - predicates: [foaf:name, <span class="hljs-attr">rdfs</span>:label]
         <span class="hljs-attr">objects</span>: [[$(firstname), en~lang], [$(lastname), nl~lang]]</pre></div>
           </div>
           <div id="tab27-2" style="display: none;">
-            <div class="example"><div class="example-title marker"><span>Example 85</span><span style="text-transform: none">: mapping with two languages using shortcuts</span></div><pre id="example-lang2-sc-rml" class="hljs css" aria-busy="false">&lt;<span class="hljs-selector-id">#TriplesMap</span>&gt; <span class="hljs-selector-tag">a</span> rr:TriplesMap; <span class="hljs-selector-id">#person</span>
+            <div class="example"><div class="example-title marker"><span>Example 87</span><span style="text-transform: none">: mapping with two languages using shortcuts</span></div><pre id="example-lang2-sc-rml" class="hljs css" aria-busy="false">&lt;<span class="hljs-selector-id">#TriplesMap</span>&gt; <span class="hljs-selector-tag">a</span> rr:TriplesMap; <span class="hljs-selector-id">#person</span>
 
   rr:predicateObjectMap [
     a rr:PredicateObjectMap;
@@ -2543,6 +2603,39 @@ mapping:
   ].</pre></div>
           </div>
         </div>
+
+        <p> The language can be also a data reference</p>
+        <div id="tabs-24a" class="nanotabs">
+          <ul>
+            <li><a href="#tab24-1a" class="selected">YARRRML</a></li>
+            <li><a href="#tab24-2a" class="">RML</a></li>
+          </ul>
+          <div id="tab24-1a" style="display: block;">
+             <div class="example"><div class="example-title marker"><span>Example 88</span><span style="text-transform: none">: mapping with one reference language</span></div><pre id="example-lang" class="hljs javascript" aria-busy="false">mappings:
+  person:
+    predicateobjects:
+      - predicates: foaf:firstName
+        <span class="hljs-attr">objects</span>:
+          value: $(firstname)
+          <span class="hljs-attr">language</span>: $(my_language)</pre></div>
+          </div>
+          <div id="tab24-2a" style="display: none;">
+            <div class="example"><div class="example-title marker"><span>Example 89</span><span style="text-transform: none">: mapping with one reference language</span></div><pre id="example-lang-rml" class="hljs javascript" aria-busy="false">&lt;#TriplesMap&gt; a rr:TriplesMap; #person
+
+  <span class="hljs-attr">rr</span>:predicateObjectMap [
+    a rr:PredicateObjectMap;
+    rr:predicate foaf:firstName;
+    rr:objectMap [
+      a rr:ObjectMap;
+      rml:reference <span class="hljs-string">"firstname"</span>;
+      rml:languageMap [
+        rml:reference <span class="hljs-string">"my_language"</span>
+      ];
+    ]
+  ].</pre></div>
+          </div>
+        </div>
+
       </section>
 
       <section id="referring-to-other-mappings">
@@ -2573,7 +2666,7 @@ mapping:
             <li><a href="#tab28-2" class="">RML</a></li>
           </ul>
           <div id="tab28-1" style="display: block;">
-            <div class="example"><div class="example-title marker"><span>Example 86</span><span style="text-transform: none">: interlinking two mappings</span></div><pre id="example-ref-map" class="hljs javascript" aria-busy="false">mappings:
+            <div class="example"><div class="example-title marker"><span>Example 90</span><span style="text-transform: none">: interlinking two mappings</span></div><pre id="example-ref-map" class="hljs javascript" aria-busy="false">mappings:
   person:
     subjects: http:<span class="hljs-comment">//example.com/person/$(ID)</span>
     predicateobjects:
@@ -2589,7 +2682,57 @@ mapping:
     <span class="hljs-title">subjects</span>: <span class="hljs-title">http</span>://<span class="hljs-title">example</span>.<span class="hljs-title">com</span>/<span class="hljs-title">project</span>/<span class="hljs-title">$</span>(<span class="hljs-params">ID</span>)</span></pre></div>
           </div>
           <div id="tab28-2" style="display: none;">
-            <div class="example"><div class="example-title marker"><span>Example 87</span><span style="text-transform: none">: interlinking two mappings</span></div><pre id="example-ref-map-rml" class="hljs css" aria-busy="false">&lt;<span class="hljs-selector-id">#TriplesMap</span>&gt; <span class="hljs-selector-tag">a</span> rr:TriplesMap; <span class="hljs-selector-id">#person</span>
+            <div class="example"><div class="example-title marker"><span>Example 91</span><span style="text-transform: none">: interlinking two mappings</span></div><pre id="example-ref-map-rml" class="hljs css" aria-busy="false">&lt;<span class="hljs-selector-id">#TriplesMap</span>&gt; <span class="hljs-selector-tag">a</span> rr:TriplesMap; <span class="hljs-selector-id">#person</span>
+
+  rr:subjectMap [
+    a rr:SubjectMap;
+    rr:template <span class="hljs-string">"http://example.com/person/{ID}"</span>
+  ]
+
+  rr:predicateObjectMap [
+    a rr:PredicateObjectMap;
+    rr:predicate foaf:worksFor;
+    rr:objectMap [
+      a rr:RefObjectMap;
+      rr:parentTriplesMap &lt;#TriplesMap2&gt;;
+      rr:joinCondition [
+        rr:child <span class="hljs-string">"projectID"</span>;
+        rr:parent <span class="hljs-string">"ID"</span>
+      ]
+    ]
+  ].
+
+&lt;#TriplesMap2&gt; a rr:TriplesMap; <span class="hljs-selector-id">#person</span>
+
+  rr:subjectMap [
+    a rr:SubjectMap;
+    rr:template <span class="hljs-string">"http://example.com/project/{ID}"</span>
+  ]</pre></div>
+          </div>
+        </div>
+      </section>
+
+       <p> The joins can also be declared using inline <a href="#functions">functions</a> in a more compact way. If more than one condition is required, the <code>equal</code> function can be repeated several times. The <code>join</code> and <code>equal</code> do not need prefix as they are specific functions of R2RML/RML. If no parameters name are provide the order <em class="rfc2119" title="MUST">MUST</em> be <code>parent mapping reference</code>, and within equal function <code>str1 (or s)</code> first and <code>str2 (or o)</code> second. </p>
+
+        <div id="tabs-28a" class="nanotabs">
+          <ul>
+            <li><a href="#tab28-1a" class="selected">YARRRML</a></li>
+            <li><a href="#tab28-2a" class="">RML</a></li>
+          </ul>
+          <div id="tab28-1a" style="display: block;">
+            <div class="example"><div class="example-title marker"><span>Example 92</span><span style="text-transform: none">: interlinking two mappings</span></div><pre id="example-ref-map" class="hljs javascript" aria-busy="false">mappings:
+  person:
+    subjects: http:<span class="hljs-comment">//example.com/person/$(ID)</span>
+    predicateobjects:
+      - predicates: foaf:worksFor
+        <span class="hljs-attr">objects</span>:
+        - <span class="hljs-function"><span class="hljs-keyword">function</span>: <span class="hljs-title">join</span>(<span class="hljs-params">mapping=project, equal(str1=$(projectID),str2=$(ID))</span>)
+
+  <span class="hljs-title">project</span>:
+    <span class="hljs-title">subjects</span>: <span class="hljs-title">http</span>://<span class="hljs-title">example</span>.<span class="hljs-title">com</span>/<span class="hljs-title">project</span>/<span class="hljs-title">$</span>(<span class="hljs-params">ID</span>)</span></pre></div>
+          </div>
+          <div id="tab28-2a" style="display: none;">
+            <div class="example"><div class="example-title marker"><span>Example 93</span><span style="text-transform: none">: interlinking two mappings</span></div><pre id="example-ref-map-rml" class="hljs css" aria-busy="false">&lt;<span class="hljs-selector-id">#TriplesMap</span>&gt; <span class="hljs-selector-tag">a</span> rr:TriplesMap; <span class="hljs-selector-id">#person</span>
 
   rr:subjectMap [
     a rr:SubjectMap;
@@ -2620,14 +2763,14 @@ mapping:
       </section>
 
       <section id="graphs">
-        <h3 id="x9-8-graphs"><span class="secno">9.8 </span>Graphs</h3>
+        <!--OddPage--><h2 id="x10-graphs"><span class="secno">10. </span>Graphs</h2>
 
         <p>
 
         </p>
 
         <section id="all-triples">
-          <h4 id="x9-8-1-all-triples"><span class="secno">9.8.1 </span>All triples</h4>
+          <h3 id="x10-1-all-triples"><span class="secno">10.1 </span>All triples</h3>
 
           <div id="tabs-32" class="nanotabs">
             <ul>
@@ -2635,12 +2778,12 @@ mapping:
               <li><a href="#tab32-2" class="">RML</a></li>
             </ul>
             <div id="tab32-1" style="display: block;">
-              <div class="example"><div class="example-title marker"><span>Example 88</span><span style="text-transform: none">: mapping with graph for all triples</span></div><pre id="example-graphs-s" class="hljs" aria-busy="false">mappings:
+              <div class="example"><div class="example-title marker"><span>Example 94</span><span style="text-transform: none">: mapping with graph for all triples</span></div><pre id="example-graphs-s" class="hljs" aria-busy="false">mappings:
   person:
     graphs: ex:myGraph</pre></div>
             </div>
             <div id="tab32-2" style="display: none;">
-              <div class="example"><div class="example-title marker"><span>Example 89</span><span style="text-transform: none">: mapping with graph for all triples</span></div><pre id="example-graphs-s-rml" class="hljs css" aria-busy="false">&lt;<span class="hljs-selector-id">#TriplesMap</span>&gt; <span class="hljs-selector-tag">a</span> rr:TriplesMap; <span class="hljs-selector-id">#person</span>
+              <div class="example"><div class="example-title marker"><span>Example 95</span><span style="text-transform: none">: mapping with graph for all triples</span></div><pre id="example-graphs-s-rml" class="hljs css" aria-busy="false">&lt;<span class="hljs-selector-id">#TriplesMap</span>&gt; <span class="hljs-selector-tag">a</span> rr:TriplesMap; <span class="hljs-selector-id">#person</span>
 
   rr:subjectMap [
     a rr:SubjectMap;
@@ -2654,7 +2797,7 @@ mapping:
         </section>
 
         <section id="all-triples-with-a-specific-predicate-and-object">
-          <h4 id="x9-8-2-all-triples-with-a-specific-predicate-and-object"><span class="secno">9.8.2 </span>All triples with a specific predicate and object</h4>
+          <h3 id="x10-2-all-triples-with-a-specific-predicate-and-object"><span class="secno">10.2 </span>All triples with a specific predicate and object</h3>
 
           <div id="tabs-33" class="nanotabs">
             <ul>
@@ -2662,7 +2805,7 @@ mapping:
               <li><a href="#tab33-2" class="">RML</a></li>
             </ul>
             <div id="tab33-1" style="display: block;">
-              <div class="example"><div class="example-title marker"><span>Example 90</span><span style="text-transform: none">: mapping with graph for all triples with a specific predicate and object</span></div><pre id="example-graphs-po" class="hljs javascript" aria-busy="false">mappings:
+              <div class="example"><div class="example-title marker"><span>Example 96</span><span style="text-transform: none">: mapping with graph for all triples with a specific predicate and object</span></div><pre id="example-graphs-po" class="hljs javascript" aria-busy="false">mappings:
   person:
     predicateobjects:
      - predicates: foaf:firstName
@@ -2670,7 +2813,7 @@ mapping:
        <span class="hljs-attr">graphs</span>: ex:myGraph</pre></div>
             </div>
             <div id="tab33-2" style="display: none;">
-              <div class="example"><div class="example-title marker"><span>Example 91</span><span style="text-transform: none">: mapping with graph for all triples with a specific predicate and object</span></div><pre id="example-graphs-po-rml" class="hljs css" aria-busy="false">&lt;<span class="hljs-selector-id">#TriplesMap</span>&gt; <span class="hljs-selector-tag">a</span> rr:TriplesMap; <span class="hljs-selector-id">#person</span>
+              <div class="example"><div class="example-title marker"><span>Example 97</span><span style="text-transform: none">: mapping with graph for all triples with a specific predicate and object</span></div><pre id="example-graphs-po-rml" class="hljs css" aria-busy="false">&lt;<span class="hljs-selector-id">#TriplesMap</span>&gt; <span class="hljs-selector-tag">a</span> rr:TriplesMap; <span class="hljs-selector-id">#person</span>
 
   rr:predicateObjectMap [
     a rr:PredicateObjectMap;
@@ -2688,10 +2831,10 @@ mapping:
           </div>
         </section>
       </section>
-    </section>
+    
 
     <section id="functions">
-      <!--OddPage--><h2 id="x10-functions"><span class="secno">10. </span>Functions</h2>
+      <!--OddPage--><h2 id="x11-functions"><span class="secno">11. </span>Functions</h2>
 
       Functions can be added to subjects, predicates, and objects.
 
@@ -2701,7 +2844,7 @@ mapping:
           <li><a href="#tab29-2" class="">RML</a></li>
         </ul>
         <div id="tab29-1" style="display: block;">
-          <div class="example"><div class="example-title marker"><span>Example 92</span><span style="text-transform: none">: mapping with function on firstname</span></div><pre id="example-fn" class="hljs javascript" aria-busy="false">mappings:
+          <div class="example"><div class="example-title marker"><span>Example 98</span><span style="text-transform: none">: mapping with function on firstname</span></div><pre id="example-fn" class="hljs javascript" aria-busy="false">mappings:
   person:
     predicateobjects:
      - predicates: foaf:firstName
@@ -2712,7 +2855,7 @@ mapping:
              <span class="hljs-title">value</span>: <span class="hljs-title">$</span>(<span class="hljs-params">firstname</span>)</span></pre></div>
         </div>
         <div id="tab29-2" style="display: none;">
-            <div class="example"><div class="example-title marker"><span>Example 93</span><span style="text-transform: none">: mapping with function on firstname</span></div><pre id="example-fn-rml" class="hljs css" aria-busy="false">&lt;<span class="hljs-selector-id">#TriplesMap</span>&gt; <span class="hljs-selector-tag">a</span> rr:TriplesMap; <span class="hljs-selector-id">#person</span>
+            <div class="example"><div class="example-title marker"><span>Example 99</span><span style="text-transform: none">: mapping with function on firstname</span></div><pre id="example-fn-rml" class="hljs css" aria-busy="false">&lt;<span class="hljs-selector-id">#TriplesMap</span>&gt; <span class="hljs-selector-tag">a</span> rr:TriplesMap; <span class="hljs-selector-id">#person</span>
 
   rr:predicateObjectMap [
     a rr:PredicateObjectMap;
@@ -2744,7 +2887,7 @@ mapping:
           <li><a href="#tab30-2" class="">RML</a></li>
         </ul>
         <div id="tab30-1" style="display: block;">
-          <div class="example"><div class="example-title marker"><span>Example 94</span><span style="text-transform: none">: mapping with function on firstname using shortcuts</span></div><pre id="example-fn-sc" class="hljs javascript" aria-busy="false">mappings:
+          <div class="example"><div class="example-title marker"><span>Example 100</span><span style="text-transform: none">: mapping with function on firstname using shortcuts</span></div><pre id="example-fn-sc" class="hljs javascript" aria-busy="false">mappings:
   person:
     predicateobjects:
      - predicates: foaf:firstName
@@ -2754,7 +2897,7 @@ mapping:
            - [<span class="hljs-title">ex</span>:<span class="hljs-title">input</span>, <span class="hljs-title">$</span>(<span class="hljs-params">firstname</span>)]</span></pre></div>
         </div>
         <div id="tab30-2" style="display: none;">
-            <div class="example"><div class="example-title marker"><span>Example 95</span><span style="text-transform: none">: mapping with function on firstname using shortcuts</span></div><pre id="example-fn-sc-rml" class="hljs css" aria-busy="false">&lt;<span class="hljs-selector-id">#TriplesMap</span>&gt; <span class="hljs-selector-tag">a</span> rr:TriplesMap; <span class="hljs-selector-id">#person</span>
+            <div class="example"><div class="example-title marker"><span>Example 101</span><span style="text-transform: none">: mapping with function on firstname using shortcuts</span></div><pre id="example-fn-sc-rml" class="hljs css" aria-busy="false">&lt;<span class="hljs-selector-id">#TriplesMap</span>&gt; <span class="hljs-selector-tag">a</span> rr:TriplesMap; <span class="hljs-selector-id">#person</span>
 
   rr:predicateObjectMap [
     a rr:PredicateObjectMap;
@@ -2786,7 +2929,7 @@ mapping:
           <li><a href="#tab36-2" class="">RML</a></li>
         </ul>
         <div id="tab36-1" style="display: block;">
-          <div class="example"><div class="example-title marker"><span>Example 96</span><span style="text-transform: none">: mapping with function on age and setting datatype to integer</span></div><pre id="example-fn-datatype" class="hljs javascript" aria-busy="false">mappings:
+          <div class="example"><div class="example-title marker"><span>Example 102</span><span style="text-transform: none">: mapping with function on age and setting datatype to integer</span></div><pre id="example-fn-datatype" class="hljs javascript" aria-busy="false">mappings:
   person:
     predicateobjects:
      - predicates: ex:age
@@ -2797,7 +2940,7 @@ mapping:
           <span class="hljs-title">datatype</span>: <span class="hljs-title">xsd</span>:<span class="hljs-title">integer</span></span></pre></div>
         </div>
         <div id="tab36-2" style="display: none;">
-            <div class="example"><div class="example-title marker"><span>Example 97</span><span style="text-transform: none">: mapping with function on age and setting datatype to integer</span></div><pre id="example-fn-datatype-rml" class="hljs css" aria-busy="false">&lt;<span class="hljs-selector-id">#TriplesMap</span>&gt; <span class="hljs-selector-tag">a</span> rr:TriplesMap; <span class="hljs-selector-id">#person</span>
+            <div class="example"><div class="example-title marker"><span>Example 103</span><span style="text-transform: none">: mapping with function on age and setting datatype to integer</span></div><pre id="example-fn-datatype-rml" class="hljs css" aria-busy="false">&lt;<span class="hljs-selector-id">#TriplesMap</span>&gt; <span class="hljs-selector-tag">a</span> rr:TriplesMap; <span class="hljs-selector-id">#person</span>
 
   rr:predicateObjectMap [
     a rr:PredicateObjectMap;
@@ -2830,7 +2973,7 @@ mapping:
           <li><a href="#tab31-2" class="">RML</a></li>
         </ul>
         <div id="tab31-1" style="display: block;">
-          <div class="example"><div class="example-title marker"><span>Example 98</span><span style="text-transform: none">: mapping with multiple functions</span></div><pre id="example-fn-recursive" class="hljs javascript" aria-busy="false">mappings:
+          <div class="example"><div class="example-title marker"><span>Example 104</span><span style="text-transform: none">: mapping with multiple functions</span></div><pre id="example-fn-recursive" class="hljs javascript" aria-busy="false">mappings:
   person:
     predicateobjects:
      - predicates: schema:name
@@ -2845,7 +2988,7 @@ mapping:
            - [<span class="hljs-title">ex</span>:<span class="hljs-title">modeParameter</span>, <span class="hljs-title">html</span>]</span></span></pre></div>
         </div>
         <div id="tab31-2" style="display: none;">
-            <div class="example"><div class="example-title marker"><span>Example 99</span><span style="text-transform: none">: mapping with multiple functions</span></div><pre id="example-fn-recursive-rml" class="hljs css" aria-busy="false">&lt;<span class="hljs-selector-id">#TriplesMap</span>&gt; <span class="hljs-selector-tag">a</span> rr:TriplesMap; <span class="hljs-selector-id">#person</span>
+            <div class="example"><div class="example-title marker"><span>Example 105</span><span style="text-transform: none">: mapping with multiple functions</span></div><pre id="example-fn-recursive-rml" class="hljs css" aria-busy="false">&lt;<span class="hljs-selector-id">#TriplesMap</span>&gt; <span class="hljs-selector-tag">a</span> rr:TriplesMap; <span class="hljs-selector-id">#person</span>
 
   rr:predicateObjectMap [
     a rr:PredicateObjectMap;
@@ -2899,7 +3042,7 @@ mapping:
           <li><a href="#tab34-2" class="">RML</a></li>
         </ul>
         <div id="tab34-1" style="display: block;">
-          <div class="example"><div class="example-title marker"><span>Example 100</span><span style="text-transform: none">: mapping with function on firstname using one line</span></div><pre id="example-fn-oneline" class="hljs javascript" aria-busy="false">mappings:
+          <div class="example"><div class="example-title marker"><span>Example 106</span><span style="text-transform: none">: mapping with function on firstname using one line</span></div><pre id="example-fn-oneline" class="hljs javascript" aria-busy="false">mappings:
   person:
     predicateobjects:
      - predicates: foaf:firstName
@@ -2907,7 +3050,7 @@ mapping:
         - <span class="hljs-function"><span class="hljs-keyword">function</span>: <span class="hljs-title">ex</span>:<span class="hljs-title">toLowerCase</span>(<span class="hljs-params">ex:input = $(firstname)</span>)</span></pre></div>
         </div>
         <div id="tab34-2" style="display: none;">
-            <div class="example"><div class="example-title marker"><span>Example 101</span><span style="text-transform: none">: mapping with function on firstname using one line</span></div><pre id="example-fn-oneline-rml" class="hljs css" aria-busy="false">&lt;<span class="hljs-selector-id">#TriplesMap</span>&gt; <span class="hljs-selector-tag">a</span> rr:TriplesMap; <span class="hljs-selector-id">#person</span>
+            <div class="example"><div class="example-title marker"><span>Example 107</span><span style="text-transform: none">: mapping with function on firstname using one line</span></div><pre id="example-fn-oneline-rml" class="hljs css" aria-busy="false">&lt;<span class="hljs-selector-id">#TriplesMap</span>&gt; <span class="hljs-selector-tag">a</span> rr:TriplesMap; <span class="hljs-selector-id">#person</span>
 
   rr:predicateObjectMap [
     a rr:PredicateObjectMap;
@@ -2940,7 +3083,7 @@ mapping:
           <li><a href="#tab35-2" class="">RML</a></li>
         </ul>
         <div id="tab35-1" style="display: block;">
-          <div class="example"><div class="example-title marker"><span>Example 102</span><span style="text-transform: none">: mapping with function on firstname using one line without prefix</span></div><pre id="example-fn-oneline-no-prefix" class="hljs javascript" aria-busy="false">mappings:
+          <div class="example"><div class="example-title marker"><span>Example 108</span><span style="text-transform: none">: mapping with function on firstname using one line without prefix</span></div><pre id="example-fn-oneline-no-prefix" class="hljs javascript" aria-busy="false">mappings:
   person:
     predicateobjects:
      - predicates: foaf:firstName
@@ -2948,7 +3091,7 @@ mapping:
         - <span class="hljs-function"><span class="hljs-keyword">function</span>: <span class="hljs-title">ex</span>:<span class="hljs-title">toLowerCase</span>(<span class="hljs-params">input = $(firstname)</span>)</span></pre></div>
         </div>
         <div id="tab35-2" style="display: none;">
-            <div class="example"><div class="example-title marker"><span>Example 103</span><span style="text-transform: none">: mapping with function on firstname using one line without prefix</span></div><pre id="example-fn-oneline-rml-no-prefix" class="hljs css" aria-busy="false">&lt;<span class="hljs-selector-id">#TriplesMap</span>&gt; <span class="hljs-selector-tag">a</span> rr:TriplesMap; <span class="hljs-selector-id">#person</span>
+            <div class="example"><div class="example-title marker"><span>Example 109</span><span style="text-transform: none">: mapping with function on firstname using one line without prefix</span></div><pre id="example-fn-oneline-rml-no-prefix" class="hljs css" aria-busy="false">&lt;<span class="hljs-selector-id">#TriplesMap</span>&gt; <span class="hljs-selector-tag">a</span> rr:TriplesMap; <span class="hljs-selector-id">#person</span>
 
   rr:predicateObjectMap [
     a rr:PredicateObjectMap;
@@ -2974,14 +3117,14 @@ mapping:
     </section>
 
     <section id="conditions">
-      <!--OddPage--><h2 id="x11-conditions"><span class="secno">11. </span>Conditions</h2>
+      <!--OddPage--><h2 id="x12-conditions"><span class="secno">12. </span>Conditions</h2>
 
       <p>
         A subject or predicate-object combination is in certain cases only generated when a condition is fulfilled.
         In the following example, the predicate-object is only generated when the <code>firstname</code> is valid.
       </p>
 
-        <div class="example"><div class="example-title marker"><span>Example 104</span><span style="text-transform: none">: mapping with condition on predicate object</span></div><pre id="example-cond" class="hljs javascript" aria-busy="false">mappings:
+        <div class="example"><div class="example-title marker"><span>Example 110</span><span style="text-transform: none">: mapping with condition on predicate object</span></div><pre id="example-cond" class="hljs javascript" aria-busy="false">mappings:
   person:
     predicateobjects:
      - predicates: foaf:firstName
@@ -2993,7 +3136,7 @@ mapping:
 
         In the following example, the mapping is only executed for every record that has set its <code>ID</code>.
 
-        <div class="example"><div class="example-title marker"><span>Example 105</span><span style="text-transform: none">: mapping with condition</span></div><pre id="example-cond2" class="hljs javascript" aria-busy="false">mappings:
+        <div class="example"><div class="example-title marker"><span>Example 111</span><span style="text-transform: none">: mapping with condition</span></div><pre id="example-cond2" class="hljs javascript" aria-busy="false">mappings:
   person:
     subjects: http:<span class="hljs-comment">//example.com/{ID}</span>
     condition:
@@ -3005,8 +3148,275 @@ mapping:
        <span class="hljs-title">objects</span>: <span class="hljs-title">$</span>(<span class="hljs-params">firstname</span>)</span></pre></div>
     </section>
 
+    <section id="rdf-star">
+      <!--OddPage--><h2 id="x13-rdf-star"><span class="secno">13. </span>RDF-Star</h2>
+
+      An YARRRML-star mapping defines a mapping from any data in a structured source format to RDF-star.
+      It enables the generation of quoted triples in the position of subject and/or object.
+
+      Quoted triples can be created by referencing the mapping identifier using the <code>quoted</code> keyword.
+      It is also possible to create non-asserted quoted triples using the <code>quotedNonAsserted</code> keyword.
+
+      <section id="keys-1">
+        <h3 id="x13-1-keys"><span class="secno">13.1 </span>Keys</h3>
+
+        <dl>
+          <dt><dfn data-dfn-type="dfn" id="dfn-quoted">quoted</dfn></dt>
+          <dd>Quoted mapping.<br>
+            Required profiles: RMLStar. <br>
+            Datatype: Mapping reference.
+          </dd>
+          <dt><dfn data-dfn-type="dfn" id="dfn-quotednonasserted">quotedNonAsserted</dfn></dt>
+          <dd>Non-asserted quoted mapping.<br>
+            Required profiles: RMLStar. <br>
+            Datatype: Mapping reference.
+          </dd>
+        </dl>
+      </section>
+
+    
+      <section id="examples-1">
+        <h3 id="x13-2-examples"><span class="secno">13.2 </span>Examples</h3>
+
+
+      <div id="tabs-60" class="nanotabs">
+        <ul>
+          <li><a href="#tab60-1" class="selected">YARRRML</a></li>
+          <li><a href="#tab60-2" class="">RML</a></li>
+        </ul>
+        <div id="tab60-1" style="display: block;">
+          <div class="example"><div class="example-title marker"><span>Example 112</span><span style="text-transform: none">: Quoted mapping in object</span></div><pre id="example-fn-oneline-no-prefix" class="hljs javascript" aria-busy="false">mappings:
+  person:
+    subject: http:<span class="hljs-comment">//example.org/person/$(Name)</span>
+    predicateobjects:
+     - predicates: ex:confirms
+       <span class="hljs-attr">objects</span>:
+        - quoted: student
+  <span class="hljs-attr">student</span>:
+    subject: http:<span class="hljs-comment">//example.org/student/$(Student)</span>
+    predicateobjects:
+     - [a, <span class="hljs-attr">ex</span>:Student]</pre></div>
+        </div>
+        <div id="tab60-2" style="display: none;">
+            <div class="example"><div class="example-title marker"><span>Example 113</span><span style="text-transform: none">: Quoted mapping in object</span></div><pre id="example-fn-oneline-rml-no-prefix" class="hljs css" aria-busy="false">&lt;<span class="hljs-selector-id">#person</span>&gt;
+  <span class="hljs-selector-tag">a</span> rr:TriplesMap ;
+  rml:subjectMap [
+    rr:template <span class="hljs-string">"http://example.com/person/{Name}"</span>
+  ] ;
+  rr:predicateObjectMap [
+    rr:predicate ex:confirmse ;
+    rml:objectMap [
+      rml:quotedTriplesMap &lt;#student&gt;;
+    ];
+  ] .
+
+&lt;<span class="hljs-selector-id">#student</span>&gt;
+  <span class="hljs-selector-tag">a</span> rr:TriplesMap ;
+  rml:subjectMap [
+    rr:template <span class="hljs-string">"http://example.org/student/{Student}"</span>;
+  ] ;
+  rr:predicateObjectMap [
+    rr:predicate rdf:type ;
+    rml:object ex:Student
+  ] .</pre></div>
+        </div>
+      </div>
+
+
+      <code>Quoted</code> mappings can be also defined in subjects
+
+      <div id="tabs-61" class="nanotabs">
+        <ul>
+          <li><a href="#tab61-1" class="selected">YARRRML</a></li>
+          <li><a href="#tab61-2" class="">RML</a></li>
+        </ul>
+        <div id="tab61-1" style="display: block;">
+          <div class="example"><div class="example-title marker"><span>Example 114</span><span style="text-transform: none">: Quoted mapping in subject</span></div><pre id="example-fn-oneline-no-prefix" class="hljs javascript" aria-busy="false">mappings:
+  person:
+    subject:
+     - quoted: student
+    <span class="hljs-attr">predicateobjects</span>:
+     - predicates: ex:accordingTo
+       <span class="hljs-attr">objects</span>: http:<span class="hljs-comment">//example.org/person/$(Name)</span>
+  student:
+    subject: http:<span class="hljs-comment">//example.org/student/$(Student)</span>
+    predicateobjects:
+     - [a, <span class="hljs-attr">ex</span>:Student]</pre></div>
+        </div>
+        <div id="tab61-2" style="display: none;">
+            <div class="example"><div class="example-title marker"><span>Example 115</span><span style="text-transform: none">: Quoted mapping in subject</span></div><pre id="example-fn-oneline-rml-no-prefix" class="hljs css" aria-busy="false">&lt;<span class="hljs-selector-id">#person</span>&gt;
+  <span class="hljs-selector-tag">a</span> rr:TriplesMap ;
+  rml:subjectMap [
+    rml:quotedTriplesMap &lt;#student&gt;;
+  ] ;
+  rr:predicateObjectMap [
+    rr:predicate ex:accordingTo ;
+    rml:objectMap [
+      rr:template <span class="hljs-string">"http://example.org/person/{Name}"</span>;
+    ];
+  ] .
+
+&lt;<span class="hljs-selector-id">#student</span>&gt;
+  <span class="hljs-selector-tag">a</span> rr:TriplesMap ;
+  rml:subjectMap [
+    rr:template <span class="hljs-string">"http://example.org/student/{Student}"</span>;
+  ] ;
+  rr:predicateObjectMap [
+    rr:predicate rdf:type ;
+    rml:object ex:Student
+  ] .</pre></div>
+        </div>
+      </div>
+
+      Quoted triples can be non asserted in the RDF-star graph using the <code>QuotedNonAsserted</code> key
+
+      <div id="tabs-62" class="nanotabs">
+        <ul>
+          <li><a href="#tab62-1" class="selected">YARRRML</a></li>
+          <li><a href="#tab62-2" class="">RML</a></li>
+        </ul>
+        <div id="tab62-1" style="display: block;">
+          <div class="example"><div class="example-title marker"><span>Example 116</span><span style="text-transform: none">: Quoted non-asserted mapping in object</span></div><pre id="example-fn-oneline-no-prefix" class="hljs javascript" aria-busy="false">mappings:
+  person:
+    subject: http:<span class="hljs-comment">//example.org/person/$(Name)</span>
+    predicateobjects:
+     - predicates: ex:confirms
+       <span class="hljs-attr">objects</span>:
+        - quotedNonAsserted: student
+  <span class="hljs-attr">student</span>:
+    subject: http:<span class="hljs-comment">//example.org/student/$(Student)</span>
+    predicateobjects:
+     - [a, <span class="hljs-attr">ex</span>:Student]</pre></div>
+        </div>
+        <div id="tab62-2" style="display: none;">
+            <div class="example"><div class="example-title marker"><span>Example 117</span><span style="text-transform: none">: Quoted non-asserted mapping in object</span></div><pre id="example-fn-oneline-rml-no-prefix" class="hljs css" aria-busy="false">&lt;<span class="hljs-selector-id">#person</span>&gt;
+  <span class="hljs-selector-tag">a</span> rr:TriplesMap ;
+  rml:subjectMap [
+    rr:template <span class="hljs-string">"http://example.com/person/{Name}"</span>
+  ] ;
+  rr:predicateObjectMap [
+    rr:predicate foaf:firstName ;
+    rml:objectMap [
+      rml:quotedTriplesMap &lt;#student&gt;;
+    ];
+  ] .
+
+&lt;<span class="hljs-selector-id">#student</span>&gt;
+  <span class="hljs-selector-tag">a</span> rml:NonAssertedTriplesMap, rr:TriplesMap ;
+  rml:subjectMap [
+    rr:template <span class="hljs-string">"http://example.org/student/{Student}"</span>;
+  ] ;
+  rr:predicateObjectMap [
+    rr:predicate rdf:type ;
+    rml:object ex:Student
+  ] .</pre></div>
+        </div>
+      </div>
+
+      Joins can also be defined in the same way with <code>quoted</code> and <code>quotedNonAsserted</code>
+
+      <div id="tabs-43" class="nanotabs">
+        <ul>
+          <li><a href="#tab63-1" class="selected">YARRRML</a></li>
+          <li><a href="#tab63-2" class="">RML</a></li>
+        </ul>
+        <div id="tab63-1" style="display: block;">
+          <div class="example"><div class="example-title marker"><span>Example 118</span><span style="text-transform: none">: Join in quoted mapping in subject</span></div><pre id="example-fn-oneline-no-prefix" class="hljs javascript" aria-busy="false">mappings:
+  person:
+    subject:
+     - quoted: student
+       <span class="hljs-attr">condition</span>:
+       <span class="hljs-function"><span class="hljs-keyword">function</span>: <span class="hljs-title">equal</span>
+       <span class="hljs-title">parameters</span>:
+         - [<span class="hljs-title">str1</span>, <span class="hljs-title">$</span>(<span class="hljs-params">condition1</span>)]
+         - [<span class="hljs-title">str2</span>, <span class="hljs-title">$</span>(<span class="hljs-params">condition2</span>)]
+    <span class="hljs-title">predicateobjects</span>:
+     - <span class="hljs-title">predicates</span>: <span class="hljs-title">foaf</span>:<span class="hljs-title">firstName</span>
+       <span class="hljs-title">objects</span>: <span class="hljs-title">$</span>(<span class="hljs-params">Name</span>)
+  <span class="hljs-title">student</span>:
+    <span class="hljs-title">subject</span>: <span class="hljs-title">http</span>://<span class="hljs-title">example</span>.<span class="hljs-title">org</span>/<span class="hljs-title">student</span>/</span>{Student}
+    <span class="hljs-attr">predicateobjects</span>:
+     - [a, <span class="hljs-attr">ex</span>:Student]</pre></div>
+        </div>
+        <div id="tab63-2" style="display: none;">
+            <div class="example"><div class="example-title marker"><span>Example 119</span><span style="text-transform: none">: Join in quoted mapping in subject</span></div><pre id="example-fn-oneline-rml-no-prefix" class="hljs css" aria-busy="false">&lt;<span class="hljs-selector-id">#person</span>&gt;
+  <span class="hljs-selector-tag">a</span> rr:TriplesMap ;
+  rml:subjectMap [
+    rml:quotedTriplesMap &lt;#student&gt;;
+    rr:joinCondition [
+      rr:child <span class="hljs-string">"condition1"</span>;
+      rr:parent <span class="hljs-string">"condition2"</span>;
+    ];
+  ] ;
+  rr:predicateObjectMap [
+    rr:predicate foaf:firstName ;
+    rml:object <span class="hljs-string">"Name"</span>;
+  ] .
+
+&lt;<span class="hljs-selector-id">#student</span>&gt;
+  <span class="hljs-selector-tag">a</span> rr:TriplesMap ;
+  rml:subjectMap [
+    rr:template <span class="hljs-string">"http://example.org/student/{Student}"</span>;
+  ] ;
+  rr:predicateObjectMap [
+    rr:predicate rdf:type ;
+    rml:object ex:Student
+  ] .</pre></div>
+        </div>
+      </div>
+
+      Quoted and QuotedNonAsserted joins can also be defined inline wih shortcut
+
+      <div id="tabs-64" class="nanotabs">
+        <ul>
+          <li><a href="#tab64-1" class="selected">YARRRML</a></li>
+          <li><a href="#tab64-2" class="">RML</a></li>
+        </ul>
+        <div id="tab64-1" style="display: block;">
+          <div class="example"><div class="example-title marker"><span>Example 120</span><span style="text-transform: none">: Join in quoted mapping in subject inline</span></div><pre id="example-fn-oneline-no-prefix" class="hljs javascript" aria-busy="false">mappings:
+  person:
+    subject:
+     - <span class="hljs-function"><span class="hljs-keyword">function</span>: <span class="hljs-title">join</span>(<span class="hljs-params">quoted=student, equal(str1=$(condition1), str2=$(condition2))</span>)
+    <span class="hljs-title">predicateobjects</span>:
+     - <span class="hljs-title">predicates</span>: <span class="hljs-title">foaf</span>:<span class="hljs-title">firstName</span>
+       <span class="hljs-title">objects</span>: <span class="hljs-title">$</span>(<span class="hljs-params">Name</span>)
+  <span class="hljs-title">student</span>:
+    <span class="hljs-title">subject</span>: <span class="hljs-title">http</span>://<span class="hljs-title">example</span>.<span class="hljs-title">org</span>/<span class="hljs-title">student</span>/<span class="hljs-title">$</span>(<span class="hljs-params">Student</span>)
+    <span class="hljs-title">predicateobjects</span>:
+     - [<span class="hljs-title">a</span>, <span class="hljs-title">ex</span>:<span class="hljs-title">Student</span>]</span></pre></div>
+        </div>
+        <div id="tab64-2" style="display: none;">
+            <div class="example"><div class="example-title marker"><span>Example 121</span><span style="text-transform: none">: Join in quoted mapping in subject inline</span></div><pre id="example-fn-oneline-rml-no-prefix" class="hljs css" aria-busy="false">&lt;<span class="hljs-selector-id">#person</span>&gt;
+  <span class="hljs-selector-tag">a</span> rr:TriplesMap ;
+  rml:subjectMap [
+    rml:quotedTriplesMap &lt;#student&gt;;
+    rr:joinCondition [
+      rr:child <span class="hljs-string">"condition1"</span>;
+      rr:parent <span class="hljs-string">"condition2"</span>;
+    ];
+  ] ;
+  rr:predicateObjectMap [
+    rr:predicate foaf:firstName ;
+    rml:object <span class="hljs-string">"Name"</span>;
+  ] .
+
+&lt;<span class="hljs-selector-id">#outerTriplesMap</span>&gt;
+  <span class="hljs-selector-tag">a</span> rr:TriplesMap ;
+  rml:subjectMap [
+    rr:template <span class="hljs-string">"http://example.org/student/{Student}"</span>;
+  ] ;
+  rr:predicateObjectMap [
+    rr:predicate rdf:type ;
+    rml:object ex:Student
+  ] .</pre></div>
+        </div>
+      </div>
+    </section>
+
+    </section>
+
     <section id="external-references">
-      <!--OddPage--><h2 id="x12-external-references"><span class="secno">12. </span>External references</h2>
+      <!--OddPage--><h2 id="x14-external-references"><span class="secno">14. </span>External references</h2>
 
       <p>
         It is possible to define references that do not refer to data in a data source.
@@ -3017,7 +3427,7 @@ mapping:
         <code>name</code> and <code>city</code> with as values <code>John</code> and <code>Ghent</code>.
       </p>
 
-      <div class="example"><div class="example-title marker"><span>Example 106</span><span style="text-transform: none">: defining external references</span></div><pre id="example-er-1" class="hljs javascript" aria-busy="false">external:
+      <div class="example"><div class="example-title marker"><span>Example 122</span><span style="text-transform: none">: defining external references</span></div><pre id="example-er-1" class="hljs javascript" aria-busy="false">external:
   name: John
   <span class="hljs-attr">city</span>: Ghent
 
@@ -3033,7 +3443,7 @@ mapping:
       Replacing the external references with their actual values results in the following.
       </p>
 
-      <div class="example"><div class="example-title marker"><span>Example 107</span><span style="text-transform: none">: external references are filled in</span></div><pre id="example-er-2" class="hljs javascript" aria-busy="false">mappings:
+      <div class="example"><div class="example-title marker"><span>Example 123</span><span style="text-transform: none">: external references are filled in</span></div><pre id="example-er-2" class="hljs javascript" aria-busy="false">mappings:
   person:
     s: http:<span class="hljs-comment">//example.org/$(id)</span>
     po:
@@ -3046,7 +3456,7 @@ mapping:
       In the following example no value is provided for <code>name</code>.
       </p>
 
-      <div class="example"><div class="example-title marker"><span>Example 108</span><span style="text-transform: none">: defining some external references</span></div><pre id="example-er-3" class="hljs javascript" aria-busy="false">external:
+      <div class="example"><div class="example-title marker"><span>Example 124</span><span style="text-transform: none">: defining some external references</span></div><pre id="example-er-3" class="hljs javascript" aria-busy="false">external:
   city: Ghent
 
 <span class="hljs-attr">mappings</span>:
@@ -3061,7 +3471,7 @@ mapping:
       Replacing the remaining external reference with its actual value results in the following.
       </p>
 
-      <div class="example"><div class="example-title marker"><span>Example 109</span><span style="text-transform: none">: some external references are filled in</span></div><pre id="example-er-4" class="hljs javascript" aria-busy="false">mappings:
+      <div class="example"><div class="example-title marker"><span>Example 125</span><span style="text-transform: none">: some external references are filled in</span></div><pre id="example-er-4" class="hljs javascript" aria-busy="false">mappings:
   person:
     subjects: http:<span class="hljs-comment">//example.org/$(id)</span>
     po:
@@ -3080,7 +3490,7 @@ mapping:
       <code>$(\_name)</code> is a regular reference.
       </p>
 
-      <div class="example"><div class="example-title marker"><span>Example 110</span><span style="text-transform: none">: defining both regular and external references</span></div><pre id="example-er-5" class="hljs javascript" aria-busy="false">external:
+      <div class="example"><div class="example-title marker"><span>Example 126</span><span style="text-transform: none">: defining both regular and external references</span></div><pre id="example-er-5" class="hljs javascript" aria-busy="false">external:
   name: John
 
 <span class="hljs-attr">mappings</span>:
@@ -3092,7 +3502,7 @@ mapping:
 
       Replacing the external reference with its actual value results in the following.
 
-      <div class="example"><div class="example-title marker"><span>Example 111</span><span style="text-transform: none">: external reference is filled in, ignoring reular reference</span></div><pre id="example-er-6" class="hljs javascript" aria-busy="false">mappings:
+      <div class="example"><div class="example-title marker"><span>Example 127</span><span style="text-transform: none">: external reference is filled in, ignoring reular reference</span></div><pre id="example-er-6" class="hljs javascript" aria-busy="false">mappings:
   person:
     subjects: http:<span class="hljs-comment">//example.org/$(id)</span>
     po:
@@ -3102,10 +3512,10 @@ mapping:
     </section>
 
     <section id="shortcuts">
-      <!--OddPage--><h2 id="x13-shortcuts"><span class="secno">13. </span>Shortcuts</h2>
+      <!--OddPage--><h2 id="x15-shortcuts"><span class="secno">15. </span>Shortcuts</h2>
 
-      <section id="keys-1">
-        <h3 id="x13-1-keys"><span class="secno">13.1 </span>Keys</h3>
+      <section id="keys-2">
+        <h3 id="x15-1-keys"><span class="secno">15.1 </span>Keys</h3>
 
           <ul>
             <li>mappings: mapping, m</li>
@@ -3123,7 +3533,7 @@ mapping:
       </section>
 
       <section id="predicates">
-        <h3 id="x13-2-predicates"><span class="secno">13.2 </span>Predicates</h3>
+        <h3 id="x15-2-predicates"><span class="secno">15.2 </span>Predicates</h3>
 
           <ul>
             <li>http://www.w3.org/1999/02/22-rdf-syntax-ns#type: a</li>
@@ -3131,13 +3541,18 @@ mapping:
       </section>
     </section>
 
-    <section id="reference-implementation">
-      <!--OddPage--><h2 id="x14-reference-implementation"><span class="secno">14. </span>Reference implementation</h2>
+    <section id="implementations">
+      <!--OddPage--><h2 id="x16-implementations"><span class="secno">16. </span>Implementations</h2>
 
       <p>
         The <a href="https://github.com/rmlio/yarrrml-parser">YARRRML Parser</a>
         is a reference implementation that generates [R2]RML rules based on YARRRML.
         The parser's code also includes tests to validate a parser's conformance to the YARRRML specification.
+      </p>
+      <p>
+        The <a href="https://github.com/oeg-upm/yarrrml-translator">YARRRML-Translator</a>
+        is a python implementation that generates [R2]RML rules based on YARRRML, and vicecersa.
+        The source code includes more than 50 tests to validate a parser's conformance to the YARRRML specification.
       </p>
     </section>
   
@@ -3151,6 +3566,7 @@ mapping:
 </dd><dt id="bib-FnO">[FnO]</dt><dd><a href="https://fno.io/spec/"><cite>The Function Ontology</cite></a>. Ben De Meester; Anastasia Dimou. IDLab - imec - Ghent University. 10 November 2021. Unofficial Draft. URL: <a href="https://fno.io/spec/">https://fno.io/spec/</a>
 </dd><dt id="bib-R2RML">[R2RML]</dt><dd><a href="https://www.w3.org/TR/r2rml/"><cite>R2RML: RDB to RDF Mapping Language</cite></a>. Souripriya Das; Seema Sundara; Richard Cyganiak. W3C. 27 September 2012. W3C Recommendation. URL: <a href="https://www.w3.org/TR/r2rml/">https://www.w3.org/TR/r2rml/</a>
 </dd><dt id="bib-RML">[RML]</dt><dd><a href="https://rml.io/specs/rml/"><cite>RDF Mapping Language (RML)</cite></a>. Anastasia Dimou; Miel Vander Sande. IDLab - imec - Ghent University. October 2020. Unofficial Draft. URL: <a href="https://rml.io/specs/rml/">https://rml.io/specs/rml/</a>
+</dd><dt id="bib-RMLStar">[RMLStar]</dt><dd><a href="https://w3id.org/kg-construct/rml-star"><cite>Star in RML</cite></a>. Ana Iglesias-Molina; Julián Arenas-Guerrero; Thomas Delva; David Chaves-Fraga; Anastasia Dimou. W3C CG in KGC. 05 May 2022. Unofficial Draft. URL: <a href="https://w3id.org/kg-construct/rml-star">https://w3id.org/kg-construct/rml-star</a>
 </dd><dt id="bib-RMLT">[RMLT]</dt><dd><a href="https://rml.io/specs/rml-target"><cite>Target in RML</cite></a>. Dylan Van Assche; Anastasia Dimou. IDLab - imec - Ghent University. 18 May 2021. Unofficial Draft. URL: <a href="https://rml.io/specs/rml-target">https://rml.io/specs/rml-target</a>
 </dd><dt id="bib-sparql11-service-description">[sparql11-service-description]</dt><dd><a href="https://www.w3.org/TR/sparql11-service-description/"><cite>SPARQL 1.1 Service Description</cite></a>. Gregory Williams. W3C. 21 March 2013. W3C Recommendation. URL: <a href="https://www.w3.org/TR/sparql11-service-description/">https://www.w3.org/TR/sparql11-service-description/</a>
 </dd><dt id="bib-VoID">[VoID]</dt><dd><a href="https://www.w3.org/TR/void/"><cite>Describing Linked Datasets with the VoID Vocabulary</cite></a>. Keith Alexander; Richard Cyganiak; Michael Hausenblas; Jun Zhao. W3C. 3 March 2011. W3C Note. URL: <a href="https://www.w3.org/TR/void/">https://www.w3.org/TR/void/</a>

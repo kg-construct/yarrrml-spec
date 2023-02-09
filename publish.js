@@ -30,16 +30,16 @@ var inputFilename = process.argv[2];
 // Create a new directory for the new version within dist, e.g. dist/20210118
 var dateString = process.argv[3] || (new Date()).toISOString().split('T')[0].replace(/-/g, '');
 try {
-    fs.mkdirSync(path.resolve(__dirname, 'dist', dateString));
+    fs.mkdirSync(path.resolve(__dirname, 'docs', dateString));
 } catch (e) {
 
 }
 
 // Create a list of all folders in dist, i.e. resources folder and all previous version folders without the main index.html file
-var files = fs.readdirSync(path.resolve(__dirname, 'dist'));
+var files = fs.readdirSync(path.resolve(__dirname, 'docs'));
 var dirs = [];
 for (var i = 0; i < files.length; i++) {
-    if (fs.lstatSync(path.resolve(__dirname, 'dist', files[i])).isDirectory()) {
+    if (fs.lstatSync(path.resolve(__dirname, 'docs', files[i])).isDirectory()) {
         dirs.push(files[i]);
     }
 }
@@ -60,9 +60,9 @@ if (dirs[0] === dateString) {
 var html = fs.readFileSync(inputFilename, 'utf8');
 html = html.replace(/%thisDate%/g, dateString);
 html = html.replace(/%prevDate%/g, dirs[0]);
-fs.writeFileSync(path.resolve(__dirname, 'dist', 'index.html'), html);
-copydir.sync(path.resolve(__dirname, 'resources'), path.resolve(__dirname, 'dist', 'resources'));
-copydir.sync(path.resolve(__dirname, 'resources'), path.resolve(__dirname, 'dist', dateString, 'resources'));
+fs.writeFileSync(path.resolve(__dirname, 'docs', 'index.html'), html);
+copydir.sync(path.resolve(__dirname, 'resources'), path.resolve(__dirname, 'docs', 'resources'));
+copydir.sync(path.resolve(__dirname, 'resources'), path.resolve(__dirname, 'docs', dateString, 'resources'));
 
 // Next to the dist root, the current version will also reside in its dedicated version directory for which paths need to be adapted
-fs.writeFileSync(path.resolve(__dirname, 'dist', dateString, 'index.html'), html);
+fs.writeFileSync(path.resolve(__dirname, 'docs', dateString, 'index.html'), html);

@@ -1,0 +1,12 @@
+sequenceDiagram
+    Processor->>+YARRRML: Get type, access
+    YARRRML-->>Processor: sparql, http://example.org/sparql
+    Processor->>+SparqlEndpoint: Make connection (using sparql, http://example.org/sparql)
+    Processor->>+YARRRML: Get query formulation, query
+    YARRRML-->>Processor: sparql11, SELECT * WHERE{?s ?p ?o}
+    Processor->>+SparqlEndpoint: Send query (using sparql11, SELECT * WHERE{?s ?p ?o})
+    SparqlEndpoint-->>-Processor: data
+    Processor->>Processor: Close connection
+    Processor->>+YARRRML: Get reference formulation, iterator
+    YARRRML-->>Processor: xpath, /sparql/results/result
+    Processor->>Processor: Iterate over data (using xpath, /sparql/results/result)
