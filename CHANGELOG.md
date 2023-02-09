@@ -5,7 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## Unreleased
+## [1.3.0] - 2023-01-26
+
+### Added
+- Pronunciation
+- Web of Things support
+- Target support
+
+### Fixed
+- Add virtuoso, myssqlserver to type and sql2008 to queryformulation (see [issue 32](https://gitlab.ilabt.imec.be/yarrrml/spec/-/issues/32))
+- Example 27 (mapping with one data source using shortcuts)
+- Example 74 (mapping with two datatypes)
+- Some typo's
+- Added shortcut for `predicateobjects` to list of shortcuts for keys.
+- Link to D2RQ.
 
 ## [1.2.1] - 2020-08-27
 
@@ -38,6 +51,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 - Release v1.0.0
 
+[1.3.0]: https://gitlab.ilabt.imec.be/yarrrml/spec/compare/v1.2.1...v1.3.0
 [1.2.1]: https://gitlab.ilabt.imec.be/yarrrml/spec/compare/v1.2.0...v1.2.1
 [1.2.0]: https://gitlab.ilabt.imec.be/yarrrml/spec/compare/v1.1.0...v1.2.0
 [1.1.0]: https://gitlab.ilabt.imec.be/yarrrml/spec/compare/v1.0.0...v1.1.0

@@ -1,0 +1,12 @@
+sequenceDiagram
+    Processor->>+YARRRML: Get type, access
+    YARRRML-->>Processor: type, access
+    Processor->>+DataSource: Make connection (using type, access)
+    Processor->>+YARRRML: Get query formulation, query
+    YARRRML-->>Processor: query formulation, query
+    Processor->>+DataSource: Send query (using query formulation, query)
+    DataSource-->>-Processor: data
+    Processor->>Processor: Close connection
+    Processor->>+YARRRML: Get reference formulation, iterator
+    YARRRML-->>Processor: reference formulation, iterator
+    Processor->>Processor: Iterate over data (using reference formulation, iterator)
