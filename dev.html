@@ -114,6 +114,7 @@
           company: 'Ghent University - IDLab, imec',
         },{
           name: "Anastasia Dimou",
+          url: "https://www.kuleuven.be/wieiswie/en/person/00142590",
           mailto: "anastasia.dimou@kuleuven.be",
           company: 'KULeuven - DTAI-EAVISE',
         },{
@@ -123,6 +124,7 @@
           company: 'Universidad Politécnica de Madrid - OEG',
         },{
           name: "Ana Iglesias-Molina",
+          url: "https://oeg.fi.upm.es/index.php/es/phdstudents/393-aiglesias/index.html",
           mailto: "ana.iglesiasm@upm.es",
           company: 'Universidad Politécnica de Madrid - OEG',
         }],
@@ -2156,7 +2158,6 @@
           <div id="tab23-2">
             <pre id="example-datatype2-sc-rml" class="example" title="mapping with two datatypes using shortcuts">
               <#TriplesMap> a rr:TriplesMap; #person
-
                 rr:predicateObjectMap [
                   a rr:PredicateObjectMap;
                   rr:predicate foaf:name;
@@ -2204,6 +2205,7 @@
                     a rr:ObjectMap;
                     rml:reference "firstname";
                     rml:datatypeMap [
+                      a rml:DatatypeMap
                       rml:reference "my_language"
                     ];
                   ]
@@ -2236,7 +2238,6 @@
           <div id="tab24-2">
             <pre id="example-lang-rml" class="example" title="mapping with one language">
               <#TriplesMap> a rr:TriplesMap; #person
-
                 rr:predicateObjectMap [
                   a rr:PredicateObjectMap;
                   rr:predicate foaf:firstName;
@@ -2388,6 +2389,7 @@
                     a rr:ObjectMap;
                     rml:reference "firstname";
                     rml:languageMap [
+                      a rml:LanguageMap;
                       rml:reference "my_language"
                     ];
                   ]
@@ -2466,7 +2468,6 @@
                 ].
 
               <#TriplesMap2> a rr:TriplesMap; #person
-
                 rr:subjectMap [
                   a rr:SubjectMap;
                   rr:template "http://example.com/project/{ID}"
@@ -2474,60 +2475,9 @@
             </pre>
           </div>
         </div>
-      </section>
 
-       <p> The joins can also be declared using inline <a href="#functions">functions</a> in a more compact way. If more than one condition is required, the <code>equal</code> function can be repeated several times. The <code>join</code> and <code>equal</code> do not need prefix as they are specific functions of R2RML/RML. If no parameters name are provide the order MUST be <code>parent mapping reference</code>, and within equal function <code>str1 (or s)</code> first and <code>str2 (or o)</code> second. </p>
 
-        <div id="tabs-28a" class="nanotabs">
-          <ul>
-            <li><a href="#tab28-1a" class="selected">YARRRML</a></li>
-            <li><a href="#tab28-2a">RML</a></li>
-          </ul>
-          <div id="tab28-1a">
-            <pre id="example-ref-map" class="example" title="interlinking two mappings">
-              mappings:
-                person:
-                  subjects: http://example.com/person/$(ID)
-                  predicateobjects:
-                    - predicates: foaf:worksFor
-                      objects:
-                      - function: join(mapping=project, equal(str1=$(projectID),str2=$(ID)))
-
-                project:
-                  subjects: http://example.com/project/$(ID)
-            </pre>
-          </div>
-          <div id="tab28-2a">
-            <pre id="example-ref-map-rml" class="example" title="interlinking two mappings">
-              <#TriplesMap> a rr:TriplesMap; #person
-
-                rr:subjectMap [
-                  a rr:SubjectMap;
-                  rr:template "http://example.com/person/{ID}"
-                ]
-
-                rr:predicateObjectMap [
-                  a rr:PredicateObjectMap;
-                  rr:predicate foaf:worksFor;
-                  rr:objectMap [
-                    a rr:RefObjectMap;
-                    rr:parentTriplesMap <#TriplesMap2>;
-                    rr:joinCondition [
-                      rr:child "projectID";
-                      rr:parent "ID"
-                    ]
-                  ]
-                ].
-
-              <#TriplesMap2> a rr:TriplesMap; #person
-
-                rr:subjectMap [
-                  a rr:SubjectMap;
-                  rr:template "http://example.com/project/{ID}"
-                ]
-            </pre>
-          </div>
-        </div>
+      
       </section>
 
       <section>
@@ -2555,7 +2505,6 @@
             <div id="tab32-2">
               <pre id="example-graphs-s-rml" class="example" title="mapping with graph for all triples">
                 <#TriplesMap> a rr:TriplesMap; #person
-
                   rr:subjectMap [
                     a rr:SubjectMap;
                     rr:graphMap [
@@ -3081,7 +3030,7 @@
         </div>
       </div>
 
-      Quoted triples can be non asserted in the RDF-star graph using the <code>QuotedNonAsserted</code> key
+      Quoted triples can be non-asserted in the RDF-star graph using the <code>QuotedNonAsserted</code> key
 
       <div id="tabs-62" class="nanotabs">
         <ul>
@@ -3144,10 +3093,10 @@
                 subject:
                  - quoted: student
                    condition:
-                   function: equal
-                   parameters:
-                     - [str1, $(condition1)]
-                     - [str2, $(condition2)]
+                     function: equal
+                     parameters:
+                       - [str1, $(condition1)]
+                       - [str2, $(condition2)]
                 predicateobjects:
                  - predicates: foaf:firstName
                    objects: $(Name)
@@ -3389,8 +3338,8 @@
         The parser's code also includes tests to validate a parser's conformance to the YARRRML specification.
       </p>
       <p>
-        The <a href="https://github.com/oeg-upm/yarrrml-translator">YARRRML-Translator</a>
-        is a python implementation that generates [R2]RML rules based on YARRRML, and vicecersa.
+        <a href="https://github.com/oeg-upm/yarrrml-translator">YARRRML-Translator</a>
+        is a Python implementation that generates [R2]RML rules based on YARRRML, and vice versa.
         The source code includes more than 50 tests to validate a parser's conformance to the YARRRML specification.
       </p>
     </section>
