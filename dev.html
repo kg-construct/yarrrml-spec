@@ -59,6 +59,20 @@
             publisher: "IDLab - imec - Ghent University",
             date: "18 May 2021",
           },
+          "RMLStar": {
+            title: "Star in RML",
+            href: "https://w3id.org/kg-construct/rml-star",
+            status: "Unofficial Draft",
+            authors: [
+              "Ana Iglesias-Molina",
+              "Julián Arenas-Guerrero",
+              "Thomas Delva",
+              "David Chaves-Fraga",
+              "Anastasia Dimou"
+            ],
+            publisher: "W3C CG in KGC",
+            date: "05 May 2022",
+          },
           "RML": {
             title: "RDF Mapping Language (RML)",
             href: "https://rml.io/specs/rml/",
@@ -100,18 +114,29 @@
           company: 'Ghent University - IDLab, imec',
         },{
           name: "Anastasia Dimou",
-          mailto: "anastasia.dimou@ugent.be",
-          company: 'Ghent University - IDLab, imec',
+          url: "https://www.kuleuven.be/wieiswie/en/person/00142590",
+          mailto: "anastasia.dimou@kuleuven.be",
+          company: 'KULeuven - DTAI-EAVISE',
+        },{
+          name: "David Chaves-Fraga",
+          url: "https://davidchavesfraga.com",
+          mailto: "david.chaves@upm.es",
+          company: 'Universidad Politécnica de Madrid - OEG',
+        },{
+          name: "Ana Iglesias-Molina",
+          url: "https://oeg.fi.upm.es/index.php/es/phdstudents/393-aiglesias/index.html",
+          mailto: "ana.iglesiasm@upm.es",
+          company: 'Universidad Politécnica de Madrid - OEG',
         }],
         // edDraftURI: "http://some.github.repo",
         shortName: "yarrrml",
-        previousURI: "https://w3id.org/yarrrml/spec/index-20210930.html",
-        previousPublishDate: "2021-09-30",
+        previousURI: "https://w3id.org/kg-construct/yarrrml/20230126/index.html",
+        previousPublishDate: "2023-01-26",
         previousMaturity: "unofficial",
-        canonicalURI: "https://w3id.org/yarrrml/spec/",
+        canonicalURI: "https://w3id.org/kg-construct/yarrrml",
         logos: [{
           src: "resources/images/logo.png",
-          href: "https://w3id.org/yarrrml",
+          href: "https://w3id.org/kg-construct/yarrrml",
           alt: "YARRRML",
           width: 164
         }],
@@ -119,8 +144,8 @@
           {
             key: "This Version",
             data: [{
-              value: "https://w3id.org/yarrrml/spec/%thisDate%/",
-              href: "https://w3id.org/yarrrml/spec/%thisDate%/"
+              value: "https://w3id.org/kg-construct/yarrrml/%thisDate%/",
+              href: "https://w3id.org/kg-construct/yarrrml/%thisDate%/"
             }]
           },
           {
@@ -133,8 +158,8 @@
           {
             key: "Website",
             data: [{
-              value: "https://w3id.org/yarrrml",
-              href: "https://w3id.org/yarrrml"
+              value: "https://w3id.org/kg-construct/yarrrml",
+              href: "https://w3id.org/kg-construct/yarrrml"
             }]
           }
         ],
@@ -200,6 +225,7 @@
         <li>R2RML: applies the semantics specified by [[R2RML]];</li>
         <li>RML: applies the semantics specified by [[RML]]; and</li>
         <li>RMLT: applies the semantics specified by [[RMLT]].</li>
+        <li>RMLStar: applies the semantics specified by [[RMLStar]].</li>
       </ul>
 
       <p>
@@ -2132,7 +2158,6 @@
           <div id="tab23-2">
             <pre id="example-datatype2-sc-rml" class="example" title="mapping with two datatypes using shortcuts">
               <#TriplesMap> a rr:TriplesMap; #person
-
                 rr:predicateObjectMap [
                   a rr:PredicateObjectMap;
                   rr:predicate foaf:name;
@@ -2150,6 +2175,45 @@
             </pre>
           </div>
         </div>
+
+        The datatype can be also a data reference
+
+        <div id="tabs-23a" class="nanotabs">
+          <ul>
+            <li><a href="#tab23-1a" class="selected">YARRRML</a></li>
+            <li><a href="#tab23-2a">RML</a></li>
+          </ul>
+          <div id="tab23-1a">
+             <pre id="example-lang" class="example" title="mapping with one reference datatype">
+                mappings:
+                  person:
+                    predicateobjects:
+                      - predicates: foaf:firstName
+                        objects:
+                          value: $(firstname)
+                          datatype: $(my_datatype)
+              </pre>
+          </div>
+          <div id="tab23-2a">
+            <pre id="example-lang-rml" class="example" title="mapping with one reference datatype">
+              <#TriplesMap> a rr:TriplesMap; #person
+
+                rr:predicateObjectMap [
+                  a rr:PredicateObjectMap;
+                  rr:predicate foaf:firstName;
+                  rr:objectMap [
+                    a rr:ObjectMap;
+                    rml:reference "firstname";
+                    rml:datatypeMap [
+                      a rml:DatatypeMap
+                      rml:reference "my_language"
+                    ];
+                  ]
+                ].
+            </pre>
+          </div>
+        </div>
+
       </section>
 
       <section>
@@ -2174,7 +2238,6 @@
           <div id="tab24-2">
             <pre id="example-lang-rml" class="example" title="mapping with one language">
               <#TriplesMap> a rr:TriplesMap; #person
-
                 rr:predicateObjectMap [
                   a rr:PredicateObjectMap;
                   rr:predicate foaf:firstName;
@@ -2297,6 +2360,44 @@
             </pre>
           </div>
         </div>
+
+        <p> The language can be also a data reference</p>
+        <div id="tabs-24a" class="nanotabs">
+          <ul>
+            <li><a href="#tab24-1a" class="selected">YARRRML</a></li>
+            <li><a href="#tab24-2a">RML</a></li>
+          </ul>
+          <div id="tab24-1a">
+             <pre id="example-lang" class="example" title="mapping with one reference language">
+                mappings:
+                  person:
+                    predicateobjects:
+                      - predicates: foaf:firstName
+                        objects:
+                          value: $(firstname)
+                          language: $(my_language)
+              </pre>
+          </div>
+          <div id="tab24-2a">
+            <pre id="example-lang-rml" class="example" title="mapping with one reference language">
+              <#TriplesMap> a rr:TriplesMap; #person
+
+                rr:predicateObjectMap [
+                  a rr:PredicateObjectMap;
+                  rr:predicate foaf:firstName;
+                  rr:objectMap [
+                    a rr:ObjectMap;
+                    rml:reference "firstname";
+                    rml:languageMap [
+                      a rml:LanguageMap;
+                      rml:reference "my_language"
+                    ];
+                  ]
+                ].
+            </pre>
+          </div>
+        </div>
+
       </section>
 
       <section>
@@ -2367,7 +2468,6 @@
                 ].
 
               <#TriplesMap2> a rr:TriplesMap; #person
-
                 rr:subjectMap [
                   a rr:SubjectMap;
                   rr:template "http://example.com/project/{ID}"
@@ -2375,6 +2475,9 @@
             </pre>
           </div>
         </div>
+
+
+      
       </section>
 
       <section>
@@ -2402,7 +2505,6 @@
             <div id="tab32-2">
               <pre id="example-graphs-s-rml" class="example" title="mapping with graph for all triples">
                 <#TriplesMap> a rr:TriplesMap; #person
-
                   rr:subjectMap [
                     a rr:SubjectMap;
                     rr:graphMap [
@@ -2800,6 +2902,296 @@
     </section>
 
     <section>
+      <h2>RDF-Star</h2>
+
+      An YARRRML-star mapping defines a mapping from any data in a structured source format to RDF-star.
+      It enables the generation of quoted triples in the position of subject and/or object.
+
+      Quoted triples can be created by referencing the mapping identifier using the <code>quoted</code> keyword.
+      It is also possible to create non-asserted quoted triples using the <code>quotedNonAsserted</code> keyword.
+
+      <section>
+        <h2>Keys</h2>
+
+        <dl>
+          <dt><dfn>quoted</dfn></dt>
+          <dd>Quoted mapping.<br />
+            Required profiles: RMLStar. <br />
+            Datatype: Mapping reference.
+          </dd>
+          <dt><dfn>quotedNonAsserted</dfn></dt>
+          <dd>Non-asserted quoted mapping.<br />
+            Required profiles: RMLStar. <br />
+            Datatype: Mapping reference.
+          </dd>
+        </dl>
+      </section>
+
+    
+      <section>
+        <h2>Examples</h2>
+
+
+      <div id="tabs-60" class="nanotabs">
+        <ul>
+          <li><a href="#tab60-1" class="selected">YARRRML</a></li>
+          <li><a href="#tab60-2">RML</a></li>
+        </ul>
+        <div id="tab60-1">
+          <pre id="example-fn-oneline-no-prefix" class="example" title="Quoted mapping in object">
+            mappings:
+              person:
+                subject: http://example.org/person/$(Name)
+                predicateobjects:
+                 - predicates: ex:confirms
+                   objects:
+                    - quoted: student
+              student:
+                subject: http://example.org/student/$(Student)
+                predicateobjects:
+                 - [a, ex:Student]
+
+          </pre>
+        </div>
+        <div id="tab60-2">
+            <pre id="example-fn-oneline-rml-no-prefix" class="example" title="Quoted mapping in object">
+              <#person>
+                a rr:TriplesMap ;
+                rml:subjectMap [
+                  rr:template "http://example.com/person/{Name}"
+                ] ;
+                rr:predicateObjectMap [
+                  rr:predicate ex:confirmse ;
+                  rml:objectMap [
+                    rml:quotedTriplesMap <#student>;
+                  ];
+                ] .
+
+              <#student>
+                a rr:TriplesMap ;
+                rml:subjectMap [
+                  rr:template "http://example.org/student/{Student}";
+                ] ;
+                rr:predicateObjectMap [
+                  rr:predicate rdf:type ;
+                  rml:object ex:Student
+                ] .
+            </pre>
+        </div>
+      </div>
+
+
+      <code>Quoted</code> mappings can be also defined in subjects
+
+      <div id="tabs-61" class="nanotabs">
+        <ul>
+          <li><a href="#tab61-1" class="selected">YARRRML</a></li>
+          <li><a href="#tab61-2">RML</a></li>
+        </ul>
+        <div id="tab61-1">
+          <pre id="example-fn-oneline-no-prefix" class="example" title="Quoted mapping in subject">
+            mappings:
+              person:
+                subject:
+                 - quoted: student
+                predicateobjects:
+                 - predicates: ex:accordingTo
+                   objects: http://example.org/person/$(Name)
+              student:
+                subject: http://example.org/student/$(Student)
+                predicateobjects:
+                 - [a, ex:Student]
+          </pre>
+        </div>
+        <div id="tab61-2">
+            <pre id="example-fn-oneline-rml-no-prefix" class="example" title="Quoted mapping in subject">
+              <#person>
+                a rr:TriplesMap ;
+                rml:subjectMap [
+                  rml:quotedTriplesMap <#student>;
+                ] ;
+                rr:predicateObjectMap [
+                  rr:predicate ex:accordingTo ;
+                  rml:objectMap [
+                    rr:template "http://example.org/person/{Name}";
+                  ];
+                ] .
+
+              <#student>
+                a rr:TriplesMap ;
+                rml:subjectMap [
+                  rr:template "http://example.org/student/{Student}";
+                ] ;
+                rr:predicateObjectMap [
+                  rr:predicate rdf:type ;
+                  rml:object ex:Student
+                ] .
+            </pre>
+        </div>
+      </div>
+
+      Quoted triples can be non-asserted in the RDF-star graph using the <code>QuotedNonAsserted</code> key
+
+      <div id="tabs-62" class="nanotabs">
+        <ul>
+          <li><a href="#tab62-1" class="selected">YARRRML</a></li>
+          <li><a href="#tab62-2">RML</a></li>
+        </ul>
+        <div id="tab62-1">
+          <pre id="example-fn-oneline-no-prefix" class="example" title="Quoted non-asserted mapping in object">
+            mappings:
+              person:
+                subject: http://example.org/person/$(Name)
+                predicateobjects:
+                 - predicates: ex:confirms
+                   objects:
+                    - quotedNonAsserted: student
+              student:
+                subject: http://example.org/student/$(Student)
+                predicateobjects:
+                 - [a, ex:Student]
+          </pre>
+        </div>
+        <div id="tab62-2">
+            <pre id="example-fn-oneline-rml-no-prefix" class="example" title="Quoted non-asserted mapping in object">
+              <#person>
+                a rr:TriplesMap ;
+                rml:subjectMap [
+                  rr:template "http://example.com/person/{Name}"
+                ] ;
+                rr:predicateObjectMap [
+                  rr:predicate foaf:firstName ;
+                  rml:objectMap [
+                    rml:quotedTriplesMap <#student>;
+                  ];
+                ] .
+
+              <#student>
+                a rml:NonAssertedTriplesMap, rr:TriplesMap ;
+                rml:subjectMap [
+                  rr:template "http://example.org/student/{Student}";
+                ] ;
+                rr:predicateObjectMap [
+                  rr:predicate rdf:type ;
+                  rml:object ex:Student
+                ] .
+            </pre>
+        </div>
+      </div>
+
+      Joins can also be defined in the same way with <code>quoted</code> and <code>quotedNonAsserted</code>
+
+      <div id="tabs-43" class="nanotabs">
+        <ul>
+          <li><a href="#tab63-1" class="selected">YARRRML</a></li>
+          <li><a href="#tab63-2">RML</a></li>
+        </ul>
+        <div id="tab63-1">
+          <pre id="example-fn-oneline-no-prefix" class="example" title="Join in quoted mapping in subject">
+            mappings:
+              person:
+                subject:
+                 - quoted: student
+                   condition:
+                     function: equal
+                     parameters:
+                       - [str1, $(condition1)]
+                       - [str2, $(condition2)]
+                predicateobjects:
+                 - predicates: foaf:firstName
+                   objects: $(Name)
+              student:
+                subject: http://example.org/student/{Student}
+                predicateobjects:
+                 - [a, ex:Student]
+
+          </pre>
+        </div>
+        <div id="tab63-2">
+            <pre id="example-fn-oneline-rml-no-prefix" class="example" title="Join in quoted mapping in subject">
+              <#person>
+                a rr:TriplesMap ;
+                rml:subjectMap [
+                  rml:quotedTriplesMap <#student>;
+                  rr:joinCondition [
+                    rr:child "condition1";
+                    rr:parent "condition2";
+                  ];
+                ] ;
+                rr:predicateObjectMap [
+                  rr:predicate foaf:firstName ;
+                  rml:object "Name";
+                ] .
+
+              <#student>
+                a rr:TriplesMap ;
+                rml:subjectMap [
+                  rr:template "http://example.org/student/{Student}";
+                ] ;
+                rr:predicateObjectMap [
+                  rr:predicate rdf:type ;
+                  rml:object ex:Student
+                ] .
+            </pre>
+        </div>
+      </div>
+
+      Quoted and QuotedNonAsserted joins can also be defined inline wih shortcut
+
+      <div id="tabs-64" class="nanotabs">
+        <ul>
+          <li><a href="#tab64-1" class="selected">YARRRML</a></li>
+          <li><a href="#tab64-2">RML</a></li>
+        </ul>
+        <div id="tab64-1">
+          <pre id="example-fn-oneline-no-prefix" class="example" title="Join in quoted mapping in subject inline">
+            mappings:
+              person:
+                subject:
+                 - function: join(quoted=student, equal(str1=$(condition1), str2=$(condition2)))
+                predicateobjects:
+                 - predicates: foaf:firstName
+                   objects: $(Name)
+              student:
+                subject: http://example.org/student/$(Student)
+                predicateobjects:
+                 - [a, ex:Student]
+
+          </pre>
+        </div>
+        <div id="tab64-2">
+            <pre id="example-fn-oneline-rml-no-prefix" class="example" title="Join in quoted mapping in subject inline">
+              <#person>
+                a rr:TriplesMap ;
+                rml:subjectMap [
+                  rml:quotedTriplesMap <#student>;
+                  rr:joinCondition [
+                    rr:child "condition1";
+                    rr:parent "condition2";
+                  ];
+                ] ;
+                rr:predicateObjectMap [
+                  rr:predicate foaf:firstName ;
+                  rml:object "Name";
+                ] .
+
+              <#outerTriplesMap>
+                a rr:TriplesMap ;
+                rml:subjectMap [
+                  rr:template "http://example.org/student/{Student}";
+                ] ;
+                rr:predicateObjectMap [
+                  rr:predicate rdf:type ;
+                  rml:object ex:Student
+                ] .
+            </pre>
+        </div>
+      </div>
+    </section>
+
+    </section>
+
+    <section>
       <h2>External references</h2>
 
       <p>
@@ -2938,12 +3330,17 @@
     </section>
 
     <section>
-      <h2>Reference implementation</h2>
+      <h2>Implementations</h2>
 
       <p>
         The <a href="https://github.com/rmlio/yarrrml-parser">YARRRML Parser</a>
         is a reference implementation that generates [R2]RML rules based on YARRRML.
         The parser's code also includes tests to validate a parser's conformance to the YARRRML specification.
+      </p>
+      <p>
+        <a href="https://github.com/oeg-upm/yarrrml-translator">YARRRML-Translator</a>
+        is a Python implementation that generates [R2]RML rules based on YARRRML, and vice versa.
+        The source code includes more than 50 tests to validate a parser's conformance to the YARRRML specification.
       </p>
     </section>
   </body>
